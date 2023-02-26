@@ -1,13 +1,9 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"gommerce/api/env"
+)
 
 func main() {
-	app := fiber.New()
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Gommerce")
-	})
-
-	app.Listen(":3000")
+	env.Load(".env")
 }
