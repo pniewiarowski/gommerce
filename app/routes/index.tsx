@@ -1,7 +1,6 @@
 import { JSX } from "preact";
+import Home from "../components/pages/home.tsx";
 
-function Index(): JSX.Element {
-  return <h1>Gommerce</h1>;
-}
+const Index = (): JSX.Element => <Home title="Gommerce" />;
 
 export default Index;
