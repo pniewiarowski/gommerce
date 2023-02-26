@@ -1,5 +1,5 @@
 import { JSX } from "preact";
-import Bar from "../atoms/bar.tsx";
+import Bar from "../components/bar.tsx";
 
 type Props = {
   title: string;
