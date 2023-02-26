@@ -4,9 +4,12 @@ import (
 	"gommerce/api/app"
 	"gommerce/api/database"
 	"gommerce/api/env"
+	"gommerce/api/models"
 )
 
-var Models = []interface{}{}
+var Models = []interface{}{
+	models.Config{},
+}
 
 func main() {
 	env.Load(".env")
