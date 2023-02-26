@@ -7,5 +7,5 @@ import (
 )
 
 func SetupConfig(router fiber.Router) {
-	router.Get("/:key", controller.GetConfig)
+	router.Get("/:key", controller.GetConfigByKey)
 }

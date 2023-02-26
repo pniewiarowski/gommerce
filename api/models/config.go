@@ -12,9 +12,10 @@ type Config struct {
 	Value string `json:"value"`
 }
 
-func GetConfigByKey(key string) string {
-	core := new(Config)
-	database.DataBase.First(&core, "key = ?", key)
+func GetConfigByKey(key string) (Config, error) {
+	var config Config
 
-	return core.Value
+	err := database.DataBase.First(&config, "key = ?", key).Error
+
+	return config, err
 }
