@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gommerce/api/app"
 	"gommerce/api/database"
 	"gommerce/api/env"
 )
@@ -12,9 +13,12 @@ func main() {
 
 	db := env.GetDb()
 	migration := env.GetMigration()
+	port := env.GetPort()
 
 	database.Setup(db)
 	if migration {
 		database.MakeMigration(Models)
 	}
+
+	app.Run(int(port))
 }
