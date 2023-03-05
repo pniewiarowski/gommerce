@@ -7,6 +7,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Load file with env variables.
 func Load(file string) {
 	err := godotenv.Load(file)
 
@@ -15,10 +16,12 @@ func Load(file string) {
 	}
 }
 
+// GetDb return database name from env variables.
 func GetDb() string {
 	return os.Getenv("DATABASE")
 }
 
+// GetPort return port from env variables.
 func GetPort() int64 {
 	port, err := strconv.ParseInt(os.Getenv("PORT"), 10, 32)
 
@@ -29,6 +32,8 @@ func GetPort() int64 {
 	return port
 }
 
+// GetMigration return flag from env variables
+// to check if models should be migrate.
 func GetMigration() bool {
 	migration, err := strconv.ParseBool(os.Getenv("MIGRATION"))
 
@@ -39,6 +44,7 @@ func GetMigration() bool {
 	return migration
 }
 
+// GetPrivateKey return private key from env variables.
 func GetPrivateKey() string {
 	return os.Getenv("PRIVATE_KEY")
 }

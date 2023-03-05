@@ -9,12 +9,12 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 )
 
+// Run application.
 func Run(port int) {
 	app := fiber.New()
 	app.Use(logger.New())
 
 	api := app.Group("/api")
-
 	config := api.Group("/config")
 
 	router.SetupConfig(config)

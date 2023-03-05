@@ -7,9 +7,15 @@ import (
 	"gorm.io/gorm"
 )
 
+// DataBase instance to manage database.
 var DataBase *gorm.DB
 
-func Setup(database string) {
+// Setup SQLite database.
+func SetupSQLite(database string) {
+	if DataBase != nil {
+		panic("database already setup")
+	}
+
 	database = fmt.Sprintf("%s.db", database)
 	db, err := gorm.Open(sqlite.Open(database), &gorm.Config{})
 

@@ -1,5 +1,6 @@
 package database
 
+// MakeMigration migrate given models to database.
 func MakeMigration(models []interface{}) {
 	for _, model := range models {
 		err := DataBase.AutoMigrate(&model)

@@ -6,6 +6,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// GetConfigByKey return JSON with config value base
+// on key given as a parameter.
 func GetConfigByKey(ctx *fiber.Ctx) error {
 	key := ctx.Params("key")
 	config, err := models.GetConfigByKey(key)
