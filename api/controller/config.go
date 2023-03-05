@@ -23,6 +23,34 @@ func GetConfigByKey(ctx *fiber.Ctx) error {
 	return ctx.
 		Status(fiber.StatusOK).
 		JSON(&fiber.Map{
-			"value": config,
+			"data": config,
+		})
+}
+
+// CreateConfig create instance of models.Config and save
+// it to database.
+func CreateConfig(ctx *fiber.Ctx) error {
+	config := new(models.Config)
+	if err := ctx.BodyParser(config); err != nil {
+		return ctx.
+			Status(fiber.StatusBadRequest).
+			JSON(&fiber.Map{
+				"error": err,
+			})
+	}
+
+	config, err := models.CreateConfig(config)
+	if err != nil {
+		return ctx.
+			Status(fiber.StatusBadRequest).
+			JSON(&fiber.Map{
+				"error": err,
+			})
+	}
+
+	return ctx.
+		Status(fiber.StatusOK).
+		JSON(&fiber.Map{
+			"data": config,
 		})
 }

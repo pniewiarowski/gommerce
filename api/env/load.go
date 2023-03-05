@@ -33,12 +33,12 @@ func GetPort() int64 {
 }
 
 // GetMigration return flag from env variables
-// to check if models should be migrate.
+// to check if models should be migrated.
 func GetMigration() bool {
 	migration, err := strconv.ParseBool(os.Getenv("MIGRATION"))
 
 	if err != nil {
-		panic("migration in .env file shoulde be a boolean")
+		panic("migration in .env file should be a boolean")
 	}
 
 	return migration

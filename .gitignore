@@ -2,3 +2,4 @@
 fresh.gen.ts
 .env
 *.db
+.idea

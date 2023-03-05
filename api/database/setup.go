@@ -10,7 +10,7 @@ import (
 // DataBase instance to manage database.
 var DataBase *gorm.DB
 
-// Setup SQLite database.
+// SetupSQLite Setup database [sqlite].
 func SetupSQLite(database string) {
 	if DataBase != nil {
 		panic("database already setup")

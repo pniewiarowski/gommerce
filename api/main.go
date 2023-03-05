@@ -7,12 +7,12 @@ import (
 	"gommerce/api/models"
 )
 
-// Register your models there.
+// Models array to register your models.
 var Models = []interface{}{
 	models.Config{},
 }
 
-// Entry point.
+// main entry point.
 func main() {
 	// Load file with env variables.
 	env.Load(".env")
