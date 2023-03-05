@@ -1,10 +1,10 @@
-import { JSX } from "preact";
+import {JSX} from "preact";
 
 /**
  * Base JSX for React components.
- * Always extend this for props.
+ * Extend this for type component props.
  */
 export type BaseJSXProps = {
-  children: Array<string> | string | Array<JSX.Element> | JSX.Element;
-  tailwind?: string;
+    children?: Array<string> | string | Array<JSX.Element> | JSX.Element;
+    tailwind?: string;
 };
