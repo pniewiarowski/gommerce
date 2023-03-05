@@ -34,6 +34,9 @@ function Navbar({title}: NavbarProps): JSX.Element {
                 </Bar.Item>
             </Bar.Group>
             <Bar.Group>
+                <Bar.Item>Searchbar</Bar.Item>
+            </Bar.Group>
+            <Bar.Group>
                 <Bar.Item>Item 1</Bar.Item>
                 <Bar.Item>Item 2</Bar.Item>
                 <Bar.Item>Item 3</Bar.Item>

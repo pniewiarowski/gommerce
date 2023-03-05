@@ -1,5 +1,5 @@
 import {JSX} from "preact";
-import {BaseJSXProps} from "../utils/types.ts";
+import {BaseProps} from "../types/base-props.ts";
 
 
 /**
@@ -10,7 +10,7 @@ import {BaseJSXProps} from "../utils/types.ts";
  *
  * @return Main component to contain all bar elements.
  */
-function Bar({children, tailwind = ""}: BaseJSXProps): JSX.Element {
+function Bar({children, tailwind = ""}: BaseProps): JSX.Element {
     const style: Array<string> = [
         "p-8",
         "m-4",
@@ -42,7 +42,7 @@ function Bar({children, tailwind = ""}: BaseJSXProps): JSX.Element {
  *
  * @returns Component for contain Bar title.
  */
-Bar.Title = function ({children, tailwind = ""}: BaseJSXProps): JSX.Element {
+Bar.Title = function ({children, tailwind = ""}: BaseProps): JSX.Element {
     const style: Array<string> = [
         "text-ui-element-foreground",
         "text-2xl",
@@ -65,7 +65,7 @@ Bar.Title = function ({children, tailwind = ""}: BaseJSXProps): JSX.Element {
  *
  * @returns Component to group elements.
  */
-Bar.Group = function ({children, tailwind = ""}: BaseJSXProps): JSX.Element {
+Bar.Group = function ({children, tailwind = ""}: BaseProps): JSX.Element {
     const style: Array<string> = [
         "flex",
         "flex-row",
@@ -88,7 +88,7 @@ Bar.Group = function ({children, tailwind = ""}: BaseJSXProps): JSX.Element {
  *
  * @returns Component to contain single Group element.
  */
-Bar.Item = function ({children, tailwind = ""}: BaseJSXProps): JSX.Element {
+Bar.Item = function ({children, tailwind = ""}: BaseProps): JSX.Element {
     const style: Array<string> = [
         "ml-3",
         "mr-3"

@@ -6,12 +6,29 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// GetConfigByKey return JSON with config value base
-// on key given as a parameter.
+// GetConfig return JSON with all models.Config pairs.
+func GetConfig(ctx *fiber.Ctx) error {
+	configs, err := models.GetConfig()
+	if err != nil {
+		return ctx.
+			Status(fiber.StatusBadRequest).
+			JSON(&fiber.Map{
+				"error": err,
+			})
+	}
+
+	return ctx.
+		Status(fiber.StatusOK).
+		JSON(&fiber.Map{
+			"data": configs,
+		})
+}
+
+// GetConfigByKey return JSON with models.Config base on given key.
 func GetConfigByKey(ctx *fiber.Ctx) error {
 	key := ctx.Params("key")
-	config, err := models.GetConfigByKey(key)
 
+	config, err := models.GetConfigByKey(key)
 	if err != nil {
 		return ctx.
 			Status(fiber.StatusNotFound).
@@ -27,8 +44,7 @@ func GetConfigByKey(ctx *fiber.Ctx) error {
 		})
 }
 
-// CreateConfig create instance of models.Config and save
-// it to database.
+// CreateConfig create instance of models.Config.
 func CreateConfig(ctx *fiber.Ctx) error {
 	config := new(models.Config)
 	if err := ctx.BodyParser(config); err != nil {

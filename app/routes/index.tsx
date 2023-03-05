@@ -6,10 +6,12 @@ import Navbar from "../islands/navbar.tsx";
  *
  * @return Home page.
  */
-const Index = (): JSX.Element => (
-    <div>
-        <Navbar title="Gommerce"/>
-    </div>
-);
+function Index(): JSX.Element {
+    return (
+        <div>
+            <Navbar title="Gommerce"/>
+        </div>
+    );
+}
 
 export default Index;

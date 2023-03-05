@@ -7,27 +7,23 @@ import (
 	"gommerce/api/models"
 )
 
-// Models array to register your models.
+// Models registered models.
 var Models = []interface{}{
 	models.Config{},
 }
 
 // main entry point.
 func main() {
-	// Load file with env variables.
 	env.Load(".env")
 
-	// Get env variables.
 	db := env.GetDb()
 	migration := env.GetMigration()
 	port := env.GetPort()
 
-	// Setup database and migrate models.
 	database.SetupSQLite(db)
 	if migration {
 		database.MakeMigration(Models)
 	}
 
-	// Run application.
 	app.Run(int(port))
 }

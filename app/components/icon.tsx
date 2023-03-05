@@ -1,7 +1,7 @@
 import {JSX} from "preact";
-import {BaseJSXProps} from "../utils/types.ts";
+import {BaseProps} from "../types/base-props.ts";
 
-type IconJSXProps = BaseJSXProps & {
+type IconProps = BaseProps & {
     source: string,
     alt?: string,
 }
@@ -14,7 +14,7 @@ type IconJSXProps = BaseJSXProps & {
  *
  * @return Icon main container.
  */
-function Icon({tailwind, source, alt}: IconJSXProps): JSX.Element {
+function Icon({tailwind, source, alt}: IconProps): JSX.Element {
     const style: Array<string> = [];
 
     return (
@@ -33,7 +33,7 @@ function Icon({tailwind, source, alt}: IconJSXProps): JSX.Element {
  *
  * @return Container for Icon component.
  */
-Icon.Container = function ({children, tailwind}: BaseJSXProps): JSX.Element {
+Icon.Container = function ({children, tailwind}: BaseProps): JSX.Element {
     const style: Array<string> = [];
 
     return (
