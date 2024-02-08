@@ -44,45 +44,45 @@ services:
       - service-blog
 
   service-account:
-    image: golang:1.22
+    image: golang:1.21
     stdin_open: true
     container_name: gommerce-service-account
     restart: unless-stopped
     build:
-      context: "api/cmd/go/account"
+      context: "api/go/account"
       dockerfile: "./Dockerfile"
     depends_on:
       - database
 
   service-shop:
-    image: golang:1.22
+    image: golang:1.21
     stdin_open: true
     container_name: gommerce-service-shop
     restart: unless-stopped
     build:
-      context: "api/cmd/go/shop"
+      context: "api/go/shop"
       dockerfile: "./Dockerfile"
     depends_on:
       - database
 
   service-blog:
-    image: golang:1.22
+    image: golang:1.21
     stdin_open: true
     container_name: gommerce-service-blog
     restart: unless-stopped
     build:
-      context: "api/cmd/go/blog"
+      context: "api/go/blog"
       dockerfile: "./Dockerfile"
     depends_on:
       - database
 
   service-customization:
-    image: golang:1.22
+    image: golang:1.21
     stdin_open: true
     container_name: gommerce-service-customization
     restart: unless-stopped
     build:
-      context: "api/cmd/go/blog"
+      context: "api/go/blog"
       dockerfile: "./Dockerfile"
     depends_on:
       - database
