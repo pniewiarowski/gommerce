@@ -1,0 +1,48 @@
+version: "3.5"
+
+
+volumes:
+  pg-data:
+  pg-admin-data:
+
+
+services:
+  database:
+    image: postgres:16.1
+    stdin_open: true
+    container_name: gommerce-database
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=gommerce-database
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin321
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  database-admin-panel:
+    image: dpage/pgadmin4
+    stdin_open: true
+    container_name: gommerce-database-admin-panel
+    restart: unless-stopped
+    ports:
+      - "1000:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.admin
+      PGADMIN_DEFAULT_PASSWORD: password123
+    volumes:
+      - pg-admin-data:/var/lib/pgadmin
+
+  service-authentication:
+    image: golang:1.22
+    stdin_open: true
+    container_name: gommerce-service-authentication
+    restart: unless-stopped
+    ports:
+      - "1010:8080"
+    build:
+      context: "api/go/authentication"
+      dockerfile: "./Dockerfile"
+    depends_on:
+      - database
