@@ -3,3 +3,27 @@
 
 # IDE
 /.idea
+
+# Shop Service
+/api/Shop/bin
+/api/Shop/obj
+/api/Shop/.idea
+
+# Web Application
+/app/node_modules
+/app/.pnp
+/app/.pnp.js
+/app/.yarn/install-state.gz
+/app/coverage
+/app/.next/
+/app/out/
+/app/build
+/app/.DS_Store
+/app/*.pem
+/app/npm-debug.log*
+/app/yarn-debug.log*
+/app/yarn-error.log*
+/app/.env*.local
+/app/.vercel
+/app/*.tsbuildinfo
+/app/next-env.d.ts

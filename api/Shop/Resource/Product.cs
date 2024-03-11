@@ -8,12 +8,12 @@ public class Product
     public float Price { get; set; }
     public uint CategoryID { get; set; }
 
-    public static ICollection<Resource.Product> fromCollection(ICollection<Model.Product> products)
+    public static ICollection<Resource.Product> FromCollection(ICollection<Model.Product> products)
     {
-        return products.Select(from).ToList();
+        return products.Select(From).ToList();
     }
 
-    public static Resource.Product from(Model.Product product)
+    public static Resource.Product From(Model.Product product)
     {
         return new Resource.Product
         {

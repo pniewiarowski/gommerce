@@ -5,12 +5,12 @@ public class Category
     public uint ID { get; set; }
     public string Name { get; set; }
 
-    public static ICollection<Resource.Category> fromCollection(ICollection<Model.Category> categories)
+    public static ICollection<Resource.Category> FromCollection(ICollection<Model.Category> categories)
     {
-        return categories.Select(from).ToList();
+        return categories.Select(From).ToList();
     }
 
-    public static Resource.Category from(Model.Category category)
+    public static Resource.Category From(Model.Category category)
     {
         return new Resource.Category
         {

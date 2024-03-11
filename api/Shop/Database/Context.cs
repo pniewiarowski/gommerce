@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using Shop.Model;
-using Category = Shop.Resource.Category;
 
 namespace Shop.Database;
 
-public class Context(DbContextOptions<Context> options) : DbContext
+public class Context(DbContextOptions<Context> options) : DbContext(options)
 {
-    public DbSet<Product> Products { get; set; }
-    public DbSet<Category> Categories { get; set; }
+    public DbSet<Model.Product> Products { get; set; }
+    public DbSet<Model.Category> Categories { get; set; }
+    public DbSet<Model.Customer> Customers { get; set; }
+    public DbSet<Model.Order> Orders { get; set; }
 }
