@@ -34,15 +34,15 @@ services:
     volumes:
       - pg-admin-data:/var/lib/pgadmin
 
-  service-authentication:
-    image: golang:1.22
+  service-shop:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
     stdin_open: true
-    container_name: gommerce-service-authentication
+    container_name: gommerce-service-shop
     restart: unless-stopped
     ports:
       - "1010:8080"
     build:
-      context: "api/go/authentication"
+      context: "api/Shop"
       dockerfile: "./Dockerfile"
     depends_on:
       - database
