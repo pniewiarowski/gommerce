@@ -11,8 +11,26 @@ const config: Config = {
     theme: {
         extend: {
             backgroundImage: {
-                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+                'radial-gradient-center-1': "url('/bg-radial-gradient-center-1.png')",
+                'radial-gradient-center-2': "url('/bg-radial-gradient-center-2.png')",
+                'radial-gradient-distracted-1': "url('/bg-radial-gradient-distracted-1.png')",
+            },
+            keyframes: {
+                floating1: {
+                    '0%': {transform: 'translateY(-0.33rem)'},
+                    '50%': {transform: 'translateY(0.13rem)'},
+                    '100%': {transform: 'translateY(-0.33rem)'},
+                },
+                floating2: {
+                    '0%': {transform: 'translateY(-0.43rem)'},
+                    '50%': {transform: 'translateY(0.03rem)'},
+                    '100%': {transform: 'translateY(-0.43rem)'},
+                },
+            },
+            animation: {
+                'floating1': 'floating1 2s ease-in-out infinite',
+                'floating2': 'floating2 3s ease-in-out infinite',
+                'floating3': 'floating1 3s ease-in-out infinite'
             },
         },
     },

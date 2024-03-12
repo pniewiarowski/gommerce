@@ -10,6 +10,7 @@
 /api/Shop/.idea
 
 # Web Application
+/app/.idea
 /app/node_modules
 /app/.pnp
 /app/.pnp.js

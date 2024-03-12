@@ -12,7 +12,7 @@ function Navbar(props: Props): React.JSX.Element {
     const categories: React.JSX.Element[] | undefined = props.categories?.map(category => {
         return (
             <NavbarItem key={category.ID}>
-                <Link className="text-2xl" href={category.Name.toLocaleLowerCase()}>
+                <Link className="text-xl" href={category.Name.toLocaleLowerCase()}>
                     {category.Name.toLocaleLowerCase()}
                 </Link>
             </NavbarItem>
@@ -22,7 +22,7 @@ function Navbar(props: Props): React.JSX.Element {
     return (
         <Base className={"p-4"} position={"static"}>
             <NavbarBrand>
-                {props.heading && <p className="font-bold text-2xl text-inherit">{props.heading.toLowerCase()}</p>}
+                {props.heading && <p className="text-xl text-inherit">{props.heading.toLowerCase()}</p>}
             </NavbarBrand>
 
             {categories &&
