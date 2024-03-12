@@ -1,11 +1,10 @@
 import React from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {Box, CssBaseline, ThemeProvider} from "@mui/material";
+import {CssBaseline, ThemeProvider} from "@mui/material";
 import {Navbar} from "./organism";
-import {ShopHomePage} from "./page";
-import {lightTheme, darkTheme} from "./theme";
-import BackgoundImage from "./image/bg-radial-gradient-center.png";
-
+import {ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage} from "./page";
+import {darkTheme} from "./theme";
+import "./base.css";
 const App = (): React.JSX.Element => {
     const title: string = "gommerce";
     const elevation: number = 3;
@@ -17,13 +16,14 @@ const App = (): React.JSX.Element => {
                 <BrowserRouter>
                     <Navbar heading={title}
                             elevation={elevation}
-                            uiColor="secondary"
                             showShoppingBagIcon
                             showAccountIcon
                             showLoginButton
                     />
                     <Routes>
                         <Route path="/" element=<ShopHomePage/>/>
+                        <Route path="/login" element=<ShopCustomerLoginPage/>/>
+                        <Route path="/register" element=<ShopCustomerRegisterPage/>/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
