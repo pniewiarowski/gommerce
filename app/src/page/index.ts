@@ -1,1 +1,1 @@
-export {default as HomePage} from "./home-page.tsx";
+export {default as ShopHomePage} from "./shop-home-page.tsx";
