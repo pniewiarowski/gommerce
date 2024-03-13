@@ -1,7 +1,8 @@
 import React from "react";
-import {AppBar, Badge, Box, Button, IconButton, Toolbar, Typography} from "@mui/material";
+import {AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography} from "@mui/material";
 import {Person, ShoppingBag} from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import {CategoryDefinition} from "../api/definition";
 
 interface Props {
     heading: string,
@@ -9,10 +10,23 @@ interface Props {
     showShoppingBagIcon?: boolean,
     showAccountIcon?: boolean,
     showLoginButton?: boolean,
+    categories: Array<CategoryDefinition>
 }
 
 const Navbar = (props: Props): React.JSX.Element => {
     const elevation: number = props.elevation === undefined ? 1 : props.elevation;
+    const categoriesToRender: Array<React.JSX.Element> = props.categories.map((category: CategoryDefinition, i: number) => {
+        return (
+            <React.Fragment>
+                {i != 0 && <Divider orientation="vertical" flexItem />}
+                <Link to={`/category/${category.id}`}>
+                    <Typography variant="h4" component="div" sx={{ml: 1, mr: 1, flexGrow: 1}}>
+                        {category.name.toLowerCase()}
+                    </Typography>
+                </Link>
+            </React.Fragment>
+        )
+    });
 
     return (
         <Box>
@@ -25,6 +39,9 @@ const Navbar = (props: Props): React.JSX.Element => {
                                     {props.heading}
                                 </Typography>
                             </Link>
+                        </Box>
+                        <Box style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                            {categoriesToRender}
                         </Box>
                         <Box style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                             {props.showShoppingBagIcon &&

@@ -61,8 +61,8 @@ public class Category(Context context) : Microsoft.AspNetCore.Mvc.Controller
     [Route("/api/v1/categories/{id}/products")]
     public IActionResult GetProducts(uint id)
     {
-        var products = context.Products.Where(product => product.CategoryID == id).ToList();
+        var products = context.Products.Where(product => product.CategoryID == id);
 
-        return Json(Resource.Product.FromCollection(products));
+        return Json(Resource.Product.FromCollection(products.ToList()));
     }
 }
