@@ -4,18 +4,19 @@ import {CssBaseline, ThemeProvider} from "@mui/material";
 import {Navbar} from "./organism";
 import {ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCategoryPage} from "./page";
 import {CategoryDefinition} from "./api/definition";
-import {darkTheme, lightTheme} from "./theme";
+import {darkTheme,} from "./theme";
+import useBackend from "./hook/use-backend.ts";
 import "./base.css";
-import {Categories} from "./api/repository";
 
 const App = (): React.JSX.Element => {
+    const {categoriesRepository} = useBackend();
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
     const title: string = "gommerce";
     const elevation: number = 3;
 
     useEffect(() => {
         const fetchCategories = async () => {
-            setCategories(await Categories.get());
+            setCategories(await categoriesRepository.get());
         }
 
         fetchCategories();

@@ -2,16 +2,17 @@ import React, {useEffect, useState} from "react";
 import {Box, Breadcrumbs, Grid, Paper, Typography} from "@mui/material";
 import {Link, useParams} from "react-router-dom";
 import CategoryDefinition from "../api/definition/category-definition.ts";
-import {Categories} from "../api/repository";
+import useBackend from "../hook/use-backend.ts";
 
 const ShopCategoryPage = (): React.JSX.Element => {
+    const {categoriesRepository} = useBackend();
     const { id } = useParams();
     const [category, setCategory] = useState<CategoryDefinition>();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchCategory = async() => {
-            setCategory(await Categories.getByID(Number(id)));
+            setCategory(await categoriesRepository.getByID(Number(id)));
         }
 
         fetchCategory();
@@ -27,7 +28,7 @@ const ShopCategoryPage = (): React.JSX.Element => {
                                 <Typography color="text.primary">Home</Typography>
                             </Link>
                             <Link to={`/category/${category?.id}`}>
-                                <Typography color="text.primary">{category?.name}</Typography>
+                                <Typography color="secondary">{category?.name}</Typography>
                             </Link>
                         </Breadcrumbs>
                     </Paper>
