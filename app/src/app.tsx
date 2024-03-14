@@ -12,7 +12,7 @@ const App = (): React.JSX.Element => {
     const {categoriesRepository} = useBackend();
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
     const title: string = "gommerce";
-    const elevation: number = 3;
+    const elevation: number = 6;
 
     useEffect(() => {
         const fetchCategories = async () => {
