@@ -9,22 +9,27 @@
 /api/Shop/obj
 /api/Shop/.idea
 
-# Web Application
-/app/.idea
-/app/node_modules
-/app/.pnp
-/app/.pnp.js
-/app/.yarn/install-state.gz
-/app/coverage
-/app/.next/
-/app/out/
-/app/build
-/app/.DS_Store
-/app/*.pem
-/app/npm-debug.log*
-/app/yarn-debug.log*
-/app/yarn-error.log*
-/app/.env*.local
-/app/.vercel
-/app/*.tsbuildinfo
-/app/next-env.d.ts
+# Auth Service
+/api/Auth/bin
+/api/Auth/obj
+/api/Auth/.idea
+
+# Shop Application
+/app/shop/.idea
+/app/shop/node_modules
+/app/shop/.pnp
+/app/shop/.pnp.js
+/app/shop/.yarn/install-state.gz
+/app/shop/coverage
+/app/shop/.next/
+/app/shop/out/
+/app/shop/build
+/app/shop/.DS_Store
+/app/shop/*.pem
+/app/shop/npm-debug.log*
+/app/shop/yarn-debug.log*
+/app/shop/yarn-error.log*
+/app/shop/.env*.local
+/app/shop/.vercel
+/app/shop/*.tsbuildinfo
+/app/shop/next-env.d.ts
