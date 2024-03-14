@@ -1,7 +1,8 @@
-import {Breadcrumbs, Grid, Grow, Paper, Typography} from "@mui/material";
+import {Breadcrumbs, Grid, Grow, Paper, Typography, Zoom} from "@mui/material";
 import React from "react";
 import {Link} from "react-router-dom";
 import CustomerRegisterForm from "../organism/customer-register-form.tsx";
+import {Close} from "@mui/icons-material";
 
 const ShopCustomerRegisterPage = (): React.JSX.Element => {
     return (
@@ -23,7 +24,11 @@ const ShopCustomerRegisterPage = (): React.JSX.Element => {
             </Grid>
 
             <Grid item xs={12} xl={6} spacing={1}>
-                <Paper elevation={1} sx={{minHeight: "490px"}}/>
+                <Paper elevation={1} sx={{minHeight: "490px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <Zoom in={true}>
+                        <Close style={{fontSize: "400px"}} color="primary"/>
+                    </Zoom>
+                </Paper>
             </Grid>
 
             <Grid item xs={0} xl={6} spacing={1}>

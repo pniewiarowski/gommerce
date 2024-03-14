@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
 import {Link} from "react-router-dom";
-import {Person, Key, Repeat} from "@mui/icons-material";
+import {Person, Key, Repeat, Email} from "@mui/icons-material";
 
 const CustomerRegisterForm = (): React.JSX.Element => {
     const theme: Theme = useTheme();
@@ -25,7 +25,7 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                     <TextField label="email" variant="outlined" color="primary" InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <Person/>
+                                <Email/>
                             </InputAdornment>
                         ),
                     }}/>

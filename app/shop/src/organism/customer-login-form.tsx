@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
 import {Link} from "react-router-dom";
-import {Key, Person} from "@mui/icons-material";
+import {Email, Key} from "@mui/icons-material";
 
 const CustomerLoginForm = (): React.JSX.Element => {
     const theme: Theme = useTheme();
@@ -16,7 +16,7 @@ const CustomerLoginForm = (): React.JSX.Element => {
                     <TextField label="email" variant="outlined" color="primary" InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <Person/>
+                                <Email/>
                             </InputAdornment>
                         ),
                     }}/>
