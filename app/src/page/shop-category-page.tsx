@@ -20,7 +20,7 @@ const ShopCategoryPage = (): React.JSX.Element => {
 
     return (
         <Box>
-            <Grid sx={{width: "60%", mx: "auto"}} container spacing={1}>
+            <Grid sx={{width: "70%", mx: "auto"}} container spacing={1}>
                 <Grid sx={{mt: 1}} item xs={12} >
                     <Paper sx={{p: 1}}>
                         <Breadcrumbs aria-label="breadcrumb">

@@ -31,7 +31,7 @@ const Navbar = (props: Props): React.JSX.Element => {
     return (
         <Box>
             <AppBar position="static" elevation={elevation}>
-                <Toolbar variant="regular" sx={{width: "62.5%", mx: "auto"}}>
+                <Toolbar variant="regular" sx={{width: "72.5%", mx: "auto"}}>
                     <Box style={{display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%"}}>
                         <Box style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                             <Link to="/">
