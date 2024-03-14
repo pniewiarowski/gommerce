@@ -1,6 +1,7 @@
 import React from "react";
-import {Box, Button, FormControl, TextField, Theme, Typography, useTheme} from "@mui/material";
+import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
 import {Link} from "react-router-dom";
+import {Key, Person} from "@mui/icons-material";
 
 const CustomerLoginForm = (): React.JSX.Element => {
     const theme: Theme = useTheme();
@@ -12,10 +13,22 @@ const CustomerLoginForm = (): React.JSX.Element => {
                     <Typography variant="h3">you are logout</Typography>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <TextField label="email" variant="outlined" color="primary"/>
+                    <TextField label="email" variant="outlined" color="primary" InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Person/>
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <TextField label="password" variant="outlined" color="primary"/>
+                    <TextField label="password" variant="outlined" color="primary" InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Key/>
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
                     <Typography>not have account yet? click <Link to="/register" style={{color: theme.palette.primary.main}}>here</Link> to register</Typography>

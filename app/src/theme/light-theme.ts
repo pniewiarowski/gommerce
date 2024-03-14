@@ -4,20 +4,38 @@ const lightTheme: ThemeOptions = createTheme({
     palette: {
         mode: "light",
         primary: {
-            main: '#ff5722',
+            main: '#651fff',
         },
         secondary: {
-            main: '#651fff',
+            main: '#90cfcf',
         },
     },
     typography: {
         h3: {
             fontWeight: 900,
-            fontFamily: "monospace",
+            fontFamily: "sans-serif",
             fontSize: 20,
         },
+        h4: {
+            fontWeight: 700,
+            fontFamily: "sans-serif",
+            fontSize: 14,
+        },
     },
-    spacing: 10,
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    fontFamily: "sans-serif",
+                    fontSize: "1rem",
+                    fontWeight: 900,
+                    lineHeight: 1.5,
+                    letterSpacing: 0,
+                    padding: "0.5rem 2rem",
+                },
+            },
+        },
+    },
 });
 
 export default lightTheme;

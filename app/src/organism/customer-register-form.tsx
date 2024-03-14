@@ -1,6 +1,7 @@
 import React from "react";
-import {Box, Button, FormControl, TextField, Theme, Typography, useTheme} from "@mui/material";
+import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
 import {Link} from "react-router-dom";
+import {Person, Key, Repeat} from "@mui/icons-material";
 
 const CustomerRegisterForm = (): React.JSX.Element => {
     const theme: Theme = useTheme();
@@ -12,16 +13,40 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                     <Typography variant="h3">create your account</Typography>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <TextField label="name" variant="outlined" color="primary"/>
+                    <TextField label="name" variant="outlined" color="primary" InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Person/>
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <TextField label="email" variant="outlined" color="primary"/>
+                    <TextField label="email" variant="outlined" color="primary" InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Person/>
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <TextField label="password" variant="outlined" color="primary"/>
+                    <TextField label="password" variant="outlined" color="primary" InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Key/>
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <TextField label="repeat password" variant="outlined" color="primary"/>
+                    <TextField label="repeat password" variant="outlined" color="primary" InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Repeat/>
+                            </InputAdornment>
+                        ),
+                    }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
                     <Typography>you have account? click <Link to="/login" style={{color: theme.palette.primary.main}}>here</Link> to login</Typography>
