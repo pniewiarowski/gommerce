@@ -5,6 +5,7 @@ import CategoryDefinition from "../api/definition/category-definition.ts";
 import useBackend from "../hook/use-backend.ts";
 import ProductDefinition from "../api/definition/product-definition.ts";
 import {SentimentVeryDissatisfied} from "@mui/icons-material";
+import {ProductTile} from "../organism";
 
 const ShopCategoryPage = (): React.JSX.Element => {
     const {categoriesRepository} = useBackend();
@@ -23,6 +24,28 @@ const ShopCategoryPage = (): React.JSX.Element => {
         fetchCategory();
     }, [id]);
 
+    useEffect(() => {
+        const fetchProducts = async () => {
+            if (!category) {
+                return;
+            }
+
+            setProducts(await categoriesRepository.getProducts(category.id));
+        }
+
+        fetchProducts();
+    }, [category, id]);
+
+    const productsToRender = products.map((product: ProductDefinition, index: number) => {
+        return (
+            <Grow in={true} {...{timeout: 250 * (index + 1)}}>
+                <Grid item xs={12} md={6} xl={3}>
+                    <ProductTile from={product}/>
+                </Grid>
+            </Grow>
+        )
+    });
+
     return (
         <React.Fragment>
             <Grid sx={{mt: 1}} item xs={12}>
@@ -40,9 +63,15 @@ const ShopCategoryPage = (): React.JSX.Element => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
+
+            {!!products.length &&
+            <Grid item container xs={12} spacing={1}>
+                {productsToRender}
+            </Grid>}
+
             {!products.length &&
-                <Grow in={true} {...{timeout: 250}}>
-                    <Grid item xs={12}>
+                <Grid item xs={12}>
+                    <Grow in={true} {...{timeout: 250}}>
                         <Paper sx={{p: 10}}
                                style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                             <Typography>
@@ -50,8 +79,8 @@ const ShopCategoryPage = (): React.JSX.Element => {
                             </Typography>
                             <Typography variant="h3">there are no products in this category...</Typography>
                         </Paper>
-                    </Grid>
-                </Grow>}
+                    </Grow>
+                </Grid>}
         </React.Fragment>
     );
 }

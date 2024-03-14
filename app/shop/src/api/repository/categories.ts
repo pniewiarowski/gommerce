@@ -1,5 +1,5 @@
 import {shop} from "../../axios";
-import {CategoryDefinition} from "../definition";
+import {CategoryDefinition, ProductDefinition} from "../definition";
 
 class Categories {
     private static resource = "categories";
@@ -14,6 +14,12 @@ class Categories {
         const response = await shop.get(`/${Categories.resource}/${id}`);
 
         return await response.data;
+    }
+
+    public async getProducts(id: number): Promise<Array<ProductDefinition>> {
+        const respnse = await shop.get(`/${Categories.resource}/${id}/products`);
+
+        return await respnse.data;
     }
 }
 
