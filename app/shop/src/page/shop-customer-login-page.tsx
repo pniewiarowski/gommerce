@@ -32,7 +32,7 @@ const ShopCustomerLoginPage = (): React.JSX.Element => {
             <Grid item xs={0} xl={6} spacing={1}>
                 <Paper elevation={1} sx={{minHeight: "490px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <Zoom in={true}>
-                        <Close style={{fontSize: "400px"}} color="primary"/>
+                        <Close style={{fontSize: "400px", color: "#00000044"}}/>
                     </Zoom>
                 </Paper>
             </Grid>

@@ -10,7 +10,7 @@ The platform provides a REST API, a web application, a command-line interface (C
 
 ### REST API
 
-The REST API is a collection of microservices developed in Go. These microservices handle various aspects of the e-commerce platform, providing a robust and scalable backend.
+The REST API is a collection of microservices developed in ASP.NET. These microservices handle various aspects of the e-commerce platform, providing a robust and scalable backend.
 
 ### Web Application
 
