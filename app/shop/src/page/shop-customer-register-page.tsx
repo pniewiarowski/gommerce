@@ -31,7 +31,7 @@ const ShopCustomerRegisterPage = (): React.JSX.Element => {
                 </Paper>
             </Grid>
 
-            <Grid item xs={0} xl={6} spacing={1}>
+            <Grid item xs={12} xl={6} spacing={1}>
                 <Grow in={true} {...{timeout: 500}}>
                     <Paper elevation={3}>
                         <CustomerRegisterForm/>

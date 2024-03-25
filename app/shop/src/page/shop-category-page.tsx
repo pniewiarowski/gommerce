@@ -71,7 +71,7 @@ const ShopCategoryPage = (): React.JSX.Element => {
 
             {!products.length &&
                 <Grid item xs={12}>
-                    <Grow in={true} {...{timeout: 250}}>
+                    <Grow in={true} timeout={250}>
                         <Paper sx={{p: 10}}
                                style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                             <Typography>

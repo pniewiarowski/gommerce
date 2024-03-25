@@ -12,7 +12,7 @@ const MailingForm = (): React.JSX.Element => {
                 </Paper>
             </Grid>
             <Grid item xl={6} xs={12}>
-                <Paper elevation={3} sx={{width: "100%", height: "100%",  display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <Paper elevation={3} sx={{width: "100%", height: "100%", p: 4,  display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <form style={{width: "80%"}}>
                         <FormControl style={{width: "70%"}}>
                             <TextField label="enter your email"/>
