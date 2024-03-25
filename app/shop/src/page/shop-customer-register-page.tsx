@@ -27,7 +27,7 @@ const ShopCustomerRegisterPage = (): React.JSX.Element => {
 
             {!!query.get("errorRegister") &&
                 <React.Fragment>
-                    <Grid item xl={12} spacing={1}>
+                    <Grid item xs={12} spacing={1}>
                         <Grow in={true} {...{timeout: 250}}>
                             <Alert icon={<Check fontSize="inherit"/>} severity="error" sx={{p: 2}} variant={"outlined"}>
                                 <Typography>{query.get("errorRegister")}</Typography>

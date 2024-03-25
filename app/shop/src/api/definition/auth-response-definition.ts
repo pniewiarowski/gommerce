@@ -1,5 +1,5 @@
 interface AuthResponseDefinition {
-    userId: number,
+    id: number,
     token: string,
 }
 

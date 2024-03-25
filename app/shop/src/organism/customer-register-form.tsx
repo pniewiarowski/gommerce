@@ -24,24 +24,20 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                     email: data.email,
                     password: data.password,
                 });
+
+                const names = data.name.split(" ");
+                const firstName = names[0];
+                const lastName = names.length > 1 ? names[1] : names[0];
+
+                await customersRepository.post({
+                    firstName: firstName,
+                    lastName: lastName,
+                    userId: user.id,
+                });
             } catch (exception: any) {
                 navigate(`/register?errorRegister=${exception.response.data}`);
                 return false;
             }
-
-            if (!user.id) {
-                return false;
-            }
-
-            const names = data.name.split(" ");
-            const firstName = names[0];
-            const lastName = names.length > 1 ? names[1] : names[0];
-
-            await customersRepository.post({
-                firstName: firstName,
-                lastName: lastName,
-                userId: user.id,
-            });
 
             return true;
         }

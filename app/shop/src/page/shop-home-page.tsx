@@ -14,7 +14,7 @@ const ShopHomePage = (): React.JSX.Element => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid item xs={12} xl={6} spacing={1}>
+            <Grid item xs={12} xl={6}>
                 <Grow in={true}>
                     <Paper sx={{height: "408px", p: 1}} elevation={1}>
                     </Paper>
@@ -24,7 +24,7 @@ const ShopHomePage = (): React.JSX.Element => {
                 <Grid container spacing={1}>
                     <Grow in={true} {...{timeout: 250}}>
                         <Grid item xs={6}>
-                            <Paper sx={{p: 1,mb: 1, height: "200px"}}></Paper>
+                            <Paper sx={{p: 1, mb: 1, height: "200px"}}></Paper>
                         </Grid>
                     </Grow>
                     <Grow in={true} {...{timeout: 500}}>

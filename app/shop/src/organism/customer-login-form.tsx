@@ -1,22 +1,80 @@
-import React from "react";
+import React, {useContext} from "react";
 import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Email, Key} from "@mui/icons-material";
 import {useForm} from "react-hook-form";
 import {loginResolver, loginType} from "../resolver";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useBackend, useCookies} from "../hook";
+import {CustomerContext, JwtContext, UserContext} from "../context";
 
 const CustomerLoginForm = (): React.JSX.Element => {
     const theme: Theme = useTheme();
+    const navigate = useNavigate();
 
-        const {
+    const {authRepository, usersRepository, customersRepository} = useBackend();
+    const {set} = useCookies();
+
+    const {setUser} = useContext(UserContext);
+    const {setCustomer} = useContext(CustomerContext);
+    const {setJwt} = useContext(JwtContext);
+
+    const {
         register,
         handleSubmit,
         formState: {errors},
     } = useForm<loginType>({resolver: zodResolver(loginResolver)});
 
-    const onSubmit = (): void => {
+    const onSubmit = async (data: loginType) => {
+        const login = async () => {
+            try {
+                const jwt = await authRepository.jwt({
+                    email: data.email,
+                    password: data.password
+                });
 
+                if (!jwt) {
+                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    return;
+                }
+                const user = await usersRepository.getByID(jwt.id, jwt.token);
+
+                if (!user || !user.id) {
+                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    return;
+                }
+
+                const customer = await customersRepository.getByUserID(user.id, jwt.token);
+
+                if (!customer) {
+                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    return;
+                }
+
+                set("jwt", jwt.token);
+                setJwt(jwt.token);
+
+                set("userID", user.id);
+                set("userEmail", user.email);
+                setUser(user);
+
+                set("customerID", customer.id);
+                set("customerFirstName", customer.firstName);
+                set("customerLastName", customer.lastName);
+                set("customerUserID", customer.userId);
+                setCustomer(customer);
+            } catch (exception: any) {
+                navigate(`/login?errorLogin=${exception.response.data}`);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        if (await login()) {
+            navigate("/");
+        }
     }
 
 
@@ -46,6 +104,7 @@ const CustomerLoginForm = (): React.JSX.Element => {
                     <TextField label="password"
                                variant="outlined"
                                color="primary"
+                               type="password"
                                {...register("password")}
                                error={!!errors.password}
                                helperText={errors.password ? errors.password.message : ""}
@@ -58,7 +117,9 @@ const CustomerLoginForm = (): React.JSX.Element => {
                                }}/>
                 </FormControl>
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <Typography>not have account yet? click <Link to="/register" style={{color: theme.palette.primary.main}}>here</Link> to register</Typography>
+                    <Typography>not have account yet? click <Link to="/register"
+                                                                  style={{color: theme.palette.primary.main}}>here</Link> to
+                        register</Typography>
                 </FormControl>
                 <FormControl fullWidth>
                     <Button sx={{p: 2}} variant="contained" style={{textAlign: 'left'}} type="submit">login</Button>

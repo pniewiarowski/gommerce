@@ -63,4 +63,13 @@ public class Customer(Context context) : Microsoft.AspNetCore.Mvc.Controller
 
         return Json(Resource.Order.FromCollection(orders.ToList()));
     }
+
+    [HttpGet]
+    [Route("/api/v1/users/{id}/customers")]
+    public IActionResult GetByUserID(uint id)
+    {
+        var customer = context.Customers.Where(customer => customer.UserID == id).First();
+
+        return Json(Resource.Customer.From(customer));
+    }
 }
