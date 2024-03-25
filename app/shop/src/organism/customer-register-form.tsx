@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link, redirect, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {Person, Key, Repeat, Email} from "@mui/icons-material";
@@ -19,10 +19,15 @@ const CustomerRegisterForm = (): React.JSX.Element => {
 
     const onSubmit = async (data: registerType) => {
         const register = async () => {
-            const user = await authRepository.register({
-                email: data.email,
-                password: data.password,
-            });
+            try {
+                const user = await authRepository.register({
+                    email: data.email,
+                    password: data.password,
+                });
+            } catch (exception: any) {
+                navigate(`/register?errorRegister=${exception.response.data}`);
+                return false;
+            }
 
             if (!user.id) {
                 return false;
@@ -45,8 +50,6 @@ const CustomerRegisterForm = (): React.JSX.Element => {
             navigate("/login?successRegister=true");
             return;
         }
-
-        navigate("/register?errorRegister=message")
     }
 
     return (

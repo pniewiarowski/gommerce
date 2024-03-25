@@ -12,8 +12,8 @@ const MailingForm = (): React.JSX.Element => {
                 </Paper>
             </Grid>
             <Grid item xl={6} xs={12}>
-                <Paper elevation={3} sx={{width: "100%", height: "100%", p: 4,  display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <form style={{width: "80%"}}>
+                <Paper elevation={3} sx={{width: "100%", height: "100%", p: 0,  display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <form style={{width: "87%"}}>
                         <FormControl style={{width: "70%"}}>
                             <TextField label="enter your email"/>
                         </FormControl>
