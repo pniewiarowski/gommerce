@@ -32,8 +32,7 @@ namespace Shop.Snapshot
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false)
+                    UserID = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {

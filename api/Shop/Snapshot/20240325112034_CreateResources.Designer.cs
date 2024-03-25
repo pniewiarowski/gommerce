@@ -11,7 +11,7 @@ using Shop.Database;
 namespace Shop.Snapshot
 {
     [DbContext(typeof(Context))]
-    [Migration("20240311210204_CreateResources")]
+    [Migration("20240325112034_CreateResources")]
     partial class CreateResources
     {
         /// <inheritdoc />
@@ -49,10 +49,6 @@ namespace Shop.Snapshot
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
@@ -61,9 +57,8 @@ namespace Shop.Snapshot
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 

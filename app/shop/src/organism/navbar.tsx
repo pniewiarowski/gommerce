@@ -18,9 +18,9 @@ const Navbar = (props: Props): React.JSX.Element => {
     const elevation: number = props.elevation === undefined ? 1 : props.elevation;
     const categoriesToRender: Array<React.JSX.Element> = props.categories.map((category: CategoryDefinition, i: number) => {
         return (
-            <React.Fragment>
+            <React.Fragment key={category.id}>
                 {i != 0 && <Divider orientation="vertical" flexItem />}
-                <Link to={`/category/${category.id}`}>
+                <Link to={`/category/${category.id}`} key={category.id}>
                     <Typography variant="h4" component="div" sx={{ml: 1, mr: 1, flexGrow: 1}}>
                         {category.name.toLowerCase()}
                     </Typography>

@@ -23,15 +23,15 @@ const ShopCustomerRegisterPage = (): React.JSX.Element => {
                 </Paper>
             </Grid>
 
-            <Grid item xs={12} xl={6} spacing={1}>
-                <Paper elevation={1} sx={{minHeight: "490px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+            <Grid item xs={12} xl={6}>
+                <Paper elevation={1} sx={{minHeight: "575px", display: "flex", justifyContent: "center", alignItems: "center"}}>
                     <Zoom in={true}>
                         <Close style={{fontSize: "400px", color: "#00000044"}}/>
                     </Zoom>
                 </Paper>
             </Grid>
 
-            <Grid item xs={12} xl={6} spacing={1}>
+            <Grid item xs={12} xl={6}>
                 <Grow in={true} {...{timeout: 500}}>
                     <Paper elevation={3}>
                         <CustomerRegisterForm/>
