@@ -19,7 +19,7 @@ public class Authentication(Context context, IHasher hasher, IToken token) : Mic
             return BadRequest("user with provided email already exists.");
         }
 
-        newUser.RoleID = Role.RegularUserID;
+        newUser.RoleID = Service.Const.Role.RegularUserID;
         newUser.Password = hasher.From(newUser.Password);
         context.Users.Add(newUser);
         context.SaveChanges();
