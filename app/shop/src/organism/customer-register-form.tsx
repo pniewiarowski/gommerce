@@ -1,10 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, redirect, useNavigate} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import {Person, Key, Repeat, Email} from "@mui/icons-material";
 import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
 import {zodResolver} from '@hookform/resolvers/zod';
 import {registerResolver, registerType} from "../resolver";
+import useBackend from "../hook/use-backend.ts";
 
 const CustomerRegisterForm = (): React.JSX.Element => {
     const {
@@ -13,9 +14,41 @@ const CustomerRegisterForm = (): React.JSX.Element => {
         formState: {errors},
     } = useForm<registerType>({resolver: zodResolver(registerResolver)});
     const theme: Theme = useTheme();
+    const navigate = useNavigate();
+    const {customersRepository, authRepository} = useBackend();
 
-    const onSubmit = (): void => {
+    const onSubmit = async (data: registerType) => {
+        const register = async () => {
+            const user = await authRepository.register({
+                email: data.email,
+                password: data.password,
+            });
 
+            alert(user.id);
+
+            if (!user.id) {
+                return false;
+            }
+
+            const names = data.name.split(" ");
+            const firstName = names[0];
+            const lastName = names.length > 1 ? names[1] : names[0];
+
+            await customersRepository.post({
+                firstName: firstName,
+                lastName: lastName,
+                userId: user.id,
+            });
+
+            return true;
+        }
+
+        if (await register()) {
+            navigate("/login?successRegister=true");
+            return;
+        }
+
+        navigate("/register?errorRegister=message")
     }
 
     return (
@@ -59,6 +92,7 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                     <TextField label="password"
                                variant="outlined"
                                color="primary"
+                               type="password"
                                {...register("password")}
                                error={!!errors.password}
                                helperText={errors.password ? errors.password.message : ""}
@@ -74,6 +108,7 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                     <TextField label="repeat password"
                                variant="outlined"
                                color="primary"
+                               type="password"
                                {...register("repeatPassword")}
                                error={!!errors.repeatPassword}
                                helperText={errors.repeatPassword ? errors.repeatPassword.message : ""}
@@ -91,7 +126,9 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                     </FormControl>
                 }
                 <FormControl sx={{mb: 2}} fullWidth>
-                    <Typography>you have account? click <Link to="/login" style={{color: theme.palette.primary.main}}>here</Link> to login</Typography>
+                    <Typography>you have account? click <Link to="/login"
+                                                              style={{color: theme.palette.primary.main}}>here</Link> to
+                        login</Typography>
                 </FormControl>
                 <FormControl fullWidth>
                     <Button sx={{p: 2}} type="submit" variant="contained">register</Button>

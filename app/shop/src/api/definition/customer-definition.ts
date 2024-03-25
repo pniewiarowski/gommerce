@@ -1,8 +1,8 @@
 interface CustomerDefinition {
-    id: number,
-    firsName: string,
+    id?: number,
+    firstName: string,
     lastName: string,
-    email: string,
+    userId: number
 }
 
 export default CustomerDefinition;
