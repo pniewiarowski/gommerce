@@ -24,8 +24,6 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                 password: data.password,
             });
 
-            alert(user.id);
-
             if (!user.id) {
                 return false;
             }

@@ -6,7 +6,7 @@ import {CustomerLoginForm} from "../organism";
 
 const ShopCustomerLoginPage = (): React.JSX.Element => {
     const [query] = useSearchParams();
-    console.log(query.get("x"))
+
     return (
         <React.Fragment>
             <Grid sx={{mt: 1}} item xs={12}>
