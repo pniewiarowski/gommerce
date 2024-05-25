@@ -4,7 +4,7 @@ import { CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
 import { Footer, MailingForm, Navbar } from "./organism";
 import { ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCustomerSettingsPage, ShopCategoryPage } from "./page";
 import { CategoryDefinition, UserDefinition, CustomerDefinition } from "./api/definition";
-import { darkTheme } from "./theme";
+import { darkTheme, lightTheme } from "./theme";
 import useBackend from "./hook/use-backend.ts";
 import { CustomerContext, JwtContext, UserContext } from "./context";
 import useCookies from "./hook/use-cookies.ts";

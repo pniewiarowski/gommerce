@@ -11,29 +11,13 @@ const Animated3DBlockIcon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: float-court-lines 6s ease-in-out infinite;
     z-index: 100;
-    
+    transition: 0.3s;
+
     &:hover {
         background-color: #000000cc;
-        cursor: pointer;
-    }
-
-    @keyframes float-court-lines {
-        0% {
-            box-shadow: 0 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
-            transform: translateY(-1rem) translateX(1rem);
-        }
-        
-        50% {
-            box-shadow: 0 0rem 0rem 0rem rgba(0, 0, 0, 0.4);
-            transform: translateY(0rem) translateX(0rem);
-        }
-        
-        100% {
-            box-shadow: 0 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
-            transform: translateY(-1rem) translateX(1rem);
-        }
+        transform: rotateX(0) rotateY(0) rotateZ(13deg) translateY(-4rem) !important;
+        box-shadow: 0 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
     }
 `;
 

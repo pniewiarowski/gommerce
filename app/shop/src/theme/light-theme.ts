@@ -3,6 +3,9 @@ import {ThemeOptions, createTheme} from "@mui/material/styles";
 const lightTheme: ThemeOptions = createTheme({
     palette: {
         mode: "light",
+        background: {
+            default: '#651fff',
+        },
         primary: {
             main: '#651fff',
         },
@@ -23,6 +26,13 @@ const lightTheme: ThemeOptions = createTheme({
         },
     },
     components: {
+        MuiAppBar: {
+            styleOverrides: {
+                colorPrimary: {
+                    backgroundColor: "#eeeeee"
+                }
+            }
+        },
         MuiButton: {
             styleOverrides: {
                 root: {

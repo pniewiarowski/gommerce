@@ -30,17 +30,17 @@ const Animated3DBlock = styled.div`
     @keyframes float-court {
         0% {
             box-shadow: 0 2rem 2rem 2rem rgba(0, 0, 0, 0.4);
-            transform: translateY(-2rem) rotateX(50deg) rotateY(3deg) rotateZ(-20deg);
+            transform: translateY(-2rem) rotateX(40deg) rotateY(9deg) rotateZ(-20deg);
         }
         
         50% {
             box-shadow: 0 1rem 1rem 0 rgba(0, 0, 0, 0.1);
-            transform: translateY(2rem) rotateX(50deg) rotateY(3deg) rotateZ(-20deg);
+            transform: translateY(2rem) rotateX(40deg) rotateY(9deg) rotateZ(-20deg);
         }
         
         100% {
             box-shadow: 0 2rem 2rem 2rem rgba(0, 0, 0, 0.4);
-            transform: translateY(-2rem) rotateX(50deg) rotateY(3deg) rotateZ(-20deg);
+            transform: translateY(-2rem) rotateX(40deg) rotateY(9deg) rotateZ(-20deg);
         }
     }
 `;

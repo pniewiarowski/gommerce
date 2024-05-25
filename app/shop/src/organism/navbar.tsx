@@ -55,7 +55,7 @@ const Navbar = (props: Props): React.JSX.Element => {
             <React.Fragment key={category.id}>
                 {i != 0 && <Divider orientation="vertical" flexItem />}
                 <Link to={`/category/${category.id}`} key={category.id}>
-                    <Typography variant="h4" component="div" sx={{ ml: 1, mr: 1, flexGrow: 1 }}>
+                    <Typography variant="h4" color={"text.primary"} component="div" sx={{ ml: 1, mr: 1, flexGrow: 1 }}>
                         {category.name.toLowerCase()}
                     </Typography>
                 </Link>
@@ -79,7 +79,7 @@ const Navbar = (props: Props): React.JSX.Element => {
                         <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             {categoriesToRender}
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}} color="text.primary">
                             <div onClick={handleOpenShoppingBag}>
                                 <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
                                     <Badge badgeContent={0} color="secondary">
