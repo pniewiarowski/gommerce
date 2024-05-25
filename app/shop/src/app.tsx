@@ -64,9 +64,9 @@ const App = (): React.JSX.Element => {
                                         showShoppingBagIcon
                                         showAccountIcon
                                         showLoginButton={!jwt}
-                                        width={desktop ? "77.5%" : "100%"}
+                                        width={desktop ? "92.5%" : "100%"}
                                         categories={categories}/>
-                                <Grid sx={{width: desktop ? "75%" : "100%", mx: "auto", mb: 1}} container spacing={1}>
+                                <Grid sx={{width: desktop ? "90%" : "100%", mx: "auto", mb: 1}} container spacing={1}>
                                     <Routes>
                                         <Route path="/" element={<ShopHomePage/>}/>
                                         <Route path="/login" element={<ShopCustomerLoginPage/>}/>

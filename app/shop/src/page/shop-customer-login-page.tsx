@@ -25,9 +25,6 @@ const ShopCustomerLoginPage = () => {
                         <Link to="/">
                             <Typography color="text.primary">Home</Typography>
                         </Link>
-                        <Link to="/account">
-                            <Typography color="text.primary">Account</Typography>
-                        </Link>
                         <Link to="/login">
                             <Typography color="secondary">Login</Typography>
                         </Link>

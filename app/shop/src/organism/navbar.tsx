@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem } from "@mui/material";
+import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar } from "@mui/material";
 import { Person, ShoppingBag } from "@mui/icons-material";
 import { CategoryDefinition } from "../api/definition";
 import { CustomerContext } from "../context";
@@ -86,10 +86,10 @@ const Navbar = (props: Props): React.JSX.Element => {
                             {props.showAccountIcon && customer &&
                                 <div>
                                     <div onClick={handleOpenMenu}>
-                                        <Button variant="outlined">{customer.firstName}</Button>
+                                        <Avatar>{customer.firstName[0]}</Avatar>
                                     </div>
 
-                                    <Menu id="customer-menu" anchorEl={anchorEl} open={open} onClose={handleCloseMenu} MenuListProps={{
+                                    <Menu id="customer-menu" anchorEl={anchorEl} open={open} sx={{transform: "translateX(-5%) translateY(1%)"}} onClose={handleCloseMenu} MenuListProps={{
                                         'aria-labelledby': 'basic-button',
                                     }}>
                                         <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>My orders</MenuItem>
