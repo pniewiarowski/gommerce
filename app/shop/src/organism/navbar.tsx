@@ -4,6 +4,7 @@ import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, M
 import { Person, ShoppingBag } from "@mui/icons-material";
 import { CategoryDefinition } from "../api/definition";
 import { CustomerContext } from "../context";
+import { stringAvatar } from "../util";
 
 interface Props {
     heading: string,
@@ -86,7 +87,7 @@ const Navbar = (props: Props): React.JSX.Element => {
                             {props.showAccountIcon && customer &&
                                 <div>
                                     <div onClick={handleOpenMenu}>
-                                        <Avatar>{customer.firstName[0]}</Avatar>
+                                        <Avatar {...stringAvatar(`${customer.firstName}`, true)}></Avatar>
                                     </div>
 
                                     <Menu id="customer-menu" anchorEl={anchorEl} open={open} sx={{transform: "translateX(-5%) translateY(1%)"}} onClose={handleCloseMenu} MenuListProps={{
