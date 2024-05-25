@@ -4,10 +4,10 @@ const lightTheme: ThemeOptions = createTheme({
     palette: {
         mode: "light",
         primary: {
-            main: '#cfcf11',
+            main: '#651fff',
         },
         secondary: {
-            main: '#333333',
+            main: '#ff1fff',
         },
     },
     typography: {

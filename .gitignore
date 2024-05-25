@@ -38,3 +38,23 @@
 /app/shop/.vercel
 /app/shop/*.tsbuildinfo
 /app/shop/next-env.d.ts
+
+# Admin Application
+/app/admin/.idea
+/app/admin/node_modules
+/app/admin/.pnp
+/app/admin/.pnp.js
+/app/admin/.yarn/install-state.gz
+/app/admin/coverage
+/app/admin/.next/
+/app/admin/out/
+/app/admin/build
+/app/admin/.DS_Store
+/app/admin/*.pem
+/app/admin/npm-debug.log*
+/app/admin/yarn-debug.log*
+/app/admin/yarn-error.log*
+/app/admin/.env*.local
+/app/admin/.vercel
+/app/admin/*.tsbuildinfo
+/app/admin/next-env.d.ts
