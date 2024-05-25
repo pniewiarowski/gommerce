@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar } from "@mui/material";
+import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar, Container } from "@mui/material";
 import { Person, ShoppingBag } from "@mui/icons-material";
 import { CategoryDefinition } from "../api/definition";
 import { CustomerContext } from "../context";
@@ -9,8 +9,6 @@ import { stringAvatar } from "../util";
 interface Props {
     heading: string,
     elevation?: number,
-    showShoppingBagIcon?: boolean,
-    showAccountIcon?: boolean,
     showLoginButton?: boolean,
     width: string,
     categories: Array<CategoryDefinition>
@@ -21,7 +19,7 @@ const Navbar = (props: Props): React.JSX.Element => {
     const { customer, setCustomer } = useContext(CustomerContext);
     const navigate = useNavigate();
     const open = Boolean(anchorEl);
-    const elevation: number = props.elevation === undefined ? 1 : props.elevation;
+    const elevation: number = 3;
 
     useEffect(() => {
         handleCloseMenu();
@@ -69,22 +67,20 @@ const Navbar = (props: Props): React.JSX.Element => {
                         <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             {categoriesToRender}
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            {props.showShoppingBagIcon &&
-                                <IconButton size="large" color="inherit">
+                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                                <IconButton size="large" color="inherit" sx={{mr: 1}}>
                                     <Badge badgeContent={0} color="secondary">
                                         <ShoppingBag />
                                     </Badge>
                                 </IconButton>
-                            }
-                            {props.showAccountIcon && !customer &&
+                            {!customer &&
                                 <Link to={"/login"}>
                                     <IconButton size="large" color="inherit">
                                         <Person />
                                     </IconButton>
                                 </Link>
                             }
-                            {props.showAccountIcon && customer &&
+                            {customer &&
                                 <div>
                                     <div onClick={handleOpenMenu}>
                                         <Avatar {...stringAvatar(`${customer.firstName}`, true)}></Avatar>
@@ -94,7 +90,9 @@ const Navbar = (props: Props): React.JSX.Element => {
                                         'aria-labelledby': 'basic-button',
                                     }}>
                                         <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>My orders</MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>Settings</MenuItem>
+                                        <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>
+                                            <Link to="/settings">Settings</Link>
+                                        </MenuItem>
                                         <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>Subscription</MenuItem>
                                         <MenuItem sx={{ ml: 1, mr: 1 }} onClick={logout}>Logout</MenuItem>
                                     </Menu>

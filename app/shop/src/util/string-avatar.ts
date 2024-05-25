@@ -19,6 +19,7 @@ function stringToColor(string: string) {
 function stringAvatar(name: string, clickable: boolean = false) {
     return {
         sx: {
+            color: "#fff",
             bgcolor: stringToColor(name),
             cursor: clickable ? "pointer" : "",
         },

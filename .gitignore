@@ -4,6 +4,11 @@
 # IDE
 /.idea
 
+# Mailing Service
+/api/Mailing/bin
+/api/Mailing/obj
+/api/Mailing/.idea
+
 # Shop Service
 /api/Shop/bin
 /api/Shop/obj
