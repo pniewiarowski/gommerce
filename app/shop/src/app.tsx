@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
 import { Footer, MailingForm, Navbar } from "./organism";
-import { ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCustomerSettingsPage, ShopCategoryPage  } from "./page";
+import { ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCustomerSettingsPage, ShopCategoryPage } from "./page";
 import { CategoryDefinition, UserDefinition, CustomerDefinition } from "./api/definition";
-import { darkTheme, lightTheme } from "./theme";
+import { darkTheme } from "./theme";
 import useBackend from "./hook/use-backend.ts";
 import { CustomerContext, JwtContext, UserContext } from "./context";
 import useCookies from "./hook/use-cookies.ts";
 import "./base.css";
 
-const App = (): React.JSX.Element => {
+const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');
     const { get } = useCookies();
     const { categoriesRepository } = useBackend();
@@ -53,11 +53,8 @@ const App = (): React.JSX.Element => {
                         <ThemeProvider theme={darkTheme}>
                             <CssBaseline enableColorScheme />
                             <BrowserRouter>
-                                <Navbar heading={"gommerce"}
-                                        showLoginButton={!jwt}
-                                        width={desktop ? "92.5%" : "100%"}
-                                        categories={categories} />
-                                <Grid sx={{ width: desktop ? "90%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>
+                                <Navbar heading={"gommerce"} showLoginButton={!jwt} width="82.5%" categories={categories} />
+                                <Grid sx={{ width: desktop ? "80%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>
                                     <Routes>
                                         <Route path="/" element={<ShopHomePage />} />
                                         <Route path="/login" element={<ShopCustomerLoginPage />} />

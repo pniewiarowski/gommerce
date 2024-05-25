@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar, Container } from "@mui/material";
-import { Person, ShoppingBag } from "@mui/icons-material";
+import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar } from "@mui/material";
+import { Person, ShoppingBag, Settings, Logout, Bookmark } from "@mui/icons-material";
 import { CategoryDefinition } from "../api/definition";
 import { CustomerContext } from "../context";
 import { stringAvatar } from "../util";
@@ -67,12 +67,12 @@ const Navbar = (props: Props): React.JSX.Element => {
                         <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             {categoriesToRender}
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-                                <IconButton size="large" color="inherit" sx={{mr: 1}}>
-                                    <Badge badgeContent={0} color="secondary">
-                                        <ShoppingBag />
-                                    </Badge>
-                                </IconButton>
+                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                            <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
+                                <Badge badgeContent={0} color="secondary">
+                                    <ShoppingBag />
+                                </Badge>
+                            </IconButton>
                             {!customer &&
                                 <Link to={"/login"}>
                                     <IconButton size="large" color="inherit">
@@ -86,15 +86,27 @@ const Navbar = (props: Props): React.JSX.Element => {
                                         <Avatar {...stringAvatar(`${customer.firstName}`, true)}></Avatar>
                                     </div>
 
-                                    <Menu id="customer-menu" anchorEl={anchorEl} open={open} sx={{transform: "translateX(-5%) translateY(1%)"}} onClose={handleCloseMenu} MenuListProps={{
+                                    <Menu id="customer-menu" anchorEl={anchorEl} open={open} sx={{ transform: "translateX(-7%) translateY(1%)" }} onClose={handleCloseMenu} MenuListProps={{
                                         'aria-labelledby': 'basic-button',
                                     }}>
-                                        <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>My orders</MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>
-                                            <Link to="/settings">Settings</Link>
+                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseMenu}>
+                                            <ShoppingBag sx={{ mr: 1 }} />
+                                            <Typography>My orders</Typography>
                                         </MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1 }} onClick={handleCloseMenu}>Subscription</MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1 }} onClick={logout}>Logout</MenuItem>
+                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseMenu}>
+                                            <Bookmark sx={{ mr: 1 }} />
+                                            <Typography>Following items</Typography>
+                                        </MenuItem>
+                                        <Link to="/settings">
+                                            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseMenu}>
+                                                <Settings sx={{ mr: 1 }} />
+                                                <Typography>Settings</Typography>
+                                            </MenuItem>
+                                        </Link>
+                                        <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={logout}>
+                                            <Logout sx={{ mr: 1 }} />
+                                            <Typography>Logout</Typography>
+                                        </MenuItem>
                                     </Menu>
                                 </div>
                             }
