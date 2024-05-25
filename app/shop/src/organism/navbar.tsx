@@ -1,39 +1,51 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar } from "@mui/material";
-import { Person, ShoppingBag, Settings, Logout, Bookmark } from "@mui/icons-material";
+import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar, ListItem } from "@mui/material";
+import { Person, ShoppingBag, Settings, Logout, Bookmark, Close } from "@mui/icons-material";
 import { CategoryDefinition } from "../api/definition";
 import { CustomerContext } from "../context";
 import { stringAvatar } from "../util";
+import { useCookies } from "../hook";
 
 interface Props {
     heading: string,
     elevation?: number,
-    showLoginButton?: boolean,
     width: string,
     categories: Array<CategoryDefinition>
 }
 
 const Navbar = (props: Props): React.JSX.Element => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorElCustomerMenu, setAnchorElCustomerMenu] = React.useState<null | HTMLElement>(null);
+    const [anchorElShoppingBag, setAnchorElShoppingBag] = React.useState<null | HTMLElement>(null);
     const { customer, setCustomer } = useContext(CustomerContext);
+    const { clear } = useCookies();
     const navigate = useNavigate();
-    const open = Boolean(anchorEl);
+    const openCustomerMenu = Boolean(anchorElCustomerMenu);
+    const openShoppingBag = Boolean(anchorElShoppingBag);
     const elevation: number = 3;
 
     useEffect(() => {
-        handleCloseMenu();
+        handleCloseCustomerMenu();
     }, [customer]);
 
-    const handleCloseMenu = () => {
-        setAnchorEl(null);
+    const handleCloseCustomerMenu = () => {
+        setAnchorElCustomerMenu(null);
     }
 
-    const handleOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+    const handleCloseShoppingBag = () => {
+        setAnchorElShoppingBag(null);
+    }
+
+    const handleOpenCustomerMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorElCustomerMenu(event.currentTarget);
+    }
+
+    const handleOpenShoppingBag = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorElShoppingBag(event.currentTarget);
     }
 
     const logout = () => {
+        clear();
         setCustomer(null);
         navigate('/login');
     }
@@ -68,11 +80,18 @@ const Navbar = (props: Props): React.JSX.Element => {
                             {categoriesToRender}
                         </Box>
                         <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
-                                <Badge badgeContent={0} color="secondary">
-                                    <ShoppingBag />
-                                </Badge>
-                            </IconButton>
+                            <div onClick={handleOpenShoppingBag}>
+                                <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
+                                    <Badge badgeContent={0} color="secondary">
+                                        <ShoppingBag />
+                                    </Badge>
+                                </IconButton>
+                            </div>
+
+                            <Menu id="shopping-bag" anchorEl={anchorElShoppingBag} open={openShoppingBag} sx={{ transform: "translateX(-5%)" }} onWheel={handleCloseShoppingBag} onClose={handleCloseShoppingBag} MenuListProps={{
+                                'aria-labelledby': 'basic-button',
+                            }}>
+                            </Menu>
                             {!customer &&
                                 <Link to={"/login"}>
                                     <IconButton size="large" color="inherit">
@@ -82,27 +101,31 @@ const Navbar = (props: Props): React.JSX.Element => {
                             }
                             {customer &&
                                 <div>
-                                    <div onClick={handleOpenMenu}>
+                                    <div onClick={handleOpenCustomerMenu}>
                                         <Avatar {...stringAvatar(`${customer.firstName}`, true)}></Avatar>
                                     </div>
 
-                                    <Menu id="customer-menu" anchorEl={anchorEl} open={open} sx={{ transform: "translateX(-7%) translateY(1%)" }} onClose={handleCloseMenu} MenuListProps={{
+                                    <Menu id="customer-menu" anchorEl={anchorElCustomerMenu} open={openCustomerMenu} sx={{ transform: "translateX(-7%) translateY(1%)" }} onWheel={handleCloseCustomerMenu} onClose={handleCloseCustomerMenu} MenuListProps={{
                                         'aria-labelledby': 'basic-button',
                                     }}>
-                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseMenu}>
+                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
                                             <ShoppingBag sx={{ mr: 1 }} />
                                             <Typography>My orders</Typography>
                                         </MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseMenu}>
+                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
                                             <Bookmark sx={{ mr: 1 }} />
                                             <Typography>Following items</Typography>
                                         </MenuItem>
                                         <Link to="/settings">
-                                            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseMenu}>
+                                            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
                                                 <Settings sx={{ mr: 1 }} />
                                                 <Typography>Settings</Typography>
                                             </MenuItem>
                                         </Link>
+                                        <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
+                                            <Close sx={{ mr: 1 }} />
+                                            <Typography>Close</Typography>
+                                        </MenuItem>
                                         <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={logout}>
                                             <Logout sx={{ mr: 1 }} />
                                             <Typography>Logout</Typography>
@@ -110,7 +133,7 @@ const Navbar = (props: Props): React.JSX.Element => {
                                     </Menu>
                                 </div>
                             }
-                            {props.showLoginButton &&
+                            {!customer &&
                                 <Link to={"/login"}>
                                     <Button sx={{ ml: 4 }} variant="outlined" color="secondary">login</Button>
                                 </Link>

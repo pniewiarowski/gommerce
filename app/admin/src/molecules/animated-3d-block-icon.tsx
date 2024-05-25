@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 const Animated3DBlockIcon = styled.div`
-    width: 32%;
-    height: 32%;
+    width: 30%;
+    height: 30%;
     background-color: #00000077;
-    border-left: solid 0.5rem #11111177;
-    border-bottom: solid 0.8rem #17171777;
-    margin: 1px 4px;
+    border-left: solid 0.3rem #11111177;
+    border-bottom: solid 0.5rem #17171744;
+    border-radius: 20px;
+    margin: 1.33%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,21 +15,24 @@ const Animated3DBlockIcon = styled.div`
     z-index: 100;
     
     &:hover {
-        background-color: #000000;
+        background-color: #000000cc;
         cursor: pointer;
     }
 
     @keyframes float-court-lines {
         0% {
-            transform: translateY(-3rem) translateX(3rem);
+            box-shadow: 0 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+            transform: translateY(-1rem) translateX(1rem);
         }
         
         50% {
+            box-shadow: 0 0rem 0rem 0rem rgba(0, 0, 0, 0.4);
             transform: translateY(0rem) translateX(0rem);
         }
         
         100% {
-            transform: translateY(-3rem) translateX(3rem);
+            box-shadow: 0 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.4);
+            transform: translateY(-1rem) translateX(1rem);
         }
     }
 `;

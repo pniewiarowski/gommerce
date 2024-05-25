@@ -7,31 +7,31 @@ const AdminLoginPageAnimation = () => {
         <Container sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
             <Animated3DBlock>
                 <Animated3DBlockIcon>
-                    <ShoppingBag sx={{ fontSize: 128 }} />
+                    <img src="mail.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <CardGiftcard sx={{ fontSize: 128 }} />
+                    <img src="heart.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="mui-logo.png" width={128} />
+                    <img src="hand-thumbsup.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="postgresql-logo.png" width={128} />
+                    <img src="emoji-in-love.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <Typography color={"text"} sx={{ fontSize: 32, fontWeight: "bold" }}>GOMMERCE</Typography>
+                    <img src="shopping-cart.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="dotnet-logo.png" width={128} />
+                    <img src="money-bag.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="go-logo.png" width={128} />
+                    <img src="go-logo.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="docker-logo.png" width={128} />
+                    <img src="emoji-angry.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="react-logo.png" width={128} />
+                    <img src="administrator.png" width={64} />
                 </Animated3DBlockIcon>
             </Animated3DBlock>
         </Container>

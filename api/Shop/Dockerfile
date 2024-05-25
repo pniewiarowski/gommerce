@@ -1,10 +1,5 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR ./Shop
 COPY . ./
-RUN dotnet restore
-RUN dotnet publish -c Release -o out
-
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
-WORKDIR /Shop
-COPY --from=build-env /Shop/out .
-ENTRYPOINT ["dotnet", "DotNet.Docker.dll"]
+RUN dotnet build
+CMD ['dotnet', '.\bin\Debug\net8.0\Shop.dll']

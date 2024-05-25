@@ -60,6 +60,7 @@ const CustomerLoginForm = (): React.JSX.Element => {
                 set("customerUserID", customer.userId);
                 setCustomer(customer);
             } catch (exception: any) {
+                console.error(exception);
                 navigate(`/login?errorLogin=${exception.response.data}`);
 
                 return false;

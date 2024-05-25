@@ -27,7 +27,7 @@ const ShopCustomerSettingsPage = () => {
                             <Typography color="text.primary">Home</Typography>
                         </Link>
                         <Link to="/settings">
-                            <Typography color="secondary">Settings</Typography>
+                            <Typography color="text.primary">Settings</Typography>
                         </Link>
                         <Link to="/settings">
                             <Typography color="secondary">{customer.firstName} {customer.lastName}</Typography>
