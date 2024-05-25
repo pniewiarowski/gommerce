@@ -11,10 +11,8 @@ import {CustomerContext, JwtContext, UserContext} from "../context";
 const CustomerLoginForm = (): React.JSX.Element => {
     const theme: Theme = useTheme();
     const navigate = useNavigate();
-
     const {authRepository, usersRepository, customersRepository} = useBackend();
     const {set} = useCookies();
-
     const {setUser} = useContext(UserContext);
     const {setCustomer} = useContext(CustomerContext);
     const {setJwt} = useContext(JwtContext);
@@ -53,11 +51,9 @@ const CustomerLoginForm = (): React.JSX.Element => {
 
                 set("jwt", jwt.token);
                 setJwt(jwt.token);
-
                 set("userID", user.id);
                 set("userEmail", user.email);
                 setUser(user);
-
                 set("customerID", customer.id);
                 set("customerFirstName", customer.firstName);
                 set("customerLastName", customer.lastName);
@@ -77,10 +73,9 @@ const CustomerLoginForm = (): React.JSX.Element => {
         }
     }
 
-
     return (
         <form style={{width: "100%", padding: "1rem"}} onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{p: 4, minHeight: "550px"}} display="flex" flexDirection="column" justifyContent="center"
+            <Box sx={{p: 4, minHeight: "618px"}} display="flex" flexDirection="column" justifyContent="center"
                  alignItems="center" height="100%">
                 <FormControl sx={{mb: 2}} fullWidth>
                     <Typography variant="h3">you are logout</Typography>

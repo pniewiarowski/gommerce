@@ -47,7 +47,7 @@ const App = (): React.JSX.Element => {
             email: userEmail,
             password: ""
         });
-
+        
         setJwt(jwt);
     }, []);
 
@@ -63,7 +63,7 @@ const App = (): React.JSX.Element => {
                                         elevation={3}
                                         showShoppingBagIcon
                                         showAccountIcon
-                                        showLoginButton
+                                        showLoginButton={!jwt}
                                         width={desktop ? "77.5%" : "100%"}
                                         categories={categories}/>
                                 <Grid sx={{width: desktop ? "75%" : "100%", mx: "auto", mb: 1}} container spacing={1}>

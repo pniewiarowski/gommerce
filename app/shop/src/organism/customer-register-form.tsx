@@ -50,7 +50,7 @@ const CustomerRegisterForm = (): React.JSX.Element => {
 
     return (
         <form style={{width: "100%", padding: "1rem"}} onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{p: 4, minHeight: "550px"}} display="flex" flexDirection="column" justifyContent="center"
+            <Box sx={{p: 4, minHeight: "618px"}} display="flex" flexDirection="column" justifyContent="center"
                  alignItems="center" height="100%">
                 <FormControl sx={{mb: 2}} fullWidth>
                     <Typography variant="h3">create your account</Typography>

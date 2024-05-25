@@ -4,21 +4,21 @@ const lightTheme: ThemeOptions = createTheme({
     palette: {
         mode: "light",
         primary: {
-            main: '#651fff',
+            main: '#cfcf11',
         },
         secondary: {
-            main: '#90cfcf',
+            main: '#333333',
         },
     },
     typography: {
         h3: {
             fontWeight: 900,
-            fontFamily: "sans-serif",
+            fontFamily: "Roboto",
             fontSize: 20,
         },
         h4: {
             fontWeight: 700,
-            fontFamily: "sans-serif",
+            fontFamily: "Roboto",
             fontSize: 14,
         },
     },
@@ -26,7 +26,7 @@ const lightTheme: ThemeOptions = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    fontFamily: "sans-serif",
+                    fontFamily: "Roboto",
                     fontSize: "1rem",
                     fontWeight: 900,
                     lineHeight: 1.5,

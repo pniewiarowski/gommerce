@@ -1,16 +1,25 @@
-import {Alert, Breadcrumbs, Grid, Grow, Paper, Typography, Zoom} from "@mui/material";
-import React from "react";
-import {Link, useSearchParams} from "react-router-dom";
-import CustomerRegisterForm from "../organism/customer-register-form.tsx";
-import {Check, Close} from "@mui/icons-material";
+import React, { useEffect, useContext } from "react";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, Zoom } from "@mui/material";
+import { Check, Close } from "@mui/icons-material";
+import { CustomerRegisterForm } from "../organism";
+import { CustomerContext } from "../context";
 
-const ShopCustomerRegisterPage = (): React.JSX.Element => {
+const ShopCustomerRegisterPage = () => {
+    const { customer } = useContext(CustomerContext);
     const [query] = useSearchParams();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (customer) {
+            navigate("/");
+        }
+    }, [customer]);
 
     return (
         <React.Fragment>
-            <Grid sx={{mt: 1}} item xs={12}>
-                <Paper sx={{p: 1}}>
+            <Grid sx={{ mt: 1 }} item xs={12}>
+                <Paper sx={{ p: 1 }}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
                             <Typography color="text.primary">Home</Typography>
@@ -24,31 +33,28 @@ const ShopCustomerRegisterPage = (): React.JSX.Element => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-
             {!!query.get("errorRegister") &&
                 <React.Fragment>
                     <Grid item xs={12} spacing={1}>
-                        <Grow in={true} {...{timeout: 250}}>
-                            <Alert icon={<Check fontSize="inherit"/>} severity="error" sx={{p: 2}} variant={"outlined"}>
+                        <Grow in={true} {...{ timeout: 250 }}>
+                            <Alert icon={<Check fontSize="inherit" />} severity="error" sx={{ p: 2 }} variant={"outlined"}>
                                 <Typography>{query.get("errorRegister")}</Typography>
                             </Alert>
                         </Grow>
                     </Grid>
                 </React.Fragment>
             }
-
             <Grid item xs={12} xl={6}>
-                <Paper elevation={1} sx={{minHeight: "575px", display: "flex", justifyContent: "center", alignItems: "center"}}>
+                <Paper elevation={1} sx={{ minHeight: "650px", display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <Zoom in={true}>
-                        <Close style={{fontSize: "400px", color: "#00000044"}}/>
+                        <Close style={{ fontSize: "400px", color: "#00000044" }} />
                     </Zoom>
                 </Paper>
             </Grid>
-
             <Grid item xs={12} xl={6}>
-                <Grow in={true} {...{timeout: 500}}>
+                <Grow in={true} {...{ timeout: 500 }}>
                     <Paper elevation={3}>
-                        <CustomerRegisterForm/>
+                        <CustomerRegisterForm />
                     </Paper>
                 </Grow>
             </Grid>

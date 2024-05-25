@@ -5,7 +5,6 @@ volumes:
   pg-data:
   pg-admin-data:
 
-
 services:
   database:
     image: postgres:16.1

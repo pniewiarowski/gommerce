@@ -13,12 +13,12 @@ const darkTheme: ThemeOptions = createTheme({
     typography: {
         h3: {
             fontWeight: 900,
-            fontFamily: "sans-serif",
+            fontFamily: "Roboto",
             fontSize: 20,
         },
         h4: {
             fontWeight: 700,
-            fontFamily: "sans-serif",
+            fontFamily: "Roboto",
             fontSize: 14,
         },
     },
@@ -26,7 +26,7 @@ const darkTheme: ThemeOptions = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    fontFamily: "sans-serif",
+                    fontFamily: "Roboto",
                     fontSize: "1rem",
                     fontWeight: 900,
                     lineHeight: 1.5,
