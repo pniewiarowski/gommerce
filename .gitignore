@@ -58,3 +58,23 @@
 /app/admin/.vercel
 /app/admin/*.tsbuildinfo
 /app/admin/next-env.d.ts
+
+# Shared package
+/app/_shared/.idea
+/app/_shared/node_modules
+/app/_shared/.pnp
+/app/_shared/.pnp.js
+/app/_shared/.yarn/install-state.gz
+/app/_shared/coverage
+/app/_shared/.next/
+/app/_shared/out/
+/app/_shared/build
+/app/_shared/.DS_Store
+/app/_shared/*.pem
+/app/_shared/npm-debug.log*
+/app/_shared/yarn-debug.log*
+/app/_shared/yarn-error.log*
+/app/_shared/.env*.local
+/app/_shared/.vercel
+/app/_shared/*.tsbuildinfo
+/app/_shared/next-env.d.ts

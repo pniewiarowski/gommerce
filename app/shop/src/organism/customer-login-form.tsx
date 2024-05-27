@@ -5,8 +5,8 @@ import { Email, Key } from "@mui/icons-material";
 import { useForm } from "react-hook-form";
 import { loginResolver, loginType } from "../resolver";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useBackend, useCookies } from "../hook";
 import { CustomerContext, JwtContext, UserContext } from "../context";
+import { useBackend, useCookies } from "gommerce-app-shared/hook";
 
 const CustomerLoginForm = () => {
     const theme: Theme = useTheme();

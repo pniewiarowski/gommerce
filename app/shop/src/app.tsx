@@ -3,12 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
 import { Footer, MailingForm, Navbar } from "./organism";
 import { ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCustomerSettingsPage, ShopCategoryPage } from "./page";
-import { CategoryDefinition, UserDefinition, CustomerDefinition } from "./api/definition";
-import { darkTheme, lightTheme } from "./theme";
-import useBackend from "./hook/use-backend.ts";
+import { CategoryDefinition, UserDefinition, CustomerDefinition } from "gommerce-app-shared/api/definition";
+import { useBackend } from "gommerce-app-shared/hook";
+import { darkTheme  } from "./theme";
 import { CustomerContext, JwtContext, UserContext } from "./context";
-import useCookies from "./hook/use-cookies.ts";
+import useCookies from "../../_shared/hook/use-cookies.ts";
 import "./base.css";
+
 
 const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');

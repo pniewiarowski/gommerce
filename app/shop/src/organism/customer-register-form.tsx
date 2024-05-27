@@ -5,7 +5,7 @@ import {Person, Key, Repeat, Email} from "@mui/icons-material";
 import {Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme} from "@mui/material";
 import {zodResolver} from '@hookform/resolvers/zod';
 import {registerResolver, registerType} from "../resolver";
-import useBackend from "../hook/use-backend.ts";
+import { useBackend } from "gommerce-app-shared/hook";
 
 const CustomerRegisterForm = (): React.JSX.Element => {
     const {

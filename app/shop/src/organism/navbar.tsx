@@ -1,11 +1,11 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar, ListItem } from "@mui/material";
+import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar } from "@mui/material";
 import { Person, ShoppingBag, Settings, Logout, Bookmark, Close } from "@mui/icons-material";
-import { CategoryDefinition } from "../api/definition";
+import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { CustomerContext } from "../context";
 import { stringAvatar } from "../util";
-import { useCookies } from "../hook";
+import { useCookies } from "../../../_shared/hook";
 
 interface Props {
     heading: string,

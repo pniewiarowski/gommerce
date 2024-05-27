@@ -1,4 +1,4 @@
-import {Authentication, Categories, Customers, Users} from "../api/repository"
+import { Authentication, Categories, Customers, Users } from "../api/repository"
 
 interface Repositories {
     categoriesRepository: Categories,

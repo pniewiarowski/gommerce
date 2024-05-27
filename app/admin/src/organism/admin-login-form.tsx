@@ -18,7 +18,7 @@ const AdminLoginForm = () => {
     return (
         <form style={{ width: "100%", padding: "1rem" }} onSubmit={handleSubmit(onSubmit)}>
             <Container>
-                <FormControl sx={{ mb: 2, mt: 4 }} fullWidth>
+                <FormControl sx={{ mb: 2, mt: 2 }} fullWidth>
                     <TextField label="email"
                         variant="outlined"
                         color="primary"

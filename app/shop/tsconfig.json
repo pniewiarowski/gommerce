@@ -22,7 +22,7 @@
   },
   "include": [
     "src"
-  ],
+, "../_shared/hook/index.ts", "../_shared/hook/use-backend.ts", "../_shared/hook/use-cookies.ts", "../_shared/axios"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

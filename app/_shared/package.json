@@ -1,0 +1,11 @@
+{
+  "name": "gommerce-app-shared",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2"
+  }
+}
