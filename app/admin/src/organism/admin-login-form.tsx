@@ -1,18 +1,63 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Container, FormControl, InputAdornment, TextField } from "@mui/material";
 import { Email, Key } from "@mui/icons-material";
+import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { loginResolver, loginType } from "../resolver";
+import { UserContext, JwtContext } from "../context";
 
 const AdminLoginForm = () => {
+    const navigate = useNavigate();
+    const { authRepository, usersRepository } = useBackend();
+    const { set } = useCookies();
+    const { setUser } = useContext(UserContext);
+    const { setJwt } = useContext(JwtContext);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<loginType>({ resolver: zodResolver(loginResolver)});
+    } = useForm<loginType>({ resolver: zodResolver(loginResolver) });
 
     const onSubmit = async (data: loginType) => {
+        const login = async () => {
+            try {
+                const jwt = await authRepository.jwt({
+                    email: data.email,
+                    password: data.password
+                });
 
+                if (!jwt) {
+                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    return;
+                }
+                const user = await usersRepository.getByID(jwt.id, jwt.token);
+
+                if (!user || !user.id) {
+                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    return;
+                }
+
+                set("jwt", jwt.token);
+                setJwt(jwt.token);
+                set("userID", user.id);
+                set("userEmail", user.email);
+                setUser(user);
+            } catch (exception: any) {
+                console.error(exception);
+                navigate(`/login?errorLogin=${exception.response.data}`);
+
+                return false;
+            }
+
+            return true;
+        }
+
+        if (await login()) {
+            navigate("/");
+        }
     }
 
     return (
