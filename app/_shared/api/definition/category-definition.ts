@@ -1,6 +1,9 @@
 interface CategoryDefinition {
-    id: number,
+    id: number | null,
     name: string,
+    description: string,
+    enabled: boolean,
+    sortOrder: number,
 }
 
 export default CategoryDefinition;

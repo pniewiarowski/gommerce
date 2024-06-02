@@ -10,7 +10,9 @@ public class Category(Context context) : Microsoft.AspNetCore.Mvc.Controller
     [Route("/api/v1/categories")]
     public IActionResult Get()
     {
-        return Json(Resource.Category.FromCollection(context.Categories.ToList()));
+        var categories = context.Categories.OrderBy(c => c.SortOrder);
+
+        return Json(Resource.Category.FromCollection(categories.ToList()));
     }
 
     [HttpGet]
@@ -42,8 +44,6 @@ public class Category(Context context) : Microsoft.AspNetCore.Mvc.Controller
         return GetByID(id);
     }
 
-
-
     [HttpDelete]
     [Route("/api/v1/categories/{id}")]
     public IActionResult Delete(uint id)
@@ -61,7 +61,9 @@ public class Category(Context context) : Microsoft.AspNetCore.Mvc.Controller
     [Route("/api/v1/categories/{id}/products")]
     public IActionResult GetProducts(uint id)
     {
-        var products = context.Products.Where(product => product.CategoryID == id);
+        var products = context.Products
+            .Where(p => p.CategoryID == id)
+            .OrderBy(p => p.SortOrder);
 
         return Json(Resource.Product.FromCollection(products.ToList()));
     }

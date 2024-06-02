@@ -1,2 +1,13 @@
 export { default as AdminLoginPage } from "./admin-login-page";
 export { default as AdminHomePage } from "./admin-home-page";
+export { default as AdminShopPage } from "./admin-shop-page";
+export { default as AdminShopCategoryPage } from "./admin-shop-category-page";
+export { default as AdminShopCategoryCreatePage } from "./admin-shop-category-create-page";
+export { default as AdminShopCategoryEditPage } from "./admin-shop-category-edit-page";
+export { default as AdminShopProductPage } from "./admin-shop-product-page";
+export { default as AdminShopProductCreatePage } from "./admin-shop-product-create-page";
+export { default as AdminShopProductEditPage } from "./admin-shop-product-edit-page";
+export { default as AdminMailingPage } from "./admin-mailing-page";
+export { default as AdminAccountPage } from "./admin-account-page";
+export { default as AdminPaymentPage } from "./admin-payment-page";
+export { default as AdminSettingsPage } from "./admin-settings-page";

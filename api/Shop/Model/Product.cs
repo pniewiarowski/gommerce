@@ -9,5 +9,7 @@ public class Product
     [Required] public string Name { get; set; }
     [MinLength(3)] public string Description { get; set; }
     [Required] public float Price { get; set; }
+    public bool Enabled { get; set; } = false;
+    public int SortOrder { get; set; }
     [ForeignKey("Product")] public uint CategoryID { get; set; }
 }

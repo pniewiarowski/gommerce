@@ -15,7 +15,6 @@ builder.Services.AddDbContext<Context>(
 
 builder.Services.AddSingleton<IHasher>(new Hasher(secretForHash));
 builder.Services.AddSingleton<IToken>(new Token(secretForJWT));
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();

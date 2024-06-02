@@ -6,7 +6,9 @@ public class Product
     public string Name { get; set; }
     public string Description { get; set; }
     public float Price { get; set; }
-    public uint CategoryID { get; set; }
+    public bool Enabled { get; set; } = false;
+    public int SortOrder { get; set; }
+    public uint CategoryId { get; set; }
 
     public static ICollection<Resource.Product> FromCollection(ICollection<Model.Product> products)
     {
@@ -21,7 +23,9 @@ public class Product
             Name = product.Name,
             Description = product.Description,
             Price = product.Price,
-            CategoryID = product.CategoryID
+            Enabled = product.Enabled,
+            SortOrder = product.SortOrder,
+            CategoryId = product.CategoryID
         };
     }
 }

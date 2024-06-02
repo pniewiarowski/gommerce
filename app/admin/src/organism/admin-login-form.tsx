@@ -46,7 +46,7 @@ const AdminLoginForm = () => {
                 set("userEmail", user.email);
                 setUser(user);
             } catch (exception: any) {
-                console.error(exception);
+                console.log(exception);
                 navigate(`/login?errorLogin=${exception.response.data}`);
 
                 return false;
@@ -94,7 +94,7 @@ const AdminLoginForm = () => {
                             }} />
                     </FormControl>
                     <FormControl fullWidth>
-                        <Button sx={{ p: 2, mt: 2 }} variant="contained" style={{ textAlign: 'left' }} type="submit">login</Button>
+                        <Button sx={{ p: 2, mt: 2 }} variant="contained" type="submit">login</Button>
                     </FormControl>
                 </FormControl>
             </Container>

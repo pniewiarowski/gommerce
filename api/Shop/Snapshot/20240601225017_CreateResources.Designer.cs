@@ -11,7 +11,7 @@ using Shop.Database;
 namespace Shop.Snapshot
 {
     [DbContext(typeof(Context))]
-    [Migration("20240325112034_CreateResources")]
+    [Migration("20240601225017_CreateResources")]
     partial class CreateResources
     {
         /// <inheritdoc />
@@ -32,9 +32,19 @@ namespace Shop.Snapshot
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -102,6 +112,9 @@ namespace Shop.Snapshot
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -111,6 +124,9 @@ namespace Shop.Snapshot
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 

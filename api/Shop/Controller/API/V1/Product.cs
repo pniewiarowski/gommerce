@@ -10,7 +10,9 @@ public class Product(Context context) : Microsoft.AspNetCore.Mvc.Controller
     [Route("/api/v1/products")]
     public IActionResult Get()
     {
-        return Json(Resource.Product.FromCollection(context.Products.ToList()));
+        var products = context.Products.OrderBy(p => p.SortOrder);
+
+        return Json(Resource.Product.FromCollection(products.ToList()));
     }
 
     [HttpGet]

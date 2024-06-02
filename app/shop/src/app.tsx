@@ -5,7 +5,7 @@ import { Footer, MailingForm, Navbar } from "./organism";
 import { ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCustomerSettingsPage, ShopCategoryPage } from "./page";
 import { CategoryDefinition, UserDefinition, CustomerDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
-import { darkTheme  } from "./theme";
+import { darkTheme } from "./theme";
 import { CustomerContext, JwtContext, UserContext } from "./context";
 import useCookies from "../../_shared/hook/use-cookies.ts";
 import "./base.css";
@@ -54,8 +54,8 @@ const App = () => {
                         <ThemeProvider theme={darkTheme}>
                             <CssBaseline enableColorScheme />
                             <BrowserRouter>
-                                <Navbar heading={"gommerce"} showLoginButton={!jwt} width="82.5%" categories={categories} />
-                                <Grid sx={{ width: desktop ? "80%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>
+                                <Navbar heading={"gommerce"} showLoginButton={!jwt} width="77.5%" categories={categories} />
+                                <Grid sx={{ width: desktop ? "75%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>
                                     <Routes>
                                         <Route path="/" element={<ShopHomePage />} />
                                         <Route path="/login" element={<ShopCustomerLoginPage />} />

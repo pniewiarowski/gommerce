@@ -1,7 +1,14 @@
-import { Authentication, Categories, Customers, Users } from "../api/repository"
+import {
+    Authentication,
+    Categories,
+    Customers,
+    Products,
+    Users
+} from "../api/repository"
 
 interface Repositories {
     categoriesRepository: Categories,
+    productRepository: Products,
     customersRepository: Customers,
     usersRepository: Users,
     authRepository: Authentication,
@@ -13,6 +20,7 @@ const useBackend = (): Repositories => {
     if (!repositories) {
         repositories = {
             categoriesRepository: new Categories(),
+            productRepository: new Products(),
             customersRepository: new Customers(),
             usersRepository: new Users(),
             authRepository: new Authentication()

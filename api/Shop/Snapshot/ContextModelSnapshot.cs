@@ -29,9 +29,19 @@ namespace Shop.Snapshot
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 
@@ -99,6 +109,9 @@ namespace Shop.Snapshot
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
@@ -108,6 +121,9 @@ namespace Shop.Snapshot
 
                     b.Property<float>("Price")
                         .HasColumnType("real");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("integer");
 
                     b.HasKey("ID");
 

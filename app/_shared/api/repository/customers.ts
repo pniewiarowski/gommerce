@@ -1,5 +1,5 @@
-import {CustomerDefinition} from "../definition";
-import {shop} from "../../axios";
+import { CustomerDefinition } from "../definition";
+import { shop } from "../../axios";
 
 class Customers {
     private static resource = "customers";

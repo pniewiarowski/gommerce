@@ -6,14 +6,12 @@ import { SentimentVeryDissatisfied } from "@mui/icons-material";
 import { ProductTile } from "../organism";
 import { useBackend } from "gommerce-app-shared/hook";
 
-const ShopCategoryPage = (): React.JSX.Element => {
+const ShopCategoryPage = () => {
     const { categoriesRepository } = useBackend();
     const { id } = useParams();
 
     const [category, setCategory] = useState<CategoryDefinition>();
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
-
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchCategory = async () => {

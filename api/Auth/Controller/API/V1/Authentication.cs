@@ -48,7 +48,8 @@ public class Authentication(Context context, IHasher hasher, IToken token) : Mic
         var response = new AuthResponse
         {
             ID = user.ID,
-            Token = token.Generate(user.ID, user.Email, user.RoleID)
+            Token = token.Generate(user.ID, user.Email, user.RoleID),
+            IsAdmin = true, //TODO Check if user is admin.
         };
 
         return Json(response);

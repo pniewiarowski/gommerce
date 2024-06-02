@@ -1,8 +1,10 @@
 interface ProductDefinition {
-    id: number,
+    id: number | null,
     name: string,
     description: string,
     price: number,
+    enabled: boolean,
+    sortOrder: number,
     categoryId: number,
 }
 

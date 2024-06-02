@@ -17,7 +17,10 @@ namespace Shop.Snapshot
                 {
                     ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    SortOrder = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Enabled = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -68,6 +71,8 @@ namespace Shop.Snapshot
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     Price = table.Column<float>(type: "real", nullable: false),
+                    Enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    SortOrder = table.Column<int>(type: "integer", nullable: false),
                     CategoryID = table.Column<long>(type: "bigint", nullable: false),
                     OrderID = table.Column<long>(type: "bigint", nullable: true)
                 },
