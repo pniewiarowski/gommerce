@@ -5,7 +5,8 @@ public class Customer
     public uint ID { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public uint UserID { get; set; }
+    public bool IsActive { get; set; }
+    public uint UserId { get; set; }
 
     public static ICollection<Resource.Customer> FromCollection(ICollection<Model.Customer> customers)
     {
@@ -19,7 +20,8 @@ public class Customer
             ID = customer.ID,
             FirstName = customer.FirstName,
             LastName = customer.LastName,
-            UserID = customer.UserID,
+            IsActive = customer.IsActive,
+            UserId = customer.UserID,
         };
     }
 }

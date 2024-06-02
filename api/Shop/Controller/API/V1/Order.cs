@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Database;
+using Shop.Resource;
 
 namespace Shop.Controller.API.V1;
 
@@ -54,4 +55,17 @@ public class Order(Context context) : Microsoft.AspNetCore.Mvc.Controller
 
         return Get();
     }
+    
+    [HttpGet]
+    [Route("/api/v1/orders/resource-info")]
+    public IActionResult GetResourceInfo()
+    {
+        var info = new ResourceInfo();
+
+        info.Name = "orders";
+        info.Size = context.Orders.ToList().Count;
+
+        return Json(info);
+    }
+
 }

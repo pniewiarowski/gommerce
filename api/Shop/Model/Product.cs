@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Shop.Model.Relation;
 
 namespace Shop.Model;
 
@@ -12,4 +13,5 @@ public class Product
     public bool Enabled { get; set; } = false;
     public int SortOrder { get; set; }
     [ForeignKey("Product")] public uint CategoryID { get; set; }
+    public ICollection<OrderProduct> Orders { get; set; }
 }

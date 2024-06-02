@@ -1,19 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Typography, Divider, Grid, Paper, Breadcrumbs } from "@mui/material";
+import { Breadcrumbs, Divider, Grid, Paper, Typography } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
-import { ProductDefinition } from "gommerce-app-shared/api/definition";
-import { UserContext } from "../context";
-import { PageContainerGrid } from "../atoms";
-import { AdminProductForm } from "../organism";
+import { CategoryDefinition } from "gommerce-app-shared/api/definition";
+import { UserContext } from "../../../context";
+import { AdminCategoryForm } from "../../../organism";
+import { PageContainerGrid } from "../../../atoms";
 
-const AdminShopProductEditPage = () => {
+const AdminShopCategoryEditPage = () => {
     const navigate = useNavigate();
-    const [product, setProduct] = useState<ProductDefinition | null>(null);
+    const [category, setCategory] = useState<CategoryDefinition | null>(null);
     const [loading, setLoading] = useState(true);
     const { user } = useContext(UserContext);
     const { id } = useParams();
-    const { productRepository } = useBackend();
+    const { categoriesRepository } = useBackend();
 
     useEffect(() => {
         if (!user) {
@@ -23,8 +23,7 @@ const AdminShopProductEditPage = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            console.log(await productRepository.getByID(id))
-            setProduct(await productRepository.getByID(Number(id)));
+            setCategory(await categoriesRepository.getByID(Number(id)))
             setLoading(false);
         };
 
@@ -37,7 +36,7 @@ const AdminShopProductEditPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">create product</Typography>
+            <Typography sx={{ fontSize: 40, }} variant="h2">edit category</Typography>
             <Divider sx={{ mt: 2, mb: 1 }} />
             <Grid sx={{ mt: 1 }} item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
@@ -48,10 +47,10 @@ const AdminShopProductEditPage = () => {
                         <Link to="/shop">
                             <Typography color="text.primary">Shop</Typography>
                         </Link>
-                        <Link to="/shop/product">
-                            <Typography color="text.primary">Product</Typography>
+                        <Link to="/shop/category">
+                            <Typography color="text.primary">Category</Typography>
                         </Link>
-                        <Link to={`/shop/product/edit/${id}`}>
+                        <Link to={`/shop/category/edit/${id}`}>
                             <Typography color="primary">Edit</Typography>
                         </Link>
                     </Breadcrumbs>
@@ -59,11 +58,11 @@ const AdminShopProductEditPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper elevation={3} sx={{ p: 2 }}>
-                    <AdminProductForm default={product} />
+                    <AdminCategoryForm default={category} />
                 </Paper>
             </Grid>
-        </PageContainerGrid>
+        </PageContainerGrid >
     );
 }
 
-export default AdminShopProductEditPage;
+export default AdminShopCategoryEditPage;

@@ -7,7 +7,7 @@ interface Props {
 const PaperButton = (props: Props) => {
     return (
         <Paper
-            elevation={3}
+            elevation={4}
             sx={{
                 width: "100%",
                 height: "100%",

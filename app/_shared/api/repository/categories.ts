@@ -1,5 +1,5 @@
 import { shop } from "../../axios";
-import { CategoryDefinition, ProductDefinition } from "../definition";
+import { CategoryDefinition, ProductDefinition, ResourceInfoDefinition } from "../definition";
 import { Repository } from "./type";
 
 class Categories implements Repository {
@@ -15,6 +15,17 @@ class Categories implements Repository {
         const response = await shop.get(`/${Categories.resource}/${id}`);
 
         return await response.data;
+    }
+
+    public async getResourceInfo(token: string): Promise<ResourceInfoDefinition> {
+        const response = await shop.get(`${Categories.resource}/resource-info`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return response.data;
     }
 
     public async create(category: CategoryDefinition, token: string): Promise<CategoryDefinition> {

@@ -1,19 +1,39 @@
-import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Typography, Divider, Grid, Paper, Breadcrumbs } from "@mui/material";
-import { UserContext } from "../context";
-import { PageContainerGrid } from "../atoms";
-import { AdminProductForm } from "../organism";
+import { useBackend } from "gommerce-app-shared/hook";
+import { ProductDefinition } from "gommerce-app-shared/api/definition";
+import { UserContext } from "../../../context";
+import { PageContainerGrid } from "../../../atoms";
+import { AdminProductForm } from "../../../organism";
 
-const AdminShopProductCreatePage = () => {
+const AdminShopProductEditPage = () => {
     const navigate = useNavigate();
+    const [product, setProduct] = useState<ProductDefinition | null>(null);
+    const [loading, setLoading] = useState(true);
     const { user } = useContext(UserContext);
+    const { id } = useParams();
+    const { productRepository } = useBackend();
 
     useEffect(() => {
         if (!user) {
             navigate("/login");
         }
     }, [user]);
+
+    useEffect(() => {
+        const fetch = async () => {
+            console.log(await productRepository.getByID(id))
+            setProduct(await productRepository.getByID(Number(id)));
+            setLoading(false);
+        };
+
+        fetch();
+    }, []);
+
+    if (loading) {
+        return;
+    }
 
     return (
         <PageContainerGrid>
@@ -28,22 +48,22 @@ const AdminShopProductCreatePage = () => {
                         <Link to="/shop">
                             <Typography color="text.primary">Shop</Typography>
                         </Link>
-                        <Link to="/shop/category">
+                        <Link to="/shop/product">
                             <Typography color="text.primary">Product</Typography>
                         </Link>
-                        <Link to="/shop/category">
-                            <Typography color="primary">Create</Typography>
+                        <Link to={`/shop/product/edit/${id}`}>
+                            <Typography color="primary">Edit</Typography>
                         </Link>
                     </Breadcrumbs>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper elevation={3} sx={{ p: 2 }}>
-                    <AdminProductForm />
+                    <AdminProductForm default={product} />
                 </Paper>
             </Grid>
         </PageContainerGrid>
     );
 }
 
-export default AdminShopProductCreatePage;
+export default AdminShopProductEditPage;

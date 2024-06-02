@@ -5,16 +5,16 @@ import { Check, Close, Delete, Edit, FileCopy } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
-import { JwtContext, UserContext } from "../context";
-import { PageContainerGrid } from "../atoms";
+import { JwtContext, UserContext } from "../../../context";
+import { PageContainerGrid } from "../../../atoms";
 
 const AdminShopProductPage = () => {
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
-    const { productRepository, categoriesRepository } = useBackend();
     const { jwt } = useContext(JwtContext);
+    const { productRepository, categoriesRepository } = useBackend();
 
     useEffect(() => {
         if (!user) {
@@ -31,7 +31,6 @@ const AdminShopProductPage = () => {
         fetch();
     }, []);
 
-    console.log(products);
     const columns: GridColDef<(typeof products)[number]>[] = [
         { field: 'id', headerName: 'ID', width: 100 },
         { field: 'name', headerName: 'Name', width: 150 },
@@ -93,6 +92,8 @@ const AdminShopProductPage = () => {
                                 description: params.row.description,
                                 price: params.row.price,
                                 categoryId: params.row.categoryId,
+                                sortOrder: params.row.sortOrder,
+                                enabled: params.row.enabled,
                             }, jwt);
 
                             setProducts([...products, await response]);

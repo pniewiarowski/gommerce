@@ -11,7 +11,7 @@ using Shop.Database;
 namespace Shop.Snapshot
 {
     [DbContext(typeof(Context))]
-    [Migration("20240601225017_CreateResources")]
+    [Migration("20240602102705_CreateResources")]
     partial class CreateResources
     {
         /// <inheritdoc />
@@ -62,6 +62,9 @@ namespace Shop.Snapshot
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -119,9 +122,6 @@ namespace Shop.Snapshot
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long?>("OrderID")
-                        .HasColumnType("bigint");
-
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
@@ -132,9 +132,30 @@ namespace Shop.Snapshot
 
                     b.HasIndex("CategoryID");
 
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Shop.Model.Relation.OrderProduct", b =>
+                {
+                    b.Property<long>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("ID"));
+
+                    b.Property<long>("OrderID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ID");
+
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Products");
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("Shop.Model.Order", b =>
@@ -153,10 +174,25 @@ namespace Shop.Snapshot
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("Shop.Model.Order", null)
+            modelBuilder.Entity("Shop.Model.Relation.OrderProduct", b =>
+                {
+                    b.HasOne("Shop.Model.Order", "Order")
                         .WithMany("Products")
-                        .HasForeignKey("OrderID");
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Shop.Model.Product", "Product")
+                        .WithMany("Orders")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Shop.Model.Category", b =>
@@ -172,6 +208,11 @@ namespace Shop.Snapshot
             modelBuilder.Entity("Shop.Model.Order", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Shop.Model.Product", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

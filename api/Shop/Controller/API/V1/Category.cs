@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Database;
+using Shop.Resource;
 
 namespace Shop.Controller.API.V1;
 
@@ -55,6 +56,18 @@ public class Category(Context context) : Microsoft.AspNetCore.Mvc.Controller
         context.SaveChanges();
 
         return Get();
+    }
+
+    [HttpGet]
+    [Route("/api/v1/categories/resource-info")]
+    public IActionResult GetResourceInfo()
+    {
+        var info = new ResourceInfo();
+
+        info.Name = "categories";
+        info.Size = context.Categories.ToList().Count;
+
+        return Json(info);
     }
 
     [HttpGet]

@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumbs, Button, Divider, Fade, Grid, Paper, Typography } from "@mui/material";
-import { UserContext } from "../context";
-import { PageContainerGrid, PaperButton } from "../atoms";
+import { UserContext } from "../../context";
+import { PageContainerGrid, PaperButton } from "../../atoms";
 
 class ShopResource {
     constructor(
@@ -58,6 +58,16 @@ const AdminShopPage = () => {
                         </Grid>
                     );
                 })}
+            </Grid>
+            <Grid sx={{ mt: 1.5 }} item xs={12}>
+                <Button
+                    sx={{ p: 2, width: 200, mr: 2 }}
+                    color="error"
+                    variant="outlined"
+                    onClick={() => navigate('/')}
+                >
+                    go back
+                </Button>
             </Grid>
         </PageContainerGrid>
     )

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Shop.Database;
+using Shop.Resource;
 
 namespace Shop.Controller.API.V1;
 
@@ -53,6 +54,18 @@ public class Customer(Context context) : Microsoft.AspNetCore.Mvc.Controller
         context.SaveChanges();
 
         return Get();
+    }
+
+    [HttpGet]
+    [Route("/api/v1/customers/resource-info")]
+    public IActionResult GetResourceInfo()
+    {
+        var info = new ResourceInfo();
+
+        info.Name = "customers";
+        info.Size = context.Customers.ToList().Count;
+
+        return Json(info);
     }
 
     [HttpGet]

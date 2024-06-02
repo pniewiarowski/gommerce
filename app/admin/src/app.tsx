@@ -12,6 +12,9 @@ import {
     AdminShopCategoryCreatePage,
     AdminShopCategoryEditPage,
     AdminShopCategoryPage,
+    AdminShopCustomerCreatePage,
+    AdminShopCustomerEditPage,
+    AdminShopCustomerPage,
     AdminShopPage,
     AdminShopProductCreatePage,
     AdminShopProductEditPage,
@@ -31,6 +34,8 @@ const App = () => {
 
     useEffect(() => {
         if (!get("userID")) {
+            setLoading(false);
+
             return;
         }
 
@@ -67,6 +72,9 @@ const App = () => {
                                         <Route path="/shop/product" element={<AdminShopProductPage />} />
                                         <Route path="/shop/product/create" element={<AdminShopProductCreatePage />} />
                                         <Route path="/shop/product/edit/:id" element={<AdminShopProductEditPage />} />
+                                        <Route path="/shop/customer" element={<AdminShopCustomerPage />} />
+                                        <Route path="/shop/customer/create" element={<AdminShopCustomerCreatePage />} />
+                                        <Route path="/shop/customer/edit/:id" element={<AdminShopCustomerEditPage />} />
                                         <Route path="/mailing" element={<AdminMailingPage />} />
                                         <Route path="/account" element={<AdminAccountPage />} />
                                         <Route path="/payment" element={<AdminPaymentPage />} />

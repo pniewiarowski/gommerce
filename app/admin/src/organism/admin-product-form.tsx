@@ -69,7 +69,7 @@ const AdminProductForm = (props: Props) => {
     }
 
     return (
-        <Box sx={{ height: "77vh", overflowY: "scroll" }}>
+        <Box sx={{ maxHeight: "77vh", overflowY: "scroll" }}>
             <form style={{ overflowY: "scroll" }} onSubmit={handleSubmit(onSubmit)}>
                 <FormControl sx={{ mb: 2 }} fullWidth>
                     <TextField

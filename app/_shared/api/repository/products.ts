@@ -1,4 +1,4 @@
-import { ProductDefinition } from "../definition";
+import { ProductDefinition, ResourceInfoDefinition } from "../definition";
 import { shop } from "../../axios";
 import { Repository } from "./type";
 
@@ -15,6 +15,17 @@ class Products implements Repository {
         const response = await shop.get(`/${Products.resource}/${id}`);
 
         return await response.data;
+    }
+
+    public async getResourceInfo(token: string): Promise<ResourceInfoDefinition> {
+        const response = await shop.get(`${Products.resource}/resource-info`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return response.data;
     }
 
     public async create(product: ProductDefinition, token: string): Promise<ProductDefinition> {

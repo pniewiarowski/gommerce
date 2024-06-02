@@ -5,8 +5,8 @@ import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { Check, Close, Delete, Edit, FileCopy } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
-import { JwtContext, UserContext } from "../context";
-import { PageContainerGrid } from "../atoms";
+import { JwtContext, UserContext } from "../../../context";
+import { PageContainerGrid } from "../../../atoms";
 
 const AdminShopCategoryPage = () => {
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
