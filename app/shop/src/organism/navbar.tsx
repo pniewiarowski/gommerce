@@ -1,9 +1,25 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AppBar, Badge, Box, Button, Divider, IconButton, Toolbar, Typography, Menu, MenuItem, Avatar } from "@mui/material";
+import {
+    AppBar,
+    Badge,
+    Box,
+    Button,
+    Divider,
+    IconButton,
+    Toolbar,
+    Typography,
+    Menu,
+    MenuItem,
+    Avatar,
+    ListItem,
+    List,
+    ListItemButton,
+    Paper,
+} from "@mui/material";
 import { Person, ShoppingBag, Settings, Logout, Bookmark, Close } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
-import { CustomerContext } from "../context";
+import { CustomerContext, ShopBagContext } from "../context";
 import { stringAvatar } from "../util";
 import { useCookies } from "../../../_shared/hook";
 
@@ -18,6 +34,7 @@ const Navbar = (props: Props): React.JSX.Element => {
     const [anchorElCustomerMenu, setAnchorElCustomerMenu] = React.useState<null | HTMLElement>(null);
     const [anchorElShoppingBag, setAnchorElShoppingBag] = React.useState<null | HTMLElement>(null);
     const { customer, setCustomer } = useContext(CustomerContext);
+    const { shopBag, setShopBag } = useContext(ShopBagContext);
     const { clear } = useCookies();
     const navigate = useNavigate();
     const openCustomerMenu = Boolean(anchorElCustomerMenu);
@@ -79,18 +96,51 @@ const Navbar = (props: Props): React.JSX.Element => {
                         <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                             {categoriesToRender}
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center"}} color="text.primary">
+                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} color="text.primary">
                             <div onClick={handleOpenShoppingBag}>
                                 <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
-                                    <Badge badgeContent={0} color="secondary">
+                                    <Badge badgeContent={shopBag.length} color="secondary">
                                         <ShoppingBag />
                                     </Badge>
                                 </IconButton>
                             </div>
 
-                            <Menu id="shopping-bag" anchorEl={anchorElShoppingBag} open={openShoppingBag} sx={{ transform: "translateX(-5%)" }} onWheel={handleCloseShoppingBag} onClose={handleCloseShoppingBag} MenuListProps={{
-                                'aria-labelledby': 'basic-button',
-                            }}>
+                            <Menu
+                                id="shopping-bag"
+                                anchorEl={anchorElShoppingBag}
+                                open={openShoppingBag}
+                                sx={{ transform: "translateX(-5%)" }}
+                                onClose={handleCloseShoppingBag}
+                                MenuListProps={{
+                                    'aria-labelledby': 'basic-button',
+                                }}>
+                                <Fragment>
+                                    <List sx={{ maxHeight: "400px", width: "344px", p: 2 }}>
+                                        {shopBag.map((item) => {
+                                            return (
+                                                <Link onClick={handleCloseShoppingBag} to={`/product/${item.id}`}>
+                                                    <Paper variant="outlined" sx={{ mb: 1, pb: 1, pt: 1, width: "100%" }}>
+                                                        <ListItem>
+                                                            <Typography>{item.name}</Typography>
+                                                        </ListItem>
+                                                    </Paper>
+                                                </Link>
+                                            );
+                                        })}
+
+                                        {shopBag.length !== 0 && <Link to={`/checkout`}>
+                                            <Button sx={{ mt: 1, mb: 1, p: 2 }} fullWidth onClick={handleCloseShoppingBag}>go to checkout</Button>
+                                        </Link>}
+
+                                        {shopBag.length === 0 &&
+                                            <ListItem sx={{
+                                                display: "flex",
+                                                justifyContent: "space-between",
+                                            }}>
+                                                <Typography>there is nothing in your shopping bag</Typography>
+                                            </ListItem>}
+                                    </List>
+                                </Fragment>
                             </Menu>
                             {!customer &&
                                 <Link to={"/login"}>

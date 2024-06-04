@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, Zoom } from "@mui/material";
-import { Check, Close } from "@mui/icons-material";
+import { Cancel, Check, Close } from "@mui/icons-material";
 import { CustomerRegisterForm } from "../organism";
 import { CustomerContext } from "../context";
 
@@ -34,7 +34,7 @@ const ShopCustomerRegisterPage = () => {
                 <React.Fragment>
                     <Grid item xs={12} spacing={1}>
                         <Grow in={true} {...{ timeout: 250 }}>
-                            <Alert icon={<Check fontSize="inherit" />} severity="error" sx={{ p: 2 }} variant={"outlined"}>
+                            <Alert icon={<Cancel fontSize="inherit" />} severity="error" sx={{ p: 2 }} variant={"outlined"}>
                                 <Typography>{query.get("errorRegister")}</Typography>
                             </Alert>
                         </Grow>
