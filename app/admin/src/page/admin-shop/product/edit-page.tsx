@@ -23,7 +23,6 @@ const AdminShopProductEditPage = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            console.log(await productRepository.getByID(id))
             setProduct(await productRepository.getByID(Number(id)));
             setLoading(false);
         };
@@ -37,7 +36,7 @@ const AdminShopProductEditPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">create product</Typography>
+            <Typography sx={{ fontSize: 40, }} variant="h2">edit {product.name} [Product {id}]</Typography>
             <Divider sx={{ mt: 2, mb: 1 }} />
             <Grid sx={{ mt: 1 }} item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>

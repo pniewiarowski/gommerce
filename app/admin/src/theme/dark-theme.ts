@@ -1,4 +1,4 @@
-import {ThemeOptions, createTheme} from "@mui/material/styles";
+import { ThemeOptions, createTheme } from "@mui/material/styles";
 
 const darkTheme: ThemeOptions = createTheme({
     palette: {
@@ -14,13 +14,16 @@ const darkTheme: ThemeOptions = createTheme({
         h3: {
             fontWeight: 900,
             fontFamily: "Roboto",
-            fontSize: 20,
+            fontSize: 18,
         },
         h4: {
             fontWeight: 700,
             fontFamily: "Roboto",
             fontSize: 14,
         },
+        body1: {
+            fontSize: 14,
+        }
     },
     components: {
         MuiButton: {

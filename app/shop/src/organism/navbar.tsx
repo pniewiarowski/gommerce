@@ -14,14 +14,15 @@ import {
     Avatar,
     ListItem,
     List,
-    ListItemButton,
     Paper,
 } from "@mui/material";
-import { Person, ShoppingBag, Settings, Logout, Bookmark, Close } from "@mui/icons-material";
-import { CategoryDefinition } from "gommerce-app-shared/api/definition";
+import { Person, ShoppingBag, Settings, Logout, Bookmark, Close, Delete } from "@mui/icons-material";
+import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
+import { useCookies } from "gommerce-app-shared/hook";
 import { CustomerContext, ShopBagContext } from "../context";
 import { stringAvatar } from "../util";
-import { useCookies } from "../../../_shared/hook";
+import CustomerMenu from "./customer-menu";
+import CustomerShoppingBag from "./customer-shopping-bag";
 
 interface Props {
     heading: string,
@@ -33,10 +34,9 @@ interface Props {
 const Navbar = (props: Props): React.JSX.Element => {
     const [anchorElCustomerMenu, setAnchorElCustomerMenu] = React.useState<null | HTMLElement>(null);
     const [anchorElShoppingBag, setAnchorElShoppingBag] = React.useState<null | HTMLElement>(null);
-    const { customer, setCustomer } = useContext(CustomerContext);
+    const { customer } = useContext(CustomerContext);
     const { shopBag, setShopBag } = useContext(ShopBagContext);
-    const { clear } = useCookies();
-    const navigate = useNavigate();
+
     const openCustomerMenu = Boolean(anchorElCustomerMenu);
     const openShoppingBag = Boolean(anchorElShoppingBag);
     const elevation: number = 3;
@@ -59,12 +59,6 @@ const Navbar = (props: Props): React.JSX.Element => {
 
     const handleOpenShoppingBag = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElShoppingBag(event.currentTarget);
-    }
-
-    const logout = () => {
-        clear();
-        setCustomer(null);
-        navigate('/login');
     }
 
     const categoriesToRender: Array<React.JSX.Element> = props.categories.map((category: CategoryDefinition, i: number) => {
@@ -109,29 +103,13 @@ const Navbar = (props: Props): React.JSX.Element => {
                                 id="shopping-bag"
                                 anchorEl={anchorElShoppingBag}
                                 open={openShoppingBag}
-                                sx={{ transform: "translateX(-5%)" }}
                                 onClose={handleCloseShoppingBag}
-                                MenuListProps={{
-                                    'aria-labelledby': 'basic-button',
-                                }}>
+                                elevation={7}
+                                sx={{ left: "-230px", top: "8px" }}
+                                MenuListProps={{ "aria-labelledby": "basic-button" }}>
                                 <Fragment>
                                     <List sx={{ maxHeight: "400px", width: "344px", p: 2 }}>
-                                        {shopBag.map((item) => {
-                                            return (
-                                                <Link onClick={handleCloseShoppingBag} to={`/product/${item.id}`}>
-                                                    <Paper variant="outlined" sx={{ mb: 1, pb: 1, pt: 1, width: "100%" }}>
-                                                        <ListItem>
-                                                            <Typography>{item.name}</Typography>
-                                                        </ListItem>
-                                                    </Paper>
-                                                </Link>
-                                            );
-                                        })}
-
-                                        {shopBag.length !== 0 && <Link to={`/checkout`}>
-                                            <Button sx={{ mt: 1, mb: 1, p: 2 }} fullWidth onClick={handleCloseShoppingBag}>go to checkout</Button>
-                                        </Link>}
-
+                                        <CustomerShoppingBag close={handleCloseShoppingBag} checkoutLink={true} />
                                         {shopBag.length === 0 &&
                                             <ListItem sx={{
                                                 display: "flex",
@@ -154,45 +132,23 @@ const Navbar = (props: Props): React.JSX.Element => {
                                     <div onClick={handleOpenCustomerMenu}>
                                         <Avatar {...stringAvatar(`${customer.firstName}`, true)}></Avatar>
                                     </div>
-
-                                    <Menu id="customer-menu" anchorEl={anchorElCustomerMenu} open={openCustomerMenu} sx={{ transform: "translateX(-7%) translateY(1%)" }} onWheel={handleCloseCustomerMenu} onClose={handleCloseCustomerMenu} MenuListProps={{
-                                        'aria-labelledby': 'basic-button',
-                                    }}>
-                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
-                                            <ShoppingBag sx={{ mr: 1 }} />
-                                            <Typography>My orders</Typography>
-                                        </MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
-                                            <Bookmark sx={{ mr: 1 }} />
-                                            <Typography>Following items</Typography>
-                                        </MenuItem>
-                                        <Link to="/settings">
-                                            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
-                                                <Settings sx={{ mr: 1 }} />
-                                                <Typography>Settings</Typography>
-                                            </MenuItem>
-                                        </Link>
-                                        <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={handleCloseCustomerMenu}>
-                                            <Close sx={{ mr: 1 }} />
-                                            <Typography>Close</Typography>
-                                        </MenuItem>
-                                        <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={logout}>
-                                            <Logout sx={{ mr: 1 }} />
-                                            <Typography>Logout</Typography>
-                                        </MenuItem>
+                                    <Menu
+                                        id="customer-menu"
+                                        anchorEl={anchorElCustomerMenu}
+                                        open={openCustomerMenu}
+                                        sx={{ transform: "translateX(-7%) translateY(1%)" }}
+                                        onWheel={handleCloseCustomerMenu}
+                                        onClose={handleCloseCustomerMenu}
+                                        MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
+                                        <CustomerMenu close={handleCloseCustomerMenu} />
                                     </Menu>
                                 </div>
                             }
-                            {!customer &&
-                                <Link to={"/login"}>
-                                    <Button sx={{ ml: 4 }} variant="outlined" color="secondary">login</Button>
-                                </Link>
-                            }
                         </Box>
                     </Box>
-                </Toolbar>
-            </AppBar>
-        </Box>
+                </Toolbar >
+            </AppBar >
+        </Box >
     );
 }
 

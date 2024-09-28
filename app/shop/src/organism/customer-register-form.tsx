@@ -1,13 +1,21 @@
-import React, { useState } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import {
+    Box,
+    Button,
+    FormControl,
+    InputAdornment,
+    TextField,
+    Theme,
+    Typography,
+    useTheme,
+} from "@mui/material";
 import { Person, Key, Repeat, Email } from "@mui/icons-material";
-import { Box, Button, FormControl, InputAdornment, TextField, Theme, Typography, useTheme } from "@mui/material";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerResolver, registerType } from "../resolver";
 import { useBackend } from "gommerce-app-shared/hook";
+import { registerResolver, registerType } from "../resolver";
 
-const CustomerRegisterForm = (): React.JSX.Element => {
+const CustomerRegisterForm = () => {
     const {
         register,
         handleSubmit,
@@ -56,13 +64,19 @@ const CustomerRegisterForm = (): React.JSX.Element => {
 
     return (
         <form style={{ width: "100%", padding: "1rem" }} onSubmit={handleSubmit(onSubmit)}>
-            <Box sx={{ p: 4, minHeight: "618px" }} display="flex" flexDirection="column" justifyContent="center"
-                alignItems="center" height="100%">
+            <Box
+                sx={{ p: 4, minHeight: "618px" }}
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+            >
                 <FormControl sx={{ mb: 2 }} fullWidth>
                     <Typography variant="h3">create your account</Typography>
                 </FormControl>
                 <FormControl sx={{ mb: 2 }} fullWidth>
-                    <TextField label="first and last name"
+                    <TextField
+                        label="first and last name"
                         variant="outlined"
                         color="primary"
                         {...register("name")}
@@ -74,7 +88,8 @@ const CustomerRegisterForm = (): React.JSX.Element => {
                                     <Person />
                                 </InputAdornment>
                             ),
-                        }} />
+                        }}
+                    />
                 </FormControl>
                 <FormControl sx={{ mb: 2 }} fullWidth>
                     <TextField label="email"

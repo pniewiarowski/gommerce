@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Breadcrumbs, Grid, Grow, Paper, Typography } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
-import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
+import { Breadcrumbs, Grid, Grow, Paper, Typography } from "@mui/material";
 import { SentimentVeryDissatisfied } from "@mui/icons-material";
-import { ProductTile } from "../organism";
+import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
+import { ProductTile } from "../organism";
 
 const ShopCategoryPage = () => {
     const { categoriesRepository } = useBackend();
@@ -60,12 +60,10 @@ const ShopCategoryPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-
             {!!products.length &&
                 <Grid item container xs={12} spacing={1}>
                     {productsToRender}
                 </Grid>}
-
             {!products.length &&
                 <Grid item xs={12}>
                     <Grow in={true} timeout={250}>

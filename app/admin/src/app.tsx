@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Container, CssBaseline, Grid, ThemeProvider } from "@mui/material";
+import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import { UserDefinition } from "gommerce-app-shared/api/definition";
 import {
     AdminAccountPage,
@@ -15,6 +15,7 @@ import {
     AdminShopCustomerCreatePage,
     AdminShopCustomerEditPage,
     AdminShopCustomerPage,
+    AdminShopOrderPage,
     AdminShopPage,
     AdminShopProductCreatePage,
     AdminShopProductEditPage,
@@ -24,16 +25,15 @@ import { useCookies } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "./context";
 import { darkTheme } from "./theme";
 import { AdminSidebar } from "./organism";
-import { LogoutButton } from "./molecules";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<UserDefinition | null>(null);
     const [jwt, setJwt] = useState<string | null>(null);
     const { get } = useCookies();
-
     useEffect(() => {
         if (!get("userID")) {
+
             setLoading(false);
 
             return;
@@ -75,12 +75,12 @@ const App = () => {
                                         <Route path="/shop/customer" element={<AdminShopCustomerPage />} />
                                         <Route path="/shop/customer/create" element={<AdminShopCustomerCreatePage />} />
                                         <Route path="/shop/customer/edit/:id" element={<AdminShopCustomerEditPage />} />
+                                        <Route path="/shop/order" element={<AdminShopOrderPage />} />
                                         <Route path="/mailing" element={<AdminMailingPage />} />
                                         <Route path="/account" element={<AdminAccountPage />} />
                                         <Route path="/payment" element={<AdminPaymentPage />} />
                                         <Route path="/settings" element={<AdminSettingsPage />} />
                                     </Routes>
-                                    {user && jwt && <LogoutButton />}
                                 </Fragment>
                             </Grid>
                         </BrowserRouter>

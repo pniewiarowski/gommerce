@@ -1,8 +1,9 @@
 import { Button, Container, Divider, Grid, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
-import { Home, Mail, Payment, Person, Settings, ShoppingBag } from "@mui/icons-material";
-import { Fragment, useEffect, useState } from "react";
+import { Home, Logout, Mail, Payment, Person, Settings, ShoppingBag } from "@mui/icons-material";
+import { Fragment, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "gommerce-app-shared/hook";
+import { UserContext, JwtContext } from "../context";
 
 class SidebarItem {
     public constructor(
@@ -17,6 +18,16 @@ class SidebarItem {
 const AdminSidebar = () => {
     const [active, setActive] = useState(0);
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
+    const { setJwt } = useContext(JwtContext);
+    const { clear } = useCookies();
+
+    const logout = () => {
+        setUser(null);
+        setJwt(null);
+        clear();
+        navigate("/login");
+    };
 
     const itemsJSX = [
         new SidebarItem(1, 'Home', () => { setActive(1); navigate("/"); }, <Home />),
@@ -45,6 +56,20 @@ const AdminSidebar = () => {
             </Fragment>
         )
     });
+
+    itemsJSX.push(
+        <Fragment>
+            <Button
+                fullWidth
+                sx={{ p: 2 }}
+                variant="outlined"
+                color="error"
+                startIcon={<Logout />}
+                onClick={logout}>
+                Exit
+            </Button>
+        </Fragment>
+    );
 
     return (
         <Grid item xs={12} xl={3} sx={{ height: "100vh", }}>

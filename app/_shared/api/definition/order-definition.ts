@@ -1,8 +1,7 @@
 interface OrderDefinition {
-    id: number,
-    firstName: string,
-    lastName: string,
-    email: string,
+    id?: number,
+    fullPrice: number,
+    customerId: number,
 }
 
 export default OrderDefinition;

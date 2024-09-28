@@ -3,12 +3,14 @@ import {
     Categories,
     Customers,
     Products,
-    Users
+    Orders,
+    Users,
 } from "../api/repository"
 
 interface Repositories {
     categoriesRepository: Categories,
     productRepository: Products,
+    ordersRepository: Orders,
     customersRepository: Customers,
     usersRepository: Users,
     authRepository: Authentication,
@@ -22,6 +24,7 @@ const useBackend = (): Repositories => {
             categoriesRepository: new Categories(),
             productRepository: new Products(),
             customersRepository: new Customers(),
+            ordersRepository: new Orders(),
             usersRepository: new Users(),
             authRepository: new Authentication()
         };

@@ -48,11 +48,12 @@ const AdminProductForm = (props: Props) => {
                 sortOrder: Number(data.sortOrder),
                 categoryId: categoryID,
             }, jwt);
+
             navigate('/shop/product')
         }
 
         const update = async () => {
-            await productRepository.create({
+            await productRepository.update({
                 id: props.default.id,
                 name: data.name,
                 description: data.description,
@@ -65,7 +66,7 @@ const AdminProductForm = (props: Props) => {
         }
 
         !props.default && create();
-        props.default && update();
+        !!props.default && update();
     }
 
     return (

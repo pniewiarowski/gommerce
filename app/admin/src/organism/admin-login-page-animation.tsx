@@ -1,10 +1,15 @@
-import { Container, Typography } from "@mui/material";
-import { ShoppingBag, CardGiftcard, Person, Settings } from "@mui/icons-material";
+import { Container } from "@mui/material";
 import { Animated3DBlock, Animated3DBlockIcon } from "../molecules";
 
 const AdminLoginPageAnimation = () => {
     return (
-        <Container sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+        <Container sx={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+        }}>
             <Animated3DBlock>
                 <Animated3DBlockIcon>
                     <img src="mail.png" width={64} />

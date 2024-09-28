@@ -1,12 +1,13 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Breadcrumbs, Button, CircularProgress, Divider, Grid, Paper, Typography } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
+import { useBackend } from "gommerce-app-shared/hook";
+import { ResourceInfoDefinition } from "gommerce-app-shared/api/definition";
+import { useTheme } from "@emotion/react";
 import { JwtContext, UserContext } from "../context";
 import { PageContainerGrid, PaperButton } from "../atoms";
-import { ResourceInfoDefinition } from "gommerce-app-shared/api/definition";
-import { useBackend } from "gommerce-app-shared/hook";
-import { useTheme } from "@emotion/react";
+import { SubHeading } from "../molecules";
 
 class Service {
     constructor(
@@ -18,14 +19,7 @@ class Service {
 
 const AdminHomePage = () => {
     const navigate = useNavigate();
-    const theme = useTheme();
     const { user } = useContext(UserContext);
-    const { jwt } = useContext(JwtContext);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [categoriesInfo, setCategoriesInfo] = useState<ResourceInfoDefinition>();
-    const [productsInfo, setProductsInfo] = useState<ResourceInfoDefinition>();
-    const [customersInfo, setCustomersInfo] = useState<ResourceInfoDefinition>();
-    const { categoriesRepository, productRepository, customersRepository } = useBackend();
     const iconSize = 78;
     const services = [
         new Service("Shop", "/shop", <img src="shopping-cart.png" width={iconSize} />),
@@ -36,22 +30,6 @@ const AdminHomePage = () => {
             navigate("/login");
         }
     }, [user]);
-
-    useEffect(() => {
-        const fetch = async () => {
-            setCategoriesInfo(await categoriesRepository.getResourceInfo(jwt));
-            setProductsInfo(await productRepository.getResourceInfo(jwt));
-            setCustomersInfo(await customersRepository.getResourceInfo(jwt));
-
-            setLoading(false);
-        }
-
-        fetch();
-    }, []);
-
-    if (loading) {
-        return <Fragment></Fragment>
-    }
 
     return (
         <PageContainerGrid>
@@ -66,18 +44,7 @@ const AdminHomePage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Typography sx={{ fontSize: 20, fontWeight: "bold", mb: 1, mt: 2 }} variant="h2">your resources in numbers</Typography>
-            <Paper elevation={4} sx={{ p: 4, mb: 2 }}>
-                <BarChart
-                    yAxis={[{ scaleType: 'band', data: ['Categories', 'Products', 'Customers'] }]}
-                    series={[{ data: [categoriesInfo.size, productsInfo.size, customersInfo.size], label: "Entites" }]}
-                    colors={[theme.palette.primary.main]}
-                    height={300}
-                    layout="horizontal"
-                />
-            </Paper>
-
-            <Typography sx={{ fontSize: 20, fontWeight: "bold", mb: 1 }} variant="h2">manage your services</Typography>
+            <SubHeading>manage your services</SubHeading>
             <Grid container spacing={1}>
                 {services.map((service) => {
                     return (

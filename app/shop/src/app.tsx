@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
-import { Footer, MailingForm, Navbar } from "./organism";
-import { ShopHomePage, ShopCustomerLoginPage, ShopCustomerRegisterPage, ShopCustomerSettingsPage, ShopCategoryPage, ShopProductPage } from "./page";
 import { CategoryDefinition, UserDefinition, CustomerDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
-import { useBackend } from "gommerce-app-shared/hook";
-import { darkTheme } from "./theme";
+import { useBackend, useCookies } from "gommerce-app-shared/hook";
+import {
+    ShopHomePage,
+    ShopCustomerLoginPage,
+    ShopCustomerRegisterPage,
+    ShopCustomerSettingsPage,
+    ShopCategoryPage,
+    ShopProductPage,
+    ShopCheckoutPage,
+    ShopCheckoutAddressPage,
+    ShopCheckoutPaymentMethodPage,
+    ShopCheckoutSuccessPage,
+    ShopCheckoutSummaryPage,
+} from "./page";
+import { Footer, MailingForm, Navbar } from "./organism";
 import { CustomerContext, JwtContext, ShopBagContext, UserContext } from "./context";
-import useCookies from "../../_shared/hook/use-cookies.ts";
+import { darkTheme, lightTheme } from "./theme";
 import "./base.css";
-
 
 const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');
@@ -66,10 +76,14 @@ const App = () => {
                 <UserContext.Provider value={{ user, setUser }}>
                     <CustomerContext.Provider value={{ customer, setCustomer }}>
                         <ShopBagContext.Provider value={{ shopBag, setShopBag }}>
-                            <ThemeProvider theme={darkTheme}>
+                            <ThemeProvider theme={lightTheme}>
                                 <CssBaseline enableColorScheme />
                                 <BrowserRouter>
-                                    <Navbar heading={"gommerce"} showLoginButton={!jwt} width="77.5%" categories={categories} />
+                                    <Navbar
+                                        heading={"gommerce"}
+                                        width="77.5%"
+                                        categories={categories}
+                                    />
                                     <Grid sx={{ width: desktop ? "75%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>
                                         <Routes>
                                             <Route path="/" element={<ShopHomePage />} />
@@ -78,6 +92,11 @@ const App = () => {
                                             <Route path="/settings" element={<ShopCustomerSettingsPage />} />
                                             <Route path="/category/:id" element={<ShopCategoryPage />} />
                                             <Route path="/product/:id" element={<ShopProductPage />} />
+                                            <Route path="/checkout" element={<ShopCheckoutPage />} />
+                                            <Route path="/checkout/address" element={<ShopCheckoutAddressPage />} />
+                                            <Route path="/checkout/payment-method" element={<ShopCheckoutPaymentMethodPage />} />
+                                            <Route path="/checkout/summary" element={<ShopCheckoutSummaryPage />} />
+                                            <Route path="/checkout/success" element={<ShopCheckoutSuccessPage />} />
                                         </Routes>
                                         <MailingForm />
                                         <Footer />

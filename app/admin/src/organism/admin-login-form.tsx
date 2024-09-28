@@ -2,7 +2,13 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Container, FormControl, InputAdornment, TextField } from "@mui/material";
+import {
+    Button,
+    Container,
+    FormControl,
+    InputAdornment,
+    TextField,
+} from "@mui/material";
 import { Email, Key } from "@mui/icons-material";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { loginResolver, loginType } from "../resolver";
@@ -46,7 +52,6 @@ const AdminLoginForm = () => {
                 set("userEmail", user.email);
                 setUser(user);
             } catch (exception: any) {
-                console.log(exception);
                 navigate(`/login?errorLogin=${exception.response.data}`);
 
                 return false;
@@ -63,7 +68,7 @@ const AdminLoginForm = () => {
     return (
         <form style={{ width: "100%", padding: "1rem" }} onSubmit={handleSubmit(onSubmit)}>
             <Container>
-                <FormControl sx={{ mb: 2, mt: 2 }} fullWidth>
+                <FormControl sx={{ mb: 2 }} fullWidth>
                     <TextField label="email"
                         variant="outlined"
                         color="primary"

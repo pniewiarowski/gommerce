@@ -1,16 +1,18 @@
-import {ThemeOptions, createTheme} from "@mui/material/styles";
+import { ThemeOptions, createTheme } from "@mui/material/styles";
+
+const accent = '#651fff';
 
 const lightTheme: ThemeOptions = createTheme({
     palette: {
         mode: "light",
         background: {
-            default: '#651fff',
+            default: `${accent}77`,
         },
         primary: {
-            main: '#651fff',
+            main: accent,
         },
         secondary: {
-            main: '#ff1fff',
+            main: accent,
         },
     },
     typography: {
@@ -29,7 +31,7 @@ const lightTheme: ThemeOptions = createTheme({
         MuiAppBar: {
             styleOverrides: {
                 colorPrimary: {
-                    backgroundColor: "#eeeeee"
+                    backgroundColor: "#ffffff"
                 }
             }
         },

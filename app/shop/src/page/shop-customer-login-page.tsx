@@ -35,8 +35,19 @@ const ShopCustomerLoginPage = () => {
                 <React.Fragment>
                     <Grid item xs={12}>
                         <Grow in={true} {...{ timeout: 250 }}>
-                            <Alert icon={<Check fontSize="inherit" />} severity="success" sx={{ p: 2 }} variant={"outlined"}>
+                            <Alert icon={<Check fontSize="inherit" />} severity="success" sx={{ p: 2 }} variant={"standard"}>
                                 <Typography>created account succesfully, now you can login to your new account!</Typography>
+                            </Alert>
+                        </Grow>
+                    </Grid>
+                </React.Fragment>
+            }
+            {!!query.get("message") &&
+                <React.Fragment>
+                    <Grid item xs={12}>
+                        <Grow in={true} {...{ timeout: 250 }}>
+                            <Alert icon={<Check fontSize="inherit" />} severity="info" sx={{ p: 2 }} variant={"standard"}>
+                                <Typography>{query.get("message")}</Typography>
                             </Alert>
                         </Grow>
                     </Grid>
@@ -46,7 +57,7 @@ const ShopCustomerLoginPage = () => {
                 <React.Fragment>
                     <Grid item xs={12}>
                         <Grow in={true} {...{ timeout: 250 }}>
-                            <Alert icon={<Check fontSize="inherit" />} severity="error" sx={{ p: 2 }} variant={"outlined"}>
+                            <Alert icon={<Check fontSize="inherit" />} severity="error" sx={{ p: 2 }} variant={"standard"}>
                                 <Typography>{query.get("errorLogin")}</Typography>
                             </Alert>
                         </Grow>
