@@ -52,12 +52,18 @@ func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 	claims[definition.JwtClaimAccountType] = user.RoleID
 	claims[definition.JwtClaimExpireTime] = time.Now().Add(time.Hour * 72).Unix()
 
-	tokenStringed, err := token.SignedString([]byte(environment.GetAPISecret()))
+	tokenStringed, err := token.SignedString([]byte(environment.GetAPISecretSeed()))
 	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{"error": err.Error()})
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.RegisterErrorResponse{
+			Message: "something went wrong while logging",
+			Code:    fiber.StatusUnauthorized,
+		})
 	}
 
-	return ctx.Status(fiber.StatusOK).JSON(response.LoginSuccessResponse{})
+	return ctx.Status(fiber.StatusOK).JSON(response.LoginSuccessResponse{
+		UserID: user.ID,
+		JWT:    tokenStringed,
+	})
 }
 
 func (ac *AuthController) Register(ctx *fiber.Ctx) error {
