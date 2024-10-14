@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/pniewiarowski/gommerce/api/_shared/environment"
 	"github.com/pniewiarowski/gommerce/api/auth/definition"
 	"github.com/pniewiarowski/gommerce/api/auth/model"
 	"github.com/pniewiarowski/gommerce/api/auth/repository"
@@ -50,6 +51,11 @@ func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 	claims[definition.JwtClaimId] = user.ID
 	claims[definition.JwtClaimAccountType] = user.RoleID
 	claims[definition.JwtClaimExpireTime] = time.Now().Add(time.Hour * 72).Unix()
+
+	tokenStringed, err := token.SignedString([]byte(environment.GetAPISecret()))
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(&fiber.Map{"error": err.Error()})
+	}
 
 	return ctx.Status(fiber.StatusOK).JSON(response.LoginSuccessResponse{})
 }

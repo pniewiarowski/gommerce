@@ -5,7 +5,7 @@ go 1.22.2
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/golang-jwt/jwt/v4 v4.5.0
-	github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014183444-7c44cbaa6b31
+	github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014211833-ff5a8b457e7e
 	golang.org/x/crypto v0.17.0
 )
 
