@@ -51,3 +51,17 @@ func GetDatabasePort() int {
 
 	return port
 }
+
+func GetAPIPort() int {
+	if !isEnvironmentLoaded {
+		panic("first load environment file via env package api.")
+	}
+
+	port, err := strconv.Atoi(os.Getenv(apiPortEnvironmentKey))
+
+	if err != nil {
+		panic(fmt.Sprintf("%s enviroment should be able to proccess into intiger.", apiPortEnvironmentKey))
+	}
+
+	return port
+}

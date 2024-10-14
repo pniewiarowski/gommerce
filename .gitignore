@@ -1,25 +1,7 @@
-# Environmetal
 /.env
-
-# IDE
 /.idea
-
-# Mailing Service
-/api/Mailing/bin
-/api/Mailing/obj
-/api/Mailing/.idea
-
-# Shop Service
-/api/Shop/bin
-/api/Shop/obj
-/api/Shop/.idea
-
-# Auth Service
-/api/Auth/bin
-/api/Auth/obj
-/api/Auth/.idea
-
-# Shop Application
+/api/_shared/.idea
+/api/auth/.idea
 /app/shop/.idea
 /app/shop/node_modules
 /app/shop/.pnp
@@ -38,8 +20,6 @@
 /app/shop/.vercel
 /app/shop/*.tsbuildinfo
 /app/shop/next-env.d.ts
-
-# Admin Application
 /app/admin/.idea
 /app/admin/node_modules
 /app/admin/.pnp
@@ -58,8 +38,6 @@
 /app/admin/.vercel
 /app/admin/*.tsbuildinfo
 /app/admin/next-env.d.ts
-
-# Shared package
 /app/_shared/.idea
 /app/_shared/node_modules
 /app/_shared/.pnp
