@@ -13,6 +13,7 @@ const (
 	databaseNameEnvironmentKey     = "DATABASE_NAME"
 	databasePortEnvironmentKey     = "DATABASE_PORT"
 	apiPortEnvironmentKey          = "API_PORT"
+	apiSecretSeedEnvironmentKey    = "API_SECRET_SEED"
 )
 
 func Load(file string) {

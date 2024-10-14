@@ -65,3 +65,11 @@ func GetAPIPort() int {
 
 	return port
 }
+
+func GetAPISecretSeed() string {
+	if !isEnvironmentLoaded {
+		panic("first load environment file via env package api.")
+	}
+
+	return os.Getenv(apiSecretSeedEnvironmentKey)
+}

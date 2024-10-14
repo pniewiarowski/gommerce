@@ -36,6 +36,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014211833-ff5a8b457e7e h1:AbOhbzPwRwIdz/QTJrlVVqzw67gZDMgBipE/yhmBO5A=
 github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014211833-ff5a8b457e7e/go.mod h1:SY2Mn92ex6s6Tj9R1yBpi5Yso9XMaRlNFTzbAMXFSWk=
+github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014212735-39e22651e606 h1:2MJ0P6sMhEu0jkkz3IMl0QFWxe8qhmRQwhTZBYHAK/0=
+github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014212735-39e22651e606/go.mod h1:SY2Mn92ex6s6Tj9R1yBpi5Yso9XMaRlNFTzbAMXFSWk=
 github.com/rivo/uniseg v0.2.0 h1:S1pD9weZBuJdFmowNwbpi7BJ8TNftyUImj/0WQi72jY=
 github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
