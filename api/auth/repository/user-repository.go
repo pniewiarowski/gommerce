@@ -34,6 +34,22 @@ func (_ *UserRepository) ReadByID(entityID uint) (*model.User, error) {
 	return &user, err
 }
 
+func (_ *UserRepository) ReadByEmail(email string) (*model.User, error) {
+	var user model.User
+
+	err := database.DataBase.First(&user, "email = ?", email).Error
+
+	return &user, err
+}
+
+func (ur *UserRepository) ExistWithGivenEmail(email string) bool {
+	var exists bool
+
+	database.DataBase.Model(model.User{}).Select("count(*) > 0").Where("email = ?", email).Find(&exists)
+
+	return exists
+}
+
 func (ur *UserRepository) Update(user, updatedUser *model.User) (*model.User, error) {
 	if user.ID <= 0 {
 		return nil, errors.New("invalid entity id")

@@ -1,8 +1,9 @@
 package model
 
 type User struct {
-	ID         uint   `gorm:"primaryKey" json:"entity_id"`
-	Email      string `gorm:"unique" json:"email"`
-	Password   string `json:"password"`
-	UserRoleID uint   `json:"role_id"`
+	ID       uint   `gorm:"primaryKey" json:"id"`
+	Email    string `gorm:"unique" json:"email"`
+	Password string `json:"password"`
+	Enable   bool   `json:"enable"`
+	RoleID   uint   `json:"role_id"`
 }

@@ -4,7 +4,9 @@ import (
 	"github.com/pniewiarowski/gommerce/api/_shared/database"
 	"github.com/pniewiarowski/gommerce/api/_shared/environment"
 	"github.com/pniewiarowski/gommerce/api/auth/app"
+	"github.com/pniewiarowski/gommerce/api/auth/definition"
 	"github.com/pniewiarowski/gommerce/api/auth/model"
+	"github.com/pniewiarowski/gommerce/api/auth/repository"
 )
 
 var Models = []interface{}{
@@ -12,9 +14,20 @@ var Models = []interface{}{
 	model.UserRole{},
 }
 
+func setup() {
+	urr := repository.UserRoleRepository{}
+
+	if _, err := urr.ReadByCode(definition.UserRoleCustomer); err != nil {
+		urr.Create(&model.UserRole{Code: definition.UserRoleCustomer})
+	}
+
+	if _, err := urr.ReadByCode(definition.UserRoleAdmin); err != nil {
+		urr.Create(&model.UserRole{Code: definition.UserRoleAdmin})
+	}
+}
+
 func main() {
 	environment.Load(".env")
-
 	database.Setup(
 		environment.GetDatabaseHost(),
 		environment.GetDatabaseUser(),
@@ -24,5 +37,7 @@ func main() {
 	)
 
 	database.Migrate(Models)
-	app.Run(environment.GetApiPort())
+	setup()
+
+	app.Run(environment.GetAPIPort())
 }

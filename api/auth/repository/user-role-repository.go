@@ -34,6 +34,14 @@ func (_ *UserRoleRepository) ReadByID(entityID uint) (*model.UserRole, error) {
 	return &userRole, err
 }
 
+func (_ *UserRoleRepository) ReadByCode(code string) (*model.UserRole, error) {
+	var userRole model.UserRole
+
+	err := database.DataBase.First(&userRole, "code = ?", code).Error
+
+	return &userRole, err
+}
+
 func (urr *UserRoleRepository) Update(userRole, updatedUserRole *model.UserRole) (*model.UserRole, error) {
 	if userRole.ID <= 0 {
 		return nil, errors.New("invalid entity id")
