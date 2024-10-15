@@ -5,7 +5,7 @@ interface ProductDefinition {
     price: number,
     enabled: boolean,
     sortOrder: number,
-    categoryId: number,
+    categoryID: number,
 }
 
 export default ProductDefinition;

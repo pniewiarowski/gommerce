@@ -1,5 +1,5 @@
-import {auth} from "../../axios";
-import {UserDefinition} from "../definition";
+import { auth } from "../../axios";
+import { UserDefinition } from "../definition";
 
 class Users {
     private static resource = "users";
@@ -12,7 +12,7 @@ class Users {
             },
         });
 
-        return response.data;
+        return response.data.data;
     }
 }
 

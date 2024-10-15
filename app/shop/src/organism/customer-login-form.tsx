@@ -37,7 +37,7 @@ const CustomerLoginForm = () => {
                 }
 
                 const user = await usersRepository.getByID(jwt.userID, jwt.token);
-
+                console.log(user)
                 if (!user || !user.id) {
                     navigate(`/login?errorLogin=something went wrong please train again later`);
                     return;
