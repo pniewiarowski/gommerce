@@ -42,6 +42,14 @@ func (_ *UserRoleRepository) ReadByCode(code string) (*model.UserRole, error) {
 	return &userRole, err
 }
 
+func (_ *UserRoleRepository) ExistsWithGivenCode(code string) bool {
+	var exists bool
+
+	database.DataBase.Model(model.UserRole{}).Select("count(*) > 0").Where("code = ?", code).Find(&exists)
+
+	return exists
+}
+
 func (urr *UserRoleRepository) Update(userRole, updatedUserRole *model.UserRole) (*model.UserRole, error) {
 	if userRole.ID <= 0 {
 		return nil, errors.New("invalid entity id")

@@ -74,22 +74,6 @@ func GetAPISecretSeed() string {
 	return os.Getenv(apiSecretSeedEnvironmentKey)
 }
 
-func GetDefaultAdminFirstName() string {
-	if !isEnvironmentLoaded {
-		panic("first load environment file via env package api.")
-	}
-
-	return os.Getenv(defaultAdminUserFirstNameEnvironmentKey)
-}
-
-func GetDefaultAdminLastName() string {
-	if !isEnvironmentLoaded {
-		panic("first load environment file via env package api.")
-	}
-
-	return os.Getenv(defaultAdminUserLastNameEnvironmentKey)
-}
-
 func GetDefaultAdminEmail() string {
 	if !isEnvironmentLoaded {
 		panic("first load environment file via env package api.")

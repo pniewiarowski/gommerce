@@ -7,6 +7,7 @@ import (
 	"github.com/pniewiarowski/gommerce/api/auth/definition"
 	"github.com/pniewiarowski/gommerce/api/auth/model"
 	"github.com/pniewiarowski/gommerce/api/auth/repository"
+	"golang.org/x/crypto/bcrypt"
 )
 
 var Models = []interface{}{
@@ -24,6 +25,19 @@ func setup() {
 
 	if _, err := urr.ReadByCode(definition.UserRoleAdmin); err != nil {
 		urr.Create(&model.UserRole{Code: definition.UserRoleAdmin})
+	}
+
+	admin, _ := urr.ReadByCode(definition.UserRoleAdmin)
+	if _, err := ur.ReadByEmail(environment.GetDefaultAdminEmail()); err != nil {
+		password := environment.GetDefaultAdminPassword()
+		hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+
+		ur.Create(&model.User{
+			Email:    environment.GetDefaultAdminEmail(),
+			Password: string(hashedPassword),
+			Enable:   true,
+			RoleID:   admin.ID,
+		})
 	}
 }
 

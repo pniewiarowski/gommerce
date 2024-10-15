@@ -11,8 +11,9 @@ import (
 
 func SetupUserRole(router fiber.Router) {
 	urr := repository.UserRoleRepository{}
-	jwt := h.JWTHelper{}
+	jwt := h.JWTHelper{UserRoleRepository: urr}
 	ctx := helper.FiberContextHelper{}
+
 	c := controller.UserRoleController{
 		UserRoleRepository: urr,
 		JWTHelper:          jwt,
@@ -22,6 +23,6 @@ func SetupUserRole(router fiber.Router) {
 	router.Get("/", middleware.Protected(), c.Index)
 	router.Get("/:id", middleware.Protected(), c.Show)
 	router.Post("/", middleware.Protected(), c.Store)
-	router.Patch("/:id", middleware.Protected(), c.Update)
+	router.Put("/:id", middleware.Protected(), c.Update)
 	router.Delete("/:id", middleware.Protected(), c.Destroy)
 }

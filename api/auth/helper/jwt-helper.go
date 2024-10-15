@@ -5,10 +5,13 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/pniewiarowski/gommerce/api/_shared/environment"
 	"github.com/pniewiarowski/gommerce/api/auth/definition"
+	"github.com/pniewiarowski/gommerce/api/auth/repository"
 	"strings"
 )
 
-type JWTHelper struct{}
+type JWTHelper struct {
+	UserRoleRepository repository.UserRoleRepository
+}
 
 func (_ *JWTHelper) ExtractClaims(tokenStr string) (jwt.MapClaims, bool) {
 	hmacSecret := []byte(environment.GetAPISecretSeed())
@@ -38,10 +41,14 @@ func (jh *JWTHelper) ExtractClaimsFromContext(ctx *fiber.Ctx) (jwt.MapClaims, bo
 	return jh.ExtractClaims(token)
 }
 
-func (_ *JWTHelper) IsAdmin(claims jwt.MapClaims) bool {
-	return claims[definition.JwtClaimId] == definition.UserRoleAdmin
+func (jh *JWTHelper) IsAdmin(claims jwt.MapClaims) bool {
+	role, _ := jh.UserRoleRepository.ReadByCode(definition.UserRoleAdmin)
+
+	return claims[definition.JwtClaimAccountType] == role.ID
 }
 
-func (_ *JWTHelper) IsCustomer(claims jwt.MapClaims) bool {
-	return claims[definition.JwtClaimAccountType] == definition.UserRoleCustomer
+func (jh *JWTHelper) IsCustomer(claims jwt.MapClaims) bool {
+	role, _ := jh.UserRoleRepository.ReadByCode(definition.UserRoleCustomer)
+
+	return claims[definition.JwtClaimAccountType] == role.ID
 }

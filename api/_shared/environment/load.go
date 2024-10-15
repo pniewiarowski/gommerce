@@ -7,17 +7,15 @@ import (
 var isEnvironmentLoaded = false
 
 const (
-	databaseHostEnvironmentKey              = "DATABASE_HOST"
-	databaseUserEnvironmentKey              = "DATABASE_USER"
-	databasePasswordEnvironmentKey          = "DATABASE_PASSWORD"
-	databaseNameEnvironmentKey              = "DATABASE_NAME"
-	databasePortEnvironmentKey              = "DATABASE_PORT"
-	apiPortEnvironmentKey                   = "API_PORT"
-	apiSecretSeedEnvironmentKey             = "API_SECRET_SEED"
-	defaultAdminUserFirstNameEnvironmentKey = "DEFAULT_ADMIN_USER_FIRST_NAME"
-	defaultAdminUserLastNameEnvironmentKey  = "DEFAULT_ADMIN_USER_LAST_NAME"
-	defaultAdminUserEmailEnvironmentKey     = "DEFAULT_ADMIN_USER_EMAIL"
-	defaultAdminUserPasswordEnvironmentKey  = "DEFAULT_ADMIN_PASSWORD"
+	databaseHostEnvironmentKey             = "DATABASE_HOST"
+	databaseUserEnvironmentKey             = "DATABASE_USER"
+	databasePasswordEnvironmentKey         = "DATABASE_PASSWORD"
+	databaseNameEnvironmentKey             = "DATABASE_NAME"
+	databasePortEnvironmentKey             = "DATABASE_PORT"
+	apiPortEnvironmentKey                  = "API_PORT"
+	apiSecretSeedEnvironmentKey            = "API_SECRET_SEED"
+	defaultAdminUserEmailEnvironmentKey    = "DEFAULT_ADMIN_USER_EMAIL"
+	defaultAdminUserPasswordEnvironmentKey = "DEFAULT_ADMIN_PASSWORD"
 )
 
 func Load(file string) {
