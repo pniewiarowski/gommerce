@@ -2,6 +2,7 @@
 /.idea
 /api/_shared/.idea
 /api/auth/.idea
+/api/shop/.idea
 /app/shop/.idea
 /app/shop/node_modules
 /app/shop/.pnp
