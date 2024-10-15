@@ -16,6 +16,7 @@ var Models = []interface{}{
 
 func setup() {
 	urr := repository.UserRoleRepository{}
+	ur := repository.UserRepository{}
 
 	if _, err := urr.ReadByCode(definition.UserRoleCustomer); err != nil {
 		urr.Create(&model.UserRole{Code: definition.UserRoleCustomer})

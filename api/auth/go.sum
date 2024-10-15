@@ -45,6 +45,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014212939-b4138a4362f2 h1:jWmRi0RjmKcv/jnTuMqerS40yooVdnUT8AkMED7X4Jk=
 github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241014212939-b4138a4362f2/go.mod h1:SY2Mn92ex6s6Tj9R1yBpi5Yso9XMaRlNFTzbAMXFSWk=
+github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241015185753-e7a83e6db3c2 h1:2cVjmMgwRURSSXcbC5hRwCiu848dNKoppZaBj67WnIE=
+github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241015185753-e7a83e6db3c2/go.mod h1:CBTIz04r0UnMamgfAviWe4V6bZXuuYOwu3jT7BOlZbE=
 github.com/rivo/uniseg v0.2.0 h1:S1pD9weZBuJdFmowNwbpi7BJ8TNftyUImj/0WQi72jY=
 github.com/rivo/uniseg v0.2.0/go.mod h1:J6wj4VEh+S6ZtnVlnTBMWIodfgj8LQOQFoIToxlJtxc=
 github.com/savsgio/dictpool v0.0.0-20221023140959-7bf2e61cea94/go.mod h1:90zrgN3D/WJsDd1iXHT96alCoN2KJo6/4x1DZC3wZs8=
