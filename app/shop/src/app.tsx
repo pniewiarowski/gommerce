@@ -81,7 +81,7 @@ const App = () => {
                                 <BrowserRouter>
                                     <Navbar
                                         heading={"gommerce"}
-                                        width="77.5%"
+                                        width={desktop ? "77.5%" : "100%"}
                                         categories={categories}
                                     />
                                     <Grid sx={{ width: desktop ? "75%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>

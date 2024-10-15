@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
-import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, Zoom } from "@mui/material";
+import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, useMediaQuery, Zoom } from "@mui/material";
 import { Cancel, Close } from "@mui/icons-material";
 import { CustomerRegisterForm } from "../organism";
 import { CustomerContext } from "../context";
 
 const ShopCustomerRegisterPage = () => {
+    const desktop: boolean = useMediaQuery('(min-width:1530px)');
     const { customer } = useContext(CustomerContext);
     const [query] = useSearchParams();
     const navigate = useNavigate();
@@ -41,13 +42,13 @@ const ShopCustomerRegisterPage = () => {
                     </Grid>
                 </React.Fragment>
             }
-            <Grid item xs={12} xl={6}>
+            {desktop && <Grid item xs={12} xl={6}>
                 <Paper elevation={1} sx={{ minHeight: "650px", display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <Zoom in={true}>
                         <Close style={{ fontSize: "400px", color: "#00000044" }} />
                     </Zoom>
                 </Paper>
-            </Grid>
+            </Grid>}
             <Grid item xs={12} xl={6}>
                 <Grow in={true} {...{ timeout: 500 }}>
                     <Paper elevation={3}>

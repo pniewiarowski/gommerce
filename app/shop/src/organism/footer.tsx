@@ -5,9 +5,9 @@ import { FooterColumn, FooterHeading, FooterItem } from "../molecule";
 const Footer = (): React.JSX.Element => {
     return (
         <React.Fragment>
-            <Grid item xs={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
                 <Paper sx={{ width: "100%", p: 4, display: "flex", justifyContent: "space-around" }} elevation={3}>
-                <FooterColumn>
+                    <FooterColumn>
                         <FooterHeading>Gommerce</FooterHeading>
                         <FooterItem link="/" content="your orders" />
                         <FooterItem link="/" content="your bag" />
@@ -16,7 +16,7 @@ const Footer = (): React.JSX.Element => {
                     </FooterColumn>
                 </Paper>
             </Grid>
-            <Grid item xs={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
                 <Paper sx={{ width: "100%", p: 4, display: "flex", justifyContent: "space-around" }} elevation={3}>
                     <FooterColumn>
                         <FooterHeading>Your account</FooterHeading>
@@ -27,7 +27,7 @@ const Footer = (): React.JSX.Element => {
                     </FooterColumn>
                 </Paper>
             </Grid>
-            <Grid item xs={6} xl={3}>
+            <Grid item xs={12} md={6} xl={3}>
                 <Paper sx={{ width: "100%", p: 4, display: "flex", justifyContent: "space-around" }} elevation={3}>
                     <FooterColumn>
                         <FooterHeading>Mailing Service</FooterHeading>
@@ -37,18 +37,18 @@ const Footer = (): React.JSX.Element => {
                         <FooterItem link="/" content="benefits" />
                     </FooterColumn>
                 </Paper>
-            </Grid>
-            <Grid item xs={6} xl={3}>
+            </Grid >
+            <Grid item xs={12} md={6} xl={3}>
                 <Paper sx={{ width: "100%", p: 4, display: "flex", justifyContent: "space-around" }} elevation={3}>
                     <FooterColumn>
                         <FooterHeading>Contact us</FooterHeading>
-                        <FooterItem link="/" content="information about us" />
+                        <FooterItem link="/" content="about us" />
                         <FooterItem link="/" content="mail us" />
                         <FooterItem link="/" content="phone" />
-                        <FooterItem link="/" content="report application error" />
+                        <FooterItem link="/" content="report error" />
                     </FooterColumn>
                 </Paper>
-            </Grid>
+            </Grid >
             <Grid item xs={12}>
                 <Paper sx={{ width: "100%", p: 6 }}>
                     <Typography variant="h4">
@@ -56,7 +56,7 @@ const Footer = (): React.JSX.Element => {
                     </Typography>
                 </Paper>
             </Grid>
-        </React.Fragment>
+        </React.Fragment >
     );
 }
 

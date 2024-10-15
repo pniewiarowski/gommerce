@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, Zoom } from "@mui/material";
+import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, useMediaQuery, Zoom } from "@mui/material";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { Check, Close } from '@mui/icons-material';
 import { CustomerLoginForm } from "../organism";
@@ -7,6 +7,7 @@ import { CustomerContext } from "../context";
 
 const ShopCustomerLoginPage = () => {
     const navigate = useNavigate();
+    const desktop: boolean = useMediaQuery('(min-width:1530px)');
     const { customer } = useContext(CustomerContext);
 
     useEffect(() => {
@@ -71,14 +72,14 @@ const ShopCustomerLoginPage = () => {
                     </Paper>
                 </Grow>
             </Grid>
-            <Grid item xs={12} xl={6}>
+            {desktop && <Grid item xs={12} xl={6}>
                 <Paper elevation={1}
                     sx={{ minHeight: "650px", display: "flex", justifyContent: "center", alignItems: "center" }}>
                     <Zoom in={true}>
                         <Close style={{ fontSize: "400px", color: "#00000044" }} />
                     </Zoom>
                 </Paper>
-            </Grid>
+            </Grid>}
         </React.Fragment>
     );
 }
