@@ -23,33 +23,18 @@ const CustomerRegisterForm = () => {
     } = useForm<registerType>({ resolver: zodResolver(registerResolver) });
     const theme: Theme = useTheme();
     const navigate = useNavigate();
-    const { customersRepository, authRepository } = useBackend();
+    const { authRepository } = useBackend();
 
     const onSubmit = async (data: registerType) => {
         const register = async () => {
             try {
-                const user = await authRepository.register({
+                await authRepository.register({
                     email: data.email,
                     password: data.password,
                 });
-
-                const names = data.name.split(" ");
-                const firstName = names[0];
-                const lastName = names.length > 1 ? names[1] : names[0];
-
-                if (user.id) {
-                    await customersRepository.create({
-                        firstName: firstName,
-                        lastName: lastName,
-                        isActive: true,
-                        userId: user.id,
-                    });
-                } else {
-                    navigate(`/register?errorRegister="error while creating customer"`);
-                    return false;
-                }
             } catch (exception: any) {
-                navigate(`/register?errorRegister=${exception.response.data}`);
+                const message = JSON.parse(exception.request.response).message;
+                navigate(`/register?errorRegister=${message}`);
                 return false;
             }
 

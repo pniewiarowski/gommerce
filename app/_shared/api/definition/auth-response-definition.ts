@@ -1,6 +1,7 @@
 interface AuthResponseDefinition {
-    id: number,
+    userID: number,
     token: string,
+    isAdmin: boolean,
 }
 
 export default AuthResponseDefinition;

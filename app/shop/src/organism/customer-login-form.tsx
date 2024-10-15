@@ -11,7 +11,7 @@ import { useBackend, useCookies } from "gommerce-app-shared/hook";
 const CustomerLoginForm = () => {
     const theme: Theme = useTheme();
     const navigate = useNavigate();
-    const { authRepository, usersRepository, customersRepository } = useBackend();
+    const { authRepository, usersRepository } = useBackend();
     const { set } = useCookies();
     const { setUser } = useContext(UserContext);
     const { setCustomer } = useContext(CustomerContext);
@@ -32,20 +32,14 @@ const CustomerLoginForm = () => {
                 });
 
                 if (!jwt) {
-                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    navigate(`/login?errorLogin=something went wrong please train again later`);
                     return;
                 }
-                const user = await usersRepository.getByID(jwt.id, jwt.token);
+
+                const user = await usersRepository.getByID(jwt.userID, jwt.token);
 
                 if (!user || !user.id) {
-                    navigate(`/login?errorLogin="something went wrong please train again later`);
-                    return;
-                }
-
-                const customer = await customersRepository.getByUserID(user.id, jwt.token);
-
-                if (!customer) {
-                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    navigate(`/login?errorLogin=something went wrong please train again later`);
                     return;
                 }
 
@@ -54,13 +48,9 @@ const CustomerLoginForm = () => {
                 set("userID", user.id);
                 set("userEmail", user.email);
                 setUser(user);
-                set("customerID", customer.id);
-                set("customerFirstName", customer.firstName);
-                set("customerLastName", customer.lastName);
-                set("customerUserID", customer.userId);
-                setCustomer(customer);
             } catch (exception: any) {
-                navigate(`/login?errorLogin=${exception.response.data}`);
+                const message = JSON.parse(exception.request.response).message;
+                navigate(`/login?errorLogin=${message}`);
 
                 return false;
             }

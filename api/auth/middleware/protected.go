@@ -12,15 +12,13 @@ func Protected() fiber.Handler {
 		SigningKey: []byte(environment.GetAPISecretSeed()),
 		ErrorHandler: func(ctx *fiber.Ctx, err error) error {
 			if err.Error() == "Missing or malformed JWT" {
-				return ctx.Status(fiber.StatusBadRequest).JSON(&response.JWTErrorResponse{
+				return ctx.Status(fiber.StatusBadRequest).JSON(&response.ErrorResponse{
 					Message: "missing jwt",
-					Code:    fiber.StatusUnauthorized,
 				})
 			}
 
-			return ctx.Status(fiber.StatusUnauthorized).JSON(&response.JWTErrorResponse{
+			return ctx.Status(fiber.StatusUnauthorized).JSON(&response.ErrorResponse{
 				Message: "invalid jwt",
-				Code:    fiber.StatusUnauthorized,
 			})
 		},
 	})

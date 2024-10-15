@@ -12,25 +12,22 @@ type RegisterValidator struct {
 	UserRepository repository.UserRepository
 }
 
-func (rv *RegisterValidator) Validate(request request.RegisterRequest) (int, *response.RegisterErrorResponse) {
+func (rv *RegisterValidator) Validate(request request.RegisterRequest) (int, *response.ErrorResponse) {
 	if _, err := mail.ParseAddress(request.Email); err != nil {
-		return fiber.StatusBadRequest, &response.RegisterErrorResponse{
+		return fiber.StatusBadRequest, &response.ErrorResponse{
 			Message: "incorrect email address",
-			Code:    fiber.StatusBadRequest,
 		}
 	}
 
 	if len(request.Password) < 8 {
-		return fiber.StatusBadRequest, &response.RegisterErrorResponse{
+		return fiber.StatusBadRequest, &response.ErrorResponse{
 			Message: "password should be minimum 8 characters",
-			Code:    fiber.StatusBadRequest,
 		}
 	}
 
 	if rv.UserRepository.ExistWithGivenEmail(request.Email) {
-		return fiber.StatusBadRequest, &response.RegisterErrorResponse{
+		return fiber.StatusBadRequest, &response.ErrorResponse{
 			Message: "account with provided email already exists",
-			Code:    fiber.StatusBadRequest,
 		}
 	}
 

@@ -5,6 +5,7 @@ import (
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/pniewiarowski/gommerce/api/_shared/environment"
 	"github.com/pniewiarowski/gommerce/api/auth/definition"
+	"github.com/pniewiarowski/gommerce/api/auth/dto"
 	"github.com/pniewiarowski/gommerce/api/auth/model"
 	"github.com/pniewiarowski/gommerce/api/auth/repository"
 	"github.com/pniewiarowski/gommerce/api/auth/request"
@@ -24,24 +25,21 @@ func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 	loginRequest := request.LoginRequest{}
 
 	if err := ctx.BodyParser(&loginRequest); err != nil {
-		return ctx.Status(fiber.StatusBadRequest).JSON(response.RegisterErrorResponse{
+		return ctx.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
 			Message: "error while parsing data into request definition",
-			Code:    fiber.StatusBadRequest,
 		})
 	}
 
 	user, err := ac.UserRepository.ReadByEmail(loginRequest.Email)
 	if err != nil {
-		return ctx.Status(fiber.StatusBadRequest).JSON(response.RegisterErrorResponse{
+		return ctx.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
 			Message: "provided email or password are not correct",
-			Code:    fiber.StatusUnauthorized,
 		})
 	}
 
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginRequest.Password)); err != nil {
-		return ctx.Status(fiber.StatusBadRequest).JSON(response.RegisterErrorResponse{
+		return ctx.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
 			Message: "provided email or password are not correct",
-			Code:    fiber.StatusUnauthorized,
 		})
 	}
 
@@ -54,15 +52,18 @@ func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 
 	tokenStringed, err := token.SignedString([]byte(environment.GetAPISecretSeed()))
 	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).JSON(response.RegisterErrorResponse{
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
 			Message: "something went wrong while logging",
-			Code:    fiber.StatusUnauthorized,
 		})
 	}
 
-	return ctx.Status(fiber.StatusOK).JSON(response.LoginSuccessResponse{
-		UserID: user.ID,
-		JWT:    tokenStringed,
+	admin, _ := ac.UserRoleRepository.ReadByCode(definition.UserRoleAdmin)
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: dto.JWTDTO{
+			Token:   tokenStringed,
+			UserID:  user.ID,
+			IsAdmin: user.RoleID == admin.ID,
+		},
 	})
 }
 
@@ -70,9 +71,8 @@ func (ac *AuthController) Register(ctx *fiber.Ctx) error {
 	registerRequest := request.RegisterRequest{}
 
 	if err := ctx.BodyParser(&registerRequest); err != nil {
-		return ctx.Status(fiber.StatusBadRequest).JSON(response.RegisterErrorResponse{
+		return ctx.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
 			Message: "error while parsing data into request definition",
-			Code:    fiber.StatusBadRequest,
 		})
 	}
 
@@ -91,16 +91,17 @@ func (ac *AuthController) Register(ctx *fiber.Ctx) error {
 	})
 
 	if err != nil {
-		return ctx.Status(fiber.StatusInternalServerError).JSON(response.RegisterErrorResponse{
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
 			Message: "something went wrong while saving entity",
-			Code:    fiber.StatusInternalServerError,
 		})
 	}
 
-	return ctx.Status(fiber.StatusOK).JSON(response.RegisterSuccessResponse{
-		ID:         user.ID,
-		Email:      user.Email,
-		Enable:     user.Enable,
-		UserRoleID: user.RoleID,
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: dto.UserDTO{
+			ID:     user.ID,
+			Email:  user.Email,
+			Enable: user.Enable,
+			RoleID: user.RoleID,
+		},
 	})
 }

@@ -4,10 +4,14 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/pniewiarowski/gommerce/api/auth/controller"
 	"github.com/pniewiarowski/gommerce/api/auth/middleware"
+	"github.com/pniewiarowski/gommerce/api/auth/repository"
 )
 
 func SetupUserRole(router fiber.Router) {
-	c := controller.UserRoleController{}
+	urr := repository.UserRoleRepository{}
+	c := controller.UserRoleController{
+		UserRoleRepository: urr,
+	}
 
 	router.Get("/", middleware.Protected(), c.Index)
 	router.Get("/:id", middleware.Protected(), c.Show)
