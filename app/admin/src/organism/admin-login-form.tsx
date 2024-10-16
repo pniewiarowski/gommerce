@@ -36,15 +36,22 @@ const AdminLoginForm = () => {
                 });
 
                 if (!jwt) {
-                    navigate(`/login?errorLogin="something went wrong please train again later`);
+                    navigate(`/login?errorLogin=something went wrong please train again later`);
                     return;
                 }
-                const user = await usersRepository.getByID(jwt.id, jwt.token);
+
+                if (!jwt.isAdmin) {
+                    navigate(`/login?errorLogin=user is not administrator`);
+                    return;
+                }
+
+                const user = await usersRepository.getByID(jwt.userID, jwt.token);
 
                 if (!user || !user.id) {
                     navigate(`/login?errorLogin="something went wrong please train again later`);
                     return;
                 }
+
 
                 set("jwt", jwt.token);
                 setJwt(jwt.token);
@@ -52,7 +59,8 @@ const AdminLoginForm = () => {
                 set("userEmail", user.email);
                 setUser(user);
             } catch (exception: any) {
-                navigate(`/login?errorLogin=${exception.response.data}`);
+                const message = exception.response.data.message;
+                navigate(`/login?errorLogin=${message}`);
 
                 return false;
             }

@@ -6,5 +6,6 @@ type Product struct {
 	Description string `json:"description"`
 	Enabled     string `json:"enabled"`
 	SortOrder   uint   `json:"sortOrder"`
+	ImageURL    string `json:"imageURL"`
 	CategoryID  uint   `json:"categoryID"`
 }

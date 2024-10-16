@@ -1,13 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Button, CircularProgress, Divider, Grid, Paper, Typography } from "@mui/material";
-import { BarChart } from "@mui/x-charts";
-import { useBackend } from "gommerce-app-shared/hook";
-import { ResourceInfoDefinition } from "gommerce-app-shared/api/definition";
-import { useTheme } from "@emotion/react";
-import { JwtContext, UserContext } from "../context";
-import { PageContainerGrid, PaperButton } from "../atoms";
-import { SubHeading } from "../molecules";
+import { Breadcrumbs, Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import { UserContext } from "../context";
+import { PageContainerGrid, PaperButton, PageTitle } from "../atoms";
 
 class Service {
     constructor(
@@ -33,7 +28,7 @@ const AdminHomePage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">general</Typography>
+            <PageTitle title="general" />
             <Divider sx={{ mt: 2, mb: 1 }} />
             <Grid sx={{ mt: 1 }} item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
@@ -44,12 +39,11 @@ const AdminHomePage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <SubHeading>manage your services</SubHeading>
             <Grid container spacing={1}>
                 {services.map((service) => {
                     return (
                         <Grid xl={2} item>
-                            <Button sx={{ width: "100%", height: "200px", p: 0 }} onClick={() => navigate(service.link)}>
+                            <Button sx={{ width: "100%", height: "150px", p: 0 }} onClick={() => navigate(service.link)}>
                                 <PaperButton>
                                     {service.icon}
                                     <Typography variant="h3">{service.label}</Typography>

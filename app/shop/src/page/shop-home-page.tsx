@@ -17,7 +17,7 @@ const ShopHomePage = () => {
             <Grid item xs={12} xl={6}>
                 <Grow in={true}>
                     <Paper sx={{ height: "408px", p: 1, display: "flex", justifyContent: "center", alignItems: "center" }} elevation={1}>
-                        <img src="dotnet-logo.png" width={250} />
+                        <img style={{ transform: "scaleX(-1)" }} src="go-logo.png" width={250} />
                     </Paper>
                 </Grow>
             </Grid>

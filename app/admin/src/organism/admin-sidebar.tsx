@@ -42,7 +42,6 @@ const AdminSidebar = () => {
                 <ListItemButton
                     key={item.ID}
                     sx={{ p: 2 }}
-                    selected={active === item.ID}
                     onClick={() => item.action()}
                 >
                     <ListItemIcon>
@@ -72,7 +71,7 @@ const AdminSidebar = () => {
     );
 
     return (
-        <Grid item xs={12} xl={3} sx={{ height: "100vh", }}>
+        <Grid item xs={12} xl={2} sx={{ height: "100vh", }}>
             <Paper sx={{ height: "100%" }} elevation={3}>
                 <Container>
                     <div style={{ display: "flex" }}>
@@ -82,7 +81,7 @@ const AdminSidebar = () => {
                             width={64}
                             height={64}
                         />
-                        <Typography sx={{ fontSize: 40, pt: 4 }} variant="h2">admin panel</Typography>
+                        <Typography sx={{ fontSize: 40, pt: 4 }} variant="h2">admin</Typography>
                     </div>
                     <Divider sx={{ mt: 2, mb: 1 }} />
                     <List sx={{ height: "100%" }}>

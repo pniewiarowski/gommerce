@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Divider, Typography } from "@mui/material";
+import { Divider } from "@mui/material";
 import { UserContext } from "../context";
-import { PageContainerGrid } from "../atoms";
+import { PageContainerGrid, PageTitle } from "../atoms";
 
 const AdminAccountPage = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const AdminAccountPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">account service</Typography>
+            <PageTitle title="account service" />
             <Divider sx={{ mt: 2, mb: 1 }} />
         </PageContainerGrid>
     )

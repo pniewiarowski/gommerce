@@ -8,13 +8,13 @@ class Categories implements Repository {
     public async get(): Promise<Array<CategoryDefinition>> {
         const response = await shop.get(`/${Categories.resource}`);
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async getByID(id: number): Promise<CategoryDefinition> {
         const response = await shop.get(`/${Categories.resource}/${id}`);
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async getResourceInfo(token: string): Promise<ResourceInfoDefinition> {

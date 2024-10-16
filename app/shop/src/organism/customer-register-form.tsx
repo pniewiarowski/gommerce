@@ -10,7 +10,7 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
-import { Person, Key, Repeat, Email } from "@mui/icons-material";
+import { Person, Key, Repeat, Email, Person2, PersonOff, PersonOutline } from "@mui/icons-material";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useBackend } from "gommerce-app-shared/hook";
 import { registerResolver, registerType } from "../resolver";
@@ -50,7 +50,7 @@ const CustomerRegisterForm = () => {
     return (
         <form style={{ width: "100%", padding: "1rem" }} onSubmit={handleSubmit(onSubmit)}>
             <Box
-                sx={{ p: 4, minHeight: "618px" }}
+                sx={{ p: 2, minHeight: "618px" }}
                 display="flex"
                 flexDirection="column"
                 justifyContent="center"
@@ -60,21 +60,40 @@ const CustomerRegisterForm = () => {
                     <Typography variant="h3">create your account</Typography>
                 </FormControl>
                 <FormControl sx={{ mb: 2 }} fullWidth>
-                    <TextField
-                        label="first and last name"
-                        variant="outlined"
-                        color="primary"
-                        {...register("name")}
-                        error={!!errors.name}
-                        helperText={errors.name ? errors.name.message : ""}
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    <Person />
-                                </InputAdornment>
-                            ),
-                        }}
-                    />
+                    <div style={{ display: "flex" }}>
+                        <TextField
+                            sx={{ width: "50%", mr: 1 }}
+                            label="first name"
+                            variant="outlined"
+                            color="primary"
+                            {...register("firstName")}
+                            error={!!errors.firstName}
+                            helperText={errors.firstName ? errors.firstName.message : ""}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <Person />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <TextField
+                            sx={{ width: "50%" }}
+                            label="last name"
+                            variant="outlined"
+                            color="primary"
+                            {...register("lastName")}
+                            error={!!errors.lastName}
+                            helperText={errors.lastName ? errors.lastName.message : ""}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <PersonOutline />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </div>
                 </FormControl>
                 <FormControl sx={{ mb: 2 }} fullWidth>
                     <TextField label="email"

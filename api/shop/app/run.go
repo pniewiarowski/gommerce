@@ -18,6 +18,7 @@ func Run(port int) {
 		AllowMethods: "GET,POST,HEAD,PUT,DELETE,PATCH,OPTIONS",
 	}))
 	app.Use(logger.New())
+	app.Static("/products/images", "../images/products/")
 
 	api := app.Group("/api")
 	v1 := api.Group("/v1")
