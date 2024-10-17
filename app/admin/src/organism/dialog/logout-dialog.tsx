@@ -11,9 +11,9 @@ const LogoutDialog = (props: Props) => {
     const { open, setActive, logout } = props;
     return (
         <Dialog open={open}>
-            <DialogTitle>are you sure you want logout?</DialogTitle>
-            <DialogActions>
-                <Button color="error" onClick={() => setActive(false)}>No</Button>
+            <DialogTitle sx={{ pl: 4, pt: 4, pr: 4 }}>are you sure you want logout?</DialogTitle>
+            <DialogActions sx={{ pl: 4, pb: 4, pr: 4 }}>
+                <Button sx={{ mr: 2 }} color="error" onClick={() => setActive(false)}>No</Button>
                 <Button variant="contained" onClick={() => logout()}>Yes</Button>
             </DialogActions>
         </Dialog>
