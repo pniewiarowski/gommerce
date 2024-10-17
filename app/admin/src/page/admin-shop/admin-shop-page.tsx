@@ -16,7 +16,7 @@ class ShopResource {
 const AdminShopPage = () => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
-    const iconSize = 78;
+    const iconSize = 50;
     const resources = [
         new ShopResource("Categories", "/shop/category", <img src="inventory-category.png" width={iconSize} />),
         new ShopResource("Products", "/shop/product", <img src="shopping-cart.png" width={iconSize} />),
@@ -32,9 +32,7 @@ const AdminShopPage = () => {
 
     return (
         <PageContainerGrid>
-            <PageTitle title="shop service" />
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
+            <Grid item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
@@ -47,18 +45,18 @@ const AdminShopPage = () => {
                 </Paper>
             </Grid>
             <Grid container spacing={1}>
-                {resources.map((resource) => {
-                    return (
-                        <Grid xl={2} item>
-                            <Button sx={{ width: "100%", height: "150px", p: 0 }} onClick={() => navigate(resource.link)}>
+                <Grid xl={12} item>
+                    {resources.map((resource) => {
+                        return (
+                            <Button sx={{ width: "120px", height: "100px", p: 0, mr: 1 }} onClick={() => navigate(resource.link)}>
                                 <PaperButton>
                                     {resource.icon}
-                                    <Typography variant="h3" sx={{ fontSize: 15 }}>{resource.label}</Typography>
+                                    <Typography variant="h4">{resource.label}</Typography>
                                 </PaperButton>
                             </Button>
-                        </Grid>
-                    );
-                })}
+                        );
+                    })}
+                </Grid>
             </Grid>
             <Grid sx={{ mt: 1.5 }} item xs={12}>
                 <Button
@@ -67,7 +65,7 @@ const AdminShopPage = () => {
                     variant="outlined"
                     onClick={() => navigate('/')}
                 >
-                    go back
+                    back
                 </Button>
             </Grid>
         </PageContainerGrid>

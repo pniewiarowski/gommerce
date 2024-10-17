@@ -10,7 +10,7 @@ import {
     Typography,
     useTheme,
 } from "@mui/material";
-import { Person, Key, Repeat, Email, Person2, PersonOff, PersonOutline } from "@mui/icons-material";
+import { Person, Key, Repeat, Email, PersonOutline } from "@mui/icons-material";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useBackend } from "gommerce-app-shared/hook";
 import { registerResolver, registerType } from "../resolver";

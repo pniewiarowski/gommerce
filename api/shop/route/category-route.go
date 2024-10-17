@@ -13,11 +13,13 @@ import (
 func SetupCategoryRoute(router fiber.Router) {
 	urr := authrepository.UserRoleRepository{}
 	cr := repository.CategoryRepository{}
+	pr := repository.ProductRepository{}
 	jwt := authhepler.JWTHelper{UserRoleRepository: urr}
 	fb := sharedhelper.FiberContextHelper{}
 
 	c := controller.CategoryController{
 		CategoryRepository: cr,
+		ProductRepository:  pr,
 		FiberHelper:        fb,
 		JWTHelper:          jwt,
 	}
@@ -27,4 +29,5 @@ func SetupCategoryRoute(router fiber.Router) {
 	router.Post("/", authmiddleware.Protected(), c.Store)
 	router.Put("/:id", authmiddleware.Protected(), c.Update)
 	router.Delete("/:id", authmiddleware.Protected(), c.Destroy)
+	router.Get("/:id/products", c.Products)
 }

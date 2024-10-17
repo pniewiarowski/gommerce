@@ -13,7 +13,7 @@ const Animated3DBlock = styled.div`
     border-bottom: solid 0.8rem #171717;
     border-radius: 20px;
     transform: rotateX(30deg) rotateY(3deg) rotateZ(-20deg);
-    animation: float-court 6s ease-in-out infinite;
+    animation: float-court 5s ease-in-out infinite;
 
     &::before {
         content: "";

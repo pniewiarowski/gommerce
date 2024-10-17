@@ -8,13 +8,13 @@ class Products implements Repository {
     public async get(): Promise<Array<ProductDefinition>> {
         const response = await shop.get(`${Products.resource}`);
 
-        return response.data;
+        return response.data.data;
     }
 
     public async getByID(id: number): Promise<ProductDefinition> {
         const response = await shop.get(`/${Products.resource}/${id}`);
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async getResourceInfo(token: string): Promise<ResourceInfoDefinition> {
@@ -25,7 +25,7 @@ class Products implements Repository {
             },
         });
 
-        return response.data;
+        return response.data.data;
     }
 
     public async create(product: ProductDefinition, token: string): Promise<ProductDefinition> {
@@ -36,7 +36,7 @@ class Products implements Repository {
                 price: product.price,
                 enabled: product.enabled,
                 sortOrder: product.sortOrder,
-                categoryId: product.categoryId,
+                categoryID: product.categoryID,
             },
             {
                 headers: {
@@ -46,7 +46,7 @@ class Products implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async delete(id: number, token: string): Promise<Array<ProductDefinition>> {
@@ -59,7 +59,7 @@ class Products implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async update(product: ProductDefinition, token: string): Promise<ProductDefinition> {
@@ -70,7 +70,7 @@ class Products implements Repository {
                 price: product.price,
                 enabled: product.enabled,
                 sortOrder: product.sortOrder,
-                categoryId: product.categoryId,
+                categoryID: product.categoryID,
             },
             {
                 headers: {
@@ -80,7 +80,7 @@ class Products implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 }
 

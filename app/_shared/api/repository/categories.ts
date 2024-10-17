@@ -25,7 +25,7 @@ class Categories implements Repository {
             },
         });
 
-        return response.data;
+        return response.data.data;
     }
 
     public async create(category: CategoryDefinition, token: string): Promise<CategoryDefinition> {
@@ -44,7 +44,7 @@ class Categories implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async delete(id: number, token: string): Promise<Array<CategoryDefinition>> {
@@ -57,7 +57,7 @@ class Categories implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async update(category: CategoryDefinition, token: string): Promise<CategoryDefinition> {
@@ -76,13 +76,13 @@ class Categories implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async getProducts(id: number): Promise<Array<ProductDefinition>> {
         const respnse = await shop.get(`/${Categories.resource}/${id}/products`);
 
-        return await respnse.data;
+        return await respnse.data.data;
     }
 }
 

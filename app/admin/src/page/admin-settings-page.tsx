@@ -1,8 +1,8 @@
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Divider } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context";
-import { PageContainerGrid, PageTitle } from "../atoms";
+import { PageContainerGrid } from "../atoms";
+import { Grid, Paper, Breadcrumbs, Typography } from "@mui/material";
 
 const AdminSettingsPage = () => {
     const navigate = useNavigate();
@@ -16,8 +16,18 @@ const AdminSettingsPage = () => {
 
     return (
         <PageContainerGrid>
-            <PageTitle title="settings" />
-            <Divider sx={{ mt: 2, mb: 1 }} />
+            <Grid item xs={12}>
+                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
+                    <Breadcrumbs aria-label="breadcrumb">
+                        <Link to="/">
+                            <Typography color="text.primary">Home</Typography>
+                        </Link>
+                        <Link to="/shop">
+                            <Typography color="primary">Settings</Typography>
+                        </Link>
+                    </Breadcrumbs>
+                </Paper>
+            </Grid>
         </PageContainerGrid>
     )
 }

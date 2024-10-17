@@ -21,8 +21,14 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src"
-, "../_shared/hook/index.ts", "../_shared/hook/use-backend.ts", "../_shared/hook/use-cookies.ts", "../_shared/axios"  ],
+    "src",
+    "../_shared/hook/index.ts",
+    "../_shared/hook/use-backend.ts",
+    "../_shared/hook/use-cookies.ts",
+    "../_shared/axios",
+    "src/atom/center.tsx",
+    "src/atom/index.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

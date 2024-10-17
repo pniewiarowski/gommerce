@@ -12,31 +12,31 @@ const AdminLoginPageAnimation = () => {
         }}>
             <Animated3DBlock>
                 <Animated3DBlockIcon>
-                    <img src="mail.png" width={64} />
+                    <img src="/mail.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="heart.png" width={64} />
+                    <img src="/heart.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="hand-thumbsup.png" width={64} />
+                    <img src="/hand-thumbsup.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="emoji-in-love.png" width={64} />
+                    <img src="/emoji-in-love.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="shopping-cart.png" width={64} />
+                    <img src="/shopping-cart.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="money-bag.png" width={64} />
+                    <img src="/money-bag.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="go-logo.png" width={64} />
+                    <img src="/go-logo.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="emoji-angry.png" width={64} />
+                    <img src="/emoji-angry.png" width={64} />
                 </Animated3DBlockIcon>
                 <Animated3DBlockIcon>
-                    <img src="administrator.png" width={64} />
+                    <img src="/administrator.png" width={64} />
                 </Animated3DBlockIcon>
             </Animated3DBlock>
         </Container>

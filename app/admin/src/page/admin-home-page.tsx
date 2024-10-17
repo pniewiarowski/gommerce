@@ -15,7 +15,7 @@ class Service {
 const AdminHomePage = () => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
-    const iconSize = 78;
+    const iconSize = 50;
     const services = [
         new Service("Shop", "/shop", <img src="shopping-cart.png" width={iconSize} />),
     ];
@@ -28,9 +28,7 @@ const AdminHomePage = () => {
 
     return (
         <PageContainerGrid>
-            <PageTitle title="general" />
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
+            <Grid item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
@@ -40,18 +38,20 @@ const AdminHomePage = () => {
                 </Paper>
             </Grid>
             <Grid container spacing={1}>
-                {services.map((service) => {
-                    return (
-                        <Grid xl={2} item>
-                            <Button sx={{ width: "100%", height: "150px", p: 0 }} onClick={() => navigate(service.link)}>
-                                <PaperButton>
-                                    {service.icon}
-                                    <Typography variant="h3">{service.label}</Typography>
-                                </PaperButton>
-                            </Button>
-                        </Grid>
-                    );
-                })}
+                <Grid xl={12} item>
+                    {services.map((service) => {
+                        return (
+                            <>
+                                <Button sx={{ width: "120px", height: "100px", p: 0, mr: 1 }} onClick={() => navigate(service.link)}>
+                                    <PaperButton>
+                                        {service.icon}
+                                        <Typography variant="h4">{service.label}</Typography>
+                                    </PaperButton>
+                                </Button>
+                            </>
+                        );
+                    })}
+                </Grid>
             </Grid>
         </PageContainerGrid >
     )

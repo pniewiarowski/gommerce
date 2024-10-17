@@ -6,7 +6,7 @@ import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
-import { PageContainerGrid } from "../../../atoms";
+import { Center, PageContainerGrid, PageTitle } from "../../../atoms";
 
 const AdminShopProductPage = () => {
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
@@ -33,24 +33,29 @@ const AdminShopProductPage = () => {
 
     const columns: GridColDef<(typeof products)[number]>[] = [
         { field: 'id', headerName: 'ID', width: 100 },
+        {
+            field: 'image', headerName: 'Image', width: 180, renderCell: (params) => {
+                return <div style={{ display: "flex", alignItems: "center", paddingTop: "12px" }}><img width={70} src={params.row.imageURL} /></div>
+            }
+        },
         { field: 'name', headerName: 'Name', width: 150 },
-        { field: 'description', headerName: 'Description', width: 270 },
+        { field: 'description', headerName: 'Description', width: 200 },
         { field: 'price', headerName: 'Price', width: 150 },
-        { field: 'sortOrder', headerName: 'Sort Order', width: 150 },
+        { field: 'sortOrder', headerName: 'Sort Order', width: 100 },
         {
             field: 'enabled', headerName: 'Enabled', width: 100, renderCell: (params) => {
                 return params.row.enabled ? <Check color="success" /> : <Close color="error" />;
             },
         },
         {
-            field: 'categoryId', headerName: 'Category', width: 250, renderCell: (params) => {
+            field: 'categoryID', headerName: 'Category', width: 150, renderCell: (params) => {
                 return (
                     <Button
                         sx={{ p: 0, width: "100%", height: "100%" }}
-                        onClick={() => navigate(`/shop/category/edit/${params.row.categoryId}`)}
+                        onClick={() => navigate(`/shop/category/edit/${params.row.categoryID}`)}
                     >
                         {categories.map((item) => {
-                            if (item.id === params.row.categoryId) {
+                            if (item.id === params.row.categoryID) {
                                 return item.name;
                             }
                         })}
@@ -91,7 +96,7 @@ const AdminShopProductPage = () => {
                                 name: params.row.name,
                                 description: params.row.description,
                                 price: params.row.price,
-                                categoryId: params.row.categoryId,
+                                categoryID: params.row.categoryID,
                                 sortOrder: params.row.sortOrder,
                                 enabled: params.row.enabled,
                             }, jwt);
@@ -109,9 +114,7 @@ const AdminShopProductPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">products</Typography>
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
+            <Grid item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
@@ -126,7 +129,7 @@ const AdminShopProductPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ mt: 2, height: "78%" }} item xs={12}>
+            <Grid sx={{ height: "78%" }} item xs={12}>
                 <Paper elevation={3} sx={{ height: "100%" }}>
                     <DataGrid
                         rows={products}

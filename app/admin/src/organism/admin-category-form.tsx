@@ -81,34 +81,35 @@ const AdminCategoryForm = (props: Props) => {
                     helperText={errors.description ? errors.description.message : ""}
                 />
             </FormControl>
-            <FormControl sx={{ mb: 2 }} fullWidth>
-                <Select value={enabled ? 1 : 0} onChange={(event) => setEnabled(Number(event.target.value) === 1)}>
-                    <MenuItem value={1}>Enabled</MenuItem>
-                    <MenuItem value={0}>Disabled</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl sx={{ mb: 3 }} fullWidth>
-                <TextField
-                    label="sort order"
-                    variant="outlined"
-                    type="number"
-                    {...register("sortOrder")}
-                    defaultValue={props.default ? props.default.sortOrder : ""}
-                    error={!!errors.sortOrder}
-                    helperText={errors.sortOrder ? errors.sortOrder.message : ""}
-                />
-            </FormControl>
+            <div style={{ display: "flex" }}>
+                <FormControl sx={{ mb: 2, mr: 2 }} fullWidth>
+                    <Select value={enabled ? 1 : 0} onChange={(event) => setEnabled(Number(event.target.value) === 1)}>
+                        <MenuItem value={1}>Enabled</MenuItem>
+                        <MenuItem value={0}>Disabled</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl sx={{ mb: 2 }} fullWidth>
+                    <TextField
+                        label="sort order"
+                        variant="outlined"
+                        type="number"
+                        {...register("sortOrder")}
+                        defaultValue={props.default ? props.default.sortOrder : ""}
+                        error={!!errors.sortOrder}
+                        helperText={errors.sortOrder ? errors.sortOrder.message : ""}
+                    />
+                </FormControl>
+            </div>
             <FormControl sx={{ display: "flex", flexDirection: "row" }} fullWidth>
                 <Button
-                    sx={{ p: 2, width: 200, mr: 2 }}
+                    sx={{ mr: 1 }}
                     color="error"
                     variant="outlined"
                     onClick={() => navigate('/shop/category')}
                 >
-                    go back
+                    back
                 </Button>
                 <Button
-                    sx={{ p: 2, width: 200 }}
                     color="primary"
                     variant="contained"
                     type="submit"

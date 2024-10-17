@@ -12,6 +12,7 @@ import (
 
 type CategoryController struct {
 	CategoryRepository repository.CategoryRepository
+	ProductRepository  repository.ProductRepository
 	JWTHelper          authhelper.JWTHelper
 	FiberHelper        sharedhelper.FiberContextHelper
 }
@@ -88,7 +89,7 @@ func (cc *CategoryController) Update(ctx *fiber.Ctx) error {
 	isAdmin := cc.JWTHelper.IsAdmin(claims)
 	if !isAdmin {
 		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{
-			Message: "you do not have access to destroy this resource",
+			Message: "you do not have access to update this resource",
 		})
 	}
 
@@ -150,5 +151,25 @@ func (cc *CategoryController) Destroy(ctx *fiber.Ctx) error {
 
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
 		Data: dto.CategoryFromCollection(categories),
+	})
+}
+
+func (cc *CategoryController) Products(ctx *fiber.Ctx) error {
+	id, err := cc.FiberHelper.GetID(ctx)
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	data, err := cc.ProductRepository.ReadByCategoryID(id)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(&response.ErrorResponse{
+			Message: "something went wrong while reading data",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: dto.ProductFromCollection(data),
 	})
 }

@@ -6,8 +6,8 @@ interface Props {
 
 const PageContainerGrid = (props: Props) => {
     return (
-        <Grid item xs={12} xl={10} sx={{ height: "100vh" }}>
-            <Paper sx={{ height: "100%", p: 2, pt: 3.9 }}>
+        <Grid item xs={12} xl={10.5} sx={{ height: "100vh" }}>
+            <Paper sx={{ height: "100%", p: 1 }}>
                 {props.children}
             </Paper>
         </Grid >

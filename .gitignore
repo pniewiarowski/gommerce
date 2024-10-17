@@ -1,9 +1,11 @@
+!.gitkeep
 /.env
 /.idea
 /api/_shared/.idea
 /api/auth/.idea
 /api/shop/.idea
 /app/shop/.idea
+/api/shop/images/products/*
 /app/shop/node_modules
 /app/shop/.pnp
 /app/shop/.pnp.js

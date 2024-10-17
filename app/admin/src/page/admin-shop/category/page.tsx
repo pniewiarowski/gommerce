@@ -6,7 +6,7 @@ import { Check, Close, Delete, Edit, FileCopy } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
-import { PageContainerGrid } from "../../../atoms";
+import { PageContainerGrid, PageTitle } from "../../../atoms";
 
 const AdminShopCategoryPage = () => {
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
@@ -85,10 +85,8 @@ const AdminShopCategoryPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">categories</Typography>
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
+            <Grid item xs={12}>
+                <Paper sx={{ p: 1, mb: 2 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
                             <Typography color="text.primary">Home</Typography>
@@ -102,7 +100,7 @@ const AdminShopCategoryPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ mt: 2, height: "78%" }} item xs={12}>
+            <Grid sx={{ height: "78%" }} item xs={12}>
                 <Paper elevation={3} sx={{ height: "100%" }}>
                     <DataGrid
                         rows={categories}
@@ -112,11 +110,11 @@ const AdminShopCategoryPage = () => {
                     />
                 </Paper>
             </Grid>
-            <Grid sx={{ mt: 1.5 }} item xs={12}>
-                <Button sx={{ p: 2, width: 200, mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/shop')}>
-                    go back
+            <Grid sx={{ mt: 2 }} item xs={12}>
+                <Button sx={{ mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/shop')}>
+                    back
                 </Button>
-                <Button sx={{ p: 2, width: 200 }} color="primary" variant="contained" onClick={() => navigate('/shop/category/create')}>
+                <Button color="primary" variant="contained" onClick={() => navigate('/shop/category/create')}>
                     add
                 </Button>
             </Grid>

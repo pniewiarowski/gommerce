@@ -34,6 +34,14 @@ func (_ *ProductRepository) ReadByID(entityID uint) (*model.Product, error) {
 	return &product, err
 }
 
+func (_ *ProductRepository) ReadByCategoryID(categoryID uint) ([]model.Product, error) {
+	var products []model.Product
+
+	err := database.DataBase.Where("category_id = ?", categoryID).Find(&products).Error
+
+	return products, err
+}
+
 func (pr *ProductRepository) Update(product, updatedProduct *model.Product) (*model.Product, error) {
 	if product.ID <= 0 {
 		return nil, errors.New("invalid entity id")

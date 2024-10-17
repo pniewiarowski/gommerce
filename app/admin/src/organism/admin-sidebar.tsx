@@ -1,9 +1,10 @@
-import { Button, Container, Divider, Grid, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
+import { Avatar, Container, Divider, Grid, List, ListItemButton, ListItemIcon, ListItemText, Paper, Theme, Typography, useTheme } from "@mui/material";
 import { Home, Logout, Mail, Payment, Person, Settings, ShoppingBag } from "@mui/icons-material";
 import { Fragment, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "gommerce-app-shared/hook";
 import { UserContext, JwtContext } from "../context";
+import { LogoutDialog } from "./dialog";
 
 class SidebarItem {
     public constructor(
@@ -17,16 +18,22 @@ class SidebarItem {
 
 const AdminSidebar = () => {
     const [active, setActive] = useState(0);
+    const [logoutDialogActive, setLogoutDialogActive] = useState(false);
     const navigate = useNavigate();
     const { setUser } = useContext(UserContext);
     const { setJwt } = useContext(JwtContext);
     const { clear } = useCookies();
+    const theme: Theme = useTheme();
 
     const logout = () => {
         setUser(null);
         setJwt(null);
         clear();
         navigate("/login");
+    }
+
+    const activeDialog = () => {
+        setLogoutDialogActive(true);
     };
 
     const itemsJSX = [
@@ -41,7 +48,7 @@ const AdminSidebar = () => {
             <Fragment>
                 <ListItemButton
                     key={item.ID}
-                    sx={{ p: 2 }}
+                    sx={{ p: 1 }}
                     onClick={() => item.action()}
                 >
                     <ListItemIcon>
@@ -58,32 +65,28 @@ const AdminSidebar = () => {
 
     itemsJSX.push(
         <Fragment>
-            <Button
-                fullWidth
-                sx={{ p: 2 }}
-                variant="outlined"
-                color="error"
-                startIcon={<Logout />}
-                onClick={logout}>
-                Exit
-            </Button>
+            <ListItemButton
+                sx={{ p: 1 }}
+                onClick={activeDialog}>
+                <ListItemIcon sx={{ color: theme.palette.error.main }}>
+                    <Logout />
+                </ListItemIcon>
+                <ListItemText sx={{ color: theme.palette.error.main }}>
+                    Logout
+                </ListItemText>
+            </ListItemButton>
         </Fragment>
     );
 
     return (
-        <Grid item xs={12} xl={2} sx={{ height: "100vh", }}>
+        <Grid item xs={12} xl={1.5} sx={{ height: "100vh", }}>
+            <LogoutDialog open={logoutDialogActive} setActive={setLogoutDialogActive} logout={logout} />
             <Paper sx={{ height: "100%" }} elevation={3}>
-                <Container>
-                    <div style={{ display: "flex" }}>
-                        <img
-                            style={{ transform: "translateY(24px)", marginRight: "15px" }}
-                            src="administrator.png"
-                            width={64}
-                            height={64}
-                        />
-                        <Typography sx={{ fontSize: 40, pt: 4 }} variant="h2">admin</Typography>
+                <Container sx={{ p: 3 }}>
+                    <div style={{ display: "flex", alignItems: "center", marginBottom: 3 }}>
+                        <Avatar sx={{ mr: 3 }} />
+                        <Typography sx={{ fontWeight: "bold" }}>Admin</Typography>
                     </div>
-                    <Divider sx={{ mt: 2, mb: 1 }} />
                     <List sx={{ height: "100%" }}>
                         {itemsJSX}
                     </List>

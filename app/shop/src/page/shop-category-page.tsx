@@ -33,7 +33,7 @@ const ShopCategoryPage = () => {
         fetchProducts();
     }, [category, id]);
 
-    const productsToRender = products.map((product: ProductDefinition, index: number) => {
+    const productsToRender = products && products.map((product: ProductDefinition, index: number) => {
         return (
             <Grow in={true} {...{ timeout: 250 * (index + 1) }}>
                 <Grid item xs={12} md={6} xl={3}>
@@ -60,11 +60,11 @@ const ShopCategoryPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            {!!products.length &&
+            {products && !!products.length &&
                 <Grid item container xs={12} spacing={1}>
                     {productsToRender}
                 </Grid>}
-            {!products.length &&
+            {!products &&
                 <Grid item xs={12}>
                     <Grow in={true} timeout={250}>
                         <Paper sx={{ p: 10 }}
