@@ -29,7 +29,7 @@ const AdminSettingsPage = () => {
                 </Paper>
             </Grid>
         </PageContainerGrid>
-    )
+    );
 }
 
 export default AdminSettingsPage;

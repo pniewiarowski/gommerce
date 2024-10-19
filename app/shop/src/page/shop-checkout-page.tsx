@@ -46,7 +46,7 @@ const ShopCheckoutPage = () => {
             </Grid>
             <Grid item xs={12} xl={8}>
                 <Grow in={true} {...{ timeout: 250 }}>
-                    <Paper sx={{ p: 4, height: 500, overflowY: "scroll" }}>
+                    <Paper sx={{ p: 4, height: 500, overflowY: fullQty > 6 ? "scroll" : "" }}>
                         <Typography variant="h3" sx={{ mb: 2 }}>your items in shoping bag</Typography>
                         <List>
                             <CustomerShoppingBag />
@@ -56,7 +56,7 @@ const ShopCheckoutPage = () => {
             </Grid>
             <Grid item xs={12} xl={4}>
                 <Grow in={true} {...{ timeout: 500 }}>
-                    <Paper sx={{ p: 3, height: 500, overflowY: "scroll", display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={3}>
+                    <Paper sx={{ p: 3, height: 500, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={3}>
                         <Box>
                             <Typography variant="h3">shoping bag summary</Typography>
                             <Divider sx={{ mt: 2, mb: 2 }} />

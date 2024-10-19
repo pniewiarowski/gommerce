@@ -101,6 +101,69 @@ func (cc *CustomerController) Store(ctx *fiber.Ctx) error {
 	})
 }
 
+func (cc *CustomerController) Update(ctx *fiber.Ctx) error {
+	id, _ := cc.FiberHelper.GetID(ctx)
+	customer, err := cc.CustomerRepository.ReadByID(id)
+
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	if !cc.isResourceOwner(customer, ctx) {
+		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{
+			Message: "you do not have access to update this resource",
+		})
+	}
+
+	customerRequest := model.Customer{}
+	if err := ctx.BodyParser(&customerRequest); err != nil {
+		return ctx.Status(fiber.StatusBadRequest).JSON(response.ErrorResponse{
+			Message: "error while parsing data into model definition",
+		})
+	}
+
+	updatedCustomer, err := cc.CustomerRepository.Update(customer, &customerRequest)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+			Message: "something went wrong while saving entity",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: dto.CustomerFromModel(*updatedCustomer),
+	})
+}
+
+func (cc *CustomerController) Destroy(ctx *fiber.Ctx) error {
+	claims, _ := cc.JWTHelper.ExtractClaimsFromContext(ctx)
+	isAdmin := cc.JWTHelper.IsAdmin(claims)
+	if !isAdmin {
+		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{
+			Message: "you do not have access to destroy this resource",
+		})
+	}
+
+	id, err := cc.FiberHelper.GetID(ctx)
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	customers, err := cc.CustomerRepository.DeleteByID(id)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+			Message: "something went wrong while deleting entity",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: dto.CustomerFromCollection(customers),
+	})
+}
+
 func (cc *CustomerController) User(ctx *fiber.Ctx) error {
 	id, _ := cc.FiberHelper.GetID(ctx)
 	customer, err := cc.CustomerRepository.ReadByUserID(id)

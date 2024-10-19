@@ -24,6 +24,8 @@ func SetupCustomerRoute(router fiber.Router) {
 
 	router.Get("/", middleware.Protected(), c.Index)
 	router.Get("/:id", middleware.Protected(), c.Show)
-	router.Get("/user/:id", middleware.Protected(), c.User)
+	router.Put("/:id", middleware.Protected(), c.Update)
+	router.Delete("/:id", middleware.Protected(), c.Destroy)
 	router.Post("/", middleware.Protected(), c.Store)
+	router.Get("/user/:id", middleware.Protected(), c.User)
 }

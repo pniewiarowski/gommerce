@@ -1,18 +1,24 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ShoppingBag, Bookmark, Settings, Close, Logout } from "@mui/icons-material";
 import { MenuItem, Typography } from "@mui/material";
 import { useCookies } from "gommerce-app-shared/hook";
 import { CustomerContext } from "../context";
+import { LogoutDialog } from "./dialog";
 
 interface Props {
     close: () => void,
 }
 
 const CustomerMenu = (props: Props) => {
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
     const { clear } = useCookies();
     const navigate = useNavigate();
     const { setCustomer } = useContext(CustomerContext);
+
+    const handleClickLogout = () => {
+        setIsDialogOpen(true);
+    }
 
     const logout = () => {
         clear();
@@ -40,10 +46,11 @@ const CustomerMenu = (props: Props) => {
                 <Close sx={{ mr: 1 }} />
                 <Typography>Close</Typography>
             </MenuItem>
-            <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={logout}>
+            <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={handleClickLogout}>
                 <Logout sx={{ mr: 1 }} />
                 <Typography>Logout</Typography>
             </MenuItem>
+            <LogoutDialog open={isDialogOpen} setActive={setIsDialogOpen} logout={logout} />
         </Fragment>
     );
 }

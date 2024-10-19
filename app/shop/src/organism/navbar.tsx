@@ -21,7 +21,6 @@ import { CustomerContext, ShopBagContext } from "../context";
 import { stringAvatar } from "../util";
 import CustomerMenu from "./customer-menu";
 import CustomerShoppingBag from "./customer-shopping-bag";
-import { Search, SearchIconWrapper, SearchTextInput } from "../atom";
 
 interface Props {
     heading: string,
