@@ -1,3 +1,6 @@
+from rich.console import Console
+from rich.table import Table
+
 from definition.command import Command
 from command.microservice.create import Create as CreateMicroservice
 from command.microservice.delete import Delete as DeleteMicroservice
@@ -49,8 +52,8 @@ def commands() -> list:
 
 
 def print_registered_commands() -> None:
-    console.print('')
-    console.print('Gommerce CLI [All registered commands]', style='bold purple')
+    console: Console = Console()
+    console.print('\nGommerce CLI [All registered commands]', style='bold purple')
 
     table = Table(show_header=False)
     table.add_column('command.py', justify='right', style='color(5)')
