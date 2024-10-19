@@ -1,7 +1,7 @@
 interface OrderDefinition {
     id?: number,
     fullPrice: number,
-    customerId: number,
+    customerID: number,
 }
 
 export default OrderDefinition;

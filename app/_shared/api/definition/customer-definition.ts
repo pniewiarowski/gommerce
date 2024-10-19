@@ -3,7 +3,7 @@ interface CustomerDefinition {
     firstName: string,
     lastName: string,
     isActive: boolean,
-    userId: number,
+    userID: number,
 }
 
 export default CustomerDefinition;

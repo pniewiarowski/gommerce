@@ -60,7 +60,7 @@ const AdminProductForm = (props: Props) => {
                 enabled: !!enabled,
                 price: data.price,
                 sortOrder: Number(data.sortOrder),
-                categoryId: categoryID,
+                categoryID: categoryID,
             }, jwt);
 
             navigate('/shop/product')
@@ -74,7 +74,7 @@ const AdminProductForm = (props: Props) => {
                 enabled: enabled,
                 price: data.price,
                 sortOrder: Number(data.sortOrder),
-                categoryId: categoryID,
+                categoryID: categoryID,
             }, jwt);
             navigate('/shop/product')
         }

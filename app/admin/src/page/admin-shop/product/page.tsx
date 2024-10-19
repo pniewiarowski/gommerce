@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Button, Divider, Grid, Paper, Typography } from "@mui/material";
-import { Check, Close, Delete, Edit, FileCopy } from "@mui/icons-material";
+import { Breadcrumbs, Button, Grid, Paper, Typography } from "@mui/material";
+import { Check, Close, Edit, FileCopy } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
-import { Center, PageContainerGrid, PageTitle } from "../../../atoms";
+import { PageContainerGrid } from "../../../atoms";
+import { DeleteProductTableAction } from "../../../organism/table-action";
 
 const AdminShopProductPage = () => {
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
@@ -68,19 +69,7 @@ const AdminShopProductPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <GridActionsCellItem
-                    icon={<Delete />}
-                    label="Delete"
-                    onClick={() => {
-                        const destroy = async () => {
-                            const response = productRepository.delete(Number(params.row.id), jwt);
-
-                            setProducts(await response);
-                        }
-
-                        destroy();
-                    }}
-                />,
+                <DeleteProductTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setProducts={setProducts} />,
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"
@@ -99,6 +88,7 @@ const AdminShopProductPage = () => {
                                 categoryID: params.row.categoryID,
                                 sortOrder: params.row.sortOrder,
                                 enabled: params.row.enabled,
+                                imageURL: params.row.imageURL,
                             }, jwt);
 
                             setProducts([...products, await response]);

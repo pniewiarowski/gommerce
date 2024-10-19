@@ -12,6 +12,8 @@ import {
     Avatar,
     ListItem,
     List,
+    TextField,
+    InputAdornment,
 } from "@mui/material";
 import { Person, ShoppingBag, Search as SearchIcon } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
@@ -77,17 +79,28 @@ const Navbar = (props: Props): React.JSX.Element => {
                 <Toolbar variant="regular" sx={{ width: props.width, mx: "auto" }}>
                     <Box
                         style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                            <Link to="/">
-                                <Typography variant="h3" color="secondary" component="div" sx={{ ml: 1.25, flexGrow: 1 }}>
-                                    {props.heading}
-                                </Typography>
-                            </Link>
+                        <Box style={{ display: "flex", alignItems: "center", width: "25%" }}>
+                            <Box sx={{ mr: 2 }}>
+                                <Link to="/">
+                                    <Typography variant="h3" color="secondary" component="div" sx={{ ml: 1.25, flexGrow: 1 }}>
+                                        {props.heading}
+                                    </Typography>
+                                </Link>
+                            </Box>
+                            <Box>
+                                <TextField size="small" variant="outlined" InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon />
+                                        </InputAdornment>
+                                    ),
+                                }} />
+                            </Box>
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%" }}>
                             {categoriesToRender}
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} color="text.primary">
+                        <Box style={{ display: "flex", justifyContent: "end", alignItems: "center", width: "25%" }} color="text.primary">
                             <div onClick={handleOpenShoppingBag}>
                                 <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
                                     <Badge badgeContent={shopBag.length} color="secondary">
@@ -95,7 +108,6 @@ const Navbar = (props: Props): React.JSX.Element => {
                                     </Badge>
                                 </IconButton>
                             </div>
-
                             <Menu
                                 id="shopping-bag"
                                 anchorEl={anchorElShoppingBag}

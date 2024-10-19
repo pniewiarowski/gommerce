@@ -10,6 +10,7 @@ import (
 var Models = []interface{}{
 	model.Category{},
 	model.Product{},
+	model.Customer{},
 }
 
 func main() {

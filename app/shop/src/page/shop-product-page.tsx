@@ -24,7 +24,7 @@ const ShopProductPage = () => {
             }
 
             if (!category) {
-                setCategory(await categoriesRepository.getByID(product.categoryId));
+                setCategory(await categoriesRepository.getByID(product.categoryID));
             }
         }
 
@@ -47,7 +47,7 @@ const ShopProductPage = () => {
                         <Link to="/category">
                             <Typography color="text.primary">Category</Typography>
                         </Link>
-                        <Link to={`/category/${product?.categoryId}`}>
+                        <Link to={`/category/${product?.categoryID}`}>
                             <Typography color="text.primary">{category?.name}</Typography>
                         </Link>
                         <Link to={`/product/${product?.id}`}>
@@ -67,7 +67,8 @@ const ShopProductPage = () => {
             }
             <Grid item xs={12} xl={6}>
                 <Grow in={true} timeout={250}>
-                    <Paper sx={{ p: 1, minHeight: "100%" }}>
+                    <Paper sx={{ p: 1, minHeight: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <img src={product?.imageURL} width={600} />
                     </Paper>
                 </Grow>
             </Grid>
@@ -107,6 +108,12 @@ const ShopProductPage = () => {
                         </Button>
                     </Paper>
                 </Grow>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper elevation={3} sx={{ p: 2 }}>
+                    <Typography variant="h3">Opinions</Typography>
+                    <Typography variant="body1">there are no opinion about this product yet</Typography>
+                </Paper>
             </Grid>
         </Fragment >
     );
