@@ -2,5 +2,5 @@ from command.base import BaseCommand
 
 
 class Delete(BaseCommand):
-    def execute(self, data: list = []) -> str:
+    def execute(self) -> str:
         pass

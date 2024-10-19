@@ -39,7 +39,7 @@ class Create(BaseCommand):
         open(new_file, mode='w')
         shutil.copyfile(template, new_file)
 
-    def execute(self, data: list = []) -> str:
+    def execute(self) -> str:
         if len(sys.argv) <= 2:
             raise CommandIncorrectUsage
 
