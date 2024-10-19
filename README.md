@@ -12,3 +12,6 @@ Choose **spacing**, **colors**, **fonts**, **layouts**, **sizing**, **images**, 
 
 ### One admin panel to manage.
 Manage microservices that runs under your store in easy way using Gommerce Admin Panel.
+![Admin Page](readme/admin-panel.png)
+
+### Powerful CLI to generate code.
