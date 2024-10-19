@@ -3,7 +3,8 @@ import sys
 from rich.console import Console
 from rich.table import Table
 
-from command.error import CommandNotExistsError, CommandIncorrectUsage, ServiceAlreadyExists
+from command.error import CommandNotExistsError, CommandIncorrectUsage, ServiceAlreadyExists, ServiceDoesNotExists
+from command.error import ResourceAlreadyExists
 from command.resolver import Resolver as CommandResolver
 from command.base import BaseCommand
 from command.command import print_registered_commands
@@ -24,7 +25,11 @@ def main() -> None:
         except CommandIncorrectUsage:
             console.print('\nIncorrect usage of CLI, read command definition\n', style="red")
         except ServiceAlreadyExists:
-            console.print(f'\nService {sys.argv[2]} already exists\n', style="red")
+            console.print(f'\nService {sys.argv[2]} already exists under project\n', style="red")
+        except ResourceAlreadyExists:
+            console.print(f'\nResource {sys.argv[3]} already exists under {sys.argv[2]} service\n', style="red")
+        except ServiceDoesNotExists:
+            console.print(f'\nService {sys.argv[2]} does not exists\n', style="red")
         return
 
     print_registered_commands()

@@ -8,3 +8,11 @@ class CommandIncorrectUsage(Exception):
 
 class ServiceAlreadyExists(Exception):
     pass
+
+
+class ServiceDoesNotExists(Exception):
+    pass
+
+
+class ResourceAlreadyExists(Exception):
+    pass
