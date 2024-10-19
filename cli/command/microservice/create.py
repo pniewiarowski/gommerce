@@ -1,6 +1,7 @@
 import sys
 import os
 import shutil
+import subprocess
 
 from command.base import BaseCommand
 from command.error import CommandIncorrectUsage, ServiceAlreadyExists
@@ -30,8 +31,13 @@ class Create(BaseCommand):
     def __make_main(self):
         template = f'{get_path_to_gommerce()}{os.sep}cli{os.sep}template{os.sep}go{os.sep}main.go'
         new_file = f'{self.path}{os.sep}main.go'
-        open(new_file, mode='w')
-        shutil.copyfile(template, new_file)
+
+        with open(template) as file:
+            data: str = file.read()
+            data = data.replace('{{service_name}}', sys.argv[2])
+
+        with open(new_file, mode='w') as file:
+            file.write(data)
 
     def __make_app_run(self):
         template = f'{get_path_to_gommerce()}{os.sep}cli{os.sep}template{os.sep}go{os.sep}app{os.sep}run.go'
@@ -49,5 +55,10 @@ class Create(BaseCommand):
         self.__make_service_dirs()
         self.__make_main()
         self.__make_app_run()
+
+        go_mod_init: str = f'go mod init github.com/pniewiarowski/gommerce/api/{microservice_name}';
+        go_mod_tidy: str = f'go mod tidy'
+        subprocess.call(go_mod_init, cwd=self.path, shell=True)
+        subprocess.call(go_mod_tidy, cwd=self.path, shell=True)
 
         return f'Declared microservice {microservice_name}'

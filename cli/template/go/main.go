@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/pniewiarowski/gommerce/api/_shared/database"
 	"github.com/pniewiarowski/gommerce/api/_shared/environment"
+	"github.com/pniewiarowski/gommerce/api/{{service_name}}/app"
 )
 
 var Models = []interface{}{}
