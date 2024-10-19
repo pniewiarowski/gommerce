@@ -5,6 +5,8 @@ from definition.command import Command
 from command.microservice.create import Create as CreateMicroservice
 from command.microservice.delete import Delete as DeleteMicroservice
 from command.microservice.run import Run as RunMicroservice
+from command.resource.create import Create as CreateResource
+from command.resource.delete import Delete as DeleteResource
 
 COMMANDS: list = [
     Command(
@@ -25,8 +27,18 @@ COMMANDS: list = [
         scope='microservice',
         command=RunMicroservice(),
     ),
-    Command('resource:create {service} {resource}', 'create resource for provided microservice', 'resource'),
-    Command('resource:delete {service} {resource}', 'delete resource by microservice and resource name', 'resource'),
+    Command(
+        label='resource:create {service} {resource}',
+        description='create resource for provided microservice',
+        scope='resource',
+        command=CreateResource(),
+    ),
+    Command(
+        label='resource:delete {service} {resource}',
+        description='delete resource by microservice and resource name',
+        scope='resource',
+        command=DeleteResource(),
+    ),
 ]
 
 
