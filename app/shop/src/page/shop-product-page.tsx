@@ -110,8 +110,8 @@ const ShopProductPage = () => {
                 </Grow>
             </Grid>
             <Grid item xs={12}>
-                <Paper elevation={3} sx={{ p: 2 }}>
-                    <Typography variant="h3">Opinions</Typography>
+                <Paper elevation={3} sx={{ p: 4 }}>
+                    <Typography variant="h3" sx={{ mb: 2 }}>Opinions</Typography>
                     <Typography variant="body1">there are no opinion about this product yet</Typography>
                 </Paper>
             </Grid>
