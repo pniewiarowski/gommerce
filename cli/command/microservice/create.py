@@ -24,6 +24,7 @@ class Create(BaseCommand):
         os.makedirs(f'{self.path}{os.sep}app')
         os.makedirs(f'{self.path}{os.sep}request')
         os.makedirs(f'{self.path}{os.sep}response')
+        os.makedirs(f'{self.path}{os.sep}repository')
         os.makedirs(f'{self.path}{os.sep}dto')
         os.makedirs(f'{self.path}{os.sep}helper')
         os.makedirs(f'{self.path}{os.sep}middleware')
