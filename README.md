@@ -15,3 +15,5 @@ Manage microservices that runs under your store in easy way using Gommerce Admin
 ![Admin Page](readme/admin-panel.png)
 
 ### Powerful CLI to generate code.
+To ease manage and extend the project.
+![Admin Page](readme/cli.png)
