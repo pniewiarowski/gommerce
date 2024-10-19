@@ -45,6 +45,12 @@ class Create(BaseCommand):
         open(new_file, mode='w')
         shutil.copyfile(template, new_file)
 
+    def __make_env(self):
+        template = f'{get_path_to_gommerce()}{os.sep}cli{os.sep}template{os.sep}go{os.sep}.env'
+        new_file = f'{self.path}{os.sep}.env'
+        open(new_file, mode='w')
+        shutil.copyfile(template, new_file)
+
     def execute(self) -> str:
         if len(sys.argv) <= 2:
             raise CommandIncorrectUsage
@@ -55,6 +61,7 @@ class Create(BaseCommand):
         self.__make_service_dirs()
         self.__make_main()
         self.__make_app_run()
+        self.__make_env()
 
         go_mod_init: str = f'go mod init github.com/pniewiarowski/gommerce/api/{microservice_name}';
         go_mod_tidy: str = f'go mod tidy'
