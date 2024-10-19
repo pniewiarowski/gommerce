@@ -1,28 +1,25 @@
 import React, { useEffect, useContext, Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     AppBar,
     Badge,
     Box,
-    Button,
     Divider,
     IconButton,
     Toolbar,
     Typography,
     Menu,
-    MenuItem,
     Avatar,
     ListItem,
     List,
-    Paper,
 } from "@mui/material";
-import { Person, ShoppingBag, Settings, Logout, Bookmark, Close, Delete } from "@mui/icons-material";
-import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
-import { useCookies } from "gommerce-app-shared/hook";
+import { Person, ShoppingBag, Search as SearchIcon } from "@mui/icons-material";
+import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { CustomerContext, ShopBagContext } from "../context";
 import { stringAvatar } from "../util";
 import CustomerMenu from "./customer-menu";
 import CustomerShoppingBag from "./customer-shopping-bag";
+import { Search, SearchIconWrapper, SearchTextInput } from "../atom";
 
 interface Props {
     heading: string,
