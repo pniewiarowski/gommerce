@@ -10,17 +10,21 @@ type CategoryDTO struct {
 	SortOrder   uint   `json:"sortOrder"`
 }
 
+func CategoryFromModel(category model.Category) CategoryDTO {
+	return CategoryDTO{
+		ID:          category.ID,
+		Name:        category.Name,
+		Description: category.Description,
+		Enabled:     category.Enabled,
+		SortOrder:   category.SortOrder,
+	}
+}
+
 func CategoryFromCollection(collection []model.Category) []CategoryDTO {
 	var data []CategoryDTO
 
 	for _, item := range collection {
-		data = append(data, CategoryDTO{
-			ID:          item.ID,
-			Name:        item.Name,
-			Description: item.Description,
-			Enabled:     item.Enabled,
-			SortOrder:   item.SortOrder,
-		})
+		data = append(data, CategoryFromModel(item))
 	}
 
 	return data

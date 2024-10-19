@@ -11,7 +11,7 @@ import { useBackend, useCookies } from "gommerce-app-shared/hook";
 const CustomerLoginForm = () => {
     const theme: Theme = useTheme();
     const navigate = useNavigate();
-    const { authRepository, usersRepository } = useBackend();
+    const { authRepository, usersRepository, customersRepository } = useBackend();
     const { set } = useCookies();
     const { setUser } = useContext(UserContext);
     const { setCustomer } = useContext(CustomerContext);
@@ -37,17 +37,23 @@ const CustomerLoginForm = () => {
                 }
 
                 const user = await usersRepository.getByID(jwt.userID, jwt.token);
-                console.log(user)
                 if (!user || !user.id) {
                     navigate(`/login?errorLogin=something went wrong please train again later`);
                     return;
                 }
+
+                const customer = await customersRepository.getViaUserID(user.id, jwt.token);
 
                 set("jwt", jwt.token);
                 setJwt(jwt.token);
                 set("userID", user.id);
                 set("userEmail", user.email);
                 setUser(user);
+                set("customerID", customer.id);
+                set("customerFirstName", customer.firstName);
+                set("customerLastName", customer.lastName);
+                set("customerUserID", customer.userID);
+                setCustomer(customer);
             } catch (exception: any) {
                 const message = JSON.parse(exception.request.response).message;
                 navigate(`/login?errorLogin=${message}`);
@@ -103,7 +109,7 @@ const CustomerLoginForm = () => {
                 </FormControl>
                 <FormControl sx={{ mb: 2 }} fullWidth>
                     <Typography>not have account yet? click <Link to="/register"
-                        style={{ color: theme.palette.primary.main }}>here</Link> to
+                        style={{ color: theme.palette.secondary.main }}>here</Link> to
                         register</Typography>
                 </FormControl>
                 <FormControl fullWidth>

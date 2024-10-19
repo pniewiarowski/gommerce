@@ -10,7 +10,7 @@ interface Props {
 const FooterItem = (props: Props): React.JSX.Element => {
     return (
         <Link to={props.link}>
-            <Typography variant="body1" color="primary">
+            <Typography variant="body1" color="secondary">
                 {props.content}
             </Typography>
         </Link>

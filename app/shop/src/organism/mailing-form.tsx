@@ -18,7 +18,7 @@ const MailingForm = (): React.JSX.Element => {
                             <TextField label="enter your email" />
                         </FormControl>
                         <FormControl style={{ width: "30%" }}>
-                            <Button variant="contained" sx={{ ml: "1.25rem", p: "1rem 2.25rem" }}>sign me</Button>
+                            <Button color="primary" variant="contained" sx={{ ml: "1.25rem", p: "1rem 2.25rem" }}>sign me</Button>
                         </FormControl>
                     </form>
                 </Paper>

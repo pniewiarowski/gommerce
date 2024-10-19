@@ -21,7 +21,7 @@ func (_ *CategoryRepository) Create(category *model.Category) (*model.Category, 
 func (_ *CategoryRepository) Read() ([]model.Category, error) {
 	var categories []model.Category
 
-	err := database.DataBase.Find(&categories).Error
+	err := database.DataBase.Order("sort_order").Find(&categories).Error
 
 	return categories, err
 }

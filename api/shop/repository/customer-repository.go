@@ -29,7 +29,15 @@ func (_ *CustomerRepository) Read() ([]model.Customer, error) {
 func (_ *CustomerRepository) ReadByID(entityID uint) (*model.Customer, error) {
 	var customer model.Customer
 
-	err := database.DataBase.Where("id = ?", entityID).Error
+	err := database.DataBase.First(&customer, "id = ?", entityID).Error
+
+	return &customer, err
+}
+
+func (_ *CustomerRepository) ReadByUserID(userID uint) (*model.Customer, error) {
+	var customer model.Customer
+
+	err := database.DataBase.First(&customer, "user_id = ?", userID).Error
 
 	return &customer, err
 }

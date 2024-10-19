@@ -21,6 +21,22 @@ type AuthController struct {
 	RegisterValidator  validator.RegisterValidator
 }
 
+func (ac *AuthController) getToken(user model.User) (*string, error) {
+	token := jwt.New(jwt.SigningMethodHS256)
+	claims := token.Claims.(jwt.MapClaims)
+
+	claims[definition.JwtClaimId] = user.ID
+	claims[definition.JwtClaimAccountType] = user.RoleID
+	claims[definition.JwtClaimExpireTime] = time.Now().Add(time.Hour * 72).Unix()
+
+	tokenStringed, err := token.SignedString([]byte(environment.GetAPISecretSeed()))
+	if err != nil {
+		return nil, err
+	}
+
+	return &tokenStringed, nil
+}
+
 func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 	loginRequest := request.LoginRequest{}
 
@@ -43,14 +59,7 @@ func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 		})
 	}
 
-	token := jwt.New(jwt.SigningMethodHS256)
-	claims := token.Claims.(jwt.MapClaims)
-
-	claims[definition.JwtClaimId] = user.ID
-	claims[definition.JwtClaimAccountType] = user.RoleID
-	claims[definition.JwtClaimExpireTime] = time.Now().Add(time.Hour * 72).Unix()
-
-	tokenStringed, err := token.SignedString([]byte(environment.GetAPISecretSeed()))
+	tokenStringed, err := ac.getToken(*user)
 	if err != nil {
 		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
 			Message: "something went wrong while logging",
@@ -60,7 +69,7 @@ func (ac *AuthController) Login(ctx *fiber.Ctx) error {
 	admin, _ := ac.UserRoleRepository.ReadByCode(definition.UserRoleAdmin)
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
 		Data: dto.JWTDTO{
-			Token:   tokenStringed,
+			Token:   *tokenStringed,
 			UserID:  user.ID,
 			IsAdmin: user.RoleID == admin.ID,
 		},
@@ -96,12 +105,22 @@ func (ac *AuthController) Register(ctx *fiber.Ctx) error {
 		})
 	}
 
+	tokenStringed, err := ac.getToken(*user)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+			Message: "something went wrong while logging",
+		})
+	}
+
+	admin, _ := ac.UserRoleRepository.ReadByCode(definition.UserRoleAdmin)
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
-		Data: dto.UserDTO{
-			ID:     user.ID,
-			Email:  user.Email,
-			Enable: user.Enable,
-			RoleID: user.RoleID,
+		Data: dto.RegisterDTO{
+			ID:      user.ID,
+			Email:   user.Email,
+			Enable:  user.Enable,
+			RoleID:  user.RoleID,
+			Token:   *tokenStringed,
+			IsAdmin: user.RoleID == admin.ID,
 		},
 	})
 }

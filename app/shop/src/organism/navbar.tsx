@@ -60,7 +60,7 @@ const Navbar = (props: Props): React.JSX.Element => {
         setAnchorElShoppingBag(event.currentTarget);
     }
 
-    const categoriesToRender: Array<React.JSX.Element> = props.categories.map((category: CategoryDefinition, i: number) => {
+    const categoriesToRender: Array<React.JSX.Element> = props.categories?.map((category: CategoryDefinition, i: number) => {
         return (
             <React.Fragment key={category.id}>
                 {i != 0 && <Divider orientation="vertical" flexItem />}

@@ -23,15 +23,21 @@ const CustomerRegisterForm = () => {
     } = useForm<registerType>({ resolver: zodResolver(registerResolver) });
     const theme: Theme = useTheme();
     const navigate = useNavigate();
-    const { authRepository } = useBackend();
+    const { authRepository, customersRepository } = useBackend();
 
     const onSubmit = async (data: registerType) => {
         const register = async () => {
             try {
-                await authRepository.register({
+                const register = await authRepository.register({
                     email: data.email,
                     password: data.password,
                 });
+
+                await customersRepository.create({
+                    firstName: data.firstName,
+                    lastName: data.lastName,
+                    isActive: true,
+                }, register.token);
             } catch (exception: any) {
                 const message = JSON.parse(exception.request.response).message;
                 navigate(`/register?errorRegister=${message}`);
@@ -149,7 +155,7 @@ const CustomerRegisterForm = () => {
                 }
                 <FormControl sx={{ mb: 2 }} fullWidth>
                     <Typography>you have account? click <Link to="/login"
-                        style={{ color: theme.palette.primary.main }}>here</Link> to
+                        style={{ color: theme.palette.secondary.main }}>here</Link> to
                         login</Typography>
                 </FormControl>
                 <FormControl fullWidth>

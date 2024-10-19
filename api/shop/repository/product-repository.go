@@ -21,7 +21,7 @@ func (_ *ProductRepository) Create(product *model.Product) (*model.Product, erro
 func (_ *ProductRepository) Read() ([]model.Product, error) {
 	var products []model.Product
 
-	err := database.DataBase.Find(&products).Error
+	err := database.DataBase.Order("sort_order").Find(&products).Error
 
 	return products, err
 }
@@ -37,7 +37,7 @@ func (_ *ProductRepository) ReadByID(entityID uint) (*model.Product, error) {
 func (_ *ProductRepository) ReadByCategoryID(categoryID uint) ([]model.Product, error) {
 	var products []model.Product
 
-	err := database.DataBase.Where("category_id = ?", categoryID).Find(&products).Error
+	err := database.DataBase.Order("sort_order").Where("category_id = ?", categoryID).Find(&products).Error
 
 	return products, err
 }

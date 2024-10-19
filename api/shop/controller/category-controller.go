@@ -40,13 +40,7 @@ func (cc *CategoryController) Show(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
-		Data: dto.CategoryDTO{
-			ID:          category.ID,
-			Name:        category.Name,
-			Description: category.Description,
-			Enabled:     category.Enabled,
-			SortOrder:   category.SortOrder,
-		},
+		Data: dto.CategoryFromModel(*category),
 	})
 }
 
@@ -74,13 +68,7 @@ func (cc *CategoryController) Store(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
-		Data: dto.CategoryDTO{
-			ID:          category.ID,
-			Name:        category.Name,
-			Description: category.Description,
-			Enabled:     category.Enabled,
-			SortOrder:   category.SortOrder,
-		},
+		Data: dto.CategoryFromModel(*category),
 	})
 }
 
@@ -116,13 +104,7 @@ func (cc *CategoryController) Update(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
-		Data: dto.CategoryDTO{
-			ID:          updatedCategory.ID,
-			Name:        updatedCategory.Name,
-			Description: updatedCategory.Description,
-			Enabled:     updatedCategory.Enabled,
-			SortOrder:   updatedCategory.SortOrder,
-		},
+		Data: dto.CategoryFromModel(*updatedCategory),
 	})
 }
 

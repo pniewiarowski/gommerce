@@ -1,15 +1,16 @@
 import { ThemeOptions, createTheme } from "@mui/material/styles";
 
-const accent = "#651fff";
+const primary = '#651fff';
+const secondary = '#ff1f65';
 
 const darkTheme: ThemeOptions = createTheme({
     palette: {
         mode: "dark",
         primary: {
-            main: accent,
+            main: primary,
         },
         secondary: {
-            main: accent,
+            main: secondary,
         },
     },
     typography: {

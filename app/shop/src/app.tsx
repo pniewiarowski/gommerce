@@ -58,7 +58,7 @@ const App = () => {
             firstName: customerFirstName,
             lastName: customerLastName,
             isActive: true,
-            userId: customerUserID,
+            userID: customerUserID,
         });
 
         setUser({

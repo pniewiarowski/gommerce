@@ -1,10 +1,10 @@
-import { AuthResponseDefinition, UserDefinition } from "../definition";
+import { AuthResponseDefinition, UserDefinition, AuthRegisterDefinition } from "../definition";
 import { auth } from "../../axios";
 
 class Authentication {
     private static resource = "auth";
 
-    public async register(user: UserDefinition): Promise<UserDefinition> {
+    public async register(user: UserDefinition): Promise<AuthRegisterDefinition> {
         const response = await auth.post(`${Authentication.resource}/register`, user);
 
         return await response.data.data;

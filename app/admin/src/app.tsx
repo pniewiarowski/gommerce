@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
-import { UserDefinition } from "gommerce-app-shared/api/definition";
+import { CustomerDefinition, UserDefinition } from "gommerce-app-shared/api/definition";
 import {
     AdminAccountPage,
     AdminHomePage,
@@ -33,7 +33,6 @@ const App = () => {
     const { get } = useCookies();
     useEffect(() => {
         if (!get("userID")) {
-
             setLoading(false);
 
             return;
