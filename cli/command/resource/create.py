@@ -2,8 +2,5 @@ from command.base import BaseCommand
 
 
 class Create(BaseCommand):
-    def __init__(self):
-        super().__init__()
-
-    def execute(self) -> str:
+    def execute(self, data: list = []) -> str:
         pass

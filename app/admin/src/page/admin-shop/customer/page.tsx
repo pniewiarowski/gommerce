@@ -68,10 +68,8 @@ const AdminShopCustomerPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">customers</Typography>
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
+            <Grid item xs={12} sx={{ mb: 1 }}>
+                <Paper sx={{ p: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
                             <Typography color="text.primary">Home</Typography>
@@ -85,7 +83,7 @@ const AdminShopCustomerPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ mt: 2, height: "78%" }} item xs={12}>
+            <Grid sx={{ height: "87%" }} item xs={12}>
                 <Paper elevation={3} sx={{ height: "100%" }}>
                     <DataGrid
                         rows={customers}

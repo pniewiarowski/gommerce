@@ -86,7 +86,7 @@ const AdminShopCategoryPage = () => {
     return (
         <PageContainerGrid>
             <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 2 }} elevation={3}>
+                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
                             <Typography color="text.primary">Home</Typography>
@@ -100,7 +100,7 @@ const AdminShopCategoryPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ height: "78%" }} item xs={12}>
+            <Grid sx={{ height: "87%" }} item xs={12}>
                 <Paper elevation={3} sx={{ height: "100%" }}>
                     <DataGrid
                         rows={categories}
@@ -110,11 +110,11 @@ const AdminShopCategoryPage = () => {
                     />
                 </Paper>
             </Grid>
-            <Grid sx={{ mt: 2 }} item xs={12}>
-                <Button sx={{ mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/shop')}>
+            <Grid sx={{ mt: 1.5 }} item xs={12}>
+                <Button sx={{ p: 2, width: 200, mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/shop')}>
                     back
                 </Button>
-                <Button color="primary" variant="contained" onClick={() => navigate('/shop/category/create')}>
+                <Button sx={{ p: 2, width: 200 }} color="primary" variant="contained" onClick={() => navigate('/shop/category/create')}>
                     add
                 </Button>
             </Grid>

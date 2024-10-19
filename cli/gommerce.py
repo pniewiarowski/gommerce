@@ -1,61 +1,33 @@
+import sys
+
 from rich.console import Console
 from rich.table import Table
 
-from definition.command import Command
-from command.microservice.create import Create as CreateMicroservice
-from command.microservice.delete import Delete as DeleteMicroservice
-from command.microservice.run import Run as RunMicroservice
-from command.resource.create import Create as CreateResource
-from command.resource.delete import Delete as DeleteResource
-
-COMMANDS: list = [
-    Command(
-        label='microservice:create {name}',
-        description='create new service with provided name from structure',
-        scope='microservice',
-        command=CreateMicroservice(),
-    ),
-    Command(
-        label='microservice:delete {name}',
-        description='delete service by name from structure',
-        scope='microservice',
-        command=DeleteMicroservice(),
-    ),
-    Command(
-        label='microservice:run {name}',
-        description='run service with given name on local machine',
-        scope='microservice',
-        command=RunMicroservice(),
-    ),
-    Command(
-        label='resource:create {service} {resource}',
-        description='create resource for provided microservice',
-        scope='resource',
-        command=CreateResource(),
-    ),
-    Command(
-        label='resource:delete {service} {resource}',
-        description='delete resource by microservice and resource name',
-        scope='resource',
-        command=DeleteResource(),
-    ),
-]
+from command.error import CommandNotExistsError, CommandIncorrectUsage, ServiceAlreadyExists
+from command.resolver import Resolver as CommandResolver
+from command.base import BaseCommand
+from command.command import print_registered_commands
 
 
 def main() -> None:
     console: Console = Console()
-    console.print('Gommerce CLI', style='bold purple')
 
-    table = Table(show_header=False)
+    if len(sys.argv) > 1:
+        try:
+            resolver = CommandResolver(sys.argv)
+            command: BaseCommand = resolver.get_command()
+            message: str = command.execute()
 
-    table.add_column('command', justify='right', style='color(5)')
-    table.add_column('description', justify='left', style='color(6)')
-    table.add_column('scope', justify='left', style='color(4)')
+            console.print(f'\n{message}\n', style="green")
+        except CommandNotExistsError:
+            console.print('\nUsed command are not registered in CLI\n', style="red")
+        except CommandIncorrectUsage:
+            console.print('\nIncorrect usage of CLI, read command definition\n', style="red")
+        except ServiceAlreadyExists:
+            console.print(f'\nService {sys.argv[2]} already exists\n', style="red")
+        return
 
-    for command in COMMANDS:
-        table.add_row(command.label, command.description, command.scope)
-
-    console.print(table)
+    print_registered_commands()
 
 
 if __name__ == '__main__':

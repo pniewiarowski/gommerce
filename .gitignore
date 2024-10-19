@@ -59,3 +59,5 @@
 /app/_shared/.vercel
 /app/_shared/*.tsbuildinfo
 /app/_shared/next-env.d.ts
+/cli/.idea
+__pycache__

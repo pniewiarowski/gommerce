@@ -119,7 +119,7 @@ const AdminShopProductPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ height: "78%" }} item xs={12}>
+            <Grid sx={{ height: "87%" }} item xs={12}>
                 <Paper elevation={3} sx={{ height: "100%" }}>
                     <DataGrid
                         rows={products}
