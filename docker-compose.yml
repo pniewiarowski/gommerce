@@ -32,3 +32,18 @@ services:
       PGADMIN_DEFAULT_PASSWORD: password123
     volumes:
       - pg-admin-data:/var/lib/pgadmin
+    depends_on:
+      - database
+
+  api-service-auth:
+    image: golang:1.22
+    container_name: gommerce-api-auth-service
+    build:
+      context: "./api/auth"
+      dockerfile: "Dockerfile"
+    ports:
+      - "1100:1100"
+    restart: unless-stopped
+    stdin_open: true
+    depends_on:
+      - database

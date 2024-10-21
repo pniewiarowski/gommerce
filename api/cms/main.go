@@ -4,9 +4,12 @@ import (
 	"github.com/pniewiarowski/gommerce/api/_shared/database"
 	"github.com/pniewiarowski/gommerce/api/_shared/environment"
 	"github.com/pniewiarowski/gommerce/api/cms/app"
+	"github.com/pniewiarowski/gommerce/api/cms/model"
 )
 
-var Models = []interface{}{}
+var Models = []interface{}{
+	model.Setting{},
+}
 
 func main() {
 	environment.Load(".env")
