@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
-import { Grid, Paper, Breadcrumbs, Typography, Grow, Container, StepButton, Step, Stepper, StepLabel } from "@mui/material";
+import { Grid, Paper, Breadcrumbs, Typography, Grow, Step, Stepper, StepLabel } from "@mui/material";
 import { SummaryOrderForm } from "../organism";
 
 const ShopCheckoutSummaryPage = () => {
@@ -21,17 +21,17 @@ const ShopCheckoutSummaryPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid item xs={12} xl={4}>
-                <Paper sx={{ p: 2, height: "600px" }}>
+            <Grid item xs={12} xl={3}>
+                <Paper sx={{ p: 2, height: "750px" }}>
                 </Paper>
             </Grid>
-            <Grid item xs={12} xl={4}>
-                <Paper sx={{ p: 2, minHeight: "600px" }}>
+            <Grid item xs={12} xl={3}>
+                <Paper sx={{ p: 2, minHeight: "750px" }}>
                 </Paper>
             </Grid>
-            <Grid item xs={12} xl={4}>
+            <Grid item xs={12} xl={6}>
                 <Grow in={true} {...{ timeout: 500 }}>
-                    <Paper elevation={7} sx={{ p: 2, height: "600px" }}>
+                    <Paper elevation={7} sx={{ p: 2, height: "750px" }}>
                         <SummaryOrderForm />
                     </Paper>
                 </Grow>

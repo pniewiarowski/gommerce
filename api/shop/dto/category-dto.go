@@ -1,6 +1,8 @@
 package dto
 
-import "github.com/pniewiarowski/gommerce/api/shop/model"
+import (
+	"github.com/pniewiarowski/gommerce/api/shop/model"
+)
 
 type CategoryDTO struct {
 	ID          uint   `gorm:"primaryKey" json:"id"`
@@ -15,7 +17,7 @@ func CategoryFromModel(category model.Category) CategoryDTO {
 		ID:          category.ID,
 		Name:        category.Name,
 		Description: category.Description,
-		Enabled:     category.Enabled,
+		Enabled:     *category.Enabled,
 		SortOrder:   category.SortOrder,
 	}
 }

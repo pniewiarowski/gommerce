@@ -5,8 +5,13 @@ import { Repository } from "./type";
 class Customers implements Repository {
     private static resource = "customers";
 
-    public async get(): Promise<Array<CustomerDefinition>> {
-        const response = await shop.get(`${Customers.resource}`);
+    public async get(token: string): Promise<Array<CustomerDefinition>> {
+        const response = await shop.get(`${Customers.resource}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
 
         return response.data.data;
     }

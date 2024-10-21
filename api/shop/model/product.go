@@ -5,7 +5,7 @@ type Product struct {
 	Name        string  `json:"name"`
 	Description string  `json:"description"`
 	Price       float32 `json:"price"`
-	Enabled     bool    `json:"enabled"`
+	Enabled     *bool   `json:"enabled"`
 	SortOrder   uint    `json:"sortOrder"`
 	ImageURL    string  `json:"imageURL"`
 	CategoryID  uint    `json:"categoryID"`

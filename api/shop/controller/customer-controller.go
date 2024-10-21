@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gofiber/fiber/v2"
 	sharedhelper "github.com/pniewiarowski/gommerce/api/_shared/helper"
 	"github.com/pniewiarowski/gommerce/api/auth/definition"
@@ -36,8 +35,6 @@ func (cc *CustomerController) isResourceOwner(customer *model.Customer, ctx *fib
 
 func (cc *CustomerController) Index(ctx *fiber.Ctx) error {
 	claims, _ := cc.JWTHelper.ExtractClaimsFromContext(ctx)
-	fmt.Println("DUPA")
-	fmt.Println(claims)
 	isAdmin := cc.JWTHelper.IsAdmin(claims)
 	if !isAdmin {
 		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{

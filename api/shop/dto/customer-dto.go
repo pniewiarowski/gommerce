@@ -15,7 +15,7 @@ func CustomerFromModel(customer model.Customer) CustomerDTO {
 		ID:        customer.ID,
 		FirstName: customer.FirstName,
 		LastName:  customer.LastName,
-		IsActive:  customer.IsActive,
+		IsActive:  *customer.IsActive,
 		UserID:    customer.UserID,
 	}
 }

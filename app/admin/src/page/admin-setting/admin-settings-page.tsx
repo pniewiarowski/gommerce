@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../context";
-import { PageContainerGrid } from "../atoms";
 import { Grid, Paper, Breadcrumbs, Typography } from "@mui/material";
+import { UserContext } from "../../context";
+import { PageContainerGrid } from "../../atoms";
+import { AdminSettingForm } from "../../organism";
 
 const AdminSettingsPage = () => {
     const navigate = useNavigate();
@@ -26,6 +27,11 @@ const AdminSettingsPage = () => {
                             <Typography color="primary">Settings</Typography>
                         </Link>
                     </Breadcrumbs>
+                </Paper>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
+                    <AdminSettingForm />
                 </Paper>
             </Grid>
         </PageContainerGrid>

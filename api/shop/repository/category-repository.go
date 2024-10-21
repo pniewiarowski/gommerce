@@ -39,7 +39,7 @@ func (cr *CategoryRepository) Update(category, updatedCategory *model.Category) 
 		return nil, errors.New("invalid entity id")
 	}
 
-	db := database.DataBase.Model(category).Updates(&updatedCategory)
+	db := database.DataBase.Model(category).Updates(updatedCategory)
 
 	if db.RowsAffected == 0 {
 		return nil, errors.New("category not found")

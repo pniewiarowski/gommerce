@@ -7,6 +7,7 @@ import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
 import { PageContainerGrid, PageTitle } from "../../../atoms";
+import { DeleteCategoryTableAction } from "../../../organism/table-action";
 
 const AdminShopCategoryPage = () => {
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
@@ -41,19 +42,7 @@ const AdminShopCategoryPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <GridActionsCellItem
-                    icon={<Delete />}
-                    label="Delete"
-                    onClick={() => {
-                        const destroy = async () => {
-                            const response = categoriesRepository.delete(Number(params.row.id), jwt);
-
-                            setCategories(await response);
-                        }
-
-                        destroy();
-                    }}
-                />,
+                <DeleteCategoryTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setCategories={setCategories} />,
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"

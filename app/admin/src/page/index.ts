@@ -14,4 +14,4 @@ export { default as AdminShopOrderPage } from "./admin-shop/order/page";
 export { default as AdminMailingPage } from "./admin-mailing-page";
 export { default as AdminAccountPage } from "./admin-account-page";
 export { default as AdminPaymentPage } from "./admin-payment-page";
-export { default as AdminSettingsPage } from "./admin-settings-page";
+export { default as AdminSettingsPage } from "./admin-setting/admin-settings-page";

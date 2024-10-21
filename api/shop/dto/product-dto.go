@@ -13,20 +13,24 @@ type ProductDTO struct {
 	CategoryID  uint    `json:"categoryID"`
 }
 
+func ProductFromModel(product model.Product) ProductDTO {
+	return ProductDTO{
+		ID:          product.ID,
+		Name:        product.Name,
+		Description: product.Description,
+		Price:       product.Price,
+		Enabled:     *product.Enabled,
+		SortOrder:   product.SortOrder,
+		ImageURL:    product.ImageURL,
+		CategoryID:  product.CategoryID,
+	}
+}
+
 func ProductFromCollection(collection []model.Product) []ProductDTO {
 	var data []ProductDTO
 
 	for _, item := range collection {
-		data = append(data, ProductDTO{
-			ID:          item.ID,
-			Name:        item.Name,
-			Description: item.Description,
-			Price:       item.Price,
-			Enabled:     item.Enabled,
-			SortOrder:   item.SortOrder,
-			ImageURL:    item.ImageURL,
-			CategoryID:  item.CategoryID,
-		})
+		data = append(data, ProductFromModel(item))
 	}
 
 	return data

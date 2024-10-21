@@ -23,7 +23,7 @@ const AdminShopCustomerPage = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            setCustomers(await customersRepository.get());
+            setCustomers(await customersRepository.get(jwt));
         };
 
         fetch();
@@ -38,7 +38,7 @@ const AdminShopCustomerPage = () => {
                 return params.row.isActive ? <Check color="success" /> : <Close color="error" />;
             },
         },
-        { field: "userId", headerName: "User ID", width: 100 },
+        { field: "userID", headerName: "User ID", width: 100 },
         {
             field: 'actions',
             type: 'actions',

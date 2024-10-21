@@ -41,16 +41,7 @@ func (pc *ProductController) Show(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
-		Data: dto.ProductDTO{
-			ID:          product.ID,
-			Name:        product.Name,
-			Description: product.Description,
-			Price:       product.Price,
-			Enabled:     product.Enabled,
-			SortOrder:   product.SortOrder,
-			ImageURL:    product.ImageURL,
-			CategoryID:  product.CategoryID,
-		},
+		Data: dto.ProductFromModel(*product),
 	})
 }
 
@@ -94,16 +85,7 @@ func (pc *ProductController) Store(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
-		Data: dto.ProductDTO{
-			ID:          product.ID,
-			Name:        product.Name,
-			Description: product.Description,
-			Price:       product.Price,
-			Enabled:     product.Enabled,
-			SortOrder:   product.SortOrder,
-			ImageURL:    product.ImageURL,
-			CategoryID:  product.CategoryID,
-		},
+		Data: dto.ProductFromModel(*product),
 	})
 }
 
@@ -139,16 +121,7 @@ func (pc *ProductController) Update(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
-		Data: dto.ProductDTO{
-			ID:          updatedProduct.ID,
-			Name:        updatedProduct.Name,
-			Description: updatedProduct.Description,
-			Price:       updatedProduct.Price,
-			Enabled:     updatedProduct.Enabled,
-			SortOrder:   updatedProduct.SortOrder,
-			ImageURL:    updatedProduct.ImageURL,
-			CategoryID:  updatedProduct.CategoryID,
-		},
+		Data: dto.ProductFromModel(*updatedProduct),
 	})
 }
 

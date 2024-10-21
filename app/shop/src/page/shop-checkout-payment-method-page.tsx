@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
-import { Grid, Paper, Breadcrumbs, Typography, Grow, Step, StepLabel, Stepper } from "@mui/material";
+import { Grid, Paper, Breadcrumbs, Typography, Grow, Step, StepLabel, Stepper, Box } from "@mui/material";
 import { PaymentMethodForm } from "../organism";
 
 const ShopCheckoutPaymentMethodPage = () => {
@@ -21,19 +21,19 @@ const ShopCheckoutPaymentMethodPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid item xs={12} xl={4}>
-                <Paper sx={{ p: 2, height: "600px" }}>
+            <Grid item xs={12} xl={3}>
+                <Paper sx={{ p: 2, height: "750px" }}>
                 </Paper>
             </Grid>
-            <Grid item xs={12} xl={4}>
+            <Grid item xs={12} xl={6}>
                 <Grow in={true} {...{ timeout: 500 }}>
-                    <Paper elevation={7} sx={{ p: 2, height: "600px" }}>
+                    <Paper elevation={7} sx={{ p: 2, height: "750px" }}>
                         <PaymentMethodForm />
                     </Paper>
                 </Grow>
             </Grid>
-            <Grid item xs={12} xl={4}>
-                <Paper sx={{ p: 2, height: "600px" }}>
+            <Grid item xs={12} xl={3}>
+                <Paper sx={{ p: 2, height: "750px" }}>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
@@ -51,7 +51,7 @@ const ShopCheckoutPaymentMethodPage = () => {
                     </Stepper>
                 </Paper>
             </Grid>
-        </Fragment>
+        </Fragment >
     );
 }
 
