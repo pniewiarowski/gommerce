@@ -5,6 +5,7 @@ import { SentimentVeryDissatisfied } from "@mui/icons-material";
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { ProductTile } from "../organism";
+import { ProductGridLoading } from "../organism/loading";
 
 const ShopCategoryPage = () => {
     const { categoriesRepository } = useBackend();
@@ -12,6 +13,7 @@ const ShopCategoryPage = () => {
 
     const [category, setCategory] = useState<CategoryDefinition>();
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchCategory = async () => {
@@ -28,10 +30,15 @@ const ShopCategoryPage = () => {
             }
 
             setProducts(await categoriesRepository.getProducts(category.id));
+            setLoading(false);
         }
 
         fetchProducts();
     }, [category, id]);
+
+    if (loading) {
+        return <ProductGridLoading />
+    }
 
     const productsToRender = products && products.map((product: ProductDefinition, index: number) => {
         return (

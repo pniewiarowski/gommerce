@@ -1,7 +1,7 @@
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { ArrowForward, Apartment, Numbers, QrCode, Close, LocationCity } from "@mui/icons-material";
+import { ArrowForward, Apartment, Numbers, Close, LocationCity } from "@mui/icons-material";
 import { Box, Button, Container, FormControl, InputAdornment, TextField, Typography } from "@mui/material";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useCookies } from "gommerce-app-shared/hook";
@@ -20,12 +20,17 @@ const AddressForm = () => {
     } = useForm<addressType>({ resolver: zodResolver(addresResolver) });
 
     useEffect(() => {
-        const city = get("address-form-city") ?? "";
-
-        setValue("city", city);
+        setValue("streetName", get("address-form-street-name"));
+        setValue("number", get("address-form-number"));
+        setValue("postalCode", get("address-form-postal-code"));
+        setValue("city", get("address-form-city"));
+        setValue("state", get("address-form-state"));
+        setValue("country", get("address-form-country"));
+        setValue("extraComment", get("address-form-extra-comment"));
     }, []);
 
     const onSubmit = async (data: addressType) => {
+        set("address-form-filled", true);
         set("address-form-street-name", data.streetName);
         set("address-form-number", data.number);
         set("address-form-postal-code", data.postalCode);
@@ -35,7 +40,11 @@ const AddressForm = () => {
         set("address-form-extra-comment", data.extraComment);
 
         navigate('/checkout/payment-method');
-    }
+    };
+
+    const onCancle = (event) => {
+        event.preventDefault();
+    };
 
 
     return (
@@ -92,13 +101,6 @@ const AddressForm = () => {
                                 {...register("postalCode")}
                                 error={!!errors.postalCode}
                                 helperText={errors.postalCode ? errors.postalCode.message : ""}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <QrCode />
-                                        </InputAdornment>
-                                    ),
-                                }}
                             />
                             <TextField
                                 sx={{ ml: 2, width: "70%" }}
@@ -135,15 +137,15 @@ const AddressForm = () => {
                             />
                         </FormControl>
                         <FormControl sx={{ display: "flex", flexDirection: "row", mb: 2 }}>
-                            <TextField label="extra comment for delivery" rows={10} multiline fullWidth />
+                            <TextField label="extra comment for delivery" rows={10} multiline fullWidth {...register("extraComment")} />
                         </FormControl>
                     </Box>
                     <Box>
-                        <Button color="error" type="submit" startIcon={<Close />} fullWidth sx={{ p: 2, mr: "10%", width: "45%" }}>
+                        <Button onClick={onCancle} color="error" variant="outlined" type="submit" startIcon={<Close />} fullWidth sx={{ p: 2, mr: 2, width: "48.7%" }}>
                             cancel
                         </Button>
-                        <Button type="submit" variant="contained" endIcon={<ArrowForward />} fullWidth sx={{ p: 2, width: "45%" }}>
-                            go next
+                        <Button type="submit" variant="contained" endIcon={<ArrowForward />} fullWidth sx={{ p: 2, width: "48.7%" }}>
+                            next
                         </Button>
                     </Box>
                 </Box>

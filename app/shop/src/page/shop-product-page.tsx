@@ -1,7 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Alert, Breadcrumbs, Button, Grid, Grow, Paper, Rating, Typography } from "@mui/material";
-import { useBackend } from "gommerce-app-shared/hook";
+import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { ShopBagContext } from "../context";
 import { Check, Favorite, FavoriteBorderOutlined } from "@mui/icons-material";
@@ -9,6 +9,7 @@ import { Check, Favorite, FavoriteBorderOutlined } from "@mui/icons-material";
 
 const ShopProductPage = () => {
     const { shopBag, setShopBag } = useContext(ShopBagContext);
+    const { set } = useCookies();
     const { productRepository, categoriesRepository } = useBackend();
     const [success, setSucess] = useState<string>("");
     const [product, setProduct] = useState<ProductDefinition>();
@@ -33,6 +34,9 @@ const ShopProductPage = () => {
 
     const add = () => {
         setShopBag([...shopBag, product]);
+        const stringifyShopBag = JSON.stringify([...shopBag, product]);
+
+        set("gommerce-shop-bag", stringifyShopBag);
         setSucess(`you added ${product?.name} to your bag`);
     }
 

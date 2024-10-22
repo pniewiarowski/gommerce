@@ -2,8 +2,9 @@ import { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { ListItem, Typography, IconButton, Divider, Button } from "@mui/material";
 import { Delete } from "@mui/icons-material";
-import { ShopBagContext } from "../context";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
+import { useCookies } from "gommerce-app-shared/hook";
+import { ShopBagContext } from "../context";
 
 interface Props {
     close?: () => void;
@@ -12,12 +13,14 @@ interface Props {
 
 const CustomerShoppingBag = (props: Props) => {
     const { shopBag, setShopBag } = useContext(ShopBagContext);
+    const { set } = useCookies();
 
     const deleteItemFromBag = (indexToDelete: number) => {
         const updated = shopBag.filter((_: ProductDefinition, index: number) => {
             return index !== indexToDelete;
         });
 
+        set("gommerce-shop-bag", JSON.stringify(updated));
         setShopBag(updated);
     }
 

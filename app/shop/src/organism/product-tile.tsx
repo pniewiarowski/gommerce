@@ -4,9 +4,11 @@ import {
     Card,
     CardActions,
     CardContent,
+    CardMedia,
     Rating,
     Typography
 } from "@mui/material";
+import { Theme, useTheme } from "@mui/material";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
 import { Link } from "react-router-dom";
 import { Center } from "../atom";
@@ -16,13 +18,17 @@ interface Props {
 }
 
 const ProductTile = (props: Props): React.JSX.Element => {
+    const theme: Theme = useTheme();
+
     return (
         <Link to={`/product/${props.from.id}`}>
             <Button variant="outlined" sx={{ p: 0.1, m: 0, width: "100%" }}>
                 <Card elevation={3} sx={{ width: "100%", p: 1, textAlign: "left" }}>
-                    <Center style={{ height: "200px" }}>
-                        <img src={props.from.imageURL} height={120} />
-                    </Center>
+                    <CardMedia>
+                        <Center style={{ height: "200px" }}>
+                            <img src={props.from.imageURL} width={250} style={{ zIndex: 2 }} />
+                        </Center>
+                    </CardMedia>
                     <CardContent>
                         <Typography variant="h3" sx={{ fontSize: 30, fontWeight: "black" }}>
                             {props.from.name}

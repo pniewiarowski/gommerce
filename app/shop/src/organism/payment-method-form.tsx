@@ -1,8 +1,14 @@
-import { Link } from "react-router-dom";
-import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowBack, ArrowForward, Wallet } from "@mui/icons-material";
 import { Box, Button, Container, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from "@mui/material";
 
 const PaymentMethodForm = () => {
+    const navigate = useNavigate();
+
+    const submit = () => {
+        navigate('/checkout/summary');
+    };
+
     return (
         <Container sx={{ height: "100%" }}>
             <form style={{ height: "100%" }}>
@@ -22,25 +28,22 @@ const PaymentMethodForm = () => {
                                 defaultValue="cash-on-delivery"
                                 name="payment-method"
                             >
-                                <FormControlLabel value="cash-on-delivery" control={<Radio />} label="cash on delivery" />
-                                <FormControlLabel value="card-payment" control={<Radio />} label="card payment" />
-                                <FormControlLabel value="blik" control={<Radio />} label={
-                                    <img src="/blik.png" alt="blik" width="50px" />
-                                } />
+                                <Box sx={{ display: "flex", alignItems: "center" }}>
+                                    <Wallet sx={{ mr: 2 }} />
+                                    <FormControlLabel value="cash-on-delivery" control={<Radio />} label="cash on delivery" />
+                                </Box>
                             </RadioGroup>
                         </FormControl>
                     </Box>
                     <Box>
                         <Link to="/checkout/address">
-                            <Button color="error" startIcon={<ArrowBack />} sx={{ p: 2, mr: "10%", width: "45%" }}>
-                                go back
+                            <Button color="error" variant="outlined" startIcon={<ArrowBack />} sx={{ p: 2, mr: 2, width: "48.7%" }}>
+                                back
                             </Button>
                         </Link>
-                        <Link to="/checkout/summary">
-                            <Button variant="contained" endIcon={<ArrowForward />} sx={{ p: 2, width: "45%" }}>
-                                go next
-                            </Button>
-                        </Link>
+                        <Button onClick={submit} variant="contained" endIcon={<ArrowForward />} sx={{ p: 2, width: "48.7%" }}>
+                            next
+                        </Button>
                     </Box>
                 </Box>
             </form>

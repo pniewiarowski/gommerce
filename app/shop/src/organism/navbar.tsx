@@ -33,7 +33,7 @@ const Navbar = (props: Props): React.JSX.Element => {
     const [anchorElCustomerMenu, setAnchorElCustomerMenu] = React.useState<null | HTMLElement>(null);
     const [anchorElShoppingBag, setAnchorElShoppingBag] = React.useState<null | HTMLElement>(null);
     const { customer } = useContext(CustomerContext);
-    const { shopBag, setShopBag } = useContext(ShopBagContext);
+    const { shopBag } = useContext(ShopBagContext);
 
     const openCustomerMenu = Boolean(anchorElCustomerMenu);
     const openShoppingBag = Boolean(anchorElShoppingBag);
