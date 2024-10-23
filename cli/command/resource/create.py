@@ -59,6 +59,18 @@ class Create(BaseCommand):
         with open(new_file, mode='w') as file:
             file.write(data)
 
+    def __make_repository(self) -> None:
+        template = f'{get_path_to_gommerce()}{os.sep}cli{os.sep}template{os.sep}go{os.sep}repository{os.sep}base.go'
+        new_file = f'{self.path}{os.sep}repository{os.sep}{self.resource}-repository.go'
+
+        with open(template) as file:
+            data: str = file.read()
+            data = data.replace('{{model}}', self.resource.title())
+            data = data.replace('{{model_lower_case}}', self.resource.lower())
+
+        with open(new_file, mode='w') as file:
+            file.write(data)
+
     def execute(self) -> str:
         if len(sys.argv) <= 3:
             raise CommandIncorrectUsage
@@ -78,5 +90,6 @@ class Create(BaseCommand):
         self.__make_dto()
         self.__make_controller()
         self.__make_route()
+        self.__make_repository()
 
         return f'Declared resource {sys.argv[3]} under {sys.argv[2]} microservice'
