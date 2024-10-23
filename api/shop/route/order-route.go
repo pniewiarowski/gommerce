@@ -13,13 +13,15 @@ import (
 func SetupOrderRoute(router fiber.Router) {
 	or := repository.OrderRepository{}
 	urr := authrepository.UserRoleRepository{}
+	cr := repository.CustomerRepository{}
 	jwt := authhelper.JWTHelper{UserRoleRepository: urr}
 	fh := sharedhelper.FiberContextHelper{}
 
 	c := controller.OrderController{
-		OrderRepository: or,
-		JWTHelper:       jwt,
-		FiberHelper:     fh,
+		OrderRepository:    or,
+		CustomerRepository: cr,
+		JWTHelper:          jwt,
+		FiberHelper:        fh,
 	}
 
 	router.Get("/", middleware.Protected(), c.Index)

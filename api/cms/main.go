@@ -9,6 +9,7 @@ import (
 
 var Models = []interface{}{
 	model.Setting{},
+	model.Theme{},
 }
 
 func main() {

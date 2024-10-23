@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumbs, Button, Grid, Paper, Typography } from "@mui/material";
-import { Check, Close, Edit, FileCopy } from "@mui/icons-material";
+import { Check, Close, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
@@ -51,10 +51,7 @@ const AdminShopProductPage = () => {
         {
             field: 'categoryID', headerName: 'Category', width: 150, renderCell: (params) => {
                 return (
-                    <Button
-                        sx={{ p: 0, width: "100%", height: "100%" }}
-                        onClick={() => navigate(`/shop/category/edit/${params.row.categoryID}`)}
-                    >
+                    <Button sx={{ p: 0, width: "100%", height: "100%" }} onClick={() => navigate(`/shop/category/edit/${params.row.categoryID}`)}>
                         {categories.map((item) => {
                             if (item.id === params.row.categoryID) {
                                 return item.name;
@@ -74,6 +71,12 @@ const AdminShopProductPage = () => {
                     icon={<Edit />}
                     label="Edit"
                     onClick={() => { navigate(`/shop/product/edit/${params.row.id}`) }}
+                />,
+                <GridActionsCellItem
+                    icon={<Visibility />}
+                    label="Show"
+                    onClick={() => { }}
+                    showInMenu
                 />,
                 <GridActionsCellItem
                     icon={<FileCopy />}

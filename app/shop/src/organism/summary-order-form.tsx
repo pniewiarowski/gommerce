@@ -5,14 +5,18 @@ import { ArrowBack, ShoppingBag } from "@mui/icons-material";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { CustomerContext, JwtContext, ShopBagContext } from "../context";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
+import { MakeOrderDialog } from "./dialog";
 
 const SummaryOrderForm = () => {
     const [address, setAddress] = useState<string>("");
     const [qty, setQty] = useState<number | null>(null);
-    const { get } = useCookies();
+    const [isMakeOrderDialogOpen, setIsMakeOrderDialogOpen] = useState<boolean>(false);
+
+    const { get, set } = useCookies();
     const { shopBag, setShopBag } = useContext(ShopBagContext);
     const { customer } = useContext(CustomerContext);
     const { jwt } = useContext(JwtContext);
+
     const { ordersRepository } = useBackend();
     const navigate = useNavigate();
 
@@ -38,9 +42,14 @@ const SummaryOrderForm = () => {
             }, jwt);
         }
 
-        buy();
         setShopBag([]);
+        set("gommerce-shop-bag", JSON.stringify([]));
+        buy();
         navigate("/checkout/success");
+    }
+
+    const handleOpenMakeOrderDialog = () => {
+        setIsMakeOrderDialogOpen(true);
     }
 
     return (
@@ -50,6 +59,7 @@ const SummaryOrderForm = () => {
             justifyContent: "space-between",
             height: "100%",
         }}>
+            <MakeOrderDialog open={isMakeOrderDialogOpen} setActive={setIsMakeOrderDialogOpen} make={handleBuy} />
             <Box>
                 <FormControl sx={{ mb: 2, mt: 2, display: "flex" }} fullWidth>
                     <Typography variant="h3">summary</Typography>
@@ -64,13 +74,7 @@ const SummaryOrderForm = () => {
                         back
                     </Button>
                 </Link>
-                <Button
-                    variant="contained"
-                    color="success"
-                    startIcon={<ShoppingBag />}
-                    sx={{ p: 2, width: "48.7%" }}
-                    onClick={handleBuy}
-                >
+                <Button variant="contained" color="success" startIcon={<ShoppingBag />} sx={{ p: 2, width: "48.7%" }} onClick={handleOpenMakeOrderDialog}>
                     buy
                 </Button>
             </div>

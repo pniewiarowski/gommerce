@@ -63,7 +63,7 @@ const ShopCheckoutPage = () => {
                             <Box>
                                 <Paper elevation={5} sx={{ mb: 1, p: 2, display: "flex", justifyContent: "space-between" }}>
                                     <Typography variant="body1">products cost</Typography>
-                                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>{fullPrice}$</Typography>
+                                    <Typography variant="body1" sx={{ fontWeight: "bold" }}>{fullPrice.toFixed(2)}$</Typography>
                                 </Paper>
                                 <Paper elevation={5} sx={{ mb: 1, p: 2, display: "flex", justifyContent: "space-between" }}>
                                     <Typography variant="body1">delivery</Typography>
@@ -74,7 +74,7 @@ const ShopCheckoutPage = () => {
                         <Box>
                             <Paper elevation={10} sx={{ mb: 2, p: 2, display: "flex", justifyContent: "space-between" }}>
                                 <Typography variant="body1">to pay (include VAT)</Typography>
-                                <Typography variant="body1" sx={{ fontWeight: "bold" }}>{fullPrice}$</Typography>
+                                <Typography variant="body1" sx={{ fontWeight: "bold" }}>{fullPrice.toFixed(2)}$</Typography>
                             </Paper>
                             <Link to="/checkout/address">
                                 <Button variant="contained" fullWidth sx={{ p: 2 }}>go next</Button>

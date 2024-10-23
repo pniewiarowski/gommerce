@@ -5,12 +5,15 @@ import (
 	"github.com/pniewiarowski/gommerce/api/_shared/environment"
 	"github.com/pniewiarowski/gommerce/api/shop/app"
 	"github.com/pniewiarowski/gommerce/api/shop/model"
+	"github.com/pniewiarowski/gommerce/api/shop/model/relation"
 )
 
 var Models = []interface{}{
 	model.Category{},
 	model.Product{},
 	model.Customer{},
+	model.Order{},
+	relation.OrderProductRelation{},
 }
 
 func main() {

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Breadcrumbs, Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
-import { Check, Close, Delete, Edit, FileCopy } from "@mui/icons-material";
+import { Check, Close, Delete, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
@@ -47,6 +47,12 @@ const AdminShopCategoryPage = () => {
                     icon={<Edit />}
                     label="Edit"
                     onClick={() => { navigate(`/shop/category/edit/${params.row.id}`) }}
+                />,
+                <GridActionsCellItem
+                    icon={<Visibility />}
+                    label="Show"
+                    onClick={() => { }}
+                    showInMenu
                 />,
                 <GridActionsCellItem
                     icon={<FileCopy />}

@@ -42,8 +42,9 @@ const AddressForm = () => {
         navigate('/checkout/payment-method');
     };
 
-    const onCancle = (event) => {
+    const onCancle = (event: Event) => {
         event.preventDefault();
+        navigate('/checkout')
     };
 
 

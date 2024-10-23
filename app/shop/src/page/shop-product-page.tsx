@@ -1,16 +1,19 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Alert, Breadcrumbs, Button, Grid, Grow, Paper, Rating, Typography } from "@mui/material";
+import { Alert, Breadcrumbs, Button, FormControl, Grid, Grow, Paper, Rating, TextField, Typography } from "@mui/material";
+import { Check, Favorite, FavoriteBorderOutlined } from "@mui/icons-material";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { ShopBagContext } from "../context";
-import { Check, Favorite, FavoriteBorderOutlined } from "@mui/icons-material";
+import { ProductDescription } from "../atom";
 
 
 const ShopProductPage = () => {
     const { shopBag, setShopBag } = useContext(ShopBagContext);
     const { set } = useCookies();
     const { productRepository, categoriesRepository } = useBackend();
+    const [isAddDisabled, setIsAddDisabled] = useState<boolean>(false);
+    const [selectedQty, setSelectedQty] = useState<number>(1);
     const [success, setSucess] = useState<string>("");
     const [product, setProduct] = useState<ProductDefinition>();
     const [category, setCategory] = useState<CategoryDefinition>();
@@ -32,12 +35,36 @@ const ShopProductPage = () => {
         fetch();
     }, [id, product]);
 
-    const add = () => {
-        setShopBag([...shopBag, product]);
-        const stringifyShopBag = JSON.stringify([...shopBag, product]);
+    useEffect(() => {
+        if (success) {
+            const timeout = setTimeout(() => {
+                setSucess("");
+                setIsAddDisabled(false);
+            }, 1500);
+            return () => {
+                clearTimeout(timeout);
+            };
+        }
+    }, [success]);
 
-        set("gommerce-shop-bag", stringifyShopBag);
+    const addProductToBag = () => {
+        const updatedShopBag = [...shopBag];
+        for (let i = 0; i < selectedQty; i++) {
+            updatedShopBag.push(product);
+        }
+
+        setShopBag(updatedShopBag);
+        set("gommerce-shop-bag", JSON.stringify(updatedShopBag));
+        setIsAddDisabled(true);
         setSucess(`you added ${product?.name} to your bag`);
+    }
+
+    const handleChangeQty = (event: Event) => {
+        setSelectedQty(event.target.value);
+    }
+
+    if (!product) {
+        return;
     }
 
     return (
@@ -95,21 +122,20 @@ const ShopProductPage = () => {
                             <Typography variant="body1" sx={{ fontSize: 24, fontWeight: "light" }}>{product?.price}$</Typography>
                             <Rating sx={{ ml: 2 }} disabled />
                         </div>
-                        <Typography variant="body1" sx={{
-                            fontSize: 20,
-                            fontWeight: "light",
-                            mt: 4,
-                            mb: 4,
-                            textAlign: "justify",
-                        }}>{product?.description}</Typography>
-                        <Button
-                            onClick={add}
-                            sx={{ p: 2 }}
-                            variant="contained"
-                            fullWidth
-                        >
-                            add to card
-                        </Button>
+                        <ProductDescription>
+                            {product.description}
+                        </ProductDescription>
+                        <FormControl sx={{ width: "15%", mr: 2 }}>
+                            <TextField label="qty" type="number" value={selectedQty} onChange={handleChangeQty} />
+                        </FormControl>
+                        <FormControl sx={{ width: "82%" }}>
+                            {!isAddDisabled && <Button onClick={addProductToBag} sx={{ p: 2 }} variant="contained" fullWidth>
+                                add to card
+                            </Button>}
+                            {isAddDisabled && <Button sx={{ p: 2 }} disabled variant="contained" fullWidth>
+                                product added
+                            </Button>}
+                        </FormControl>
                     </Paper>
                 </Grow>
             </Grid>

@@ -1,7 +1,7 @@
 import { ThemeOptions, createTheme } from "@mui/material/styles";
 
 const primary = '#651fff';
-const secondary = '#ff1f65';
+const secondary = '#651fff';
 
 const darkTheme: ThemeOptions = createTheme({
     palette: {
