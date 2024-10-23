@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Typography, Divider, Breadcrumbs, Grid, Paper, Button } from "@mui/material"
-import { Check, Close, Delete, Edit, FileCopy } from "@mui/icons-material";
+import { Check, Close, Delete, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { CustomerDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { PageContainerGrid } from "../../../atoms"
 import { JwtContext, UserContext } from "../../../context";
+import { DeleteCustomerTableAction } from "../../../organism/table-action";
 
 const AdminShopCustomerPage = () => {
     const [customers, setCustomers] = useState<Array<CustomerDefinition>>([]);
@@ -44,24 +45,9 @@ const AdminShopCustomerPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <GridActionsCellItem
-                    icon={<Delete />}
-                    label="Delete"
-                    onClick={() => {
-                        const destroy = async () => {
-                            const response = customersRepository.delete(Number(params.row.id), jwt);
-
-                            setCustomers(await response);
-                        }
-
-                        destroy();
-                    }}
-                />,
-                <GridActionsCellItem
-                    icon={<Edit />}
-                    label="Edit"
-                    onClick={() => { navigate(`/shop/customer/edit/${params.row.id}`) }}
-                />,
+                <DeleteCustomerTableAction id={params.row.id ?? 0} name={`${params.row.firstName} ${params.row.lastName}`} setCustomers={setCustomers} />,
+                <GridActionsCellItem icon={<Edit />} label="Edit" onClick={() => { navigate(`/shop/customer/edit/${params.row.id}`) }} />,
+                <GridActionsCellItem icon={<Visibility />} label="Show" onClick={() => { }} showInMenu />,
             ],
         },
     ];
