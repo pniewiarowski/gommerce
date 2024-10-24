@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Grid, Paper, Breadcrumbs, Typography } from "@mui/material";
+import { Grid, Paper, Breadcrumbs, Typography, Button, Grow } from "@mui/material";
 import { UserContext } from "../../context";
 import { PageContainerGrid } from "../../atoms";
-import { AdminSettingForm } from "../../organism";
+import { AdminBreadcrumbs, AdminSettingForm } from "../../organism";
 
 const AdminSettingsPage = () => {
     const navigate = useNavigate();
@@ -17,23 +17,19 @@ const AdminSettingsPage = () => {
 
     return (
         <PageContainerGrid>
+            <AdminBreadcrumbs breadcrumbs={[{ label: "Home", link: "/" }, { label: "Settings", link: "/settings" }]} />
             <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="primary">Settings</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
+                <Grow in={true} {...{ timeout: 250 }}>
+                    <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
+                        <AdminSettingForm />
+                    </Paper>
+                </Grow>
             </Grid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <AdminSettingForm />
-                </Paper>
-            </Grid>
+            <Grow in={true} {...{ timeout: 750 }}>
+                <Button sx={{ p: 1, width: 100, mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/')}>
+                    back
+                </Button>
+            </Grow>
         </PageContainerGrid>
     );
 }

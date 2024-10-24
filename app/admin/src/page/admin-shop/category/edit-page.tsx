@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Breadcrumbs, Divider, Grid, Paper, Typography } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
+import { Grid, Paper } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { UserContext } from "../../../context";
-import { AdminCategoryForm } from "../../../organism";
+import { AdminBreadcrumbs, AdminCategoryForm } from "../../../organism";
 import { PageContainerGrid } from "../../../atoms";
 
 const AdminShopCategoryEditPage = () => {
@@ -36,24 +36,12 @@ const AdminShopCategoryEditPage = () => {
 
     return (
         <PageContainerGrid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="text.primary">Shop</Typography>
-                        </Link>
-                        <Link to="/shop/category">
-                            <Typography color="text.primary">Category</Typography>
-                        </Link>
-                        <Link to={`/shop/category/edit/${id}`}>
-                            <Typography color="primary">Edit</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
-            </Grid>
+            <AdminBreadcrumbs breadcrumbs={[
+                { label: "Home", link: "/" },
+                { label: "Shop", link: "/shop" },
+                { label: "Category", link: "/shop/category" },
+                { label: "Edit", link: `/shop/category/edit/${id}` },
+            ]} />
             <Grid item xs={12}>
                 <Paper elevation={3} sx={{ p: 1, minHeight: "100vh" }}>
                     <AdminCategoryForm default={category} />

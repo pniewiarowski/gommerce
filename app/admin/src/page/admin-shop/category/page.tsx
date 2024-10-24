@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Grid, Grow, Paper } from "@mui/material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
-import { Check, Close, Delete, Edit, FileCopy, Visibility } from "@mui/icons-material";
+import { Check, Close, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
-import { JwtContext, UserContext } from "../../../context";
-import { PageContainerGrid, PageTitle } from "../../../atoms";
+import { AdminBreadcrumbs } from "../../../organism";
 import { DeleteCategoryTableAction } from "../../../organism/table-action";
+import { JwtContext, UserContext } from "../../../context";
+import { PageContainerGrid } from "../../../atoms";
+import { ResourceMainViewAction } from "../../../organism/resource";
 
 const AdminShopCategoryPage = () => {
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
@@ -34,7 +36,7 @@ const AdminShopCategoryPage = () => {
         {
             field: 'enabled', headerName: 'Enabled', width: 100, renderCell: (params) => {
                 return params.value ? <Check color="success" /> : <Close color="error" />;
-            },
+            }
         },
         { field: 'sortOrder', headerName: 'Sort order', width: 100 },
         {
@@ -80,39 +82,24 @@ const AdminShopCategoryPage = () => {
 
     return (
         <PageContainerGrid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="text.primary">Shop</Typography>
-                        </Link>
-                        <Link to="/shop/category">
-                            <Typography color="primary">Category</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
+            <AdminBreadcrumbs breadcrumbs={[
+                { label: "Home", link: "/" },
+                { label: "Shop", link: "/shop" },
+                { label: "Category", link: "/shop/category" },
+            ]} />
+            <Grid sx={{ height: "89%" }} item xs={12}>
+                <Grow in={true} {...{ timeout: 250 }}>
+                    <Paper elevation={3} sx={{ height: "100%" }}>
+                        <DataGrid
+                            rows={categories}
+                            columns={columns}
+                            density="comfortable"
+                            disableColumnSelector
+                        />
+                    </Paper>
+                </Grow>
             </Grid>
-            <Grid sx={{ height: "87%" }} item xs={12}>
-                <Paper elevation={3} sx={{ height: "100%" }}>
-                    <DataGrid
-                        rows={categories}
-                        columns={columns}
-                        density="comfortable"
-                        disableColumnSelector
-                    />
-                </Paper>
-            </Grid>
-            <Grid sx={{ mt: 1.5 }} item xs={12}>
-                <Button sx={{ p: 2, width: 200, mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/shop')}>
-                    back
-                </Button>
-                <Button sx={{ p: 2, width: 200 }} color="primary" variant="contained" onClick={() => navigate('/shop/category/create')}>
-                    add
-                </Button>
-            </Grid>
+            <ResourceMainViewAction backLink="/shop" createLink="/shop/category/create" />
         </PageContainerGrid>
     )
 }

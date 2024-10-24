@@ -4,6 +4,8 @@ import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import { CustomerDefinition, UserDefinition } from "gommerce-app-shared/api/definition";
 import {
     AdminAccountPage,
+    AdminCMSPage,
+    AdminCMSThemePage,
     AdminHomePage,
     AdminLoginPage,
     AdminMailingPage,
@@ -74,6 +76,8 @@ const App = () => {
                                         <Route path="/shop/customer" element={<AdminShopCustomerPage />} />
                                         <Route path="/shop/customer/create" element={<AdminShopCustomerCreatePage />} />
                                         <Route path="/shop/customer/edit/:id" element={<AdminShopCustomerEditPage />} />
+                                        <Route path="/cms" element={<AdminCMSPage />} />
+                                        <Route path="/cms/theme" element={<AdminCMSThemePage />} />
                                         <Route path="/shop/order" element={<AdminShopOrderPage />} />
                                         <Route path="/mailing" element={<AdminMailingPage />} />
                                         <Route path="/account" element={<AdminAccountPage />} />

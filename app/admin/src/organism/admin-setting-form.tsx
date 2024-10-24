@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 const AdminSettingForm = () => {
     return (
-        <Box sx={{ height: "94vh", overflowY: "scroll" }}>
+        <Box sx={{ maxHeight: "86vh", overflowY: "scroll" }}>
             <form style={{ overflowY: "scroll" }}>
             </form>
         </Box>

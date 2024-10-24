@@ -10,6 +10,8 @@ export { default as AdminShopProductEditPage } from "./admin-shop/product/edit-p
 export { default as AdminShopCustomerPage } from "./admin-shop/customer/page";
 export { default as AdminShopCustomerCreatePage } from "./admin-shop/customer/create-page";
 export { default as AdminShopCustomerEditPage } from "./admin-shop/customer/edit-page";
+export { default as AdminCMSPage } from "./admin-cms/admin-cms-page";
+export { default as AdminCMSThemePage } from "./admin-cms/theme/page";
 export { default as AdminShopOrderPage } from "./admin-shop/order/page";
 export { default as AdminMailingPage } from "./admin-mailing-page";
 export { default as AdminAccountPage } from "./admin-account-page";

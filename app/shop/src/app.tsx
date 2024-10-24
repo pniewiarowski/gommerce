@@ -52,7 +52,12 @@ const App = () => {
         const userID: number = get("userID");
         const userEmail: string = get("userEmail");
         const jwt: string = get("jwt");
-        const shopBag: Array<ProductDefinition> = JSON.parse(get("gommerce-shop-bag"));
+
+        const cookieBag = get("gommerce-shop-bag");
+        if (cookieBag.length !== 0) {
+            const shopBag: Array<ProductDefinition> = JSON.parse(cookieBag);
+            setShopBag(shopBag);
+        }
 
         setCustomer({
             id: customerID,
@@ -69,7 +74,7 @@ const App = () => {
         });
 
         setJwt(jwt);
-        setShopBag(shopBag);
+
     }, []);
 
     return (

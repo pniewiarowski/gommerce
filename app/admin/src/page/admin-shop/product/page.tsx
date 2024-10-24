@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Button, Grid, Paper, Typography } from "@mui/material";
+import { Breadcrumbs, Button, Grid, Grow, Paper, Typography } from "@mui/material";
 import { Check, Close, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
@@ -8,6 +8,7 @@ import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
 import { DeleteProductTableAction } from "../../../organism/table-action";
+import { ResourceMainViewAction } from "../../../organism/resource";
 
 const AdminShopProductPage = () => {
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
@@ -122,24 +123,19 @@ const AdminShopProductPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ height: "87%" }} item xs={12}>
-                <Paper elevation={3} sx={{ height: "100%" }}>
-                    <DataGrid
-                        rows={products}
-                        columns={columns}
-                        density="comfortable"
-                        disableColumnSelector
-                    />
-                </Paper>
+            <Grid sx={{ height: "89%" }} item xs={12}>
+                <Grow in={true} {...{ timeout: 250 }}>
+                    <Paper elevation={3} sx={{ height: "100%" }}>
+                        <DataGrid
+                            rows={products}
+                            columns={columns}
+                            density="comfortable"
+                            disableColumnSelector
+                        />
+                    </Paper>
+                </Grow>
             </Grid>
-            <Grid sx={{ mt: 1.5 }} item xs={12}>
-                <Button sx={{ p: 2, width: 200, mr: 2 }} color="error" variant="outlined" onClick={() => navigate('/shop')}>
-                    go back
-                </Button>
-                <Button sx={{ p: 2, width: 200 }} color="primary" variant="contained" onClick={() => navigate('/shop/product/create')}>
-                    add
-                </Button>
-            </Grid>
+            <ResourceMainViewAction backLink="/shop" createLink="/shop/product/create" />
         </PageContainerGrid>
     );
 }

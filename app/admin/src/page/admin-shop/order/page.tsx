@@ -4,7 +4,7 @@ import { useBackend } from "gommerce-app-shared/hook";
 import { OrderDefinition } from "gommerce-app-shared/api/definition";
 import { UserContext, JwtContext } from "../../../context";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
-import { Typography, Divider, Grid, Paper, Breadcrumbs, Button } from "@mui/material";
+import { Typography, Grid, Paper, Breadcrumbs, Button } from "@mui/material";
 import { PageContainerGrid } from "../../../atoms";
 import { Delete } from "@mui/icons-material";
 
@@ -32,7 +32,7 @@ const AdminShopOrderPage = () => {
     const columns: GridColDef<(typeof orders)[number]>[] = [
         { field: "id", headerName: "ID", width: 100 },
         { field: "fullPrice", headerName: "Full price", width: 200 },
-        { field: "customerId", headerName: "Customer ID", width: 100 },
+        { field: "customerID", headerName: "Customer ID", width: 100 },
         {
             field: "actions",
             type: "actions",
@@ -57,9 +57,7 @@ const AdminShopOrderPage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">orders</Typography>
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
+            <Grid item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
@@ -74,7 +72,7 @@ const AdminShopOrderPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid sx={{ mt: 2, height: "78%" }} item xs={12}>
+            <Grid sx={{ height: "87%" }} item xs={12}>
                 <Paper elevation={3} sx={{ height: "100%" }}>
                     <DataGrid
                         rows={orders}

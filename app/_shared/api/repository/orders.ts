@@ -13,7 +13,7 @@ class Orders implements Repository {
             }
         });
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async getByID(id: number, token: string): Promise<OrderDefinition> {
@@ -24,7 +24,7 @@ class Orders implements Repository {
             }
         });
 
-        return response.data;
+        return response.data.data;
     }
 
     public async getResourceInfo(token: string): Promise<ResourceInfoDefinition> {
@@ -35,15 +35,12 @@ class Orders implements Repository {
             },
         });
 
-        return response.data;
+        return response.data.data;
     }
 
     public async create(order: OrderDefinition, token: string): Promise<OrderDefinition> {
         const response = await shop.post(`/${Orders.resource}`,
             {
-                id: order.id,
-                fullPrice: order.fullPrice,
-                customerId: order.customerId,
             },
             {
                 headers: {
@@ -52,7 +49,7 @@ class Orders implements Repository {
                 }
             });
 
-        return response.data;
+        return response.data.data;
     }
 
     public async delete(id: number, token: string): Promise<Array<OrderDefinition>> {
@@ -65,15 +62,12 @@ class Orders implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 
     public async update(order: OrderDefinition, token: string): Promise<OrderDefinition> {
         const response = await shop.put(`/${Orders.resource}/${order.id}`,
             {
-                id: order.id,
-                status: order.status,
-                customerId: order.customerId,
             },
             {
                 headers: {
@@ -83,7 +77,7 @@ class Orders implements Repository {
             }
         );
 
-        return await response.data;
+        return await response.data.data;
     }
 }
 

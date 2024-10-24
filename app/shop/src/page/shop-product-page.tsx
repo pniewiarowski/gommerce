@@ -132,7 +132,7 @@ const ShopProductPage = () => {
                             {!isAddDisabled && <Button onClick={addProductToBag} sx={{ p: 2 }} variant="contained" fullWidth>
                                 add to card
                             </Button>}
-                            {isAddDisabled && <Button sx={{ p: 2 }} disabled variant="contained" fullWidth>
+                            {isAddDisabled && <Button sx={{ p: 2 }} loading variant="contained" fullWidth>
                                 product added
                             </Button>}
                         </FormControl>

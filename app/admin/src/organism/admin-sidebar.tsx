@@ -1,5 +1,5 @@
 import { Avatar, Container, Divider, Grid, List, ListItemButton, ListItemIcon, ListItemText, Paper, Theme, Typography, useTheme } from "@mui/material";
-import { Home, Logout, Mail, Payment, Person, Settings, ShoppingBag } from "@mui/icons-material";
+import { Brush, Home, Logout, Mail, Payment, Person, Settings, ShoppingBag } from "@mui/icons-material";
 import { Fragment, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "gommerce-app-shared/hook";
@@ -42,7 +42,8 @@ const AdminSidebar = () => {
         new SidebarItem(3, 'Mailing', () => { setActive(3); navigate("/mailing"); }, <Mail />),
         new SidebarItem(4, 'Account', () => { setActive(4); navigate("/account"); }, <Person />),
         new SidebarItem(5, 'Payment', () => { setActive(5); navigate("/payment"); }, <Payment />),
-        new SidebarItem(6, 'Settings', () => { setActive(6); navigate("/settings"); }, <Settings />),
+        new SidebarItem(6, 'CMS', () => { setActive(6); navigate("/cms"); }, <Brush />),
+        new SidebarItem(7, 'Settings', () => { setActive(7); navigate("/settings"); }, <Settings />),
     ].map((item) => {
         return (
             <Fragment>

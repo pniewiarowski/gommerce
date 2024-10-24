@@ -5,6 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/pniewiarowski/gommerce/api/cms/route"
 	"log"
 )
 
@@ -19,7 +20,11 @@ func Run(port int) {
 	app.Use(logger.New())
 
 	api := app.Group("/api")
-	_ = api.Group("/v1")
-	
+	v1 := api.Group("/v1")
+
+	themes := v1.Group("/themes")
+
+	route.SetupTheme(themes)
+
 	log.Fatal(app.Listen(fmt.Sprintf(":%d", port)))
 }
