@@ -31,12 +31,12 @@ const ShopCustomerRegisterPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            {!!query.get("errorRegister") &&
+            {!!query.get("error") &&
                 <React.Fragment>
                     <Grid item xs={12} spacing={1}>
                         <Grow in={true} {...{ timeout: 250 }}>
                             <Alert icon={<Cancel fontSize="inherit" />} severity="error" sx={{ p: 2 }} variant={"standard"}>
-                                <Typography>{query.get("errorRegister")}</Typography>
+                                <Typography>{query.get("error")}</Typography>
                             </Alert>
                         </Grow>
                     </Grid>

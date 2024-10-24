@@ -40,7 +40,7 @@ const CustomerRegisterForm = () => {
                 }, register.token);
             } catch (exception: any) {
                 const message = JSON.parse(exception.request.response).message;
-                navigate(`/register?errorRegister=${message}`);
+                navigate(`/register?error=${message}`);
                 return false;
             }
 

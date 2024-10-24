@@ -15,6 +15,7 @@ import (
 type OrderController struct {
 	OrderRepository    repository.OrderRepository
 	CustomerRepository repository.CustomerRepository
+	ProductRepository  repository.ProductRepository
 	JWTHelper          authhelper.JWTHelper
 	FiberHelper        sharedhelper.FiberContextHelper
 }
@@ -35,8 +36,9 @@ func (oc *OrderController) Index(ctx *fiber.Ctx) error {
 		})
 	}
 
+	order := dto.OrderFromCollection(data)
 	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
-		Data: dto.OrderFromCollection(data),
+		Data: order,
 	})
 }
 
@@ -60,13 +62,38 @@ func (oc *OrderController) Store(ctx *fiber.Ctx) error {
 		})
 	}
 
-	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
-	_ = model.Order{
-		CustomerID: claims[definition.JwtClaimId].(uint),
-		FullPrice:  0,
+	fullPrice := float32(0)
+	for _, id := range orderRequest.ProductIDs {
+		product, err := oc.ProductRepository.ReadByID(id)
+		if err != nil {
+			return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+				Message: "product with provided ID does not exists",
+			})
+		}
+
+		fullPrice += product.Price
 	}
 
-	return ctx.Status(fiber.StatusOK).JSON(&fiber.Map{})
+	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
+	order := model.Order{
+		CustomerID: claims[definition.JwtClaimId].(uint),
+		FullPrice:  fullPrice,
+	}
+
+	createdOrder, err := oc.OrderRepository.Create(&order, orderRequest.ProductIDs)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+			Message: "something went wrong while saving entity",
+		})
+	}
+
+	createdOrderDTO := dto.OrderFromModel(*createdOrder)
+	orderProducts, _ := oc.OrderRepository.ReadProducts(createdOrderDTO.ID)
+	createdOrderDTO.Products = dto.ProductFromCollection(orderProducts)
+
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: createdOrderDTO,
+	})
 }
 
 func (oc *OrderController) Update(ctx *fiber.Ctx) error {

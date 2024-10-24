@@ -4,12 +4,25 @@ import (
 	"errors"
 	"github.com/pniewiarowski/gommerce/api/_shared/database"
 	"github.com/pniewiarowski/gommerce/api/shop/model"
+	"github.com/pniewiarowski/gommerce/api/shop/model/relation"
 )
 
 type OrderRepository struct{}
 
-func (_ *OrderRepository) Create(order *model.Order) (*model.Order, error) {
+func (or *OrderRepository) Create(order *model.Order, productIDs []uint) (*model.Order, error) {
 	err := database.DataBase.Create(order).Error
+
+	for _, productID := range productIDs {
+		orderProductRelation := relation.OrderProductRelation{
+			OrderID:   order.ID,
+			ProductID: productID,
+		}
+
+		err := database.DataBase.Create(&orderProductRelation).Error
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	if err != nil {
 		return nil, err
@@ -32,6 +45,21 @@ func (_ *OrderRepository) ReadByID(entityID uint) (*model.Order, error) {
 	err := database.DataBase.First(&order, "id = ?", entityID).Error
 
 	return &order, err
+}
+
+func (_ *OrderRepository) ReadProducts(entityID uint) ([]model.Product, error) {
+	var productOrderRelation []relation.OrderProductRelation
+	productRepository := ProductRepository{}
+
+	err := database.DataBase.Where("order_id = ?", entityID).Find(&productOrderRelation).Error
+
+	var products []model.Product
+	for _, item := range productOrderRelation {
+		product, _ := productRepository.ReadByID(item.ProductID)
+		products = append(products, *product)
+	}
+
+	return products, err
 }
 
 func (or *OrderRepository) Update(order, updatedOrder *model.Order) (*model.Order, error) {

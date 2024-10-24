@@ -14,12 +14,14 @@ func SetupOrderRoute(router fiber.Router) {
 	or := repository.OrderRepository{}
 	urr := authrepository.UserRoleRepository{}
 	cr := repository.CustomerRepository{}
+	pr := repository.ProductRepository{}
 	jwt := authhelper.JWTHelper{UserRoleRepository: urr}
 	fh := sharedhelper.FiberContextHelper{}
 
 	c := controller.OrderController{
 		OrderRepository:    or,
 		CustomerRepository: cr,
+		ProductRepository:  pr,
 		JWTHelper:          jwt,
 		FiberHelper:        fh,
 	}

@@ -61,6 +61,7 @@ const AdminProductForm = (props: Props) => {
                 price: data.price,
                 sortOrder: Number(data.sortOrder),
                 categoryID: categoryID,
+                imageURL: ""
             }, jwt);
 
             navigate('/shop/product')
@@ -75,6 +76,7 @@ const AdminProductForm = (props: Props) => {
                 price: data.price,
                 sortOrder: Number(data.sortOrder),
                 categoryID: categoryID,
+                imageURL: ""
             }, jwt);
             navigate('/shop/product')
         }
@@ -104,7 +106,7 @@ const AdminProductForm = (props: Props) => {
                         </Button>
                         <input ref={fileUpload} style={{ display: "none" }} id="file" type="file" onChange={handleFileChange} />
                     </FormControl>
-                    <FormControl sx={{ mb: 2, mr: 2, width: "70%" }} fullWidth>
+                    <FormControl sx={{ mb: 2, width: "70%" }} fullWidth>
                         <TextField
                             label="description"
                             variant="outlined"

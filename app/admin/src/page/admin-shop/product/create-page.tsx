@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography, Divider, Grid, Paper, Breadcrumbs } from "@mui/material";
+import { Typography, Grid, Paper, Breadcrumbs } from "@mui/material";
 import { UserContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
 import { AdminProductForm } from "../../../organism";
@@ -17,9 +17,7 @@ const AdminShopProductCreatePage = () => {
 
     return (
         <PageContainerGrid>
-            <Typography sx={{ fontSize: 40, }} variant="h2">create product</Typography>
-            <Divider sx={{ mt: 2, mb: 1 }} />
-            <Grid sx={{ mt: 1 }} item xs={12}>
+            <Grid item xs={12}>
                 <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
                     <Breadcrumbs aria-label="breadcrumb">
                         <Link to="/">
@@ -38,7 +36,7 @@ const AdminShopProductCreatePage = () => {
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Paper elevation={3} sx={{ p: 2 }}>
+                <Paper elevation={3} sx={{ p: 1, minHeight: "100vh" }}>
                     <AdminProductForm />
                 </Paper>
             </Grid>

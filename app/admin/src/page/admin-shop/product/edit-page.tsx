@@ -55,7 +55,7 @@ const AdminShopProductEditPage = () => {
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Paper elevation={3} sx={{ minHeight: "100vh", p: 2 }}>
+                <Paper elevation={3} sx={{ p: 1, minHeight: "100vh" }}>
                     <AdminProductForm default={product} />
                 </Paper>
             </Grid>

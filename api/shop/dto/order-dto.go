@@ -3,9 +3,10 @@ package dto
 import "github.com/pniewiarowski/gommerce/api/shop/model"
 
 type OrderDTO struct {
-	ID         uint    `gorm:"primaryKey" json:"id"`
-	CustomerID uint    `json:"customerID"`
-	FullPrice  float32 `json:"fullPrice"`
+	ID         uint         `gorm:"primaryKey" json:"id"`
+	CustomerID uint         `json:"customerID"`
+	FullPrice  float32      `json:"fullPrice"`
+	Products   []ProductDTO `json:"products"`
 }
 
 func OrderFromModel(order model.Order) OrderDTO {
@@ -13,6 +14,7 @@ func OrderFromModel(order model.Order) OrderDTO {
 		ID:         order.ID,
 		CustomerID: order.CustomerID,
 		FullPrice:  order.FullPrice,
+		Products:   []ProductDTO{},
 	}
 }
 
