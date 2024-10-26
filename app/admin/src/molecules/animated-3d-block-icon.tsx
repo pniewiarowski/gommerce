@@ -33,9 +33,9 @@ const Animated3DBlockIcon = styled.div`
     }
 
     &:hover {
-        background-color: #${props => props.variant === 'dark' ? "ffffffee" : "00000077"};
-        border-left: solid 0.3rem #${props => props.variant === 'dark' ? "ddddddee" : "11111177"};
-        border-bottom: solid 0.5rem #${props => props.variant === 'dark' ? "aaaaaaee" : "17171777"};
+        background-color: #${props => props.variant === 'dark' ? "ffffffee" : "000000cc"};
+        border-left: solid 0.3rem #${props => props.variant === 'dark' ? "ddddddee" : "111111cc"};
+        border-bottom: solid 0.5rem #${props => props.variant === 'dark' ? "aaaaaaee" : "171717cc"};
         cursor: pointer;
     }
 `;

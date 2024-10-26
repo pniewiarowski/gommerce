@@ -118,6 +118,7 @@ const AdminShopProductPage = () => {
                 <Grow in={true} {...{ timeout: 250 }}>
                     <Paper elevation={3} sx={{ height: "100%" }}>
                         <DataGrid
+                            checkboxSelection
                             sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
                             rows={products}
                             columns={columns}
