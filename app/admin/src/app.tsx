@@ -26,7 +26,7 @@ import {
 import { useCookies } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "./context";
 import { darkTheme } from "./theme";
-import { AdminSidebar } from "./organism";
+import { AdminGoopher, AdminSidebar } from "./organism";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -59,10 +59,12 @@ const App = () => {
                 <UserContext.Provider value={{ user, setUser }}>
                     <ThemeProvider theme={darkTheme}>
                         <CssBaseline enableColorScheme />
+
                         <BrowserRouter>
                             <Grid container>
                                 <Fragment>
                                     {user && jwt && <AdminSidebar />}
+                                    {user && jwt && <AdminGoopher />}
                                     <Routes>
                                         <Route path="/" element={<AdminHomePage />} />
                                         <Route path="/login" element={<AdminLoginPage />} />
