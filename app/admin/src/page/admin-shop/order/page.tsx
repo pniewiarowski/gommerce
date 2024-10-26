@@ -4,9 +4,11 @@ import { useBackend } from "gommerce-app-shared/hook";
 import { OrderDefinition } from "gommerce-app-shared/api/definition";
 import { UserContext, JwtContext } from "../../../context";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
-import { Typography, Grid, Paper, Breadcrumbs, Button } from "@mui/material";
+import { Typography, Grid, Paper, Breadcrumbs, Button, Grow } from "@mui/material";
 import { PageContainerGrid } from "../../../atoms";
 import { Delete } from "@mui/icons-material";
+import { AdminBreadcrumbs } from "../../../organism";
+import ResourceMainViewAction from "../../../organism/resource/resource-main-view-action";
 
 const AdminShopOrderPage = () => {
     const [orders, setOrders] = useState<Array<OrderDefinition>>([]);
@@ -57,39 +59,24 @@ const AdminShopOrderPage = () => {
 
     return (
         <PageContainerGrid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="text.primary">Shop</Typography>
-                        </Link>
-                        <Link to="/shop/order">
-                            <Typography color="primary">Order</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
+            <AdminBreadcrumbs breadcrumbs={[
+                { label: "Home", link: "/" },
+                { label: "Shop", link: "/shop" },
+                { label: "Customer", link: "/shop/order" },
+            ]} />
+            <Grid sx={{ height: "89%" }} item xs={12}>
+                <Grow in={true} {...{ timeout: 250 }}>
+                    <Paper elevation={3} sx={{ height: "100%" }}>
+                        <DataGrid
+                            rows={orders}
+                            columns={columns}
+                            density="comfortable"
+                            disableColumnSelector
+                        />
+                    </Paper>
+                </Grow>
             </Grid>
-            <Grid sx={{ height: "87%" }} item xs={12}>
-                <Paper elevation={3} sx={{ height: "100%" }}>
-                    <DataGrid
-                        rows={orders}
-                        columns={columns}
-                        density="comfortable"
-                        disableColumnSelector
-                    />
-                </Paper>
-            </Grid>
-            <Grid sx={{ mt: 1.5 }} item xs={12}>
-                <Button sx={{ p: 2, width: 200, mr: 2 }} color="error" variant="outlined" onClick={() => navigate("/shop")}>
-                    go back
-                </Button>
-                <Button sx={{ p: 2, width: 200 }} color="primary" variant="contained" onClick={() => navigate("/shop/order/create")}>
-                    add
-                </Button>
-            </Grid>
+            <ResourceMainViewAction backLink="/shop" createLink="/shop/order/create" />
         </PageContainerGrid>
     );
 }

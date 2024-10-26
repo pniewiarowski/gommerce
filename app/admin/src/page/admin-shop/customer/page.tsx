@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Typography, Divider, Breadcrumbs, Grid, Paper, Button } from "@mui/material"
+import { Typography, Divider, Breadcrumbs, Grid, Paper, Button, Grow } from "@mui/material"
 import { Check, Close, Delete, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { CustomerDefinition } from "gommerce-app-shared/api/definition";
@@ -8,6 +8,8 @@ import { useBackend } from "gommerce-app-shared/hook";
 import { PageContainerGrid } from "../../../atoms"
 import { JwtContext, UserContext } from "../../../context";
 import { DeleteCustomerTableAction } from "../../../organism/table-action";
+import { AdminBreadcrumbs } from "../../../organism";
+import { ResourceMainViewAction } from "../../../organism/resource";
 
 const AdminShopCustomerPage = () => {
     const [customers, setCustomers] = useState<Array<CustomerDefinition>>([]);
@@ -54,39 +56,24 @@ const AdminShopCustomerPage = () => {
 
     return (
         <PageContainerGrid>
-            <Grid item xs={12} sx={{ mb: 1 }}>
-                <Paper sx={{ p: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="text.primary">Shop</Typography>
-                        </Link>
-                        <Link to="/shop/customer">
-                            <Typography color="primary">Customer</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
+            <AdminBreadcrumbs breadcrumbs={[
+                { label: "Home", link: "/" },
+                { label: "Shop", link: "/shop" },
+                { label: "Customer", link: "/shop/customer" },
+            ]} />
+            <Grid sx={{ height: "89%" }} item xs={12}>
+                <Grow in={true} {...{ timeout: 250 }}>
+                    <Paper elevation={3} sx={{ height: "100%" }}>
+                        <DataGrid
+                            rows={customers}
+                            columns={columns}
+                            density="comfortable"
+                            disableColumnSelector
+                        />
+                    </Paper>
+                </Grow>
             </Grid>
-            <Grid sx={{ height: "87%" }} item xs={12}>
-                <Paper elevation={3} sx={{ height: "100%" }}>
-                    <DataGrid
-                        rows={customers}
-                        columns={columns}
-                        density="comfortable"
-                        disableColumnSelector
-                    />
-                </Paper>
-            </Grid>
-            <Grid sx={{ mt: 1.5 }} item xs={12}>
-                <Button sx={{ p: 2, width: 200, mr: 2 }} color="error" variant="outlined" onClick={() => navigate("/shop")}>
-                    go back
-                </Button>
-                <Button sx={{ p: 2, width: 200 }} color="primary" variant="contained" onClick={() => navigate("/shop/customer/create")}>
-                    add
-                </Button>
-            </Grid>
+            <ResourceMainViewAction backLink="/shop" createLink="/shop/customer/create" />
         </PageContainerGrid>
     );
 }
