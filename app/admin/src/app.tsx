@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CssBaseline, Grid, ThemeProvider } from "@mui/material";
-import { CustomerDefinition, UserDefinition } from "gommerce-app-shared/api/definition";
+import { UserDefinition } from "gommerce-app-shared/api/definition";
 import {
     AdminAccountPage,
     AdminCMSPage,
@@ -24,15 +24,17 @@ import {
     AdminShopProductPage,
 } from "./page";
 import { useCookies } from "gommerce-app-shared/hook";
-import { JwtContext, UserContext } from "./context";
-import { darkTheme } from "./theme";
-import { AdminGoopher, AdminSidebar } from "./organism";
+import { JwtContext, ThemeContext, UserContext } from "./context";
+import { darkTheme, lightTheme } from "./theme";
+import { AdminGoopher, AdminSidebar, AdminThemeSwitcher } from "./organism";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState<UserDefinition | null>(null);
     const [jwt, setJwt] = useState<string | null>(null);
+    const [theme, setTheme] = useState<string>("dark");
     const { get } = useCookies();
+
     useEffect(() => {
         if (!get("userID")) {
             setLoading(false);
@@ -43,10 +45,12 @@ const App = () => {
         const userID: number = get("userID");
         const userEmail: string = get("userEmail");
         const jwt: string = get("jwt");
+        const theme: string = get("gommerce-admin-panel-theme");
 
         setUser({ id: userID, email: userEmail, password: "" });
         setJwt(jwt);
         setLoading(false);
+        setTheme(theme);
     }, []);
 
     if (loading) {
@@ -57,12 +61,12 @@ const App = () => {
         <Fragment>
             <JwtContext.Provider value={{ jwt, setJwt }}>
                 <UserContext.Provider value={{ user, setUser }}>
-                    <ThemeProvider theme={darkTheme}>
+                    <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
                         <CssBaseline enableColorScheme />
-
                         <BrowserRouter>
                             <Grid container>
                                 <Fragment>
+                                    <AdminThemeSwitcher setTheme={setTheme} theme={theme} />
                                     {user && jwt && <AdminSidebar />}
                                     {user && jwt && <AdminGoopher />}
                                     <Routes>

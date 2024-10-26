@@ -8,3 +8,4 @@ export { default as AdminBreadcrumbs } from "./admin-breadcrumbs";
 export { default as AdminSidebar } from "./admin-sidebar";
 
 export { default as AdminGoopher } from "./admin-goopher";
+export { default as AdminThemeSwitcher } from "./admin-theme-switcher";

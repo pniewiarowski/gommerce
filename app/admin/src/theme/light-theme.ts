@@ -20,22 +20,18 @@ const lightTheme: ThemeOptions = createTheme({
         h3: {
             fontWeight: 900,
             fontFamily: "Roboto",
-            fontSize: 20,
+            fontSize: 18,
         },
         h4: {
             fontWeight: 700,
             fontFamily: "Roboto",
             fontSize: 14,
         },
+        body1: {
+            fontSize: 14,
+        }
     },
     components: {
-        MuiAppBar: {
-            styleOverrides: {
-                colorPrimary: {
-                    backgroundColor: "#ffffff"
-                }
-            }
-        },
         MuiButton: {
             styleOverrides: {
                 root: {
