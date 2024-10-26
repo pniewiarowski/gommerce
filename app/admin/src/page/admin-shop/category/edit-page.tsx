@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Grow } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { UserContext } from "../../../context";
@@ -43,9 +43,7 @@ const AdminShopCategoryEditPage = () => {
                 { label: "Edit", link: `/shop/category/edit/${id}` },
             ]} />
             <Grid item xs={12}>
-                <Paper elevation={3} sx={{ p: 1, minHeight: "100vh" }}>
-                    <AdminCategoryForm default={category} />
-                </Paper>
+                <AdminCategoryForm default={category} />
             </Grid>
         </PageContainerGrid >
     );

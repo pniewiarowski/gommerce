@@ -4,6 +4,7 @@ import { Breadcrumbs, Button, Grid, Grow, Paper, Typography } from "@mui/materia
 import { UserContext } from "../../context";
 import { PageContainerGrid, PaperButton } from "../../atoms";
 import { AdminBreadcrumbs } from "../../organism";
+import { LineChart } from "@mui/x-charts";
 
 class ShopResource {
     constructor(
@@ -18,10 +19,11 @@ const AdminShopPage = () => {
     const { user } = useContext(UserContext);
     const iconSize = 50;
     const resources = [
-        new ShopResource("Categories", "/shop/category", <img src="inventory-category.png" width={iconSize} />),
-        new ShopResource("Products", "/shop/product", <img src="shopping-cart.png" width={iconSize} />),
-        new ShopResource("Customers", "/shop/customer", <img src="customers.png" width={iconSize} />),
-        new ShopResource("Orders", "/shop/order", <img src="money-bag.png" width={iconSize} />),
+        new ShopResource("Categories", "/shop/category", <img src="/inventory-category.png" width={iconSize} />),
+        new ShopResource("Products", "/shop/product", <img src="/shopping-cart.png" width={iconSize} />),
+        new ShopResource("Customers", "/shop/customer", <img src="/customers.png" width={iconSize} />),
+        new ShopResource("Addresses", "/shop/address", <img src="/company.png" width={iconSize} />),
+        new ShopResource("Orders", "/shop/order", <img src="/money-bag.png" width={iconSize} />),
     ];
 
     useEffect(() => {
@@ -33,6 +35,42 @@ const AdminShopPage = () => {
     return (
         <PageContainerGrid>
             <AdminBreadcrumbs breadcrumbs={[{ label: "Home", link: "/" }, { label: "Shop", link: "/shop" }]} />
+            <Grid container spacing={1} sx={{ mb: 1 }}>
+                <Grid xl={6} item>
+                    <Grow in={true} {...{ timeout: 250 }}>
+                        <Paper elevation={4} sx={{ p: 2 }}>
+                            <Typography variant="h3">registered customers</Typography>
+                            <LineChart
+                                xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
+                                series={[
+                                    { data: [3, 1, 2, 5, 5, 1], },
+                                ]}
+                                width={780}
+                                height={300}
+                                margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
+                                grid={{ vertical: true, horizontal: true }}
+                            />
+                        </Paper>
+                    </Grow>
+                </Grid>
+                <Grid xl={6} item>
+                    <Grow in={true} {...{ timeout: 500 }}>
+                        <Paper elevation={4} sx={{ p: 2 }}>
+                            <Typography variant="h3">created orders</Typography>
+                            <LineChart
+                                xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
+                                series={[
+                                    { data: [0, 1, 2, 3, 0, 1], },
+                                ]}
+                                width={780}
+                                height={300}
+                                margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
+                                grid={{ vertical: true, horizontal: true }}
+                            />
+                        </Paper>
+                    </Grow>
+                </Grid>
+            </Grid>
             <Grid container spacing={1}>
                 <Grid xl={12} item>
                     {resources.map((resource, index: number) => {

@@ -40,42 +40,6 @@ const AdminHomePage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-            <Grid container spacing={1} sx={{ mb: 1 }}>
-                <Grid xl={6} item>
-                    <Grow in={true} {...{ timeout: 250 }}>
-                        <Paper elevation={4} sx={{ p: 2 }}>
-                            <Typography variant="h3">registered customers</Typography>
-                            <LineChart
-                                xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
-                                series={[
-                                    { data: [3, 1, 2, 5, 5, 1], },
-                                ]}
-                                width={780}
-                                height={300}
-                                margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
-                                grid={{ vertical: true, horizontal: true }}
-                            />
-                        </Paper>
-                    </Grow>
-                </Grid>
-                <Grid xl={6} item>
-                    <Grow in={true} {...{ timeout: 500 }}>
-                        <Paper elevation={4} sx={{ p: 2 }}>
-                            <Typography variant="h3">orders</Typography>
-                            <LineChart
-                                xAxis={[{ data: [1, 2, 3, 4, 5, 6] }]}
-                                series={[
-                                    { data: [0, 1, 2, 3, 0, 1], },
-                                ]}
-                                width={780}
-                                height={300}
-                                margin={{ left: 30, right: 30, top: 30, bottom: 30 }}
-                                grid={{ vertical: true, horizontal: true }}
-                            />
-                        </Paper>
-                    </Grow>
-                </Grid>
-            </Grid>
             <Grid container spacing={1}>
                 <Grid xl={12} item>
                     {services.map((service, index: number) => {

@@ -26,11 +26,13 @@ func Run(port int) {
 	categories := v1.Group("/categories")
 	products := v1.Group("/products")
 	customers := v1.Group("/customers")
+	addresses := v1.Group("/addresses")
 	orders := v1.Group("orders")
 
 	route.SetupCategoryRoute(categories)
 	route.SetupProductRoute(products)
 	route.SetupCustomerRoute(customers)
+	route.SetupAddressRoute(addresses)
 	route.SetupOrderRoute(orders)
 
 	log.Fatal(app.Listen(fmt.Sprintf(":%d", port)))

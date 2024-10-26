@@ -12,6 +12,7 @@ var Models = []interface{}{
 	model.Category{},
 	model.Product{},
 	model.Customer{},
+	model.Address{},
 	model.Order{},
 	relation.OrderProductRelation{},
 }

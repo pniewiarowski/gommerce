@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Grid, Paper } from "@mui/material";
+import { Grid } from "@mui/material";
 import { UserContext } from "../../../context";
 import { AdminBreadcrumbs, AdminCategoryForm } from "../../../organism";
 import { PageContainerGrid } from "../../../atoms";
@@ -24,9 +24,7 @@ const AdminShopCategoryCreatePage = () => {
                 { label: "Create", link: "/shop/category/create" },
             ]} />
             <Grid item xs={12}>
-                <Paper elevation={3} sx={{ p: 1, minHeight: "100vh" }}>
-                    <AdminCategoryForm />
-                </Paper>
+                <AdminCategoryForm />
             </Grid>
         </PageContainerGrid>
     );
