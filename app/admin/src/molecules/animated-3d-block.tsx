@@ -8,18 +8,18 @@ const Animated3DBlock = styled.div`
     height: 600px;
     display: flex;
     flex-wrap: wrap;
-    background-image: linear-gradient(50deg, #272727 30%, #373737);
-    border-left: solid 0.5rem #111111;
-    border-bottom: solid 0.8rem #171717;
+    background-image: linear-gradient(50deg, #${props => props.variant === 'dark' ? "272727" : "dadada"} 30%, #${props => props.variant === 'dark' ? "373737" : "eaeaea"});
+    border-left: solid 0.5rem #${props => props.variant === 'dark' ? "111111" : "999999"};
+    border-bottom: solid 0.8rem #${props => props.variant === 'dark' ? "171717" : "aaaaaa"};
     border-radius: 20px;
     transform: rotateX(30deg) rotateY(3deg) rotateZ(-20deg);
     animation: float-court 5s ease-in-out infinite;
 
     &::before {
         content: "";
-        border-left: solid 4rem #272727;
-        border-right: solid 4rem #272727;
-        border-top: solid 4rem #272727;
+        border-left: solid 4rem #${props => props.variant === 'dark' ? "373737" : "eaeaea"};
+        border-right: solid 4rem #${props => props.variant === 'dark' ? "373737" : "eaeaea"};
+        border-top: solid 4rem #${props => props.variant === 'dark' ? "373737" : "eaeaea"};;
         border-radius: 60px 60px 0 0;
         position: absolute;
         top: -140px;

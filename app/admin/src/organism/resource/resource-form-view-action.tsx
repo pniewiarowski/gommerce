@@ -17,7 +17,15 @@ const ResourceFormViewAction = (props: Props) => {
                     back
                 </Button>
             </Grow>
-            <Grow in={true} {...{ timeout: 750 }}>
+
+            {props.type === "save" && <Grow in={true} {...{ timeout: 750 }}>
+                <Button sx={{ mr: 1 }} color="error" variant="contained" onClick={() => navigate('/shop/category')}>
+                    delete
+                </Button>
+            </Grow>}
+
+
+            <Grow in={true} {...{ timeout: 1000 }}>
                 <Button color="primary" variant="contained" type="submit">
                     {props.type === "save" && "save"}
                     {props.type === "create" && "create"}
