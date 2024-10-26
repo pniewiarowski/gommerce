@@ -9,6 +9,7 @@ import { JwtContext, UserContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
 import { DeleteProductTableAction } from "../../../organism/table-action";
 import { ResourceMainViewAction } from "../../../organism/resource";
+import { AdminBreadcrumbs } from "../../../organism";
 
 const AdminShopProductPage = () => {
     const [products, setProducts] = useState<Array<ProductDefinition>>([]);
@@ -108,25 +109,16 @@ const AdminShopProductPage = () => {
 
     return (
         <PageContainerGrid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="text.primary">Shop</Typography>
-                        </Link>
-                        <Link to="/shop/product">
-                            <Typography color="primary">Product</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
-            </Grid>
+            <AdminBreadcrumbs breadcrumbs={[
+                { label: "Home", link: "/" },
+                { label: "Shop", link: "/shop" },
+                { label: "Product", link: "/shop/product" },
+            ]} />
             <Grid sx={{ height: "89%" }} item xs={12}>
                 <Grow in={true} {...{ timeout: 250 }}>
                     <Paper elevation={3} sx={{ height: "100%" }}>
                         <DataGrid
+                            sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
                             rows={products}
                             columns={columns}
                             density="comfortable"

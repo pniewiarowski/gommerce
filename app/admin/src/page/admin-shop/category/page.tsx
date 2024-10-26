@@ -91,6 +91,7 @@ const AdminShopCategoryPage = () => {
                 <Grow in={true} {...{ timeout: 250 }}>
                     <Paper elevation={3} sx={{ height: "100%" }}>
                         <DataGrid
+                            sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
                             rows={categories}
                             columns={columns}
                             density="comfortable"
