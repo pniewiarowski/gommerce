@@ -7,6 +7,7 @@ export { default as AdminShopCategoryEditPage } from "./admin-shop/category/edit
 export { default as AdminShopProductPage } from "./admin-shop/product/page";
 export { default as AdminShopProductCreatePage } from "./admin-shop/product/create-page";
 export { default as AdminShopProductEditPage } from "./admin-shop/product/edit-page";
+export { default as AdminShopAddressPage } from "./admin-shop/address/page";
 export { default as AdminShopCustomerPage } from "./admin-shop/customer/page";
 export { default as AdminShopCustomerCreatePage } from "./admin-shop/customer/create-page";
 export { default as AdminShopCustomerEditPage } from "./admin-shop/customer/edit-page";

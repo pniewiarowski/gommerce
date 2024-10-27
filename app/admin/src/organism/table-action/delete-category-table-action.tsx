@@ -5,7 +5,7 @@ import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useBackend } from "gommerce-app-shared/hook";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { JwtContext } from "../../context";
-import { DeleteCategoryDialog } from "../dialog";
+import { DeleteDialog } from "../dialog";
 
 interface Props {
     id: number,
@@ -26,7 +26,7 @@ const DeleteCategoryTableAction = (props: Props) => {
                 label="Delete"
                 onClick={() => setIsOpen(true)}
             />
-            <DeleteCategoryDialog name={name} handleDelete={() => {
+            <DeleteDialog name={name} resource="category" handleDelete={() => {
                 const destroy = async () => {
                     const response = categoriesRepository.delete(Number(id), jwt);
 

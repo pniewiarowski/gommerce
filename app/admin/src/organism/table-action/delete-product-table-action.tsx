@@ -5,7 +5,7 @@ import { GridActionsCellItem } from "@mui/x-data-grid";
 import { useBackend } from "gommerce-app-shared/hook";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
 import { JwtContext } from "../../context";
-import { DeleteProductDialog } from "../dialog";
+import { DeleteDialog } from "../dialog";
 
 interface Props {
     id: number,
@@ -26,7 +26,7 @@ const DeleteProductTableAction = (props: Props) => {
                 label="Delete"
                 onClick={() => setIsOpen(true)}
             />
-            <DeleteProductDialog name={name} handleDelete={() => {
+            <DeleteDialog name={name} resource="product" handleDelete={() => {
                 const destroy = async () => {
                     const response = productRepository.delete(Number(id), jwt);
 

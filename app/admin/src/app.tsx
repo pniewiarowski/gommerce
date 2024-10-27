@@ -11,6 +11,7 @@ import {
     AdminMailingPage,
     AdminPaymentPage,
     AdminSettingsPage,
+    AdminShopAddressPage,
     AdminShopCategoryCreatePage,
     AdminShopCategoryEditPage,
     AdminShopCategoryPage,
@@ -82,6 +83,7 @@ const App = () => {
                                         <Route path="/shop/customer" element={<AdminShopCustomerPage />} />
                                         <Route path="/shop/customer/create" element={<AdminShopCustomerCreatePage />} />
                                         <Route path="/shop/customer/edit/:id" element={<AdminShopCustomerEditPage />} />
+                                        <Route path="/shop/address" element={<AdminShopAddressPage />} />
                                         <Route path="/cms" element={<AdminCMSPage />} />
                                         <Route path="/cms/theme" element={<AdminCMSThemePage />} />
                                         <Route path="/shop/order" element={<AdminShopOrderPage />} />

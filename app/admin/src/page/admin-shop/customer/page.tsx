@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Typography, Divider, Breadcrumbs, Grid, Paper, Button, Grow } from "@mui/material"
-import { Check, Close, Delete, Edit, FileCopy, Visibility } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { Grid, Paper, Grow } from "@mui/material"
+import { Check, Close, Edit, Visibility } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { CustomerDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";

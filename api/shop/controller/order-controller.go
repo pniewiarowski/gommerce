@@ -16,8 +16,26 @@ type OrderController struct {
 	OrderRepository    repository.OrderRepository
 	CustomerRepository repository.CustomerRepository
 	ProductRepository  repository.ProductRepository
-	JWTHelper          authhelper.JWTHelper
-	FiberHelper        sharedhelper.FiberContextHelper
+
+	JWTHelper   authhelper.JWTHelper
+	FiberHelper sharedhelper.FiberContextHelper
+}
+
+func (oc *OrderController) isResourceOwner(order *model.Order, ctx *fiber.Ctx) bool {
+	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
+	isAdmin := oc.JWTHelper.IsAdmin(claims)
+	if isAdmin {
+		return true
+	}
+
+	idFromToken := claims[definition.JwtClaimId]
+	customer, err := oc.CustomerRepository.ReadByUserID(idFromToken.(uint))
+
+	if err != nil {
+		return false
+	}
+
+	return order.CustomerID == customer.ID
 }
 
 func (oc *OrderController) Index(ctx *fiber.Ctx) error {
@@ -44,14 +62,27 @@ func (oc *OrderController) Index(ctx *fiber.Ctx) error {
 
 func (oc *OrderController) Show(ctx *fiber.Ctx) error {
 	id, _ := oc.FiberHelper.GetID(ctx)
-	_, err := oc.OrderRepository.ReadByID(id)
+	order, err := oc.OrderRepository.ReadByID(id)
+
 	if err != nil {
 		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
 			Message: "entity with provided ID does not exists",
 		})
 	}
 
-	return ctx.Status(fiber.StatusOK).JSON(&fiber.Map{})
+	if !oc.isResourceOwner(order, ctx) {
+		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{
+			Message: "you do not have access to read this resource",
+		})
+	}
+
+	orderProducts, _ := oc.OrderRepository.ReadProducts(order.ID)
+	orderDTO := dto.OrderFromModel(*order)
+	orderDTO.Products = dto.ProductFromCollection(orderProducts)
+
+	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
+		Data: orderDTO,
+	})
 }
 
 func (oc *OrderController) Store(ctx *fiber.Ctx) error {
@@ -75,8 +106,9 @@ func (oc *OrderController) Store(ctx *fiber.Ctx) error {
 	}
 
 	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
+	customer, _ := oc.CustomerRepository.ReadByUserID(claims[definition.JwtClaimId].(uint))
 	order := model.Order{
-		CustomerID: claims[definition.JwtClaimId].(uint),
+		CustomerID: customer.ID,
 		FullPrice:  fullPrice,
 	}
 
@@ -97,9 +129,50 @@ func (oc *OrderController) Store(ctx *fiber.Ctx) error {
 }
 
 func (oc *OrderController) Update(ctx *fiber.Ctx) error {
+	id, _ := oc.FiberHelper.GetID(ctx)
+	_, err := oc.OrderRepository.ReadByID(id)
+
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
+	isAdmin := oc.JWTHelper.IsAdmin(claims)
+	if !isAdmin {
+		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{
+			Message: "you do not have access to update this resource",
+		})
+	}
+
 	return ctx.Status(fiber.StatusOK).JSON(&fiber.Map{})
 }
 
 func (oc *OrderController) Destroy(ctx *fiber.Ctx) error {
-	return ctx.Status(fiber.StatusOK).JSON(&fiber.Map{})
+	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
+	isAdmin := oc.JWTHelper.IsAdmin(claims)
+	if !isAdmin {
+		return ctx.Status(fiber.StatusForbidden).JSON(&response.ErrorResponse{
+			Message: "you do not have access to destroy this resource",
+		})
+	}
+
+	id, err := oc.FiberHelper.GetID(ctx)
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	orders, err := oc.OrderRepository.DeleteByID(id)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+			Message: "something went wrong while deleting entity",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
+		Data: dto.OrderFromCollection(orders),
+	})
 }
