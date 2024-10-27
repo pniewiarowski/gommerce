@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
-import { Grid, Paper, Breadcrumbs, Typography, Grow, Stepper, Step, StepLabel, Box } from "@mui/material";
-import { AddressForm } from "../organism";
+import { Grid, Paper, Breadcrumbs, Typography, Grow, Step, StepLabel, Stepper, Box } from "@mui/material";
+import { PaymentMethodForm } from "../../organism";
 
-const ShopCheckoutAddressPage = () => {
+const ShopCheckoutPaymentMethodPage = () => {
     return (
         <Fragment>
             <Grid sx={{ mt: 1 }} item xs={12}>
@@ -15,30 +15,30 @@ const ShopCheckoutAddressPage = () => {
                         <Link to="/checkout">
                             <Typography color="text.primary">Checkout</Typography>
                         </Link>
-                        <Link to="/checkout/address">
-                            <Typography color="secondary">Address</Typography>
+                        <Link to="/checkout/payment-method">
+                            <Typography color="secondary">Payment Method</Typography>
                         </Link>
                     </Breadcrumbs>
+                </Paper>
+            </Grid>
+            <Grid item xs={12} xl={3}>
+                <Paper sx={{ p: 2, height: "750px" }}>
                 </Paper>
             </Grid>
             <Grid item xs={12} xl={6}>
                 <Grow in={true} {...{ timeout: 500 }}>
                     <Paper elevation={7} sx={{ p: 2, height: "750px" }}>
-                        <AddressForm />
+                        <PaymentMethodForm />
                     </Paper>
                 </Grow>
             </Grid>
             <Grid item xs={12} xl={3}>
-                <Paper sx={{ p: 2, minHeight: "750px" }}>
-                </Paper>
-            </Grid>
-            <Grid item xs={12} xl={3}>
-                <Paper sx={{ p: 2, minHeight: "750px" }}>
+                <Paper sx={{ p: 2, height: "750px" }}>
                 </Paper>
             </Grid>
             <Grid item xs={12}>
                 <Paper sx={{ p: 4 }}>
-                    <Stepper activeStep={0} alternativeLabel>
+                    <Stepper activeStep={1} alternativeLabel>
                         <Step>
                             <StepLabel>enter delivery address</StepLabel>
                         </Step>
@@ -51,8 +51,8 @@ const ShopCheckoutAddressPage = () => {
                     </Stepper>
                 </Paper>
             </Grid>
-        </Fragment>
+        </Fragment >
     );
 }
 
-export default ShopCheckoutAddressPage;
+export default ShopCheckoutPaymentMethodPage;

@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from "react";
 import { Link, useSearchParams, useNavigate } from "react-router-dom";
 import { Alert, Breadcrumbs, Grid, Grow, Paper, Typography, useMediaQuery, Zoom } from "@mui/material";
 import { Cancel, Close } from "@mui/icons-material";
-import { CustomerRegisterForm } from "../organism";
-import { CustomerContext } from "../context";
+import { CustomerRegisterForm } from "../../organism";
+import { CustomerContext } from "../../context";
 
 const ShopCustomerRegisterPage = () => {
     const desktop: boolean = useMediaQuery('(min-width:1530px)');

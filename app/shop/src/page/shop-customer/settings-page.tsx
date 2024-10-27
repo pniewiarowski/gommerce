@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Avatar, Breadcrumbs, Divider, Grid, Grow, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
 import { DeliveryDining, Person, Payment, Settings } from "@mui/icons-material";
-import { CustomerContext } from "../context";
-import { stringAvatar } from "../util";
+import { CustomerContext } from "../../context";
+import { stringAvatar } from "../../util";
 
 class SettingsItem {
     public constructor(

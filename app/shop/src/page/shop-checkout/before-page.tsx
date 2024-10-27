@@ -1,9 +1,9 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Breadcrumbs, Button, Divider, Grid, Grow, List, Paper, Typography } from "@mui/material";
-import { CustomerContext, ShopBagContext } from "../context";
+import { CustomerContext, ShopBagContext } from "../../context";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
-import { CustomerShoppingBag } from "../organism";
+import { CustomerShoppingBag } from "../../organism";
 
 const ShopCheckoutPage = () => {
     const { shopBag } = useContext(ShopBagContext);

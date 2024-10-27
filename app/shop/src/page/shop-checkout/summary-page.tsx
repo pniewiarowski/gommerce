@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import { Grid, Paper, Breadcrumbs, Typography, Grow, Step, Stepper, StepLabel } from "@mui/material";
-import { SummaryOrderForm } from "../organism";
+import { SummaryOrderForm } from "../../organism";
 
 const ShopCheckoutSummaryPage = () => {
     return (
