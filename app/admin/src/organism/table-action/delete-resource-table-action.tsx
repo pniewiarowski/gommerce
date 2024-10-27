@@ -8,6 +8,7 @@ import { Repository } from "gommerce-app-shared/api/repository/type";
 interface Props {
     id: number,
     name: string,
+    resource: string,
     setResources: Dispatch<SetStateAction<any[]>>;
     resourceRepository: Repository,
 }
@@ -24,7 +25,7 @@ const DeleteResourceTableAction = (props: Props) => {
                 label="Delete"
                 onClick={() => setIsOpen(true)}
             />
-            <DeleteDialog name={name} resource="product" handleDelete={() => {
+            <DeleteDialog name={name} resource={props.resource} handleDelete={() => {
                 const destroy = async () => {
                     const response = resourceRepository.delete(Number(id), jwt);
 

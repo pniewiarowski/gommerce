@@ -41,6 +41,7 @@ class Orders implements Repository {
     public async create(order: OrderDefinition, token: string): Promise<OrderDefinition> {
         const response = await shop.post(`/${Orders.resource}`,
             {
+                productIDs: order.productsIDs,
             },
             {
                 headers: {

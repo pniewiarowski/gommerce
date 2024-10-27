@@ -3,18 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Container, FormControl, Typography } from "@mui/material";
 import { ArrowBack, ShoppingBag } from "@mui/icons-material";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
-import { CustomerContext, JwtContext, ShopBagContext } from "../context";
+import { JwtContext, ShopBagContext } from "../context";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
 import { MakeOrderDialog } from "./dialog";
 
 const SummaryOrderForm = () => {
     const [address, setAddress] = useState<string>("");
-    const [qty, setQty] = useState<number | null>(null);
     const [isMakeOrderDialogOpen, setIsMakeOrderDialogOpen] = useState<boolean>(false);
 
     const { get, set } = useCookies();
     const { shopBag, setShopBag } = useContext(ShopBagContext);
-    const { customer } = useContext(CustomerContext);
     const { jwt } = useContext(JwtContext);
 
     const { ordersRepository } = useBackend();
@@ -25,20 +23,18 @@ const SummaryOrderForm = () => {
         const number: string = get("address-form-number");
         const city: string = get("address-form-city");
 
-        setQty(shopBag.length);
         setAddress(`${street} ${number}, ${city}`);
     }, []);
 
     const handleBuy = () => {
         const buy = async () => {
-            let price = 0;
+            const productIDs: Array<number> = [];
             shopBag.forEach((product: ProductDefinition) => {
-                price += product.price;
+                product.id !== null && productIDs.push(product.id);
             });
 
             ordersRepository.create({
-                customerID: customer.id,
-                fullPrice: price,
+                productsIDs: productIDs,
             }, jwt);
         }
 

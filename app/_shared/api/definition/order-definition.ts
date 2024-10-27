@@ -1,7 +1,7 @@
 interface OrderDefinition {
     id?: number,
-    fullPrice: number,
-    customerID: number,
+    fullPrice?: number,
+    customerID?: number,
     productsIDs: Array<number>,
 }
 

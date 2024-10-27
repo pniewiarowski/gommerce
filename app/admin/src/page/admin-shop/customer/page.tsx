@@ -47,7 +47,13 @@ const AdminShopCustomerPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <DeleteResourceTableAction id={params.row.id ?? 0} name={`${params.row.firstName} ${params.row.lastName}`} setResources={setCustomers} resourceRepository={customersRepository} />,
+                <DeleteResourceTableAction
+                    id={params.row.id ?? 0}
+                    name={`${params.row.firstName} ${params.row.lastName}`}
+                    setResources={setCustomers}
+                    resourceRepository={customersRepository}
+                    resource="customer"
+                />,
                 <GridActionsCellItem icon={<Edit />} label="Edit" onClick={() => { navigate(`/shop/customer/edit/${params.row.id}`) }} />,
                 <GridActionsCellItem icon={<Visibility />} label="Show" onClick={() => { }} showInMenu />,
             ],
@@ -67,7 +73,7 @@ const AdminShopCustomerPage = () => {
                         <DataGrid
                             checkboxSelection
                             sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
-                            rows={customers}
+                            rows={customers ?? []}
                             columns={columns}
                             density="comfortable"
                             disableColumnSelector

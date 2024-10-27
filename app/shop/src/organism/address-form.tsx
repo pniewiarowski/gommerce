@@ -8,7 +8,11 @@ import { useCookies } from "gommerce-app-shared/hook";
 import { addresResolver, addressType } from "../resolver";
 import { useEffect } from "react";
 
-const AddressForm = () => {
+interface Props {
+    scope: "checkout" | "update-form",
+}
+
+const AddressForm = (props: Props) => {
     const navigate = useNavigate();
     const { set, get } = useCookies();
 
@@ -30,16 +34,22 @@ const AddressForm = () => {
     }, []);
 
     const onSubmit = async (data: addressType) => {
-        set("address-form-filled", true);
-        set("address-form-street-name", data.streetName);
-        set("address-form-number", data.number);
-        set("address-form-postal-code", data.postalCode);
-        set("address-form-city", data.city);
-        set("address-form-state", data.state);
-        set("address-form-country", data.country);
-        set("address-form-extra-comment", data.extraComment);
+        switch (props.scope) {
+            case "checkout":
+                set("address-form-filled", true);
+                set("address-form-street-name", data.streetName);
+                set("address-form-number", data.number);
+                set("address-form-postal-code", data.postalCode);
+                set("address-form-city", data.city);
+                set("address-form-state", data.state);
+                set("address-form-country", data.country);
+                set("address-form-extra-comment", data.extraComment);
 
-        navigate('/checkout/payment-method');
+                navigate('/checkout/payment-method');
+                break;
+            case "update-form":
+                break;
+        }
     };
 
     const onCancle = (event: Event) => {
@@ -47,9 +57,8 @@ const AddressForm = () => {
         navigate('/checkout')
     };
 
-
     return (
-        <Container sx={{ height: "100%" }}>
+        <Container sx={{ height: "90%" }}>
             <form onSubmit={handleSubmit(onSubmit)} style={{ height: "100%" }}>
                 <Box sx={{
                     display: "flex",
@@ -58,9 +67,6 @@ const AddressForm = () => {
                     height: "100%",
                 }}>
                     <Box>
-                        <FormControl sx={{ mb: 2, mt: 2, display: "flex" }} fullWidth>
-                            <Typography variant="h3">fill your address</Typography>
-                        </FormControl>
                         <FormControl sx={{ display: "flex", flexDirection: "row", mb: 2 }} fullWidth>
                             <TextField
                                 sx={{ width: "70%" }}
@@ -141,14 +147,24 @@ const AddressForm = () => {
                             <TextField label="extra comment for delivery" rows={10} multiline fullWidth {...register("extraComment")} />
                         </FormControl>
                     </Box>
-                    <Box>
+
+                    {props.scope === "checkout" && <Box>
                         <Button onClick={onCancle} color="error" variant="outlined" type="submit" startIcon={<Close />} fullWidth sx={{ p: 2, mr: 2, width: "48.7%" }}>
                             cancel
                         </Button>
                         <Button type="submit" variant="contained" endIcon={<ArrowForward />} fullWidth sx={{ p: 2, width: "48.7%" }}>
                             next
                         </Button>
-                    </Box>
+                    </Box>}
+
+                    {props.scope === "update-form" && <Box>
+                        <Button variant="outlined" color="error" sx={{ mr: 1 }}>
+                            clear
+                        </Button>
+                        <Button type="submit" variant="contained">
+                            save
+                        </Button>
+                    </Box>}
                 </Box>
             </form>
         </Container >

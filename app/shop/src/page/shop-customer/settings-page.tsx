@@ -4,6 +4,7 @@ import { Avatar, Breadcrumbs, Divider, Grid, Grow, List, ListItemButton, ListIte
 import { DeliveryDining, Person, Payment, Settings } from "@mui/icons-material";
 import { CustomerContext } from "../../context";
 import { stringAvatar } from "../../util";
+import AddressTab from "./customer-setting/address-tab";
 
 class SettingsItem {
     public constructor(
@@ -16,22 +17,19 @@ class SettingsItem {
 }
 
 const ShopCustomerSettingsPage = () => {
+    const [selectedTab, setSelectedTab] = useState<number>(1);
     const [loading, setLoading] = useState(true);
     const { customer } = useContext(CustomerContext);
 
     const itemsJSX = [
-        new SettingsItem(1, 'General', () => { }, <Settings />),
-        new SettingsItem(2, 'Account', () => { }, <Person />),
-        new SettingsItem(3, 'Address', () => { }, <DeliveryDining />),
-        new SettingsItem(4, 'Payment', () => { }, <Payment />),
+        new SettingsItem(1, 'General', () => { setSelectedTab(1) }, <Settings />),
+        new SettingsItem(2, 'Account', () => { setSelectedTab(2) }, <Person />),
+        new SettingsItem(3, 'Address', () => { setSelectedTab(3) }, <DeliveryDining />),
+        new SettingsItem(4, 'Payment', () => { setSelectedTab(4) }, <Payment />),
     ].map((item) => {
         return (
             <Fragment>
-                <ListItemButton
-                    key={item.ID}
-                    sx={{ p: 1 }}
-                    onClick={() => item.action()}
-                >
+                <ListItemButton key={item.ID} sx={{ p: 1 }} onClick={() => item.action()}>
                     <ListItemIcon>
                         {item.icon}
                     </ListItemIcon>
@@ -74,7 +72,7 @@ const ShopCustomerSettingsPage = () => {
             </Grid>
             <Grid item xs={3}>
                 <Grow in={true} {...{ timeout: 500 }}>
-                    <Paper elevation={3} sx={{ p: 2, height: 400 }}>
+                    <Paper elevation={3} sx={{ p: 2, height: 750, pt: 3 }}>
                         <div style={{ display: "flex", alignItems: "center", marginBottom: 3 }}>
                             <Avatar {...stringAvatar(`${customer.firstName}`, true)}></Avatar>
                             <Typography sx={{ ml: 2, fontWeight: "bold" }}>{customer.firstName} {customer.lastName}</Typography>
@@ -87,7 +85,8 @@ const ShopCustomerSettingsPage = () => {
             </Grid>
             <Grid item xs={9}>
                 <Grow in={true} {...{ timeout: 750 }}>
-                    <Paper elevation={3} sx={{ p: 2, height: 400 }}>
+                    <Paper elevation={3} sx={{ p: 2, height: 750 }}>
+                        {selectedTab === 3 && <AddressTab />}
                     </Paper>
                 </Grow>
             </Grid>

@@ -68,7 +68,13 @@ const AdminShopProductPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <DeleteResourceTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setResources={setProducts} resourceRepository={productRepository} />,
+                <DeleteResourceTableAction
+                    id={params.row.id ?? 0}
+                    name={params.row.name ?? ""}
+                    setResources={setProducts}
+                    resourceRepository={productRepository}
+                    resource="product"
+                />,
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"
@@ -120,7 +126,7 @@ const AdminShopProductPage = () => {
                         <DataGrid
                             checkboxSelection
                             sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
-                            rows={products}
+                            rows={products ?? []}
                             columns={columns}
                             density="comfortable"
                             disableColumnSelector

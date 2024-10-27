@@ -44,7 +44,13 @@ const AdminShopCategoryPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <DeleteResourceTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setResources={setCategories} resourceRepository={categoriesRepository} />,
+                <DeleteResourceTableAction
+                    id={params.row.id ?? 0}
+                    name={params.row.name ?? ""}
+                    setResources={setCategories}
+                    resourceRepository={categoriesRepository}
+                    resource="category"
+                />,
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"
@@ -93,7 +99,7 @@ const AdminShopCategoryPage = () => {
                         <DataGrid
                             checkboxSelection
                             sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
-                            rows={categories}
+                            rows={categories ?? []}
                             columns={columns}
                             density="comfortable"
                             disableColumnSelector

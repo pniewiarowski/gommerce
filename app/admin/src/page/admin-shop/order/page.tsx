@@ -6,9 +6,10 @@ import { UserContext, JwtContext } from "../../../context";
 import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
 import { Typography, Grid, Paper, Breadcrumbs, Button, Grow } from "@mui/material";
 import { PageContainerGrid } from "../../../atoms";
-import { Delete } from "@mui/icons-material";
+import { Delete, Edit, Visibility } from "@mui/icons-material";
 import { AdminBreadcrumbs } from "../../../organism";
 import ResourceMainViewAction from "../../../organism/resource/resource-main-view-action";
+import { DeleteResourceTableAction } from "../../../organism/table-action";
 
 const AdminShopOrderPage = () => {
     const [orders, setOrders] = useState<Array<OrderDefinition>>([]);
@@ -40,18 +41,23 @@ const AdminShopOrderPage = () => {
             type: "actions",
             width: 170,
             getActions: (params) => [
+                <DeleteResourceTableAction
+                    id={params.row.id ?? 0}
+                    name={`${params.row.id ?? 0}`}
+                    setResources={setOrders}
+                    resourceRepository={ordersRepository}
+                    resource="order"
+                />,
                 <GridActionsCellItem
-                    icon={<Delete />}
-                    label="Delete"
-                    onClick={() => {
-                        const destroy = async () => {
-                            const response = ordersRepository.delete(Number(params.row.id), jwt);
-
-                            setOrders(await response);
-                        }
-
-                        destroy();
-                    }}
+                    icon={<Edit />}
+                    label="Edit"
+                    onClick={() => { navigate(`/shop/order/edit/${params.row.id}`) }}
+                />,
+                <GridActionsCellItem
+                    icon={<Visibility />}
+                    label="Show"
+                    onClick={() => { navigate(`/shop/order/show/${params.row.id}`) }}
+                    showInMenu
                 />,
             ]
         }
@@ -62,7 +68,7 @@ const AdminShopOrderPage = () => {
             <AdminBreadcrumbs breadcrumbs={[
                 { label: "Home", link: "/" },
                 { label: "Shop", link: "/shop" },
-                { label: "Customer", link: "/shop/order" },
+                { label: "Order", link: "/shop/order" },
             ]} />
             <Grid sx={{ height: "89%" }} item xs={12}>
                 <Grow in={true} {...{ timeout: 250 }}>
@@ -70,7 +76,7 @@ const AdminShopOrderPage = () => {
                         <DataGrid
                             checkboxSelection
                             sx={{ '&, [class^=MuiDataGrid]': { border: 'none' } }}
-                            rows={orders}
+                            rows={orders ?? []}
                             columns={columns}
                             density="comfortable"
                             disableColumnSelector

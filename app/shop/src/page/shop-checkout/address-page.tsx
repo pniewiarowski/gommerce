@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
-import { Grid, Paper, Breadcrumbs, Typography, Grow, Stepper, Step, StepLabel } from "@mui/material";
+import { Grid, Paper, Breadcrumbs, Typography, Grow, Stepper, Step, StepLabel, FormControl } from "@mui/material";
 import { AddressForm } from "../../organism";
 
 const ShopCheckoutAddressPage = () => {
@@ -24,7 +24,10 @@ const ShopCheckoutAddressPage = () => {
             <Grid item xs={12} xl={6}>
                 <Grow in={true} {...{ timeout: 500 }}>
                     <Paper elevation={7} sx={{ p: 2, height: "750px" }}>
-                        <AddressForm />
+                        <FormControl sx={{ ml: 2, p: 2 }} fullWidth>
+                            <Typography variant="h3">fill your address</Typography>
+                        </FormControl>
+                        <AddressForm scope="checkout" />
                     </Paper>
                 </Grow>
             </Grid>

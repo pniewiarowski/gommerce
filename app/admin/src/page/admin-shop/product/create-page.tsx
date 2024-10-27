@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Typography, Grid, Paper, Breadcrumbs } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Grid, Paper } from "@mui/material";
 import { UserContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
-import { AdminProductForm } from "../../../organism";
+import { AdminBreadcrumbs, AdminProductForm } from "../../../organism";
 
 const AdminShopProductCreatePage = () => {
     const navigate = useNavigate();
@@ -17,24 +17,12 @@ const AdminShopProductCreatePage = () => {
 
     return (
         <PageContainerGrid>
-            <Grid item xs={12}>
-                <Paper sx={{ p: 1, mb: 1 }} elevation={3}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        <Link to="/">
-                            <Typography color="text.primary">Home</Typography>
-                        </Link>
-                        <Link to="/shop">
-                            <Typography color="text.primary">Shop</Typography>
-                        </Link>
-                        <Link to="/shop/category">
-                            <Typography color="text.primary">Product</Typography>
-                        </Link>
-                        <Link to="/shop/category">
-                            <Typography color="primary">Create</Typography>
-                        </Link>
-                    </Breadcrumbs>
-                </Paper>
-            </Grid>
+            <AdminBreadcrumbs breadcrumbs={[
+                { label: "Home", link: "/" },
+                { label: "Shop", link: "/shop" },
+                { label: "Product", link: "/shop/product" },
+                { label: "Create", link: "/shop/product/create" },
+            ]} />
             <Grid item xs={12}>
                 <Paper elevation={3} sx={{ p: 1, minHeight: "100vh" }}>
                     <AdminProductForm />

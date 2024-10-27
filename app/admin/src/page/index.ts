@@ -14,6 +14,7 @@ export { default as AdminShopCustomerEditPage } from "./admin-shop/customer/edit
 export { default as AdminCMSPage } from "./admin-cms/admin-cms-page";
 export { default as AdminCMSThemePage } from "./admin-cms/theme/page";
 export { default as AdminShopOrderPage } from "./admin-shop/order/page";
+export { default as AdminShopOrderShowPage } from "./admin-shop/order/show";
 export { default as AdminMailingPage } from "./admin-mailing-page";
 export { default as AdminAccountPage } from "./admin-account-page";
 export { default as AdminPaymentPage } from "./admin-payment-page";
