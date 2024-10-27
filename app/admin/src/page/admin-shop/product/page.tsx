@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Breadcrumbs, Button, Grid, Grow, Paper, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Button, Grid, Grow, Paper } from "@mui/material";
 import { Check, Close, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { DataGrid, GridActionsCellItem, GridColDef } from '@mui/x-data-grid';
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
-import { DeleteProductTableAction } from "../../../organism/table-action";
+import { DeleteResourceTableAction } from "../../../organism/table-action";
 import { ResourceMainViewAction } from "../../../organism/resource";
 import { AdminBreadcrumbs } from "../../../organism";
 
@@ -68,7 +68,7 @@ const AdminShopProductPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <DeleteProductTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setProducts={setProducts} />,
+                <DeleteResourceTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setResources={setProducts} resourceRepository={productRepository} />,
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"

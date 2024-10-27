@@ -7,7 +7,7 @@ import { CustomerDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { PageContainerGrid } from "../../../atoms"
 import { JwtContext, UserContext } from "../../../context";
-import { DeleteCustomerTableAction } from "../../../organism/table-action";
+import { DeleteResourceTableAction } from "../../../organism/table-action";
 import { AdminBreadcrumbs } from "../../../organism";
 import { ResourceMainViewAction } from "../../../organism/resource";
 
@@ -47,7 +47,7 @@ const AdminShopCustomerPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <DeleteCustomerTableAction id={params.row.id ?? 0} name={`${params.row.firstName} ${params.row.lastName}`} setCustomers={setCustomers} />,
+                <DeleteResourceTableAction id={params.row.id ?? 0} name={`${params.row.firstName} ${params.row.lastName}`} setResources={setCustomers} resourceRepository={customersRepository} />,
                 <GridActionsCellItem icon={<Edit />} label="Edit" onClick={() => { navigate(`/shop/customer/edit/${params.row.id}`) }} />,
                 <GridActionsCellItem icon={<Visibility />} label="Show" onClick={() => { }} showInMenu />,
             ],

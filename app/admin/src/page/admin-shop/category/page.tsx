@@ -6,7 +6,7 @@ import { Check, Close, Edit, FileCopy, Visibility } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { AdminBreadcrumbs } from "../../../organism";
-import { DeleteCategoryTableAction } from "../../../organism/table-action";
+import { DeleteResourceTableAction } from "../../../organism/table-action";
 import { JwtContext, UserContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
 import { ResourceMainViewAction } from "../../../organism/resource";
@@ -44,7 +44,7 @@ const AdminShopCategoryPage = () => {
             type: 'actions',
             width: 170,
             getActions: (params) => [
-                <DeleteCategoryTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setCategories={setCategories} />,
+                <DeleteResourceTableAction id={params.row.id ?? 0} name={params.row.name ?? ""} setResources={setCategories} resourceRepository={categoriesRepository} />,
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"

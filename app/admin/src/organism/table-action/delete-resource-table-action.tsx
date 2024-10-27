@@ -1,22 +1,20 @@
-import React from "react";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { Delete } from "@mui/icons-material";
 import { GridActionsCellItem } from "@mui/x-data-grid";
-import { useBackend } from "gommerce-app-shared/hook";
-import { CustomerDefinition } from "gommerce-app-shared/api/definition";
+import React, { Dispatch, SetStateAction, useState, useContext } from "react";
 import { JwtContext } from "../../context";
 import { DeleteDialog } from "../dialog";
+import { Repository } from "gommerce-app-shared/api/repository/type";
 
 interface Props {
     id: number,
     name: string,
-    setCustomers: Dispatch<SetStateAction<CustomerDefinition[]>>;
+    setResources: Dispatch<SetStateAction<any[]>>;
+    resourceRepository: Repository,
 }
 
-const DeleteCustomerTableAction = (props: Props) => {
+const DeleteResourceTableAction = (props: Props) => {
     const [isOpen, setIsOpen] = useState(false);
-    const { id, name, setCustomers } = props;
-    const { customersRepository } = useBackend();
+    const { id, name, setResources, resourceRepository } = props;
     const { jwt } = useContext(JwtContext);
 
     return (
@@ -26,11 +24,11 @@ const DeleteCustomerTableAction = (props: Props) => {
                 label="Delete"
                 onClick={() => setIsOpen(true)}
             />
-            <DeleteDialog name={name} resource="customer" handleDelete={() => {
+            <DeleteDialog name={name} resource="product" handleDelete={() => {
                 const destroy = async () => {
-                    const response = customersRepository.delete(Number(id), jwt);
+                    const response = resourceRepository.delete(Number(id), jwt);
 
-                    setCustomers(await response);
+                    setResources(await response);
                 }
 
                 destroy();
@@ -39,4 +37,4 @@ const DeleteCustomerTableAction = (props: Props) => {
     );
 }
 
-export default DeleteCustomerTableAction;
+export default DeleteResourceTableAction;

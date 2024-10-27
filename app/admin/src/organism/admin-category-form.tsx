@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Button, FormControl, Grow, MenuItem, Paper, Select, TextField } from "@mui/material";
+import { FormControl, Grow, MenuItem, Paper, Select, TextField } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { zodResolver } from "@hookform/resolvers/zod";
