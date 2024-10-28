@@ -17,9 +17,9 @@ const Animated3DBlock = styled.div`
 
     &::before {
         content: "";
-        border-left: solid 4rem #${props => props.variant === 'dark' ? "373737" : "eaeaea"};
-        border-right: solid 4rem #${props => props.variant === 'dark' ? "373737" : "eaeaea"};
-        border-top: solid 4rem #${props => props.variant === 'dark' ? "373737" : "eaeaea"};;
+        border-left: solid 4rem #${props => props.variant === 'dark' ? "333333" : "eaeaea"};
+        border-right: solid 4rem #${props => props.variant === 'dark' ? "333333" : "eaeaea"};
+        border-top: solid 4rem #${props => props.variant === 'dark' ? "333333" : "eaeaea"};;
         border-radius: 60px 60px 0 0;
         position: absolute;
         top: -140px;

@@ -6,6 +6,7 @@ import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
 import { ShopBagContext } from "../context";
 import { ProductDescription } from "../atom";
+import { ProductPageLoading } from "../organism/loading";
 
 
 const ShopProductPage = () => {
@@ -16,6 +17,7 @@ const ShopProductPage = () => {
     const [selectedQty, setSelectedQty] = useState<number>(1);
     const [success, setSucess] = useState<string>("");
     const [product, setProduct] = useState<ProductDefinition>();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [category, setCategory] = useState<CategoryDefinition>();
     const [followIconHovered, setFollowIconHovered] = useState<boolean>(false);
     const { id } = useParams();
@@ -30,6 +32,8 @@ const ShopProductPage = () => {
             if (!category) {
                 setCategory(await categoriesRepository.getByID(product.categoryID));
             }
+
+            setIsLoading(false);
         }
 
         fetch();
@@ -63,8 +67,8 @@ const ShopProductPage = () => {
         setSelectedQty(event.target.value);
     }
 
-    if (!product) {
-        return;
+    if (isLoading) {
+        return <ProductPageLoading />;
     }
 
     return (

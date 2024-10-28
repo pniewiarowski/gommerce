@@ -46,7 +46,7 @@ const CustomerMenu = (props: Props) => {
                 <Close sx={{ mr: 1 }} />
                 <Typography>Close</Typography>
             </MenuItem>
-            <MenuItem sx={{ ml: 1, mr: 1, p: 1 }} onClick={handleClickLogout}>
+            <MenuItem color="error" sx={{ ml: 1, mr: 1, p: 1 }} onClick={handleClickLogout}>
                 <Logout sx={{ mr: 1 }} />
                 <Typography>Logout</Typography>
             </MenuItem>

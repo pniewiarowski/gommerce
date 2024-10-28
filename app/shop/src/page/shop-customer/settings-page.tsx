@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Avatar, Breadcrumbs, Divider, Grid, Grow, List, ListItemButton, ListItemIcon, ListItemText, Paper, Typography } from "@mui/material";
-import { DeliveryDining, Person, Payment, Settings } from "@mui/icons-material";
+import { DeliveryDining, Person, Payment, Settings, Bookmark, ShoppingBag } from "@mui/icons-material";
 import { CustomerContext } from "../../context";
 import { stringAvatar } from "../../util";
 import AddressTab from "./customer-setting/address-tab";
@@ -26,6 +26,8 @@ const ShopCustomerSettingsPage = () => {
         new SettingsItem(2, 'Account', () => { setSelectedTab(2) }, <Person />),
         new SettingsItem(3, 'Address', () => { setSelectedTab(3) }, <DeliveryDining />),
         new SettingsItem(4, 'Payment', () => { setSelectedTab(4) }, <Payment />),
+        new SettingsItem(5, 'Following Items', () => { setSelectedTab(5) }, <Bookmark />),
+        new SettingsItem(5, 'Orders', () => { setSelectedTab(6) }, <ShoppingBag />),
     ].map((item) => {
         return (
             <Fragment>

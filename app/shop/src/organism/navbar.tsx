@@ -14,6 +14,7 @@ import {
     List,
     TextField,
     InputAdornment,
+    useMediaQuery,
 } from "@mui/material";
 import { Person, ShoppingBag, Search as SearchIcon } from "@mui/icons-material";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
@@ -30,6 +31,7 @@ interface Props {
 }
 
 const Navbar = (props: Props): React.JSX.Element => {
+    const desktop: boolean = useMediaQuery('(min-width:1200px)');
     const [anchorElCustomerMenu, setAnchorElCustomerMenu] = React.useState<null | HTMLElement>(null);
     const [anchorElShoppingBag, setAnchorElShoppingBag] = React.useState<null | HTMLElement>(null);
     const { customer } = useContext(CustomerContext);
@@ -79,14 +81,14 @@ const Navbar = (props: Props): React.JSX.Element => {
                     <Box
                         style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
                         <Box style={{ display: "flex", alignItems: "center", width: "25%" }}>
-                            <Box sx={{ mr: 2 }}>
+                            {desktop && <Box sx={{ mr: 2 }}>
                                 <Link to="/">
                                     <Typography variant="h3" color="secondary" component="div" sx={{ ml: 1.25, flexGrow: 1 }}>
                                         {props.heading}
                                     </Typography>
                                 </Link>
-                            </Box>
-                            <Box>
+                            </Box>}
+                            {desktop && <Box>
                                 <TextField size="small" variant="outlined" InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -94,11 +96,12 @@ const Navbar = (props: Props): React.JSX.Element => {
                                         </InputAdornment>
                                     ),
                                 }} />
-                            </Box>
+                            </Box>}
                         </Box>
-                        <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%" }}>
+                        {desktop && <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%" }}>
                             {categoriesToRender}
-                        </Box>
+                        </Box>}
+
                         <Box style={{ display: "flex", justifyContent: "end", alignItems: "center", width: "25%" }} color="text.primary">
                             <div onClick={handleOpenShoppingBag}>
                                 <IconButton size="large" color="inherit" sx={{ mr: 1 }}>
