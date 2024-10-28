@@ -7,6 +7,7 @@ import { useBackend } from "gommerce-app-shared/hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { categoryType, productResolver, productType } from "../resolver";
 import { JwtContext } from "../context";
+import { ResourceFormViewAction } from "./resource";
 
 interface Props {
     default?: ProductDefinition | null
@@ -101,8 +102,8 @@ const AdminProductForm = (props: Props) => {
                 <div style={{ display: "flex" }}>
                     <FormControl sx={{ mb: 2, mr: 2, width: "30%" }} fullWidth>
                         <Button variant="outlined" sx={{ p: 0.1, m: 0, width: "100%", height: "100%" }} onClick={handleUpload}>
-                            {updatedFileURL && <img src={updatedFileURL} height={120} />}
-                            {!updatedFileURL && <img src={props.default ? props.default.imageURL : ""} height={120} />}
+                            {updatedFileURL && <img src={updatedFileURL} height={200} />}
+                            {!updatedFileURL && <img src={props.default ? props.default.imageURL : ""} height={200} />}
                         </Button>
                         <input ref={fileUpload} style={{ display: "none" }} id="file" type="file" onChange={handleFileChange} />
                     </FormControl>
@@ -165,21 +166,7 @@ const AdminProductForm = (props: Props) => {
                     </FormControl>
                 </div>
                 <FormControl sx={{ display: "flex", flexDirection: "row" }} fullWidth>
-                    <Button
-                        sx={{ mr: 2 }}
-                        color="error"
-                        variant="outlined"
-                        onClick={() => navigate('/shop/product')}
-                    >
-                        go back
-                    </Button>
-                    <Button
-                        color="primary"
-                        variant="contained"
-                        type="submit"
-                    >
-                        {props.default ? "save" : "create"}
-                    </Button>
+                    <ResourceFormViewAction backLink={"shop/product"} type={props.default ? "save" : "create"} />
                 </FormControl>
             </form >
         </Box >
