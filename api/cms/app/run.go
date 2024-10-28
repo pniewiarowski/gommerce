@@ -23,8 +23,10 @@ func Run(port int) {
 	v1 := api.Group("/v1")
 
 	themes := v1.Group("/themes")
+	settings := v1.Group("/settings")
 
-	route.SetupTheme(themes)
+	route.SetupThemeRoute(themes)
+	route.SetupSettingRoute(settings)
 
 	log.Fatal(app.Listen(fmt.Sprintf(":%d", port)))
 }

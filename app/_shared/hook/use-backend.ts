@@ -5,6 +5,8 @@ import {
     Products,
     Orders,
     Users,
+    Themes,
+    Settings,
 } from "../api/repository"
 
 interface Repositories {
@@ -14,6 +16,8 @@ interface Repositories {
     customersRepository: Customers,
     usersRepository: Users,
     authRepository: Authentication,
+    themeRepository: Themes,
+    settingRepository: Settings,
 }
 
 let repositories: Repositories | null = null;
@@ -26,7 +30,9 @@ const useBackend = (): Repositories => {
             customersRepository: new Customers(),
             ordersRepository: new Orders(),
             usersRepository: new Users(),
-            authRepository: new Authentication()
+            authRepository: new Authentication(),
+            themeRepository: new Themes(),
+            settingRepository: new Settings(),
         };
     }
 

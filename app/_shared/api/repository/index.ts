@@ -4,3 +4,6 @@ export { default as Orders } from "./orders.ts";
 export { default as Customers } from "./customers.ts";
 export { default as Users } from "./users.ts";
 export { default as Authentication } from "./authentication.ts";
+export { default as Themes } from "./themes.ts";
+export { default as Settings } from "./setting.ts";
+

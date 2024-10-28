@@ -5,10 +5,13 @@ go 1.22.2
 require (
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/pniewiarowski/gommerce/api/_shared v0.0.0-20241019202605-78e15b1b4c5e
+	github.com/pniewiarowski/gommerce/api/auth v0.0.0-20241028202217-a62b9348ef6e
 )
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
+	github.com/gofiber/jwt/v3 v3.3.10 // indirect
+	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
