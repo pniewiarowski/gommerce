@@ -16,15 +16,17 @@ import {
     ShopCheckoutSuccessPage,
     ShopCheckoutSummaryPage,
 } from "./page";
+import { ThemeOptions, createTheme } from "@mui/material/styles";
 import { Footer, MailingForm, Navbar } from "./organism";
 import { CustomerContext, JwtContext, ShopBagContext, UserContext } from "./context";
-import { darkTheme, lightTheme } from "./theme";
 import "./base.css";
 
 const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');
+    const [theme, setTheme] = useState<ThemeOptions | null>(null);
+    const [isThemeLoading, setIsThemeLoading] = useState<boolean>(true);
     const { get } = useCookies();
-    const { categoriesRepository } = useBackend();
+    const { categoriesRepository, themeRepository } = useBackend();
 
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
     const [shopBag, setShopBag] = useState<Array<ProductDefinition>>([]);
@@ -33,11 +35,67 @@ const App = () => {
     const [jwt, setJwt] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchCategories = async () => {
-            setCategories(await categoriesRepository.get());
-        }
+        (async () => {
+            const resp = themeRepository.getByID(2);
+            const primary = '#651fff';
+            const secondary = '#651fff';
 
-        fetchCategories();
+            setTheme(createTheme({
+                palette: {
+                    mode: "light",
+                    background: {
+                        default: `${primary}77`,
+                    },
+                    primary: {
+                        main: primary,
+                    },
+                    secondary: {
+                        main: secondary,
+                    },
+                },
+                typography: {
+                    h3: {
+                        fontWeight: 900,
+                        fontFamily: "Roboto",
+                        fontSize: 20,
+                    },
+                    h4: {
+                        fontWeight: 700,
+                        fontFamily: "Roboto",
+                        fontSize: 14,
+                    },
+                },
+
+                components: {
+                    MuiAppBar: {
+                        styleOverrides: {
+                            colorPrimary: {
+                                backgroundColor: "#ffffff"
+                            }
+                        }
+                    },
+                    MuiButton: {
+                        styleOverrides: {
+                            root: {
+                                fontFamily: "Roboto",
+                                fontSize: "1rem",
+                                fontWeight: 900,
+                                lineHeight: 1.4,
+                                letterSpacing: 0,
+                                padding: "",
+                            },
+                        },
+                    },
+                },
+            }));
+            setIsThemeLoading(false);
+        })();
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            setCategories(await categoriesRepository.get());
+        })();
     }, []);
 
     useEffect(() => {
@@ -77,13 +135,17 @@ const App = () => {
 
     }, []);
 
+    if (isThemeLoading) {
+        return;
+    }
+
     return (
         <React.Fragment>
             <JwtContext.Provider value={{ jwt, setJwt }}>
                 <UserContext.Provider value={{ user, setUser }}>
                     <CustomerContext.Provider value={{ customer, setCustomer }}>
                         <ShopBagContext.Provider value={{ shopBag, setShopBag }}>
-                            <ThemeProvider theme={lightTheme}>
+                            <ThemeProvider theme={theme}>
                                 <CssBaseline enableColorScheme />
                                 <BrowserRouter>
                                     <Navbar

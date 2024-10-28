@@ -29,6 +29,7 @@ import { useCookies } from "gommerce-app-shared/hook";
 import { JwtContext, ThemeContext, UserContext } from "./context";
 import { darkTheme, lightTheme } from "./theme";
 import { AdminGoopher, AdminSidebar, AdminThemeSwitcher } from "./organism";
+import AdminCMSThemeCreatePage from "./page/admin-cms/theme/create-page";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -87,6 +88,7 @@ const App = () => {
                                         <Route path="/shop/address" element={<AdminShopAddressPage />} />
                                         <Route path="/cms" element={<AdminCMSPage />} />
                                         <Route path="/cms/theme" element={<AdminCMSThemePage />} />
+                                        <Route path="/cms/theme/create" element={<AdminCMSThemeCreatePage />} />
                                         <Route path="/shop/order" element={<AdminShopOrderPage />} />
                                         <Route path="/shop/order/show/:id" element={<AdminShopOrderShowPage />} />
                                         <Route path="/mailing" element={<AdminMailingPage />} />

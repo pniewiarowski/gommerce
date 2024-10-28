@@ -28,6 +28,7 @@ const lightTheme: ThemeOptions = createTheme({
             fontSize: 14,
         },
     },
+
     components: {
         MuiAppBar: {
             styleOverrides: {
@@ -42,9 +43,9 @@ const lightTheme: ThemeOptions = createTheme({
                     fontFamily: "Roboto",
                     fontSize: "1rem",
                     fontWeight: 900,
-                    lineHeight: 1.5,
+                    lineHeight: 1.4,
                     letterSpacing: 0,
-                    padding: "0.5rem 2rem",
+                    padding: "",
                 },
             },
         },

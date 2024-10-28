@@ -26,12 +26,10 @@ const AdminShopProductPage = () => {
     }, [user]);
 
     useEffect(() => {
-        const fetch = async () => {
+        (async () => {
             setProducts(await productRepository.get());
             setCategories(await categoriesRepository.get());
-        };
-
-        fetch();
+        })();
     }, []);
 
     const columns: GridColDef<(typeof products)[number]>[] = [
