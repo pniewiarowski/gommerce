@@ -1,8 +1,9 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Grid } from "@mui/material";
 import { UserContext } from "../../../context";
+import { AdminBreadcrumbs, ThemeForm } from "../../../organism";
 import { PageContainerGrid } from "../../../atoms";
-import { AdminBreadcrumbs } from "../../../organism";
 
 const AdminCMSThemeCreatePage = () => {
     const navigate = useNavigate();
@@ -22,6 +23,9 @@ const AdminCMSThemeCreatePage = () => {
                 { label: "Theme", link: "/cms/theme" },
                 { label: "Create", link: "/cms/theme/create" },
             ]} />
+            <Grid item xs={12}>
+                <ThemeForm />
+            </Grid>
         </PageContainerGrid>
     )
 }

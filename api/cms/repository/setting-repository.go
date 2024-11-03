@@ -34,6 +34,14 @@ func (_ *SettingRepository) ReadByID(entityID uint) (*model.Setting, error) {
 	return &setting, err
 }
 
+func (_ *SettingRepository) ReadByKey(key string) (*model.Setting, error) {
+	var setting model.Setting
+
+	err := database.DataBase.First(&setting, "key = ?", key).Error
+
+	return &setting, err
+}
+
 func (sr *SettingRepository) Update(setting, updatedSetting *model.Setting) (*model.Setting, error) {
 	if setting.ID <= 0 {
 		return nil, errors.New("invalid entity id")
@@ -42,7 +50,7 @@ func (sr *SettingRepository) Update(setting, updatedSetting *model.Setting) (*mo
 	db := database.DataBase.Model(setting).Updates(updatedSetting)
 
 	if db.RowsAffected == 0 {
-		return nil, errors.New("category not found")
+		return nil, errors.New("setting not found")
 	}
 
 	if db.Error != nil {

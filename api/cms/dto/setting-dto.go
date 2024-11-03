@@ -4,6 +4,7 @@ import "github.com/pniewiarowski/gommerce/api/cms/model"
 
 type SettingDTO struct {
 	ID          uint   `gorm:"primaryKey" json:"id"`
+	Key         string `json:"key"`
 	Value       string `json:"value"`
 	Type        string `json:"type"`
 	Description string `json:"description"`
@@ -12,6 +13,7 @@ type SettingDTO struct {
 func SettingFromModel(setting model.Setting) SettingDTO {
 	return SettingDTO{
 		ID:          setting.ID,
+		Key:         setting.Key,
 		Value:       setting.Value,
 		Type:        setting.Type,
 		Description: setting.Description,

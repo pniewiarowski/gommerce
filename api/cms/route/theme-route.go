@@ -10,19 +10,19 @@ import (
 	"github.com/pniewiarowski/gommerce/api/cms/repository"
 )
 
-func SetupSettingRoute(router fiber.Router) {
-	sr := repository.SettingRepository{}
+func SetupThemeRoute(router fiber.Router) {
+	tr := repository.ThemeRepository{}
 	urr := authrepository.UserRoleRepository{}
 	jwt := authhepler.JWTHelper{UserRoleRepository: urr}
 	fb := sharedhelper.FiberContextHelper{}
 
-	c := controller.SettingController{
-		SettingRepository: sr,
-		JWTHelper:         jwt,
-		FiberHelper:       fb,
+	c := controller.ThemeController{
+		ThemeRepository: tr,
+		JWTHelper:       jwt,
+		FiberHelper:     fb,
 	}
 
-	router.Get("/", authmiddleware.Protected(), c.Index)
+	router.Get("/", c.Index)
 	router.Get("/:id", c.Show)
 	router.Post("/", authmiddleware.Protected(), c.Store)
 	router.Put("/:id", authmiddleware.Protected(), c.Update)

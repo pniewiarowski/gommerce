@@ -48,7 +48,7 @@ const AdminCMSThemePage = () => {
                 <GridActionsCellItem
                     icon={<Edit />}
                     label="Edit"
-                    onClick={() => { navigate(`/shop/product/edit/${params.row.id}`) }}
+                    onClick={() => { navigate(`/cms/theme/edit/${params.row.id}`) }}
                 />,
                 <GridActionsCellItem
                     icon={<Visibility />}

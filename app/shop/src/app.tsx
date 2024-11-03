@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
-import { CategoryDefinition, UserDefinition, CustomerDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
+import { CategoryDefinition, UserDefinition, CustomerDefinition, ProductDefinition, SettingDefinition, ThemeDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import {
     ShopHomePage,
@@ -16,19 +16,21 @@ import {
     ShopCheckoutSuccessPage,
     ShopCheckoutSummaryPage,
 } from "./page";
-import { ThemeOptions, createTheme } from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
 import { Footer, MailingForm, Navbar } from "./organism";
 import { CustomerContext, JwtContext, ShopBagContext, UserContext } from "./context";
 import "./base.css";
+import { darkTheme, lightTheme } from "./theme";
 
 const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');
     const [theme, setTheme] = useState<ThemeOptions | null>(null);
+    const [currentTheme, setCurrentTheme] = useState<ThemeDefinition | null>(null);
     const [isThemeLoading, setIsThemeLoading] = useState<boolean>(true);
     const { get } = useCookies();
-    const { categoriesRepository, themeRepository } = useBackend();
-
+    const { categoriesRepository, themeRepository, settingRepository } = useBackend();
     const [categories, setCategories] = useState<Array<CategoryDefinition>>([]);
+    const [settings, setSettings] = useState<Array<SettingDefinition>>([]);
     const [shopBag, setShopBag] = useState<Array<ProductDefinition>>([]);
     const [customer, setCustomer] = useState<CustomerDefinition | null>(null);
     const [user, setUser] = useState<UserDefinition | null>(null);
@@ -36,67 +38,40 @@ const App = () => {
 
     useEffect(() => {
         (async () => {
-            const resp = themeRepository.getByID(2);
-            const primary = '#651fff';
-            const secondary = '#651fff';
+            setCategories(await categoriesRepository.get());
 
-            setTheme(createTheme({
-                palette: {
-                    mode: "light",
-                    background: {
-                        default: `${primary}77`,
-                    },
-                    primary: {
-                        main: primary,
-                    },
-                    secondary: {
-                        main: secondary,
-                    },
-                },
-                typography: {
-                    h3: {
-                        fontWeight: 900,
-                        fontFamily: "Roboto",
-                        fontSize: 20,
-                    },
-                    h4: {
-                        fontWeight: 700,
-                        fontFamily: "Roboto",
-                        fontSize: 14,
-                    },
-                },
-
-                components: {
-                    MuiAppBar: {
-                        styleOverrides: {
-                            colorPrimary: {
-                                backgroundColor: "#ffffff"
-                            }
-                        }
-                    },
-                    MuiButton: {
-                        styleOverrides: {
-                            root: {
-                                fontFamily: "Roboto",
-                                fontSize: "1rem",
-                                fontWeight: 900,
-                                lineHeight: 1.4,
-                                letterSpacing: 0,
-                                padding: "",
-                            },
-                        },
-                    },
-                },
-            }));
-            setIsThemeLoading(false);
         })();
     }, []);
 
     useEffect(() => {
         (async () => {
-            setCategories(await categoriesRepository.get());
+            if (!isThemeLoading) {
+                return;
+            }
+
+            if (settings.length === 0) {
+                setSettings(await settingRepository.get());
+            }
+
+            if (settings.length > 0) {
+                const setting = settings.find((setting) => setting.key === "current-theme");
+                setCurrentTheme(await themeRepository.getByID(Number(setting?.value)));
+            }
+
+            if (currentTheme) {
+                const finalTheme = currentTheme.mode === "light" ? lightTheme : darkTheme;
+                finalTheme.palette.primary.main = currentTheme.primaryColor;
+                finalTheme.palette.secondary.main = currentTheme.primaryColor;
+
+                if (currentTheme.mode === "light") {
+                    finalTheme.palette.background.default = `${currentTheme.primaryColor}88`;
+                }
+
+                setTheme(finalTheme);
+                setIsThemeLoading(false);
+            }
         })();
-    }, []);
+    }, [settings, currentTheme]);
 
     useEffect(() => {
         if (!get("userID")) {
@@ -132,7 +107,6 @@ const App = () => {
         });
 
         setJwt(jwt);
-
     }, []);
 
     if (isThemeLoading) {
@@ -149,7 +123,7 @@ const App = () => {
                                 <CssBaseline enableColorScheme />
                                 <BrowserRouter>
                                     <Navbar
-                                        heading={"gommerce"}
+                                        heading={currentTheme?.applicationTitle}
                                         width={desktop ? "77.5%" : "100%"}
                                         categories={categories}
                                     />

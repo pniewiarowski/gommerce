@@ -1,6 +1,6 @@
-import { cms } from "../../axios";
 import { ThemeDefinition } from "../definition";
 import { Repository } from "./type";
+import { cms } from "../../axios";
 
 class Themes implements Repository {
     private static resource = "themes";
@@ -17,26 +17,60 @@ class Themes implements Repository {
     }
 
     public async getByID(id: number, token?: string): Promise<ThemeDefinition> {
-        const response = await cms.get(`/${Themes.resource}/${id}`, {
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            }
-        });
+        const response = await cms.get(`/${Themes.resource}/${id}`);
 
         return response.data.data;
     }
 
-    public async create(entity: ThemeDefinition, token: string): Promise<ThemeDefinition> {
-        throw new Error("Method not implemented.");
+    public async create(theme: ThemeDefinition, token: string): Promise<ThemeDefinition> {
+        const response = await cms.post(`/${Themes.resource}`,
+            {
+                "title": theme.title,
+                "mode": theme.mode,
+                "applicationTitle": theme.applicationTitle,
+                "primaryColor": theme.primaryColor,
+                "secondaryColor": theme.secondaryColor,
+                "errorColor": theme.errorColor,
+                "successColor": theme.successColor,
+                "warningColor": theme.warningColor,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+        );
+
+        return await response.data.data;
     }
 
     public async delete(id: number, token: string): Promise<Array<ThemeDefinition>> {
         throw new Error("Method not implemented.");
     }
 
-    public async update(entity: ThemeDefinition, token: string): Promise<ThemeDefinition> {
-        throw new Error("Method not implemented.");
+    public async update(theme: ThemeDefinition, token: string): Promise<ThemeDefinition> {
+        const response = await cms.put(`/${Themes.resource}/${theme.id}`,
+            {
+                "id": theme.id,
+                "title": theme.title,
+                "mode": theme.mode,
+                "applicationTitle": theme.applicationTitle,
+                "primaryColor": theme.primaryColor,
+                "secondaryColor": theme.secondaryColor,
+                "errorColor": theme.errorColor,
+                "successColor": theme.successColor,
+                "warningColor": theme.warningColor,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                }
+            }
+        );
+
+        return await response.data.data;
     }
 }
 

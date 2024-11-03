@@ -3,8 +3,11 @@ interface ThemeDefinition {
     title: string,
     mode: string,
     applicationTitle: string,
-    primaryAccentColor: string,
-    secondaryAccentColor: string,
+    primaryColor: string,
+    secondaryColor: string,
+    errorColor: string,
+    successColor: string,
+    warningColor: string,
 }
 
 export default ThemeDefinition;

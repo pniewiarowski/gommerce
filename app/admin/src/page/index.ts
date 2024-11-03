@@ -19,3 +19,5 @@ export { default as AdminMailingPage } from "./admin-mailing-page";
 export { default as AdminAccountPage } from "./admin-account-page";
 export { default as AdminPaymentPage } from "./admin-payment-page";
 export { default as AdminSettingsPage } from "./admin-setting/admin-settings-page";
+export { default as AdminCMSThemeCreatePage } from "./admin-cms/theme/create-page";
+export { default as AdminCMSThemeEditPage } from "./admin-cms/theme/edit-page";
