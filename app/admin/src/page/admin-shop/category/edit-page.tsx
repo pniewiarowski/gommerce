@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Grid, Grow } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
 import { CategoryDefinition } from "gommerce-app-shared/api/definition";
 import { UserContext } from "../../../context";

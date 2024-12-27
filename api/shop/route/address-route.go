@@ -12,14 +12,16 @@ import (
 
 func SetupAddressRoute(router fiber.Router) {
 	ar := repository.AddressRepository{}
+	cr := repository.CustomerRepository{}
 	urr := authrepository.UserRoleRepository{}
 	jwt := authhelper.JWTHelper{UserRoleRepository: urr}
 	fh := sharedhelper.FiberContextHelper{}
 
 	c := controller.AddressController{
-		AddressRepository: ar,
-		JWTHelper:         jwt,
-		FiberHelper:       fh,
+		AddressRepository:  ar,
+		CustomerRepository: cr,
+		JWTHelper:          jwt,
+		FiberHelper:        fh,
 	}
 
 	router.Get("/", middleware.Protected(), c.Index)

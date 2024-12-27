@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
+import { Box, CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
 import { CategoryDefinition, UserDefinition, CustomerDefinition, ProductDefinition, SettingDefinition, ThemeDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import {
@@ -61,7 +61,7 @@ const App = () => {
             if (currentTheme) {
                 const finalTheme = currentTheme.mode === "light" ? lightTheme : darkTheme;
                 finalTheme.palette.primary.main = currentTheme.primaryColor;
-                finalTheme.palette.secondary.main = currentTheme.primaryColor;
+                finalTheme.palette.secondary.main = currentTheme.secondaryColor;
 
                 if (currentTheme.mode === "light") {
                     finalTheme.palette.background.default = `${currentTheme.primaryColor}88`;
@@ -155,3 +155,7 @@ const App = () => {
 }
 
 export default App;
+function useRive(arg0: { src: string; stateMachines: string; autoplay: boolean; }): { rive: any; RiveComponent: any; } {
+    throw new Error("Function not implemented.");
+}
+

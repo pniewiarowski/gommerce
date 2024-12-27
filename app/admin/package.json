@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.12",
     "@mui/x-charts": "^7.6.1",
     "@mui/x-data-grid": "^7.6.1",
+    "@rive-app/react-canvas": "^4.16.1",
     "axios": "^1.6.7",
     "gommerce-app-shared": "file:../_shared",
     "mui-color-input": "^4.0.2",

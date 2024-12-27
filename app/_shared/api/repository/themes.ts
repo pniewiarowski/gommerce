@@ -46,7 +46,16 @@ class Themes implements Repository {
     }
 
     public async delete(id: number, token: string): Promise<Array<ThemeDefinition>> {
-        throw new Error("Method not implemented.");
+        const response = await cms.delete(`/${Themes.resource}/${id}`,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+
+        return await response.data.data;
     }
 
     public async update(theme: ThemeDefinition, token: string): Promise<ThemeDefinition> {

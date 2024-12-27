@@ -67,10 +67,13 @@ const ShopCategoryPage = () => {
                     </Breadcrumbs>
                 </Paper>
             </Grid>
+
             {products && !!products.length &&
-                <Grid item container xs={12} spacing={1}>
-                    {productsToRender}
-                </Grid>}
+                <React.Fragment>
+                    <Grid item container xs={12} spacing={1}>
+                        {productsToRender}
+                    </Grid>
+                </React.Fragment>}
             {!products &&
                 <Grid item xs={12}>
                     <Grow in={true} timeout={250}>

@@ -6,5 +6,7 @@ export { default as AdminBreadcrumbs } from "./admin-breadcrumbs";
 export { default as AdminSidebar } from "./admin-sidebar";
 export { default as AdminGoopher } from "./admin-goopher";
 export { default as AdminThemeSwitcher } from "./admin-theme-switcher";
+export { ProductList } from "./list";
 export { SettingForm } from "./form";
 export { ThemeForm } from "./form";
+export { CustomerBox } from "./other";

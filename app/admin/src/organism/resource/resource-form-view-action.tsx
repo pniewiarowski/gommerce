@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
     backLink: string;
-    type: "save" | "create" | "setting";
+    type: "save" | "create" | "setting" | "show";
 }
 
 const ResourceFormViewAction = (props: Props) => {
@@ -25,13 +25,15 @@ const ResourceFormViewAction = (props: Props) => {
             </Grow>}
 
 
-            <Grow in={true} {...{ timeout: 1000 }}>
-                <Button color="primary" variant="contained" type="submit">
-                    {props.type === "save" && "save"}
-                    {props.type === "setting" && "save"}
-                    {props.type === "create" && "create"}
-                </Button>
-            </Grow>
+            {props.type !== "show" &&
+                <Grow in={true} {...{ timeout: 1000 }}>
+                    <Button color="primary" variant="contained" type="submit">
+                        {props.type === "save" && "save"}
+                        {props.type === "setting" && "save"}
+                        {props.type === "create" && "create"}
+                    </Button>
+                </Grow>}
+
         </React.Fragment>
     );
 }
