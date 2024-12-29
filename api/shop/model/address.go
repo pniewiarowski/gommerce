@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type Address struct {
 	ID              uint   `gorm:"primaryKey" json:"id"`
 	City            string `json:"city"`
@@ -8,5 +10,6 @@ type Address struct {
 	StreetNumber    uint   `json:"streetNumber"`
 	ApartmentNumber uint   `json:"apartmentNumber"`
 	State           string `json:"state"`
-	CustomerID      uint   `json:"customerID"`
+	CreatedAt       time.Time
+	CustomerID      uint `json:"customerID"`
 }

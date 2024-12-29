@@ -21,7 +21,7 @@ func (_ *AddressRepository) Create(address *model.Address) (*model.Address, erro
 func (_ *AddressRepository) Read() ([]model.Address, error) {
 	var addresses []model.Address
 
-	err := database.DataBase.Order("sort_order").Find(&addresses).Error
+	err := database.DataBase.Find(&addresses).Error
 
 	return addresses, err
 }

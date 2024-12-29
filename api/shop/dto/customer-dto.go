@@ -1,13 +1,17 @@
 package dto
 
-import "github.com/pniewiarowski/gommerce/api/shop/model"
+import (
+	"github.com/pniewiarowski/gommerce/api/shop/model"
+	"time"
+)
 
 type CustomerDTO struct {
-	ID        uint   `gorm:"primaryKey" json:"id"`
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	IsActive  bool   `json:"isActive"`
-	UserID    uint   `json:"userID"`
+	ID        uint      `gorm:"primaryKey" json:"id"`
+	FirstName string    `json:"firstName"`
+	LastName  string    `json:"lastName"`
+	IsActive  bool      `json:"isActive"`
+	CreatedAt time.Time `json:"createdAt"`
+	UserID    uint      `json:"userID"`
 }
 
 func CustomerFromModel(customer model.Customer) CustomerDTO {
@@ -16,6 +20,7 @@ func CustomerFromModel(customer model.Customer) CustomerDTO {
 		FirstName: customer.FirstName,
 		LastName:  customer.LastName,
 		IsActive:  *customer.IsActive,
+		CreatedAt: customer.CreatedAt,
 		UserID:    customer.UserID,
 	}
 }

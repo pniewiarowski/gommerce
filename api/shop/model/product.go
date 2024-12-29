@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type Product struct {
 	ID          uint    `gorm:"primaryKey" json:"id"`
 	Name        string  `json:"name"`
@@ -8,5 +10,6 @@ type Product struct {
 	Enabled     *bool   `json:"enabled"`
 	SortOrder   uint    `json:"sortOrder"`
 	ImageURL    string  `json:"imageURL"`
-	CategoryID  uint    `json:"categoryID"`
+	CreatedAt   time.Time
+	CategoryID  uint `json:"categoryID"`
 }

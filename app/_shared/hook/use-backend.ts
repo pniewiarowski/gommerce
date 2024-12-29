@@ -7,6 +7,7 @@ import {
     Users,
     Themes,
     Settings,
+    Addresses,
 } from "../api/repository"
 
 interface Repositories {
@@ -18,6 +19,7 @@ interface Repositories {
     authRepository: Authentication,
     themeRepository: Themes,
     settingRepository: Settings,
+    addressesRepository: Addresses,
 }
 
 let repositories: Repositories | null = null;
@@ -33,6 +35,7 @@ const useBackend = (): Repositories => {
             authRepository: new Authentication(),
             themeRepository: new Themes(),
             settingRepository: new Settings(),
+            addressesRepository: new Addresses(),
         };
     }
 

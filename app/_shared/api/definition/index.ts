@@ -8,3 +8,4 @@ export type { default as SettingDefinition } from "./setting-definition.ts";
 export type { default as AuthResponseDefinition } from "./auth-response-definition.ts";
 export type { default as AuthRegisterDefinition } from "./auth-register-definition.ts";
 export type { default as ResourceInfoDefinition } from "./resource-info-definition.ts";
+export type { default as AddressDefinition } from "./address-definition.ts";

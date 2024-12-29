@@ -10,6 +10,7 @@ type Theme struct {
 	ErrorColor             string `json:"errorColor"`
 	SuccessColor           string `json:"successColor"`
 	WarningColor           string `json:"warningColor"`
-	InterfaceButtonVariant string `json:"buttonVariant"`
+	InterfaceUIVariant     string `json:"interfaceUIVariant"`
+	InterfaceButtonVariant string `json:"interfaceButtonVariant"`
 	InterfaceInputVariant  string `json:"interfaceInputVariant"`
 }

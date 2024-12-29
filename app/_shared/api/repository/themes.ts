@@ -33,6 +33,9 @@ class Themes implements Repository {
                 "errorColor": theme.errorColor,
                 "successColor": theme.successColor,
                 "warningColor": theme.warningColor,
+                "interfaceUIVariant": theme.interfaceUIVariant,
+                "interfaceButtonVariant": theme.interfaceButtonVariant,
+                "interfaceInputVariant": theme.interfaceInputVariant,
             },
             {
                 headers: {
@@ -70,6 +73,9 @@ class Themes implements Repository {
                 "errorColor": theme.errorColor,
                 "successColor": theme.successColor,
                 "warningColor": theme.warningColor,
+                "interfaceUIVariant": theme.interfaceUIVariant,
+                "interfaceButtonVariant": theme.interfaceButtonVariant,
+                "interfaceInputVariant": theme.interfaceInputVariant,
             },
             {
                 headers: {

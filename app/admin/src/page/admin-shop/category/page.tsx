@@ -25,8 +25,7 @@ const AdminShopCategoryPage = () => {
     }, [user]);
 
     useEffect(() => {
-        const fetch = async () => setCategories(await categoriesRepository.get());
-        fetch();
+        (async () => setCategories(await categoriesRepository.get()))();
     }, []);
 
     const columns: GridColDef<(typeof categories)[number]>[] = [

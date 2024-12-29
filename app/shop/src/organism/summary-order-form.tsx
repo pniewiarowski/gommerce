@@ -15,7 +15,7 @@ const SummaryOrderForm = () => {
     const { shopBag, setShopBag } = useContext(ShopBagContext);
     const { jwt } = useContext(JwtContext);
 
-    const { ordersRepository } = useBackend();
+    const { ordersRepository, addressesRepository } = useBackend();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -35,6 +35,17 @@ const SummaryOrderForm = () => {
 
             ordersRepository.create({
                 productsIDs: productIDs,
+                products: null
+            }, jwt);
+
+            addressesRepository.create({
+                city: get("address-form-city"),
+                country: "",
+                street: get("address-form-street-name"),
+                streetNumber: get("address-form-number"),
+                apartmentNumber: 0,
+                state: "",
+                customerID: 0
             }, jwt);
         }
 

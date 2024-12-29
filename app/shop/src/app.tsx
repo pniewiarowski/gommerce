@@ -16,11 +16,11 @@ import {
     ShopCheckoutSuccessPage,
     ShopCheckoutSummaryPage,
 } from "./page";
-import { createTheme, ThemeOptions } from "@mui/material/styles";
+import { ThemeOptions } from "@mui/material/styles";
 import { Footer, MailingForm, Navbar } from "./organism";
 import { CustomerContext, JwtContext, ShopBagContext, UserContext } from "./context";
 import "./base.css";
-import { darkTheme, lightTheme } from "./theme";
+import { createGommerceTheme } from "./theme";
 
 const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');
@@ -59,15 +59,7 @@ const App = () => {
             }
 
             if (currentTheme) {
-                const finalTheme = currentTheme.mode === "light" ? lightTheme : darkTheme;
-                finalTheme.palette.primary.main = currentTheme.primaryColor;
-                finalTheme.palette.secondary.main = currentTheme.secondaryColor;
-
-                if (currentTheme.mode === "light") {
-                    finalTheme.palette.background.default = `${currentTheme.primaryColor}88`;
-                }
-
-                setTheme(finalTheme);
+                setTheme(createGommerceTheme(currentTheme));
                 setIsThemeLoading(false);
             }
         })();

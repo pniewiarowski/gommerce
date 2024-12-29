@@ -20,10 +20,19 @@ const ThemeForm = (props: Props) => {
     const navigate = useNavigate();
     const [primaryColor, setPrimaryColor] = useState<string>(props.default ? props.default.primaryColor : "#651fff");
     const [secondaryColor, setSecondaryColor] = useState<string>(props.default ? props.default.secondaryColor : "#651fff");
+    const [interfaceUIVariant, setInterfaceUIVariant] = useState<"mui" | "rounded" | "sharp">(
+        props.default !== null && props.default !== undefined ? props.default.interfaceUIVariant : "mui"
+    );
+    const [interfaceButtonVariant, setInterfaceButtonVariant] = useState<"mui" | "rounded" | "sharp">(
+        props.default !== null && props.default !== undefined ? props.default.interfaceButtonVariant : "mui"
+    );
+    const [interfaceInputVariant, setInterfaceInputVaraint] = useState<"mui" | "rounded" | "sharp">(
+        props.default !== null && props.default !== undefined ? props.default.interfaceInputVariant : "mui"
+    );
     const [errorColor, setErrorColor] = useState<string>(props.default ? props.default.errorColor : "#cf3245");
     const [successColor, setSuccessColor] = useState<string>(props.default ? props.default.successColor : "#32cf45");
     const [warningColor, setWariningColor] = useState<string>(props.default ? props.default.warningColor : "#cfaa11");
-    const [themeMode, setThemeMode] = useState<string>(props.default ? props.default.mode : "light");
+    const [themeMode, setThemeMode] = useState<"dark" | "light">(props.default ? props.default.mode : "light");
     const { jwt } = useContext(JwtContext);
     const { themeRepository } = useBackend();
 
@@ -38,6 +47,9 @@ const ThemeForm = (props: Props) => {
                 errorColor: errorColor,
                 successColor: successColor,
                 warningColor: warningColor,
+                interfaceUIVariant: interfaceUIVariant,
+                interfaceButtonVariant: interfaceButtonVariant,
+                interfaceInputVariant: interfaceInputVariant,
             }, jwt);
             navigate('/cms/theme')
         }
@@ -53,6 +65,9 @@ const ThemeForm = (props: Props) => {
                 errorColor: errorColor,
                 successColor: successColor,
                 warningColor: warningColor,
+                interfaceUIVariant: interfaceUIVariant,
+                interfaceButtonVariant: interfaceButtonVariant,
+                interfaceInputVariant: interfaceInputVariant,
             }, jwt);
             navigate('/cms/theme')
         }
@@ -86,7 +101,7 @@ const ThemeForm = (props: Props) => {
                     />
                 </FormControl>
                 <FormControl sx={{ mb: 1, width: "100%" }} fullWidth>
-                    <Select defaultValue={props.default ? props.default.mode : "light"} onChange={(event) => setThemeMode(event.target.value as string)}>
+                    <Select defaultValue={props.default ? props.default.mode : "light"} onChange={(event) => setThemeMode(event.target.value as "dark" | "light")}>
                         <MenuItem value={"light"}>Light</MenuItem>
                         <MenuItem value={"dark"}>Dark</MenuItem>
                     </Select>
@@ -118,8 +133,16 @@ const ThemeForm = (props: Props) => {
             <Box sx={{ mb: 3 }}>
                 <Typography variant="h3" sx={{ mb: 1, fontSize: "2rem" }}>Interface</Typography>
                 <FormControl sx={{ mb: 1, mr: 1, width: "10%" }} fullWidth>
+                    <Typography sx={{ zIndex: "5" }}>UI</Typography>
+                    <Select defaultValue={interfaceUIVariant} onChange={(event) => setInterfaceUIVariant(event.target.value as "mui" | "rouneded" | "sharp")}>
+                        <MenuItem value={"mui"}>MUI</MenuItem>
+                        <MenuItem value={"rounded"}>Rounded</MenuItem>
+                        <MenuItem value={"sharp"}>Sharp</MenuItem>
+                    </Select>
+                </FormControl>
+                <FormControl sx={{ mb: 1, mr: 1, width: "10%" }} fullWidth>
                     <Typography sx={{ zIndex: "5" }}>Button</Typography>
-                    <Select defaultValue={"mui"}>
+                    <Select defaultValue={interfaceButtonVariant} onChange={(event) => setInterfaceButtonVariant(event.target.value as "mui" | "rounded" | "sharp")}>
                         <MenuItem value={"mui"}>MUI</MenuItem>
                         <MenuItem value={"rounded"}>Rounded</MenuItem>
                         <MenuItem value={"sharp"}>Sharp</MenuItem>
@@ -127,7 +150,7 @@ const ThemeForm = (props: Props) => {
                 </FormControl>
                 <FormControl sx={{ mb: 1, mr: 1, width: "10%" }} fullWidth>
                     <Typography sx={{ zIndex: "5" }}>Input</Typography>
-                    <Select defaultValue={"mui"}>
+                    <Select defaultValue={interfaceInputVariant} onChange={(event) => setInterfaceInputVaraint(event.target.value as "mui" | "rouneded" | "sharp")}>
                         <MenuItem value={"mui"}>MUI</MenuItem>
                         <MenuItem value={"rounded"}>Rounded</MenuItem>
                         <MenuItem value={"sharp"}>Sharp</MenuItem>
