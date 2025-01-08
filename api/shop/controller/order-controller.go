@@ -3,9 +3,10 @@ package controller
 import (
 	"github.com/gofiber/fiber/v2"
 	sharedhelper "github.com/pniewiarowski/gommerce/api/_shared/helper"
-	"github.com/pniewiarowski/gommerce/api/auth/definition"
+	authdefinition "github.com/pniewiarowski/gommerce/api/auth/definition"
 	authhelper "github.com/pniewiarowski/gommerce/api/auth/helper"
 	"github.com/pniewiarowski/gommerce/api/auth/response"
+	shopdefinition "github.com/pniewiarowski/gommerce/api/shop/definition"
 	"github.com/pniewiarowski/gommerce/api/shop/dto"
 	"github.com/pniewiarowski/gommerce/api/shop/model"
 	"github.com/pniewiarowski/gommerce/api/shop/repository"
@@ -28,7 +29,7 @@ func (oc *OrderController) isResourceOwner(order *model.Order, ctx *fiber.Ctx) b
 		return true
 	}
 
-	idFromToken := claims[definition.JwtClaimId]
+	idFromToken := claims[authdefinition.JwtClaimId]
 	customer, err := oc.CustomerRepository.ReadByUserID(idFromToken.(uint))
 
 	if err != nil {
@@ -106,9 +107,10 @@ func (oc *OrderController) Store(ctx *fiber.Ctx) error {
 	}
 
 	claims, _ := oc.JWTHelper.ExtractClaimsFromContext(ctx)
-	customer, _ := oc.CustomerRepository.ReadByUserID(claims[definition.JwtClaimId].(uint))
+	customer, _ := oc.CustomerRepository.ReadByUserID(claims[authdefinition.JwtClaimId].(uint))
 	order := model.Order{
 		CustomerID: customer.ID,
+		Status:     shopdefinition.ORDER_STATUS_NEW,
 		FullPrice:  fullPrice,
 	}
 

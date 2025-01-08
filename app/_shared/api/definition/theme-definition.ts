@@ -2,6 +2,7 @@ interface ThemeDefinition {
     id?: number,
     title: string,
     mode: "light" | "dark",
+    userSpaceWidth: number,
     applicationTitle: string,
     primaryColor: string,
     secondaryColor: string,

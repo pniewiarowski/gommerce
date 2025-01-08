@@ -9,6 +9,7 @@ type OrderDTO struct {
 	ID         uint         `gorm:"primaryKey" json:"id"`
 	CustomerID uint         `json:"customerID"`
 	FullPrice  float32      `json:"fullPrice"`
+	Status     string       `json:"status"`
 	CreatedAt  time.Time    `json:"createdAt"`
 	Products   []ProductDTO `json:"products"`
 }
@@ -18,6 +19,7 @@ func OrderFromModel(order model.Order) OrderDTO {
 		ID:         order.ID,
 		CustomerID: order.CustomerID,
 		FullPrice:  order.FullPrice,
+		Status:     order.Status,
 		CreatedAt:  order.CreatedAt,
 		Products:   []ProductDTO{},
 	}

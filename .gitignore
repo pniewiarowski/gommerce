@@ -61,3 +61,5 @@
 /app/_shared/next-env.d.ts
 /cli/.idea
 __pycache__
+dist
+idea

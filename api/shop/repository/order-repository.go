@@ -62,6 +62,14 @@ func (_ *OrderRepository) ReadProducts(entityID uint) ([]model.Product, error) {
 	return products, err
 }
 
+func (or *OrderRepository) ReadByCustomerID(customerID uint) ([]model.Order, error) {
+	var orders []model.Order
+
+	err := database.DataBase.Where("customer_id = ?", customerID).Find(&orders).Error
+
+	return orders, err
+}
+
 func (or *OrderRepository) Update(order, updatedOrder *model.Order) (*model.Order, error) {
 	if order.ID <= 0 {
 		return nil, errors.New("invalid entity id")

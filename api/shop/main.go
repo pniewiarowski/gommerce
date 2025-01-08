@@ -15,6 +15,7 @@ var Models = []interface{}{
 	model.Address{},
 	model.Order{},
 	relation.OrderProductRelation{},
+	relation.CustomerFollowingProductRelation{},
 }
 
 func main() {

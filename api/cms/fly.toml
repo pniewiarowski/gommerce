@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for cms-green-thunder-3294 on 2025-01-08T19:43:54+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'cms-green-thunder-3294'
+primary_region = 'waw'
+
+[build]
+
+[http_service]
+  internal_port = 1120
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

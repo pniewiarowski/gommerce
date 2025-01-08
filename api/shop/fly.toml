@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for shop on 2025-01-08T20:02:53+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'shop'
+primary_region = 'waw'
+
+[build]
+
+[http_service]
+  internal_port = 1110
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1

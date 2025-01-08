@@ -25,6 +25,26 @@ func setup() {
 			Description: "current selected theme",
 		})
 	}
+
+	if _, err := sr.ReadByKey("store-name"); err != nil {
+		sr.Create(&model.Setting{
+			Key:         "store-name",
+			Value:       "Gommerce",
+			Type:        "string",
+			Scope:       "shop",
+			Description: "name of your store",
+		})
+	}
+
+	if _, err := sr.ReadByKey("footer-content"); err != nil {
+		sr.Create(&model.Setting{
+			Key:         "footer-content",
+			Value:       "Copyright© 2024 pniewiarowski...anyway, I don't care.",
+			Type:        "string",
+			Scope:       "shop",
+			Description: "content of store footer",
+		})
+	}
 }
 
 func main() {

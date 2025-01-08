@@ -8,6 +8,7 @@ type Product struct {
 	Description string  `json:"description"`
 	Price       float32 `json:"price"`
 	Enabled     *bool   `json:"enabled"`
+	Qty         uint    `json:"qty"`
 	SortOrder   uint    `json:"sortOrder"`
 	ImageURL    string  `json:"imageURL"`
 	CreatedAt   time.Time

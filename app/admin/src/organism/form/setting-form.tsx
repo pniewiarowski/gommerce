@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { FormControl, MenuItem, Select, Typography } from "@mui/material";
+import { FormControl, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
 import { SettingDefinition, ThemeDefinition } from "gommerce-app-shared/api/definition";
 import { ResourceFormViewAction } from "../resource";
@@ -44,7 +44,11 @@ const AdminSettingForm = () => {
 
     return (
         <PaperForm onSubmit={handleSubmit}>
-            <FormControl fullWidth sx={{ mb: 1 }}>
+            <FormControl fullWidth sx={{ mb: 1, mr: 1, width: "49.7%" }}>
+                <Typography variant="h3" sx={{ mb: 1 }}>Store Name</Typography>
+                <TextField />
+            </FormControl>
+            <FormControl fullWidth sx={{ mb: 1, width: "49.7%" }}>
                 <Typography variant="h3" sx={{ mb: 1 }}>Project Theme</Typography>
                 <Select defaultValue={selectedTheme} onChange={(event) => setSelectedTheme(event.target.value as number)}>
                     {themes.map((theme) =>
@@ -52,8 +56,12 @@ const AdminSettingForm = () => {
                     )}
                 </Select>
             </FormControl>
+            <FormControl fullWidth sx={{ mb: 1, width: "100%" }}>
+                <Typography variant="h3" sx={{ mb: 1 }}>Footer content</Typography>
+                <TextField multiline rows={3} />
+            </FormControl>
             <ResourceFormViewAction backLink={"/"} type={"setting"} />
-        </PaperForm>
+        </PaperForm >
     );
 }
 

@@ -11,6 +11,7 @@ type ProductDTO struct {
 	Description string    `json:"description"`
 	Price       float32   `json:"price"`
 	Enabled     bool      `json:"enabled"`
+	Qty         uint      `json:"qty"`
 	SortOrder   uint      `json:"sortOrder"`
 	ImageURL    string    `json:"imageURL"`
 	CreatedAt   time.Time `json:"createdAt"`
@@ -24,6 +25,7 @@ func ProductFromModel(product model.Product) ProductDTO {
 		Description: product.Description,
 		Price:       product.Price,
 		Enabled:     *product.Enabled,
+		Qty:         product.Qty,
 		SortOrder:   product.SortOrder,
 		ImageURL:    product.ImageURL,
 		CreatedAt:   product.CreatedAt,

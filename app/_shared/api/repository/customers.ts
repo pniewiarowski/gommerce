@@ -1,4 +1,4 @@
-import { CustomerDefinition, ResourceInfoDefinition } from "../definition";
+import { CustomerDefinition, OrderDefinition, ResourceInfoDefinition } from "../definition";
 import { shop } from "../../axios";
 import { Repository } from "./type";
 
@@ -40,6 +40,17 @@ class Customers implements Repository {
 
     public async getByUserID(userID: number, token: string): Promise<CustomerDefinition> {
         const response = await shop.get(`/users/${userID}/customers`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        return response.data.data;
+    }
+
+    public async getOrders(id: number, token: string): Promise<Array<OrderDefinition>> {
+        const response = await shop.get(`/customers/${id}/orders`, {
             headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`,

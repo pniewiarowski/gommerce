@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Box, FormControl, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Box, FormControl, MenuItem, Select, Slider, TextField, Typography } from "@mui/material";
 import { MuiColorInput } from "mui-color-input"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ThemeDefinition } from "gommerce-app-shared/api/definition";
@@ -29,6 +29,7 @@ const ThemeForm = (props: Props) => {
     const [interfaceInputVariant, setInterfaceInputVaraint] = useState<"mui" | "rounded" | "sharp">(
         props.default !== null && props.default !== undefined ? props.default.interfaceInputVariant : "mui"
     );
+    const [userSpaceWidth, setUserSpaceWidth] = useState<number>(props.default !== null && props.default !== undefined ? props.default.userSpaceWidth : 75);
     const [errorColor, setErrorColor] = useState<string>(props.default ? props.default.errorColor : "#cf3245");
     const [successColor, setSuccessColor] = useState<string>(props.default ? props.default.successColor : "#32cf45");
     const [warningColor, setWariningColor] = useState<string>(props.default ? props.default.warningColor : "#cfaa11");
@@ -41,6 +42,7 @@ const ThemeForm = (props: Props) => {
             await themeRepository.create({
                 title: data.title,
                 mode: themeMode,
+                userSpaceWidth: userSpaceWidth,
                 applicationTitle: data.applicationTitle,
                 primaryColor: primaryColor,
                 secondaryColor: secondaryColor,
@@ -68,6 +70,7 @@ const ThemeForm = (props: Props) => {
                 interfaceUIVariant: interfaceUIVariant,
                 interfaceButtonVariant: interfaceButtonVariant,
                 interfaceInputVariant: interfaceInputVariant,
+                userSpaceWidth: userSpaceWidth,
             }, jwt);
             navigate('/cms/theme')
         }
@@ -75,6 +78,18 @@ const ThemeForm = (props: Props) => {
         !props.default && create();
         props.default && update();
     };
+
+    const buildMarksForWidthSlider = () => {
+        const marks = [];
+        for (let i = 65; i <= 100; i += 5) {
+            marks.push({
+                value: i,
+                label: `${i}%`,
+            });
+        }
+
+        return marks;
+    }
 
     return (
         <PaperForm onSubmit={handleSubmit(onSubmit)}>
@@ -105,6 +120,10 @@ const ThemeForm = (props: Props) => {
                         <MenuItem value={"light"}>Light</MenuItem>
                         <MenuItem value={"dark"}>Dark</MenuItem>
                     </Select>
+                </FormControl>
+                <FormControl sx={{ width: "100%", p: 1 }} fullWidth>
+                    <Typography sx={{ zIndex: "5", }}>Application container with</Typography>
+                    <Slider min={65} max={100} value={userSpaceWidth} marks={buildMarksForWidthSlider()} onChange={(e) => { setUserSpaceWidth(e.target.value) }} />
                 </FormControl>
             </Box>
             <Box sx={{ mb: 3 }}>
