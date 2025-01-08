@@ -28,7 +28,10 @@ const CustomerMenu = (props: Props) => {
 
     return (
         <Fragment>
-            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={props.close}>
+            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={() => {
+                props.close();
+                navigate('/order');
+            }}>
                 <ShoppingBag sx={{ mr: 1 }} />
                 <Typography>My orders</Typography>
             </MenuItem>

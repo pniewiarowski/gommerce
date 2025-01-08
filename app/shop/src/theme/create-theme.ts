@@ -60,6 +60,15 @@ const createGommerceTheme = (options: ThemeDefinition): ThemeOptions => {
                 secondary: {
                     main: options.secondaryColor,
                 },
+                error: {
+                    main: options.errorColor,
+                },
+                success: {
+                    main: options.successColor,
+                },
+                warning: {
+                    main: options.warningColor,
+                },
             },
             typography: {
                 h3: {
@@ -90,6 +99,15 @@ const createGommerceTheme = (options: ThemeDefinition): ThemeOptions => {
             },
             secondary: {
                 main: options.secondaryColor,
+            },
+            error: {
+                main: options.errorColor,
+            },
+            success: {
+                main: options.successColor,
+            },
+            warning: {
+                main: options.warningColor,
             },
         },
         typography: {

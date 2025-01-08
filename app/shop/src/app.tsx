@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Box, CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
+import { CircularProgress, Container, CssBaseline, Grid, ThemeProvider, useMediaQuery } from "@mui/material";
 import { CategoryDefinition, UserDefinition, CustomerDefinition, ProductDefinition, SettingDefinition, ThemeDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import {
@@ -15,12 +15,13 @@ import {
     ShopCheckoutPaymentMethodPage,
     ShopCheckoutSuccessPage,
     ShopCheckoutSummaryPage,
+    ShopCustomerOrderPage,
 } from "./page";
 import { ThemeOptions } from "@mui/material/styles";
 import { Footer, MailingForm, Navbar } from "./organism";
 import { CustomerContext, JwtContext, ShopBagContext, UserContext } from "./context";
-import "./base.css";
 import { createGommerceTheme } from "./theme";
+import "./base.css";
 
 const App = () => {
     const desktop: boolean = useMediaQuery('(min-width:1200px)');
@@ -37,30 +38,49 @@ const App = () => {
     const [jwt, setJwt] = useState<string | null>(null);
 
     useEffect(() => {
-        (async () => {
-            setCategories(await categoriesRepository.get());
-
-        })();
+        (async () => { setCategories(await categoriesRepository.get()) })();
     }, []);
 
     useEffect(() => {
         (async () => {
-            if (!isThemeLoading) {
-                return;
-            }
+            try {
+                if (!isThemeLoading) {
+                    return;
+                }
 
-            if (settings.length === 0) {
-                setSettings(await settingRepository.get());
-            }
+                if (settings.length === 0) {
+                    setSettings(await settingRepository.get());
+                }
 
-            if (settings.length > 0) {
-                const setting = settings.find((setting) => setting.key === "current-theme");
-                setCurrentTheme(await themeRepository.getByID(Number(setting?.value)));
-            }
+                if (settings.length > 0) {
+                    const setting = settings.find((setting) => setting.key === "current-theme");
+                    setCurrentTheme(await themeRepository.getByID(Number(setting?.value)));
+                }
 
-            if (currentTheme) {
-                setTheme(createGommerceTheme(currentTheme));
-                setIsThemeLoading(false);
+                if (currentTheme) {
+                    setTheme(createGommerceTheme(currentTheme));
+                    setIsThemeLoading(false);
+                }
+            } catch (exception) {
+                setCurrentTheme({
+                    title: "default",
+                    applicationTitle: "gommerce",
+                    mode: "light",
+                    userSpaceWidth: 70,
+                    primaryColor: "#651fff",
+                    secondaryColor: "#651fff",
+                    errorColor: "#cf3245",
+                    successColor: "#32cf45",
+                    warningColor: "#cfaa11",
+                    interfaceUIVariant: "mui",
+                    interfaceButtonVariant: "mui",
+                    interfaceInputVariant: "mui",
+                });
+
+                if (currentTheme) {
+                    setTheme(createGommerceTheme(currentTheme));
+                    setIsThemeLoading(false);
+                }
             }
         })();
     }, [settings, currentTheme]);
@@ -102,7 +122,13 @@ const App = () => {
     }, []);
 
     if (isThemeLoading) {
-        return;
+        return (
+            <React.Fragment>
+                <Container sx={{ width: "100vw", height: "90vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <CircularProgress color="primary" size={"10rem"} />
+                </Container>
+            </React.Fragment>
+        );
     }
 
     return (
@@ -116,10 +142,10 @@ const App = () => {
                                 <BrowserRouter>
                                     <Navbar
                                         heading={currentTheme?.applicationTitle}
-                                        width={desktop ? "77.5%" : "100%"}
+                                        width={desktop ? `${currentTheme?.userSpaceWidth}%` : "100%"}
                                         categories={categories}
                                     />
-                                    <Grid sx={{ width: desktop ? "75%" : "100%", mx: "auto", mb: 1 }} container spacing={1}>
+                                    <Grid sx={{ width: desktop ? `${currentTheme?.userSpaceWidth - 2.5}%` : "100%", mx: "auto", mb: 1 }} container spacing={1}>
                                         <Routes>
                                             <Route path="/" element={<ShopHomePage />} />
                                             <Route path="/login" element={<ShopCustomerLoginPage />} />
@@ -132,6 +158,7 @@ const App = () => {
                                             <Route path="/checkout/payment-method" element={<ShopCheckoutPaymentMethodPage />} />
                                             <Route path="/checkout/summary" element={<ShopCheckoutSummaryPage />} />
                                             <Route path="/checkout/success" element={<ShopCheckoutSuccessPage />} />
+                                            <Route path="/order" element={<ShopCustomerOrderPage />} />
                                         </Routes>
                                         <MailingForm />
                                         <Footer />

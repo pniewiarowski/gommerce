@@ -17,6 +17,7 @@
     "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
+    "noEmitOnError": false,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },

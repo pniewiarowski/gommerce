@@ -9,3 +9,4 @@ export { default as ShopCheckoutAddressPage } from "./shop-checkout/address-page
 export { default as ShopCheckoutPaymentMethodPage } from "./shop-checkout/payment-method-page.tsx";
 export { default as ShopCheckoutSummaryPage } from "./shop-checkout/summary-page.tsx";
 export { default as ShopCheckoutSuccessPage } from "./shop-checkout/success-page.tsx";
+export { default as ShopCustomerOrderPage } from "./shop-customer/order-page.tsx";
