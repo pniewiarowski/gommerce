@@ -1,16 +1,15 @@
-FROM golang:1.22
+FROM golang:1.22 AS build
+WORKDIR /app
 
-WORKDIR /gommerce/src/api/auth
-
-COPY go.mod .
-COPY go.sum .
-
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
-COPY . .
+COPY . ./
+RUN go build -o main .
 
-RUN go build -o ./out/auth .
-
-EXPOSE 1100
-
-CMD ["./out/auth"]
+FROM debian:bullseye-slim
+WORKDIR /app
+COPY --from=build /app/main .
+EXPOSE 8080
+CMD ["./main"]

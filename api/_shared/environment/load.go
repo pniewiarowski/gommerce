@@ -7,6 +7,7 @@ import (
 var isEnvironmentLoaded = false
 
 const (
+	databaseURL                            = "DATABASE_URL"
 	databaseHostEnvironmentKey             = "DATABASE_HOST"
 	databaseUserEnvironmentKey             = "DATABASE_USER"
 	databasePasswordEnvironmentKey         = "DATABASE_PASSWORD"

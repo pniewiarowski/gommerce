@@ -6,6 +6,14 @@ import (
 	"strconv"
 )
 
+func GetDatabaseURL() string {
+	if !isEnvironmentLoaded {
+		panic("first load environment file via env package api.")
+	}
+
+	return os.Getenv(databaseURL)
+}
+
 func GetDatabaseHost() string {
 	if !isEnvironmentLoaded {
 		panic("first load environment file via env package api.")

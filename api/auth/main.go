@@ -43,7 +43,14 @@ func setup() {
 
 func main() {
 	environment.Load(".env")
-	database.Setup(environment.GetDatabaseURL())
+	database.Setup(
+		environment.GetDatabaseHost(),
+		environment.GetDatabaseUser(),
+		environment.GetDatabasePassword(),
+		environment.GetDatabaseName(),
+		environment.GetDatabasePort(),
+	)
+
 	database.Migrate(Models)
 	setup()
 
