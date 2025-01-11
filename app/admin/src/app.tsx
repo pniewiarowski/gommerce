@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Box, CssBaseline, Grid, ThemeProvider } from "@mui/material";
+import { CircularProgress, Container, CssBaseline, Grid, ThemeProvider } from "@mui/material";
 import { UserDefinition } from "gommerce-app-shared/api/definition";
 import {
     AdminAccountPage,
@@ -31,6 +31,7 @@ import { useCookies } from "gommerce-app-shared/hook";
 import { JwtContext, UserContext } from "./context";
 import { darkTheme, lightTheme } from "./theme";
 import { AdminGoopher, AdminSidebar, AdminThemeSwitcher } from "./organism";
+import React from "react";
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -58,7 +59,13 @@ const App = () => {
     }, []);
 
     if (loading) {
-        return <Fragment></Fragment>;
+        return (
+            <React.Fragment>
+                <Container sx={{ width: "100vw", height: "90vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <CircularProgress color="primary" size={"10rem"} />
+                </Container>
+            </React.Fragment>
+        );
     }
 
     return (
