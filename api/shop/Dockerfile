@@ -1,16 +1,15 @@
-FROM golang:1.22
+FROM golang:1.222 AS build
+WORKDIR /app
 
-WORKDIR /gommerce/src/api/shop
-
-COPY go.mod .
-COPY go.sum .
-
+COPY go.mod ./
+COPY go.sum ./
 RUN go mod download
 
-COPY . .
+COPY . ./
+RUN go build -o main .
 
-RUN go build -o ./out/shop .
-
-EXPOSE 1110
-
-CMD ["./out/shop"]
+FROM debian:bullseye-slim
+WORKDIR /app
+COPY --from=build /app/main .
+EXPOSE 8080
+CMD ["./main"]

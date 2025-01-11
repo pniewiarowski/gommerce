@@ -1,9 +1,9 @@
-# fly.toml app configuration file generated for auth-summer-brook-7476 on 2025-01-08T19:30:55+01:00
+# fly.toml app configuration file generated for auth-gommerce on 2025-01-11T16:31:18+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'auth-summer-brook-7476'
+app = 'auth-gommerce'
 primary_region = 'waw'
 
 [build]
