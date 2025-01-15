@@ -1,4 +1,4 @@
-import { Avatar, Box, Paper, Typography } from "@mui/material";
+import { Avatar, Box, Paper, Rating, Typography } from "@mui/material";
 import { OpinionDefinition } from "gommerce-app-shared/api/definition";
 
 interface Props {
@@ -10,11 +10,14 @@ const OpinionList = (props: Props) => {
         <Box>
             {props.opinions.map((opinion) => {
                 return (
-                    <Paper elevation={3} sx={{ p: 2, display: "flex", "alignItems": "center" }}>
+                    <Paper elevation={3} sx={{ p: 2, mt: 1, display: "flex", "alignItems": "center" }}>
                         <Avatar sx={{ width: "5rem", height: "5rem" }} />
-                        <Typography variant="body1" sx={{ ml: 1.33, fontSize: "2rem" }}>
-                            {opinion.comment}
-                        </Typography>
+                        <Box sx={{ ml: "1.33rem", display: "flex", flexDirection: "column" }}>
+                            <Rating value={opinion.score} readOnly />
+                            <Typography variant="body1" sx={{ fontSize: "2rem", mt: "0.25rem" }}>
+                                {opinion.comment}
+                            </Typography>
+                        </Box>
                     </Paper>
                 );
             })}

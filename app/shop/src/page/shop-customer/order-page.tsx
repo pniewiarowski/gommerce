@@ -1,8 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Grid, Paper, Breadcrumbs, Typography } from "@mui/material";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Grid, Paper, Breadcrumbs, Typography, Box } from "@mui/material";
+import { useBackend } from "gommerce-app-shared/hook";
+import { OrderDefinition } from "gommerce-app-shared/api/definition";
+import { JwtContext } from "../../context";
+import { ProductList } from "../../organism/list";
 
 const ShopCustomerOrderPage = () => {
+    const { id } = useParams();
+    const [order, setOrder] = useState<OrderDefinition | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
+    const { jwt } = useContext(JwtContext);
+    const { ordersRepository } = useBackend();
+
+    useEffect(() => {
+        (async () => {
+            setOrder(await ordersRepository.getByID(Number(id), jwt))
+            setLoading(false);
+        })();
+    })
+
+    if (loading) {
+        return <></>;
+    }
+
     return (
         <React.Fragment>
             <Grid sx={{ mt: 1 }} item xs={12}>
@@ -14,10 +35,22 @@ const ShopCustomerOrderPage = () => {
                         <Link to="/order">
                             <Typography color="text.primary">Order</Typography>
                         </Link>
+                        <Link to={`/${id}`}>
+                            <Typography color="text.primary">{id}</Typography>
+                        </Link>
                     </Breadcrumbs>
                 </Paper>
             </Grid>
-        </React.Fragment>
+            <Grid item xs={12}>
+                <Paper sx={{ p: 1 }}>
+                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                        <Typography variant="h3">Order {order?.id}</Typography>
+                        <Typography variant="h3">{order?.fullPrice}$</Typography>
+                    </Box>
+                    <ProductList products={order?.products ?? []} />
+                </Paper>
+            </Grid>
+        </React.Fragment >
     );
 }
 

@@ -52,6 +52,13 @@ const Footer = (): React.JSX.Element => {
             <Grid item xs={12}>
                 <Paper sx={{ width: "100%", p: 2 }}>
                     <Typography variant="h4">
+                        System powstał na Wydziale Informatyki Politechniki Białostockiej
+                    </Typography>
+                </Paper>
+            </Grid>
+            <Grid item xs={12}>
+                <Paper sx={{ width: "100%", p: 2 }}>
+                    <Typography variant="h4">
                         Copyright© 2024 pniewiarowski...anyway, I don't care.
                     </Typography>
                 </Paper>

@@ -39,6 +39,11 @@ const AdminHomePage = () => {
                         </Link>
                     </Breadcrumbs>
                 </Paper>
+                <Paper elevation={3} sx={{ width: "100%", p: 2, mb: 1 }}>
+                    <Typography variant="h4">
+                        System powstał na Wydziale Informatyki Politechniki Białostockiej
+                    </Typography>
+                </Paper>
             </Grid>
             <Grid container spacing={1}>
                 <Grid xl={12} item>
