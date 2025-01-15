@@ -43,11 +43,13 @@ const ShopCustomerOrderPage = () => {
             </Grid>
             <Grid item xs={12}>
                 <Paper sx={{ p: 2 }}>
-                    <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <Typography variant="h3">Order {order?.id} <Chip label={order?.status} color="primary" size="small" sx={{ ml: 1 }} /> </Typography>
-                        <Typography variant="body1" sx={{ fontSize: "2rem", fontWeight: "bold" }}>{order?.fullPrice}$</Typography>
-                    </Box>
-                    <ProductList products={order?.products ?? []} />
+                    <React.Fragment>
+                        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                            <Typography variant="h3">Order {order?.id} <Chip label={order?.status} color="primary" size="small" sx={{ ml: 1 }} /> </Typography>
+                            <Typography variant="body1" sx={{ fontSize: "2rem", fontWeight: "bold" }}>{order?.fullPrice}$</Typography>
+                        </Box>
+                        <ProductList products={order?.products ?? []} />
+                    </React.Fragment>
                 </Paper>
             </Grid>
         </React.Fragment >

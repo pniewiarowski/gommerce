@@ -48,7 +48,8 @@ const ShopCustomerOrdersPage = () => {
             <Grid item xs={12}>
                 <Paper sx={{ p: 1 }}>
                     <Typography variant="h3">your orders</Typography>
-                    <OrderList orders={orders} />
+                    {orders && <OrderList orders={orders} />}
+                    {!orders && <Typography variant="body1">you do not make any order yet</Typography>}
                 </Paper>
             </Grid>
         </React.Fragment>
