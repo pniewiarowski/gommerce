@@ -34,6 +34,14 @@ func (_ *AddressRepository) ReadByID(entityID uint) (*model.Address, error) {
 	return &address, err
 }
 
+func (_ *AddressRepository) ReadByCustomerID(id uint) (*model.Address, error) {
+	var address model.Address
+
+	err := database.DataBase.First(&address, "customer_id = ?", id).Error
+
+	return &address, err
+}
+
 func (ar *AddressRepository) Update(address, updatedAddress *model.Address) (*model.Address, error) {
 	if address.ID <= 0 {
 		return nil, errors.New("invalid entity id")

@@ -8,6 +8,7 @@ import { UserContext, JwtContext } from "../../../context";
 import { PageContainerGrid } from "../../../atoms";
 import { AdminBreadcrumbs } from "../../../organism";
 import { ResourceMainViewAction } from "../../../organism/resource";
+import { DeleteResourceTableAction } from "../../../organism/table-action";
 
 const AdminShopAddressPage = () => {
     const [addresses, setAddresses] = useState<Array<AddressDefinition>>([]);
@@ -41,7 +42,13 @@ const AdminShopAddressPage = () => {
             type: "actions",
             width: 170,
             getActions: (params) => [
-
+                <DeleteResourceTableAction
+                    id={params.row.id ?? 0}
+                    name={`${params.row.street} ${params.row.streetNumber}` ?? ""}
+                    setResources={setAddresses}
+                    resourceRepository={addressesRepository}
+                    resource="address"
+                />,
             ]
         }
     ];

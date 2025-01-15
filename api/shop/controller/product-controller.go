@@ -14,6 +14,7 @@ import (
 
 type ProductController struct {
 	ProductRepository repository.ProductRepository
+	OpinionRepository repository.OpinionRepository
 	JWTHelper         authhelper.JWTHelper
 	FiberHelper       sharedhelper.FiberContextHelper
 }
@@ -150,5 +151,26 @@ func (pc *ProductController) Destroy(ctx *fiber.Ctx) error {
 
 	return ctx.Status(fiber.StatusOK).JSON(response.SuccessResponse{
 		Data: dto.ProductFromCollection(products),
+	})
+}
+
+func (pc *ProductController) Opinions(ctx *fiber.Ctx) error {
+	id, _ := pc.FiberHelper.GetID(ctx)
+	_, err := pc.ProductRepository.ReadByID(id)
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	opinions, err := pc.OpinionRepository.ReadByProductID(id)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).JSON(response.ErrorResponse{
+			Message: "something went wrong while reading entity",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
+		Data: dto.OpinionFromCollection(opinions),
 	})
 }

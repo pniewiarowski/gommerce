@@ -149,10 +149,10 @@ const AddressForm = (props: Props) => {
                     </Box>
 
                     {props.scope === "checkout" && <Box>
-                        <Button onClick={onCancle} color="error" variant="outlined" type="submit" startIcon={<Close />} fullWidth sx={{ p: 2, mr: 2, width: "48.7%" }}>
+                        <Button onClick={onCancle} color="error" variant="outlined" type="submit" startIcon={<Close />} fullWidth sx={{ p: 2, mr: 2, width: "48.5%" }}>
                             cancel
                         </Button>
-                        <Button type="submit" variant="contained" endIcon={<ArrowForward />} fullWidth sx={{ p: 2, width: "48.7%" }}>
+                        <Button type="submit" variant="contained" endIcon={<ArrowForward />} fullWidth sx={{ p: 2, width: "48.5%" }}>
                             next
                         </Button>
                     </Box>}

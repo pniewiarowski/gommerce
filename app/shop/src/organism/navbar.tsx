@@ -147,7 +147,7 @@ const Navbar = (props: Props): React.JSX.Element => {
                                         id="customer-menu"
                                         anchorEl={anchorElCustomerMenu}
                                         open={openCustomerMenu}
-                                        sx={{ transform: "translateX(-7%) translateY(1%)" }}
+                                        sx={{ transform: "translateX(-4%) translateY(1%)" }}
                                         onWheel={handleCloseCustomerMenu}
                                         onClose={handleCloseCustomerMenu}
                                         MenuListProps={{ 'aria-labelledby': 'basic-button' }}>

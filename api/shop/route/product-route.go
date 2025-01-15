@@ -15,8 +15,10 @@ func SetupProductRoute(router fiber.Router) {
 	pr := repository.ProductRepository{}
 	fb := sharedhelper.FiberContextHelper{}
 	jwt := authhepler.JWTHelper{UserRoleRepository: urr}
+	or := repository.OpinionRepository{}
 	c := controller.ProductController{
 		ProductRepository: pr,
+		OpinionRepository: or,
 		JWTHelper:         jwt,
 		FiberHelper:       fb,
 	}
@@ -26,4 +28,5 @@ func SetupProductRoute(router fiber.Router) {
 	router.Post("/", authmiddleware.Protected(), c.Store)
 	router.Put("/:id", authmiddleware.Protected(), c.Update)
 	router.Delete("/:id", authmiddleware.Protected(), c.Destroy)
+	router.Get("/:id/opinions", c.Opinions)
 }

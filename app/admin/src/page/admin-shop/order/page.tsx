@@ -49,11 +49,6 @@ const AdminShopOrderPage = () => {
                     resource="order"
                 />,
                 <GridActionsCellItem
-                    icon={<Edit />}
-                    label="Edit"
-                    onClick={() => { navigate(`/shop/order/edit/${params.row.id}`) }}
-                />,
-                <GridActionsCellItem
                     icon={<Visibility />}
                     label="Show"
                     onClick={() => { navigate(`/shop/order/show/${params.row.id}`) }}

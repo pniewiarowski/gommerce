@@ -1,12 +1,13 @@
 import { Fragment, useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Alert, Breadcrumbs, Button, FormControl, Grid, Grow, Paper, Rating, TextField, Typography } from "@mui/material";
+import { Alert, Breadcrumbs, Button, Chip, FormControl, Grid, Grow, Paper, Rating, TextField, Typography } from "@mui/material";
 import { Check, Favorite, FavoriteBorderOutlined } from "@mui/icons-material";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
-import { CategoryDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
-import { ShopBagContext } from "../context";
+import { CategoryDefinition, OpinionDefinition, ProductDefinition } from "gommerce-app-shared/api/definition";
+import { CustomerContext, ShopBagContext } from "../context";
 import { ProductDescription } from "../atom";
 import { ProductPageLoading } from "../organism/loading";
+import { OpinionList } from "../organism/list";
 
 
 const ShopProductPage = () => {
@@ -19,13 +20,17 @@ const ShopProductPage = () => {
     const [product, setProduct] = useState<ProductDefinition>();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [category, setCategory] = useState<CategoryDefinition>();
+    const [opinions, setOpinions] = useState<Array<OpinionDefinition>>([]);
     const [followIconHovered, setFollowIconHovered] = useState<boolean>(false);
+    const { customer } = useContext(CustomerContext);
     const { id } = useParams();
 
     useEffect(() => {
         const fetch = async () => {
             if (!product) {
                 setProduct(await productRepository.getByID(Number(id)));
+                setOpinions(await productRepository.getOpinions(Number(id)) ?? [])
+
                 return;
             }
 
@@ -144,10 +149,19 @@ const ShopProductPage = () => {
                 </Grow>
             </Grid>
             <Grid item xs={12}>
-                <Paper elevation={3} sx={{ p: 4 }}>
-                    <Typography variant="h3" sx={{ mb: 2 }}>Opinions</Typography>
-                    <Typography variant="body1">there are no opinion about this product yet</Typography>
+                <Paper elevation={3} sx={{ p: 2 }}>
+                    <Typography variant="h3">Opinions <Chip size="small" label={opinions.length} /> </Typography>
+                    {opinions.length === 0 && <Typography variant="body1">there are no opinion about this product yet</Typography>}
                 </Paper>
+                {opinions.length !== 0 &&
+                    <Grid sx={{ mt: 1 }}>
+                        <OpinionList opinions={opinions} />
+                    </Grid>}
+                {customer === null &&
+                    <Paper elevation={3} sx={{ p: 2 }}>
+                        you need to be logged in to leave your opinion
+                    </Paper>
+                }
             </Grid>
         </Fragment >
     );

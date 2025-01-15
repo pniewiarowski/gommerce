@@ -13,6 +13,7 @@ import (
 func SetupCustomerRoute(router fiber.Router) {
 	cr := repository.CustomerRepository{}
 	urr := authrepository.UserRoleRepository{}
+	ar := repository.AddressRepository{}
 	jwt := authhelper.JWTHelper{UserRoleRepository: urr}
 	fh := sharedhelper.FiberContextHelper{}
 	or := repository.OrderRepository{}
@@ -20,6 +21,7 @@ func SetupCustomerRoute(router fiber.Router) {
 	c := controller.CustomerController{
 		CustomerRepository: cr,
 		OrderRepository:    or,
+		AddressRepository:  ar,
 		JWTHelper:          jwt,
 		FiberHelper:        fh,
 	}
@@ -31,4 +33,5 @@ func SetupCustomerRoute(router fiber.Router) {
 	router.Post("/", middleware.Protected(), c.Store)
 	router.Get("/user/:id", middleware.Protected(), c.User)
 	router.Get("/:id/orders", middleware.Protected(), c.Orders)
+	router.Get("/:id/address", middleware.Protected(), c.Address)
 }

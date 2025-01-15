@@ -5,4 +5,5 @@ type Opinion struct {
 	Score      uint   `json:"score"`
 	Comment    string `json:"comment"`
 	CustomerID uint   `json:"customerID"`
+	ProductID  uint   `json:"productID"`
 }

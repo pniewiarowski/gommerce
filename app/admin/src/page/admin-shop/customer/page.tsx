@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid, Paper, Grow } from "@mui/material"
-import { Check, Close, Edit, Visibility } from "@mui/icons-material";
-import { DataGrid, GridActionsCellItem, GridColDef } from "@mui/x-data-grid";
+import { Check, Close } from "@mui/icons-material";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { CustomerDefinition } from "gommerce-app-shared/api/definition";
 import { useBackend } from "gommerce-app-shared/hook";
 import { PageContainerGrid } from "../../../atoms"
@@ -54,8 +54,6 @@ const AdminShopCustomerPage = () => {
                     resourceRepository={customersRepository}
                     resource="customer"
                 />,
-                <GridActionsCellItem icon={<Edit />} label="Edit" onClick={() => { navigate(`/shop/customer/edit/${params.row.id}`) }} />,
-                <GridActionsCellItem icon={<Visibility />} label="Show" onClick={() => { }} showInMenu />,
             ],
         },
     ];

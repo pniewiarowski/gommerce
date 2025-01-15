@@ -3,14 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, Container, FormControl, Typography } from "@mui/material";
 import { ArrowBack, ShoppingBag } from "@mui/icons-material";
 import { useBackend, useCookies } from "gommerce-app-shared/hook";
-import { JwtContext, ShopBagContext } from "../context";
+import { CustomerContext, JwtContext, ShopBagContext } from "../context";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
 import { MakeOrderDialog } from "./dialog";
 
 const SummaryOrderForm = () => {
     const [address, setAddress] = useState<string>("");
     const [isMakeOrderDialogOpen, setIsMakeOrderDialogOpen] = useState<boolean>(false);
-
+    const { customer } = useContext(CustomerContext);
     const { get, set } = useCookies();
     const { shopBag, setShopBag } = useContext(ShopBagContext);
     const { jwt } = useContext(JwtContext);
@@ -42,10 +42,10 @@ const SummaryOrderForm = () => {
                 city: get("address-form-city"),
                 country: "",
                 street: get("address-form-street-name"),
-                streetNumber: get("address-form-number"),
+                streetNumber: Number(get("address-form-number")),
                 apartmentNumber: 0,
                 state: "",
-                customerID: 0
+                customerID: Number(customer.id),
             }, jwt);
         }
 
@@ -77,11 +77,11 @@ const SummaryOrderForm = () => {
             </Box>
             <div>
                 <Link to="/checkout/payment-method">
-                    <Button color="error" variant="outlined" startIcon={<ArrowBack />} sx={{ p: 2, mr: 2, width: "48.7%" }}>
+                    <Button color="error" variant="outlined" startIcon={<ArrowBack />} sx={{ p: 2, mr: 2, width: "48.5%" }}>
                         back
                     </Button>
                 </Link>
-                <Button variant="contained" color="success" startIcon={<ShoppingBag />} sx={{ p: 2, width: "48.7%" }} onClick={handleOpenMakeOrderDialog}>
+                <Button variant="contained" color="success" startIcon={<ShoppingBag />} sx={{ p: 2, width: "48.5%" }} onClick={handleOpenMakeOrderDialog}>
                     buy
                 </Button>
             </div>

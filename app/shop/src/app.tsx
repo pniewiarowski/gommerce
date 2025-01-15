@@ -15,6 +15,7 @@ import {
     ShopCheckoutPaymentMethodPage,
     ShopCheckoutSuccessPage,
     ShopCheckoutSummaryPage,
+    ShopCustomerOrdersPage,
     ShopCustomerOrderPage,
 } from "./page";
 import { ThemeOptions } from "@mui/material/styles";
@@ -158,7 +159,8 @@ const App = () => {
                                             <Route path="/checkout/payment-method" element={<ShopCheckoutPaymentMethodPage />} />
                                             <Route path="/checkout/summary" element={<ShopCheckoutSummaryPage />} />
                                             <Route path="/checkout/success" element={<ShopCheckoutSuccessPage />} />
-                                            <Route path="/order" element={<ShopCustomerOrderPage />} />
+                                            <Route path="/order" element={<ShopCustomerOrdersPage />} />
+                                            <Route path="/order/:id" element={<ShopCustomerOrderPage />} />
                                         </Routes>
                                         <MailingForm />
                                         <Footer />

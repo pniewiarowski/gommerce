@@ -37,11 +37,11 @@ const PaymentMethodForm = () => {
                     </Box>
                     <Box>
                         <Link to="/checkout/address">
-                            <Button color="error" variant="outlined" startIcon={<ArrowBack />} sx={{ p: 2, mr: 2, width: "48.7%" }}>
+                            <Button color="error" variant="outlined" startIcon={<ArrowBack />} sx={{ p: 2, mr: 2, width: "48.5%" }}>
                                 back
                             </Button>
                         </Link>
-                        <Button onClick={submit} variant="contained" endIcon={<ArrowForward />} sx={{ p: 2, width: "48.7%" }}>
+                        <Button onClick={submit} variant="contained" endIcon={<ArrowForward />} sx={{ p: 2, width: "48.5%" }}>
                             next
                         </Button>
                     </Box>

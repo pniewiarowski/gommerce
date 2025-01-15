@@ -9,3 +9,4 @@ export type { default as AuthResponseDefinition } from "./auth-response-definiti
 export type { default as AuthRegisterDefinition } from "./auth-register-definition.ts";
 export type { default as ResourceInfoDefinition } from "./resource-info-definition.ts";
 export type { default as AddressDefinition } from "./address-definition.ts";
+export type { default as OpinionDefinition } from "./opinion-definition.ts";

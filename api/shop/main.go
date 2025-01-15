@@ -14,6 +14,7 @@ var Models = []interface{}{
 	model.Customer{},
 	model.Address{},
 	model.Order{},
+	model.Opinion{},
 	relation.OrderProductRelation{},
 	relation.CustomerFollowingProductRelation{},
 }

@@ -14,6 +14,7 @@ import (
 type CustomerController struct {
 	CustomerRepository repository.CustomerRepository
 	OrderRepository    repository.OrderRepository
+	AddressRepository  repository.AddressRepository
 	JWTHelper          authhelper.JWTHelper
 	FiberHelper        sharedhelper.FiberContextHelper
 }
@@ -180,6 +181,27 @@ func (cc *CustomerController) User(ctx *fiber.Ctx) error {
 
 	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
 		Data: dto.CustomerFromModel(*customer),
+	})
+}
+
+func (cc *CustomerController) Address(ctx *fiber.Ctx) error {
+	id, _ := cc.FiberHelper.GetID(ctx)
+	customer, err := cc.CustomerRepository.ReadByID(id)
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	address, err := cc.AddressRepository.ReadByCustomerID(customer.ID)
+	if err != nil {
+		return ctx.Status(fiber.StatusNotFound).JSON(&response.ErrorResponse{
+			Message: "entity with provided ID does not exists",
+		})
+	}
+
+	return ctx.Status(fiber.StatusOK).JSON(&response.SuccessResponse{
+		Data: dto.AddressFromModel(*address),
 	})
 }
 

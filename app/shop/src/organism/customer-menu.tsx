@@ -1,6 +1,6 @@
 import { Fragment, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { ShoppingBag, Bookmark, Settings, Close, Logout } from "@mui/icons-material";
+import { ShoppingBag, Settings, Close, Logout } from "@mui/icons-material";
 import { MenuItem, Typography } from "@mui/material";
 import { useCookies } from "gommerce-app-shared/hook";
 import { CustomerContext } from "../context";
@@ -34,10 +34,6 @@ const CustomerMenu = (props: Props) => {
             }}>
                 <ShoppingBag sx={{ mr: 1 }} />
                 <Typography>My orders</Typography>
-            </MenuItem>
-            <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={props.close}>
-                <Bookmark sx={{ mr: 1 }} />
-                <Typography>Following items</Typography>
             </MenuItem>
             <Link to="/settings">
                 <MenuItem sx={{ ml: 1, mr: 1, mb: 1, p: 1 }} onClick={props.close}>

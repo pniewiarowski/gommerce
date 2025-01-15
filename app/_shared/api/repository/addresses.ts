@@ -28,6 +28,7 @@ class Addresses implements Repository {
     }
 
     public async create(address: AddressDefinition, token: string): Promise<AddressDefinition> {
+        console.log(address);
         const response = await shop.post(`${Addresses.resource}`,
             {
                 city: address.city,

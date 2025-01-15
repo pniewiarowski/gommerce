@@ -1,4 +1,4 @@
-import { ProductDefinition, ResourceInfoDefinition } from "../definition";
+import { OpinionDefinition, ProductDefinition, ResourceInfoDefinition } from "../definition";
 import { shop } from "../../axios";
 import { Repository } from "./type";
 
@@ -13,6 +13,12 @@ class Products implements Repository {
 
     public async getByID(id: number): Promise<ProductDefinition> {
         const response = await shop.get(`/${Products.resource}/${id}`);
+
+        return await response.data.data;
+    }
+
+    public async getOpinions(id: number): Promise<Array<OpinionDefinition>> {
+        const response = await shop.get(`${Products.resource}/${id}/opinions`);
 
         return await response.data.data;
     }

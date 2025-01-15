@@ -25,9 +25,6 @@ const ShopCustomerSettingsPage = () => {
         new SettingsItem(1, 'General', () => { setSelectedTab(1) }, <Settings />),
         new SettingsItem(2, 'Account', () => { setSelectedTab(2) }, <Person />),
         new SettingsItem(3, 'Address', () => { setSelectedTab(3) }, <DeliveryDining />),
-        new SettingsItem(4, 'Payment', () => { setSelectedTab(4) }, <Payment />),
-        new SettingsItem(5, 'Following Items', () => { setSelectedTab(5) }, <Bookmark />),
-        new SettingsItem(5, 'Orders', () => { setSelectedTab(6) }, <ShoppingBag />),
     ].map((item) => {
         return (
             <Fragment>
