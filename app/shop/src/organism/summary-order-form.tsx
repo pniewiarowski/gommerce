@@ -14,6 +14,7 @@ const SummaryOrderForm = () => {
     const { customer } = useContext(CustomerContext);
     const { get, set } = useCookies();
     const { shopBag, setShopBag } = useContext(ShopBagContext);
+    const [fullPrice, setFullPrice] = useState<number>(0);
     const { jwt } = useContext(JwtContext);
 
     const { ordersRepository, addressesRepository } = useBackend();
@@ -24,19 +25,27 @@ const SummaryOrderForm = () => {
         const number: string = get("address-form-number");
         const city: string = get("address-form-city");
 
+        let price = 0;
+        shopBag.forEach((product: ProductDefinition) => {
+            price += product.price;
+        });
+
+        setFullPrice(price);
         setAddress(`${street} ${number}, ${city}`);
     }, []);
 
     const handleBuy = () => {
         const buy = async () => {
             const productIDs: Array<number> = [];
+            let price = 0;
             shopBag.forEach((product: ProductDefinition) => {
                 product.id !== null && productIDs.push(product.id);
             });
 
+            setFullPrice(price);
             ordersRepository.create({
                 productsIDs: productIDs,
-                products: null
+                products: null,
             }, jwt);
 
             addressesRepository.create({
@@ -76,6 +85,9 @@ const SummaryOrderForm = () => {
                     <Typography variant="body1">delivery to {address}</Typography>
                 </FormControl>
                 <ProductList products={shopBag} />
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                    <Typography>Full price: <b>{fullPrice}</b>$</Typography>
+                </Box>
             </Box>
             <div>
                 <Link to="/checkout/payment-method">
