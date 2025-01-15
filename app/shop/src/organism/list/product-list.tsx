@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { Divider, List, ListItem, ListItemButton, ListItemIcon } from "@mui/material";
+import { Divider, List, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,13 @@ const ProductList = (props: Props) => {
                     <Link to={`/product/${product.id}`}>
                         <ListItemButton>
                             <ListItemIcon>
-                                <img width={100} src={product.imageURL} />
+                                <img width={80} src={product.imageURL} />
                             </ListItemIcon>
+                            <ListItemText>
+                                <Typography variant="body1" sx={{ fontSize: "1.5rem", ml: "2rem" }}>
+                                    you bought <b>{product.name}</b> for <b>{product.price}</b>$
+                                </Typography>
+                            </ListItemText>
                         </ListItemButton>
                         <Divider />
                     </Link>

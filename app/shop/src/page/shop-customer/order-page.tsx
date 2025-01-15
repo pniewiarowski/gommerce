@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Grid, Paper, Breadcrumbs, Typography, Box } from "@mui/material";
+import { Grid, Paper, Breadcrumbs, Typography, Box, Chip } from "@mui/material";
 import { useBackend } from "gommerce-app-shared/hook";
 import { OrderDefinition } from "gommerce-app-shared/api/definition";
 import { JwtContext } from "../../context";
@@ -42,10 +42,10 @@ const ShopCustomerOrderPage = () => {
                 </Paper>
             </Grid>
             <Grid item xs={12}>
-                <Paper sx={{ p: 1 }}>
+                <Paper sx={{ p: 2 }}>
                     <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                        <Typography variant="h3">Order {order?.id}</Typography>
-                        <Typography variant="h3">{order?.fullPrice}$</Typography>
+                        <Typography variant="h3">Order {order?.id} <Chip label={order?.status} color="primary" size="small" sx={{ ml: 1 }} /> </Typography>
+                        <Typography variant="body1" sx={{ fontSize: "2rem", fontWeight: "bold" }}>{order?.fullPrice}$</Typography>
                     </Box>
                     <ProductList products={order?.products ?? []} />
                 </Paper>
