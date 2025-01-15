@@ -79,7 +79,7 @@ const AdminShopOrderPage = () => {
                     </Paper>
                 </Grow>
             </Grid>
-            <ResourceMainViewAction backLink="/shop" createLink="/shop/order/create" />
+            <ResourceMainViewAction backLink="/shop" />
         </PageContainerGrid>
     );
 }

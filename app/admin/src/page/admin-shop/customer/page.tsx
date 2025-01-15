@@ -79,7 +79,7 @@ const AdminShopCustomerPage = () => {
                     </Paper>
                 </Grow>
             </Grid>
-            <ResourceMainViewAction backLink="/shop" createLink="/shop/customer/create" />
+            <ResourceMainViewAction backLink="/shop" />
         </PageContainerGrid>
     );
 }

@@ -74,7 +74,7 @@ const AdminShopAddressPage = () => {
                     </Paper>
                 </Grow>
             </Grid>
-            <ResourceMainViewAction backLink="/shop" createLink="/shop/address/create" />
+            <ResourceMainViewAction backLink="/shop" />
         </PageContainerGrid>
     )
 }

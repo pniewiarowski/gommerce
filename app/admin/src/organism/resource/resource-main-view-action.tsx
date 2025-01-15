@@ -3,7 +3,7 @@ import { Grid, Grow, Button } from "@mui/material";
 
 interface Props {
     backLink: string,
-    createLink: string,
+    createLink: string | null,
 }
 
 const ResourceMainViewAction = (props: Props) => {
@@ -16,11 +16,12 @@ const ResourceMainViewAction = (props: Props) => {
                     back
                 </Button>
             </Grow>
-            <Grow in={true} {...{ timeout: 750 }}>
-                <Button color="primary" variant="contained" onClick={() => navigate(props.createLink)}>
-                    add
-                </Button>
-            </Grow>
+            {props.createLink &&
+                <Grow in={true} {...{ timeout: 750 }}>
+                    <Button color="primary" variant="contained" onClick={() => navigate(props.createLink)}>
+                        add
+                    </Button>
+                </Grow>}
         </Grid>
     )
 }
