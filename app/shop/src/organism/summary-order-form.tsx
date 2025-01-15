@@ -6,6 +6,7 @@ import { useBackend, useCookies } from "gommerce-app-shared/hook";
 import { CustomerContext, JwtContext, ShopBagContext } from "../context";
 import { ProductDefinition } from "gommerce-app-shared/api/definition";
 import { MakeOrderDialog } from "./dialog";
+import { ProductList } from "./list";
 
 const SummaryOrderForm = () => {
     const [address, setAddress] = useState<string>("");
@@ -74,6 +75,7 @@ const SummaryOrderForm = () => {
                 <FormControl sx={{ mb: 2, mt: 2, display: "flex" }} fullWidth>
                     <Typography variant="body1">delivery to {address}</Typography>
                 </FormControl>
+                <ProductList products={shopBag} />
             </Box>
             <div>
                 <Link to="/checkout/payment-method">

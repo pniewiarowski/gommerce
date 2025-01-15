@@ -19,7 +19,7 @@ const ProductList = (props: Props) => {
                             </ListItemIcon>
                             <ListItemText>
                                 <Typography variant="body1" sx={{ fontSize: "1.5rem", ml: "2rem" }}>
-                                    you bought <b>{product.name}</b> for <b>{product.price}</b>$
+                                    <b>{product.name}</b> for <b>{product.price}</b>$
                                 </Typography>
                             </ListItemText>
                         </ListItemButton>

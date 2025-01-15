@@ -88,7 +88,7 @@ const Navbar = (props: Props): React.JSX.Element => {
                                     </Typography>
                                 </Link>
                             </Box>}
-                            {desktop && <Box>
+                            {/* {desktop && <Box>
                                 <TextField size="small" variant="outlined" InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -96,7 +96,7 @@ const Navbar = (props: Props): React.JSX.Element => {
                                         </InputAdornment>
                                     ),
                                 }} />
-                            </Box>}
+                            </Box>} */}
                         </Box>
                         {desktop && <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "50%" }}>
                             {categoriesToRender}
